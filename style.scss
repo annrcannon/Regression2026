@@ -1,0 +1,70 @@
+/*-- scss:rules --*/
+
+.icon h1 {
+  text-align: center;
+  color: #523178;
+}
+
+.center h5 {
+  text-align: center;
+}
+
+// --- Special styling for a single badge label ---
+$warn-bg-light: #fff3cd;
+$warn-text-light: #664d03;
+$warn-border: rgba(0,0,0,.08);
+
+$warn-bg-dark: #3a3005;
+$warn-text-dark: #ffe7a3;
+
+
+// --- Badge sizing for all categories ---
+.quarto-title {
+  .quarto-categories {
+    gap: .5rem;
+    .category {
+      font-size: 1.15rem;     // scale all badges
+      padding: .35rem .8rem;
+      border-radius: .75rem;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+  }
+}
+
+
+
+.quarto-title .quarto-categories {
+  // Match the exact category text as shown in your page YAML
+  .category[data-category="⚠️ Warning: Page Under Revision"] {
+    background: $warn-bg-light;
+    color: $warn-text-light;
+    border: 1px solid $warn-border;
+
+    // make THIS badge larger than the rest
+    font-size: 1.3rem;
+    padding: .45rem 1rem;
+
+    // optional: add an emoji prefix (simplest cross-platform “icon”)
+    &::before {
+      content: "⚠️";
+      margin-right: .4rem;
+    }
+  }
+}
+
+// Dark mode tweaks
+html[data-bs-theme="dark"] {
+  .quarto-title .quarto-categories
+  .category[data-category="⚠️ Warning: Page Under Revision"] {
+    background: $warn-bg-dark;
+    color: $warn-text-dark;
+    border-color: #000;
+  }
+}
+
+
+.quarto-title .quarto-categories
+.category[data-category="⚠️ Warning: Page Under Revision"] {
+  background: #523178; color: #fff; border-color: #3e255c;
+}

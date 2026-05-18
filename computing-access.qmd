@@ -1,0 +1,7 @@
+---
+title: "Computing access"
+---
+
+To access computing resources the course, Introduction to Data Science, offered by the Cornell College Department of Mathematics and Statistics, go to the [RStudio Server](http://turing.cornellcollege.edu:8787/) [while on campus]{.underline} and connected to campus internet.
+
+Your account will be pre-created before the class begins and will use your Cornell College username. The default password will be shared in class and you will need to change it.

@@ -1,0 +1,67 @@
+---
+title: 'Mini Project 1'
+subtitle: 'Poisson Regression'
+execute:
+  eval: false
+---
+
+## Project Setup
+
+1)  Pick a partner.
+2)  Create a new R project.
+3)  Create *qmd* or script files as needed.
+
+## Instructions
+
+Find data with a reasonable poisson response that you are interested in. Clean that data. Fit and interpret poisson regression models. Summarize your findings.
+
+Data Options. Check out Data Links on the [Useful Links](../course-links.qmd) part of the course website. *TidyTuesday* has quickly accessible data.
+
+At least 1 group should work with the *macbride_fish.csv* data. See the data dictionary in the data folder to learn more.
+
+This project will be in a *workshop* style. The intention is for you to start and finish by the end of class time. We will follow a timeline:
+
+| Task | Timing |
+|--------------------------------------|----------------------------------|
+| Clean Data | 9:20 am - 9:50 am |
+| Perform EDA | 10:00 am - 10:30 am |
+| Fit, Assess, and Compare Regression Models | 10:30 am - 11:00 am, 1:00 pm - 2:00 pm |
+| Prepare presentation | 2:00 pm - 2:20 pm |
+| Present your findings | 2:20 pm - 2:40 pm |
+| Submit your Final Report | Submit HTML 10/29 at 11:59 pm |
+
+### Grading
+
+Each Mini Project is worth 50 points (Labs are 10 points each).
+
+| Category | Points |
+|---------------------------------------------------------|---------------|
+| The data chosen is appropriate, and the cleaning steps are correct and explained. | 5 |
+| EDA is thorough. All included graphs and tables are paired with a discussion. EDA supports the choice of modeling technique. | 15 |
+| The model fitting process has a logical flow. Multiple models are considered and compared using statistical tests and multiple metrics. Any model that is interpreted has been assessed using residual plots and appropriate statistical tests. | 15 |
+| The code follows a sensible order and has been appropriately commented on. | 5 |
+| The presentation is concise, describes the data, highlights key parts of the EDA, describes minimally the final model, gives at least 1 interpretation in the context of a coefficient, and discusses limitations and potential future work. | 5 |
+| The report is well written, with correct spelling and grammar. The used code is included either inline or in an appendix at the end. | 5 |
+
+### Submission
+
+Add format part of your final report document and then re-render:
+
+```{{r}}
+#| label: yaml_example
+#| eval: false
+---
+title: "Document title"
+author: "my name"
+format:
+  html:
+    embed-resources: true
+---
+```
+
+When you are finished with your homework, be sure to Render the final document. Once rendered, you can download your file by:
+
+-   Finding the .html file in your File pane (on the bottom right of the screen)
+-   Click the check box next to the file
+-   Click the blue gear above and then click "Export" to download
+-   Submit your final html document to the respective assignment on [Moodle]({{< var course.moodle >}})

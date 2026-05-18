@@ -1,0 +1,171 @@
+---
+title: Homework 6
+subtitle: 'Ch 7: Correlated Data and Ch 8: Multilevel Models'
+---
+
+`r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\var}{\\operatorname{Var}}'`
+
+
+## Setup
+
+Each of your assignments will begin with the following steps.
+
+-   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
+
+-   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_6* and having that project in the course folder you created. 
+
+-   Create a new quarto document and give it a sensible name such as *hw6*.
+
+-   In the `YAML` add the following (add what you don't have). The embed-resources component will make your final rendered `html` self-contained.
+
+```{r}
+#| label: yaml_example
+#| eval: false
+---
+title: "Document title"
+author: "my name"
+format:
+  html:
+    embed-resources: true
+---
+```
+
+## Instructions
+
+Include the relevant R code as well as full sentences answering each of the questions (i.e. if I ask for the average, you can output the answer in R but **also** write a full sentence with the answer). Be sure to frequently save your files!
+
+Data for the homework will be in the STA363_inst_files -> data folder.
+
+## Exercises
+
+All problems are from {{< var course.text >}} Abbreviated BMLR. 
+
+Use the numbering on the left. The codes are for instructor use (Ex: C1).
+
+## Part 1: Chapter 7 - Correlated Data
+
+### Exercise 1
+
+1. (C1) __Examples with correlated data.__ For each of the following studies: 
+    i. Identify the most basic observational units
+    ii. Identify the grouping units (could be multiple levels of grouping)
+    iii. State the response(s) measured and variable type (normal, binary, Poisson, etc.)
+    iv. Write a sentence describing the within-group correlation.
+    v. Identify fixed and random effects
+
+a. *Epilepsy study.*  Researchers conducted a randomized controlled study where patients were randomly assigned to either an anti-epileptic drug or a placebo.  For each patient, the number of seizures at baseline was measured over a 2-week period.  For four consecutive visits the number of seizures were determined over the past 2-week period. Patient age and sex along with visit number were recorded.
+
+b. *Prairie restoration.*  Researchers at a small Midwestern college decided to experimentally explore the underlying causes of variation in soil reconstruction projects in order to make future projects more effective. Introductory ecology classes were organized to collect weekly data on plants in pots containing soil samples. Data will be examined to compare:
+    - germination and growth of two species of prairie plants—--leadplants (*Amorpha canescens*) and coneflowers (*Ratibida pinnata*).
+    - soil from a cultivated (agricultural) field, a natural prairie, and a restored (reconstructed) prairie.
+    - the effect of sterilization, since half of the sampled soil was sterilized to determine if rhizosphere differences were responsible for the observed variation.
+    
+c. *Radon in Minnesota.*  Radon is a carcinogen – a naturally occurring radioactive gas whose decay products are also radioactive – known to cause lung cancer in high concentrations. The EPA sampled more than 80,000 homes across the U.S.  Each house came from a randomly selected county and measurements were made on each level of each home.  Uranium measurements at the county level were included to improve the radon estimates.
+    
+    
+## Part 2: Chapter 8 - Multilevel Models
+  
+### Exercise 2
+  
+2. (C1,2,3) Brown and Uyar ([2004](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html#ref-Brown2004)) describe "A Hierarchical Linear Model Approach for Assessing the Effects of House and Neighborhood Characteristics on Housing Prices". 
+
+a. Based on the title of their paper: (i) give the observational units at Level One and Level Two, and (ii) list potential explanatory variables at both Level One and Level Two.
+
+b. In the preceding problem, why can't we assume all houses in the data set are independent?  What would be the potential implications to our analysis of assuming independence among houses?
+
+c. In the preceding problem, for each of the following sets of predictors: 
+
+* *Predictor set 1:* Square footage, number of bedrooms
+* *Predictor set 2:* Median neighborhood income, rating of neighborhood schools
+* *Predictor set 3:* Square footage, number of bedrooms, age of house, median neighborhood housing price
+* *Predictor set 4:* Square footage, median neighborhood income, rating of neighborhood schools, median neighborhood housing price
+  
+  (i) write out the two-level model for predicting housing prices, 
+  (ii) write out the corresponding composite model, and 
+  (iii) determine how many model parameters (fixed effects and variance components) must be estimated.
+
+### Exercise 3
+
+3. (C8) Why is Model A (Section in [8.6.2](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html#modela8)) sometimes called the "unconditional means model"? Why is it also sometimes called the "random intercepts model"? Are these two labels consistent with each other?
+
+### Exercise 4
+
+4. (C9) Consider adding an indicator variable in Model B (Section [8.7.1](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html#randomslopeandint)) for Small Ensemble performances.
+    - Write out the two-level model for performance anxiety,
+    - Write out the corresponding composite model,
+    - Determine how many model parameters (fixed effects and variance components) must be estimated, and
+    - Explain how the interpretation for the coefficient in front of Large Ensembles would change.  
+  
+### Exercise 5
+
+5. (C10) Give a short rule in your own words describing when an interpretation of an estimated coefficient should "hold constant" another covariate or "set to 0" that covariate (see Section [8.1.1](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html#interp:modeld)).
+
+### Exercise 6
+
+6. (C14) Interpret three other estimated parameters from Model F beyond those interpreted in Section [8.10](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html#modelf): $\hat{\alpha}_{0}$, $\hat{\alpha}_{2}$, $\hat{\alpha}_{3}$, $\hat{\beta}_{0}$, $\hat{\gamma}_{0}$, $\hat{\zeta}_{0}$, $\hat{\rho}_{wx}$, $\hat{\sigma}^{2}$, $\hat{\sigma}_{u}^{2}$, and $\hat{\sigma}_{z}^{2}$. 
+
+### Exercise 7
+
+7. (O1) Chapp et al. ([2018](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html#ref-Chapp2018)) explored 2014 congressional candidates' ambiguity on political issues in their paper, _Going Vague: Ambiguity and Avoidance in Online Political Messaging_. They hand-coded a random sample of 2012 congressional candidates' websites, assigning an ambiguity score. A total of 870 websites from 2014 were then automatically scored using Wordscores, a program designed for political textual analysis. In their paper, they fit a multilevel model for candidates' ambiguities with predictors at both the candidate and district levels. Some of their hypotheses include that:  
+    
+* "when incumbents do hazard issue statements, these statements will be marked by a higher degree of clarity." (Hypothesis 1b)
+* "ideological distance [from district residents] will be associated with greater ambiguity." (Hypothesis 2a)
+* "controlling for ideological distance, ideological extremity [of the candidate] should correspond to less ambiguity." (Hypothesis 2b)
+* "more variance in attitudes [among district residents] will correspond to a higher degree of ambiguity in rhetoric" (Hypothesis 3a)
+* "a more heterogeneous mix of subgroups [among district residents] will also correspond to a higher degree of ambiguity in rhetoric" (Hypothesis 3b)
+
+Their data can be found in `ambiguity.csv`. Variables of interest include:
+
+- `ambiguity` = assigned ambiguity score.  Higher scores indicate greater clarity (less ambiguity)
+- `democrat` = 1 if a Democrat, 0 otherwise (Republican)
+- `incumbent` = 1 if an incumbent, 0 otherwise
+- `ideology` = a measure of the candidate's left-right orientation. Higher (positive) scores indicate more conservative candidates and lower (negative) scores indicate more liberal candidates.
+- `mismatch` = the distance between the candidate's ideology and the district's ideology (candidate ideology scores were regressed against district ideology scores; mismatch values represent the absolute value of the residual associated with each candidate)
+- `distID` = the congressional district's unique ID
+- `distLean` = the district's political leaning. Higher scores imply more conservative districts.
+- `attHeterogeneity` = a measure of the variability of ideologies within the district. Higher scores imply more attitudinal heterogeneity among voters.
+- `demHeterogeneity` = a measure of the demographic variability within the district. Higher scores imply more demographic heterogeneity among voters.
+    
+
+With this in mind, fit your own models to address these hypotheses from Chapp et al. ([2018](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html#ref-Chapp2018)). Be sure to use a two-level structure to account for variables at both the candidate and district levels.
+
+Hints: (1) Make sure to conduct an EDA. (2) Build appropriate model(s) that allow you to test these hypothesis using the significance of the predictors. 
+
+##### Some Example Code for Question 6
+
+```{r}
+#| eval: false
+library(tidyverse)
+library(tidymodels)
+library(lme4)
+library(broom.mixed)
+
+m1 <- lmer(ambiguity ~ ideology + incumbent + (1 |distID),data = ambiguity)
+
+amb.mod1 <- lmer(ambiguity ~ democrat + incumbent +
+                   demHeterogeneity + attHeterogeneity + mismatch + ideology +
+                   distLean + (1 |distID), data=ambiguity)
+
+amb.mod2 <- lmer(ambiguity ~ democrat + incumbent +
+                   demHeterogeneity + attHeterogeneity + ideology + distLean +
+                   (1 |distID), data=ambiguity)
+
+amb.mod3 <- lmer(ambiguity ~ democrat + incumbent +
+                   demHeterogeneity + attHeterogeneity + mismatch + ideology +
+                   distLean + democrat:ideology + (1 |distID), data=ambiguity)
+
+```
+
+# Submission
+
+When you are finished with your homework, render the final document. Once rendered, you can download your file by:
+
+-   Finding the .html file in your File pane (on the bottom right of the screen)
+-   Click the check box next to the file
+-   Click the blue gear above and then click "Export" to download
+-   Submit your final html document to the respective assignment on [Moodle]({{< var course.moodle >}})
+
+
+

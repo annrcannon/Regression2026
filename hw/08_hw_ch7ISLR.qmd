@@ -1,0 +1,118 @@
+---
+title: Homework 8
+subtitle: 'Chapter 7: Moving Beyond Linearity, ISLR'
+---
+
+`r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\var}{\\operatorname{Var}}'`
+
+
+## Setup
+
+Each of your assignments will begin with the following steps.
+
+-   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
+
+-   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_8* and having that project in the course folder you created. 
+
+-   Create a new quarto document and give it a sensible name such as *hw8*.
+
+-   In the `YAML` add the following (add what you don't have). The embed-resources component will make your final rendered `html` self-contained.
+
+```{r}
+#| label: yaml_example
+#| eval: false
+---
+title: "Document title"
+author: "my name"
+format:
+  html:
+    embed-resources: true
+---
+```
+
+## Instructions
+
+Be sure to include the relevant R code as well as full sentences answering each of the questions (i.e. if I ask for the average, you can output the answer in R but **also** write a full sentence with the answer). Be sure to frequently save your files!
+
+In this homework we will work with four packages: `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way, `tidymodels` for statistical model coefficients, `splines` for our splines models and `ISLR2` for the `Boston` data. 
+
+
+## Code
+
+#### Polynomial Regression
+
+To fit a degree 4 polynomial regression model you use:
+
+```{r}
+#| eval: false
+model1 <- lm(wage ~ poly(age , 4, raw = TRUE), data = wage)
+```
+
+#### Cubic Spline
+
+To fit a cubic spline (degree 3) polynomial regression model you use:
+
+```{r}
+#| eval: false
+model2<- lm(wage ~ bs(age , knots = c(22, 33, 50), degree = 3), data = Wage)
+```
+
+Use quantiles of the predictor to choose your knots. The choice should be motivated by some EDA. 
+
+
+#### Natual Cubic Spline
+
+To fit a degree natural cubic spline. 
+
+```{r}
+#| eval: false
+model3 <- lm(wage ~ ns(age,df = 4), data = Wage)
+```
+
+Instead of providing the degrees of freedom (df), you can provide knots. 
+
+
+## Exercises
+
+All problems are from {{< var course.text2 >}} Abbreviated ISLR. 
+
+```{r}
+library(ISLR2)
+```
+
+
+1. Suppose we fit a curve with basis functions $b_1(X) = X,\space b_2(X) = (X − 1)^2I(X \geq 1)$. (Note that $I(X \geq 1)$ equals 1 for $X \geq 1$ and 0 otherwise.) We fit the linear regression model 
+
+$$Y = \beta_0 + \beta_1b_1(X) + \beta_2b_2(X) + \epsilon,$$ <br>
+
+and obtain coefficient estimates $\hat{\beta}_0 = 1,\space \hat{\beta}_1 = 1,\space \hat{\beta}_2 = −2$. Sketch the estimated curve between $X = −2$ and $X = 2$. Note the intercepts, slopes, and other relevant information.
+
+2. (ISLR,7,9) This question uses the variables `dis` (the weighted mean of distances to five Boston employment centers) and `nox` (nitrogen oxides concentration in parts per 10 million) from the Boston data (in package `ISLR2`). We will treat `dis` as the predictor and `nox` as the response.
+
+  (a) Use the `poly()` function to fit a cubic polynomial regression to predict `nox` using `dis`. Report the regression output, and plot the resulting data and polynomial fits.
+  
+  (b) Plot the polynomial fits for a range of different polynomial degrees (say, from 1 to 5), and report the associated residual sum of squares.
+  
+  (c) Select the optimal degree for the polynomial, and explain your results.
+  
+  (d) Use the `bs()` function to fit a regression spline to predict `nox` using `dis`. Report the output for the fit using four degrees of freedom. How did you choose the knots? Plot the resulting fit.
+  
+  (e) Now fit a regression spline for a range of degrees of freedom, and plot the resulting fits and report the resulting RSS. Describe the results obtained.
+
+  (e) Now fit a natural regression spline for a range of degrees of freedom, and plot the resulting fits and report the resulting RSS. Describe the results obtained.
+  
+  (f) Pick an overall best model using various metrics, complexity, and regression assumptions to make your choice. They are the same metrics used in multiple linear regression. 
+
+# Submission
+
+When you are finished with your homework, be sure to Render the final document. Once rendered, you can download your file by:
+
+-   Finding the .html file in your File pane (on the bottom right of the screen)
+-   Click the check box next to the file
+-   Click the blue gear above and then click "Export" to download
+-   Submit your final html document to the respective assignment on [Moodle]({{< var course.moodle >}})
+
+
+

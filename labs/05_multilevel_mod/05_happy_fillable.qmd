@@ -1,0 +1,22 @@
+---
+title: "Chapter 8 - Multilevel Models"
+subtitle: "Music Performance Joy"
+---
+
+### Questions
+
+1. Perform an exploratory data analysis by comparing positive affect (happiness) to Level One and Level Two covariates using appropriate graphs. Comment on interesting trends, supporting your comments with appropriate summary statistics.
+
+2. Report estimated fixed effects and variance components from Model A, using proper notation from this chapter (no interpretations required). Also report and interpret an intraclass correlation coefficient.
+
+3. Report estimated fixed effects and variance components from Model B, using proper notation from this chapter. Interpret your MLE estimates for $\hat{\alpha}_{0}$ (the intercept), $\hat{\beta}_{1}$ (the instructor indicator), and $\hat{\sigma}_{u}$ (the Level Two standard deviation for the intercept). Also report and interpret an appropriate pseudo R-squared value.
+
+4. Write out Model C, using both separate Level One and Level Two models as well as a composite model. Be sure to express distributions for error terms. How many parameters must be estimated in Model C?
+
+5. Report and interpret the following parameter estimates from Model C: $\hat{\alpha}_{0}$, $\hat{\alpha}_{1}$, $\hat{\gamma}_{0}$, $\hat{\beta}_{1}$, $\hat{\sigma}_{u}$, $\hat{\sigma}_{v}$, and $\hat{\rho}_{uv}$. Interpretations for variance components should be done in terms of standard deviations and correlation coefficients.
+
+6. Report and interpret the same parameter estimates listed above from Model D. In each case, the new interpretation should involve a small modification of your interpretation from Model C.  Use underlines or highlights to denote the part of the Model D interpretation that differs from the Model C interpretation.
+
+7. Also report and interpret the following parameter estimates from Model D: $\hat{\alpha}_{2}$ and $\hat{\beta}_{2}$.
+
+8. Use a drop in deviance statistic (likelihood ratio test) to compare Model C vs. Model D. Give a test statistic and p-value, then state a conclusion. Also compare Models C and D with appropriate pseudo R-squared value(s) and with AIC and BIC statistics.

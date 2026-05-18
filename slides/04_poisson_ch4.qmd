@@ -1,0 +1,1590 @@
+---
+title: "Poisson Regression"
+subtitle: "BMLR Chapter 4"
+format: 
+  revealjs:
+    output-file: "04_poisson_ch4.html"
+    slide-number: true
+  html:
+    output-file: "04_poisson_ch4_o.html"
+logo: "../img/favicon.png"
+---
+
+## Setup
+
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(GGally)
+library(knitr)
+library(patchwork)
+library(viridis)
+library(ggfortify)
+library(gridExtra)
+```
+
+## Learning goals (1/2) {.smaller}
+
+- Describe properties of the Poisson random variable
+
+- Write the Poisson regression model 
+
+- Describe how the Poisson regression differs from least-squares regression
+
+- Interpret the coefficients for the Poisson regression model 
+
+- Compare two Poisson regression models
+
+- Define and calculate residuals for the Poisson regression model 
+
+- Use Goodness-of-fit to assess model fit 
+
+## Learning goals (2/2) {.smaller}
+
+- Identify overdispersion 
+
+- Apply modeling approaches to deal with overdispersion 
+
+- Explore properties of negative binomial versus Poisson response 
+
+- Fit and interpret models with offset to adjust for differences in sampling effort
+
+- Fit and interpret Zero-inflated Poisson models
+
+- Write likelihood for Poisson and Zero-inflated Poisson model
+
+
+## Scenarios to use Poisson regression{.smaller}
+
+- Does the number of employers conducting on-campus interviews during a year differ for public and private colleges?
+
+- Does the daily number of asthma-related visits to an Emergency Room differ depending on air pollution indices?
+
+- Does the number of paint defects per square foot of wall differ based on the years of experience of the painter? 
+
+. . .
+
+Each response variable is a count per a unit of time or space.
+
+
+
+## Poisson distribution {.smaller}
+
+Let $Y$ be the number of events in a given unit of time or space. Then $Y$ can be modeled using a *Poisson distribution*
+
+. . .
+
+$$P(Y=y) = \frac{e^{-\lambda}\lambda^y}{y!} \hspace{10mm} y=0,1,2,\ldots, \infty$$
+
+
+
+## Poisson Features {.smaller}
+
+- $E(Y) = Var(Y) = \lambda$ 
+- The distribution is typically skewed right, particularly if $\lambda$ is small
+- The distribution becomes more symmetric as $\lambda$ increases
+  - If $\lambda$ is sufficiently large, it can be approximated using a normal distribution ([Click here](https://online.stat.psu.edu/stat414/lesson/28/28.2) for an example.)
+  
+
+## Poisson Graphs  {.smaller}
+
+:::{.panel-tabset}
+
+### Graphs
+
+```{r echo = F, out.width = "100%"}
+set.seed(2000)
+sim1 <- rpois(100000,1)
+sim2 <- rpois(100000,5)
+sim3 <- rpois(100000,50)
+pois_sim <- tibble (
+  sim1 = sim1, 
+  sim2 = sim2, 
+  sim3 = sim3
+)
+p1 <- ggplot(data = pois_sim, aes(x = sim1)) +
+  geom_histogram() +
+  labs(x = "", title = "lambda = 1")
+p2 <- ggplot(data = pois_sim, aes(x = sim2)) +
+  geom_histogram() +
+  labs(x = "", title = "lambda = 5")
+p3 <- ggplot(data = pois_sim, aes(x = sim3)) +
+  geom_histogram() +
+  labs(x = "", title = "lambda = 50")
+p1 + p2 + p3 
+```
+
+### Table
+
+```{r echo = F}
+sum1 <- c(mean(sim1), var(sim1))
+sum2 <- c(mean(sim2), var(sim2))
+sum3 <- c(mean(sim3), var(sim3))
+data <- rbind(sum1,sum2,sum3)
+rownames(data) <- c("lambda = 1", "lambda = 5","lambda = 50")
+colnames(data) <- c("Mean", "Variance")
+kable(data,format="html")
+```
+  
+:::
+
+## Example {.smaller}
+
+The annual number of earthquakes registering at least 2.5 on the Richter Scale and having an epicenter within 40 miles of downtown Memphis follows a Poisson distribution with mean 6.5. **What is the probability there will be at 3 or fewer such earthquakes next year?**
+
+. . .
+
+$$P(Y \leq 3) = P(Y = 0) + P(Y = 1) + P(Y = 2) + P(Y = 3)$$
+
+
+$$ = \frac{e^{-6.5}6.5^0}{0!} + \frac{e^{-6.5}6.5^1}{1!} + \frac{e^{-6.5}6.5^2}{2!} + \frac{e^{-6.5}6.5^3}{3!}$$
+
+$$ = 0.112$$
+
+. . .
+
+```{r}
+ppois(3, 6.5)
+```
+
+
+
+::: aside
+Example adapted from [Introduction to Probability Theory Example 28-2](https://online.stat.psu.edu/stat414/lesson/28/28.2)
+:::
+
+
+
+# Poisson regression
+
+## Poisson regression{.smaller}
+
+**The data: Household size in the Philippines**
+
+The data [fHH1.csv](data/fHH1.csv) come from the 2015 Family Income and Expenditure Survey conducted by the Philippine Statistics Authority. 
+
+**Goal**: Understand the association between household size and various characteristics of the household
+
+**Response**: 
+
+- `total`: Number of people in the household other than the head
+
+:::: {.columns}
+::: {.column}
+
+**Predictors**: 
+
+- `location`: Where the house is located
+
+- `age`: Age of the head of household
+
+- `roof`: Type of roof on the residence (proxy for wealth)
+
+:::
+
+::: {.column}
+
+
+**Other variables**: 
+
+- `numLT5`: Number in the household under 5 years old 
+
+:::
+::::
+
+## The data {.smaller}
+
+```{r}
+hh_data <- read_csv("data/fHH1.csv")
+hh_data |> slice(1:5) |> kable()
+```
+
+
+
+## Response variable
+
+
+:::: {.columns}
+::: {.column width="80%"}
+
+```{r, echo = F, out.width = "100%"}
+ggplot(data = hh_data, aes(x = total)) +
+  geom_histogram() + 
+  labs(title = "Total number in household other than the head")
+```
+
+:::
+
+::: {.column}
+
+```{r echo = F}
+hh_data |>
+  summarise(mean = mean(total), var = var(total)) |>
+  kable(digits = 3)
+```
+
+:::
+::::
+
+
+## Why the least-squares model doesn't work {.smaller}
+
+The goal is to model $\lambda$, the expected number of people in the household (other than the head), as a function of the predictors (covariates)
+
+. . .
+
+We might be tempted to try a linear model $$\lambda_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_px_{ip}$$
+
+. . .
+
+This model won't work because...
+
+- It could produce negative values of $\lambda$ for certain values of the predictors 
+- The equal variance assumption required to conduct inference for linear regression is violated. 
+
+
+
+## Poisson regression model {.smaller}
+
+If $Y_i \sim Poisson$ with $\lambda = \lambda_i$ for the given values $x_{i1}, \ldots, x_{ip}$, then 
+
+
+$$\log(\lambda_i) = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}$$
+
+
+- Each observation can have a different value of $\lambda$ based on its value of the predictors $x_1, \ldots, x_p$
+
+- $\lambda$ determines the mean and variance, so we don't need to estimate a separate error term 
+
+
+
+## Poisson vs. multiple linear regression 
+
+```{r, OLSpois, fig.align="center",out.width="80%", fig.cap='Regression models: Linear regression (left) and Poisson regression (right).',echo=FALSE, warning=FALSE, message=FALSE}
+## Sample data for graph of OLS normality assumption
+## Code from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+
+set.seed(0)
+dat <- data.frame(x=(x=runif(10000, 0, 50)),
+                  y=rnorm(10000, 10*x, 100))
+
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len=5)
+dat$section <- cut(dat$x, breaks)
+
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data=dat))
+
+## Compute densities for each section, flip the axes, add means 
+## of sections.  Note: densities need to be scaled in relation 
+## to section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+  d <- density(x$res, n=5000)
+  res <- data.frame(x=max(x$x)- d$y*1000, y=d$x+mean(x$y))
+  res <- res[order(res$y), ]
+  ## Get some data for normal lines as well
+  xs <- seq(min(x$res), max(x$res), len=5000)
+  res <- rbind(res, data.frame(y=xs + mean(x$y),
+                x=max(x$x) - 1000*dnorm(xs, 0, sd(x$res))))
+  res$type <- rep(c("empirical", "normal"), each=5000)
+  res
+}))
+dens$section <- rep(levels(dat$section), each=10000)
+
+ols_assume <- ggplot(dat, aes(x, y)) +
+  geom_point(size = 0.1, alpha = .25) +
+  geom_smooth(method="lm", fill=NA, lwd=2) +
+  geom_path(data=dens[dens$type=="normal",], 
+            aes(x, y, group=section), 
+            color="salmon", lwd=1.1) +
+  theme_bw() +
+  geom_vline(xintercept=breaks, lty=2)
+
+# Now make Poisson regression picture
+set.seed(0)
+dat <- data.frame(x=(x=runif(1000, 0, 20)),
+                  y=rpois(1000, exp(.1*x)))
+
+## breaks: where you want to compute densities
+breaks <- seq(2, max(dat$x), len=5)
+dat$section <- cut(dat$x, breaks)
+
+## Get the residuals
+dat$res <- dat$y - .1*dat$x
+
+## Compute densities for each section, flip the axes, add means
+## of sections.  Note: densities need to be scaled in relation 
+## to section size
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+  d <- density(x$res, n=500)
+  res <- data.frame(x=max(x$x)- d$y*10, y=d$x+mean(x$y))
+  res <- res[order(res$y), ]
+  ## Get some data for poisson lines as well
+  xs <- seq(min(x$y), max(x$y), len=500)
+  res <- rbind(res, data.frame(y=xs,
+          x=max(x$x) - 10*dpois(round(xs), exp(.1*max(x$x)))))
+  res$type <- rep(c("empirical", "poisson"), each=500)
+  res
+}))
+dens$section <- rep(levels(dat$section), each=1000)
+
+pois_assume <- ggplot(dat, aes(x, jitter(y, .25))) +
+  geom_point(size = 0.1) +
+  geom_smooth(method="loess", fill=NA, lwd=2) +
+  geom_path(data=dens[dens$type=="poisson",], 
+            aes(x, y, group=section), 
+            color="salmon", lwd=1.1) +
+  theme_bw() + ylab("y") + xlab("x") +
+  geom_vline(xintercept=breaks, lty=2)
+
+grid.arrange(ols_assume, pois_assume, ncol = 2)
+```
+
+::: aside
+From [BMLR Figure 4.1](https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html#a-graphical-look-at-poisson-regression)
+:::
+
+
+
+## Assumptions for Poisson regression {.smaller}
+
+:::: {.columns}
+::: {.column}
+
+**Poisson response**: The response variable is a count per unit of time or space, described by a Poisson distribution, at each level of the predictor(s)
+
+**Independence**: The observations must be independent of one another
+
+**Mean = Variance**: The mean must equal the variance
+
+**Linearity**: The log of the mean rate, $\log(\lambda)$, must be a linear function of the predictor(s)
+
+:::
+
+::: {.column}
+
+```{r echo = F, out.width = "100%"}
+pois_assume
+```
+
+:::
+::::
+
+
+## Model 1: Number in household vs. age {.smaller}
+
+```{r}
+model1 <- glm(total ~ age, data = hh_data, family = poisson)
+
+tidy(model1) |> 
+  kable(digits = 4)
+```
+
+$$\log(\hat{\lambda}) = 1.5499  - 0.0047 ~ age$$
+
+
+. . .
+
+Question: The coefficient for `age` is -0.0047. Interpret this coefficient in context.
+
+## Answers {.smaller}
+
+- Each additional year older the head of household is, the estimated average log of the number of people in the household is .0047 lower. 
+
+- Each additional year older the head of household is, the estimated average number of people in the household reduces by 0.5%.
+- Each additional year older the head of household is the estimated average number of people in the household changes by a factor of .995.
+
+- For every 10 years older the head of household is, the estimated average number of people in the household reduces by 5%.
+
+
+## Understanding the interpretation 
+
+Let's derive the change in predicted mean when we go from $x$ to $x+1$ 
+
+(see boardwork)
+
+
+## Is the coefficient of `age` statistically significant? {.smaller}
+
+```{r echo = F}
+tidy(model1, conf.int = T) |>
+  kable(digits = 4)
+```
+
+$$H_0: \beta_1 = 0 \hspace{2mm} \text{ vs. } \hspace{2mm} H_a: \beta_1 \neq 0$$
+
+. . .
+
+**Test statistic**
+
+$$Z = \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)} = \frac{-0.0047 - 0}{0.0009} = -5.026 \text{ (using exact values)}$$
+
+. . .
+
+**P-value**
+
+$$P(|Z| > |-5.026|) = 5.01 \times 10^{-7} \approx 0$$ 
+
+
+
+## What are plausible values for the coefficient of `age`? {.smaller}
+
+```{r echo = F}
+tidy(model1, conf.int = T) |>
+  kable(digits = 4)
+```
+
+**95% confidence interval for the coefficient of `age`**
+
+$$\hat{\beta}_1 \pm Z^{*}\times SE(\hat{\beta}_1)$$
+$$-0.0047 \pm 1.96 \times 0.0009 = \mathbf{(-.0065, -0.0029)}$$
+
+. . .
+
+
+Question: Interpret the interval in terms of the change in mean household size. 
+
+## **Which can help determine if Model 1 is a good fit?** {.smaller}
+
+:::{.panel-tabset}
+
+### Plots
+
+```{r echo = F, out.width="70%"}
+p1 <- ggplot(data = hh_data, aes(x = age, y = total)) + 
+  geom_point() + 
+  labs(y = "Total household size", 
+       title = "Plot A")
+
+p2 <- hh_data |>
+  group_by(age) |> 
+  summarise(mean = mean(total)) |>
+  ggplot(aes(x = age, y = mean))+ 
+  geom_point() + 
+  labs(y = "Empirical mean household size", 
+       title = "Plot B")
+
+p3 <- hh_data |>
+  group_by(age) |> 
+  summarise(log_mean = log(mean(total))) |>
+  ggplot(aes(x = age, y = log_mean)) + 
+  geom_point() + 
+  labs(y = "Log empirical mean household size", 
+       title = "Plot C")
+
+p1 + p2 + p3 + plot_annotation(tag_levels = 'A')
+```
+
+### Code
+
+```{r eval=F}
+p1 <- ggplot(data = hh_data, aes(x = age, y = total)) + 
+  geom_point() + 
+  labs(y = "Total household size", 
+       title = "Plot A")
+
+p2 <- hh_data |>
+  group_by(age) |> 
+  summarise(mean = mean(total)) |>
+  ggplot(aes(x = age, y = mean))+ 
+  geom_point() + 
+  labs(y = "Empirical mean household size", 
+       title = "Plot B")
+
+p3 <- hh_data |>
+  group_by(age) |> 
+  summarise(log_mean = log(mean(total))) |>
+  ggplot(aes(x = age, y = log_mean)) + 
+  geom_point() + 
+  labs(y = "Log empirical mean household size", 
+       title = "Plot C")
+
+p1 + p2 + p3 + plot_annotation(tag_levels = 'A')
+```
+
+:::
+
+## Model 2: Add a quadratic effect for `age`
+
+```{r}
+hh_data <- hh_data |> 
+  mutate(age2 = age*age)
+
+model2 <- glm(total ~ age + age2, data = hh_data, family = poisson)
+tidy(model2, conf.int = T) |> 
+  kable(digits = 4)
+```
+
+
+
+## Model 2: Add a quadratic effect for `age` {.smaller}
+
+```{r echo = F}
+tidy(model2, conf.int = T) |> 
+  kable(digits = 4)
+```
+
+We can determine whether to keep $age^2$ in the model in two ways: 
+
+`r emo::ji("one")` Use the p-value (or confidence interval) for the coefficient (since we are adding a single term to the model)
+
+`r emo::ji("two")` Conduct a drop-in-deviance test
+
+
+
+## Deviance {.smaller}
+
+A **deviance** is a way to measure how the observed data deviates from the model predictions.
+
+- It's a measure unexplained variability in the response variable (similar to SSE in linear regression ) 
+
+- Lower deviance means the model is a better fit to the data 
+
+. . .
+
+We can calculate the "deviance residual" for each observation in the data (more on the formula later). Let $(\text{deviance residual}_i$ be the deviance residual for the $i^{th}$ observation, then 
+
+$$\text{deviance} = \sum(\text{deviance residual})_i^2$$
+
+. . .
+
+*Note: Deviance is also known as the "residual deviance"*
+
+
+
+## Drop-in-Deviance Test {.smaller}
+
+We can use a **drop-in-deviance test** to compare two models. To conduct the test 
+
+`r emo::ji("one")` Compute the deviance for each model 
+
+`r emo::ji("two")` Calculate the drop in deviance 
+
+$$\text{drop-in-deviance =  Deviance(reduced model) - Deviance(larger model)}$$
+
+. . .
+
+`r emo::ji("three")` Given the reduced model is the true model $(H_0 \text{ true})$, then $$\text{drop-in-deviance} \sim \chi_d^2$$
+
+where $d$ is the difference in degrees of freedom between the two models (i.e., the difference in number of terms)
+
+## Drop-in-deviance - Model1 and Model2 {.smaller}
+
+```{r}
+anova(model1, model2, test = "Chisq") |>
+  kable(digits = 3)
+```
+
+. . .
+
+Questions:
+
+- Write the null and alternative hypotheses.
+- What does the value 2337.089	tell you? 
+- What does the value 1 tell you? 
+- What is your conclusion? 
+
+
+## Add `location` to the model? {.smaller}
+
+Suppose we want to add `location` to the model, so we compare the following models: 
+
+**Model A**: $\lambda_i = \beta_0 + \beta_1 ~ age_i + \beta_2 ~ age_i^2$
+
+**Model B**: $\lambda_i =  \beta_0 + \beta_1 ~ age_i + \beta_2 ~ age_i^2 + \beta_3 ~ Loc1_i + \beta_4 ~ Loc2_i + \beta_5 ~ Loc3_i + \beta_6 ~ Loc4_i$
+
+## Question {.smaller}
+
+Which of the following are reliable ways to determine if `location` should be added to the model? 
+
+- Drop-in-deviance test 
+- Use the p-value for each coefficient
+- Likelihood ratio test
+- Nested F Test
+- BIC
+
+## Add `location` to the model? {.smaller}
+
+```{r}
+model3 <- glm(total ~ age + age2 + location, data = hh_data, family = poisson)
+```
+
+. . .
+
+Use a **drop-in-deviance** test to determine if Model 2 or Model 3 (with location) is a better fit for the data.
+
+. . .
+
+
+```{r}
+anova(model2, model3, test = "Chisq") |>
+  kable(digits = 3)
+```
+
+The p-value is small (0.01 < 0.05), so we conclude that Model 3 is a better fit for the data. 
+
+
+
+## Model 3 {.smaller}
+
+```{r echo = F}
+tidy(model3, conf.int = TRUE) |>
+  kable(digits = 4)
+```
+
+. . .
+
+**Does this model sufficiently explain the variability in the mean household size?**
+
+
+
+# Goodness-of-fit
+
+
+
+## Pearson residuals {.smaller}
+
+We can calculate two types of residuals for Poisson regression: Pearson residuals and deviance residuals  
+
+. . .
+
+
+$$\text{Pearson residual}_i = \frac{\text{observed} - \text{predicted}}{\text{std. error}} = \frac{y_i - \hat{\lambda}_i}{\sqrt{\hat{\lambda}_i}}$$
+
+
+. . .
+
+- Similar interpretation as standardized residuals from linear regression 
+
+- Expect most to fall between -2 and 2
+
+- Used to calculate overdispersion parameter
+
+
+
+## Deviance residuals {.smaller}
+
+The **deviance residual** indicates how much the observed data deviates from the fitted model
+
+
+$$\text{deviance residual}_i = \text{sign}(y_i - \hat{\lambda}_i)\sqrt{2\Bigg[y_i\log\bigg(\frac{y_i}{\hat{\lambda}_i}\bigg) - (y_i - \hat{\lambda}_i)\Bigg]}$$
+
+where 
+
+$$\text{sign}(y_i - \hat{\lambda}_i)  =  \begin{cases}
+1 & \text{ if }(y_i - \hat{\lambda}_i) > 0 \\
+-1 & \text{ if }(y_i - \hat{\lambda}_i) < 0 \\
+0 & \text{ if }(y_i - \hat{\lambda}_i) = 0
+\end{cases}$$
+
+
+
+
+## Model 3: Residual plots  {.smaller}
+
+
+```{r}
+model3_aug_pearson <- augment(model3, type.residuals = "pearson") 
+model3_aug_deviance <- augment(model3, type.residuals = "deviance")
+```
+
+:::{.panel-tabset}
+
+### Plots
+```{r echo = F}
+p1 <- ggplot(data = model3_aug_pearson, aes(x = .fitted, y = .resid)) + 
+  geom_point()  + 
+  geom_smooth() + 
+  labs(x = "Fitted values", 
+       y = "Pearson residuals", 
+       title = "Pearson residuals vs. fitted")
+
+p2 <-  ggplot(data = model3_aug_deviance, aes(x = .fitted, y = .resid)) + 
+  geom_point()  + 
+  geom_smooth() + 
+  labs(x = "Fitted values", 
+       y = "Deviance residuals", 
+       title = "Deviance residuals vs. fitted")
+
+p1 + p2
+```
+
+### Code
+```{r eval=F}
+p1 <- ggplot(data = model3_aug_pearson, aes(x = .fitted, y = .resid)) + 
+  geom_point()  + 
+  geom_smooth() + 
+  labs(x = "Fitted values", 
+       y = "Pearson residuals", 
+       title = "Pearson residuals vs. fitted")
+
+p2 <-  ggplot(data = model3_aug_deviance, aes(x = .fitted, y = .resid)) + 
+  geom_point()  + 
+  geom_smooth() + 
+  labs(x = "Fitted values", 
+       y = "Deviance residuals", 
+       title = "Deviance residuals vs. fitted")
+
+p1 + p2
+```
+
+:::
+
+
+## Goodness-of-fit {.smaller}
+
+- **Goal**: Use the (residual) deviance to assess how much the predicted values differ from the observed values. Recall $(\text{deviance}) = \sum_{i=1}^{n}(\text{deviance residual})_i^2$
+
+- If the model sufficiently fits the data, then 
+
+. . .
+
+$$\text{deviance} \sim \chi^2_{df}$$ 
+
+where $df$ is the model's residual degrees of freedom
+
+. . .
+
+
+- **Question**: What is the probability of observing a deviance larger than the one we've observed, given this model sufficiently fits the data?
+
+. . .
+
+$$P(\chi^2_{df} > \text{ deviance})$$
+
+
+
+## Model 3: Goodness-of-fit calculations {.smaller}
+
+```{r}
+model3$deviance
+model3$df.residual
+```
+
+```{r}
+pchisq(model3$deviance, model3$df.residual, lower.tail = FALSE)
+```
+
+The probability of observing a deviance greater than `r round(model3$deviance,1)` is $\approx 0$, so there is significant evidence of **lack-of-fit**. 
+
+
+
+## Lack-of-fit {.smaller}
+
+There are a few potential reasons for lack-of-fit:
+
+- Missing important interactions or higher-order terms
+
+- Missing important variables (perhaps this means a more comprehensive data set is required)
+
+- There could be extreme observations causing the deviance to be larger than expected (assess based on the residual plots)
+
+- There could be a problem with the Poisson model 
+  - May need more flexibility in the model to handle **overdispersion**
+  
+
+
+## Overdispersion  {.smaller}
+
+**Overdispersion**: There is more variability in the response than what is implied by the Poisson model 
+
+:::{.panel-tabset}
+
+### Tables
+
+:::: {.columns}
+
+::: {.column}
+
+**Overall**
+
+```{r echo = F}
+hh_data |>
+  summarise(mean = mean(total), var = var(total)) |>
+  kable(digits = 3)
+```
+
+:::
+
+::: {.column}
+
+**by Location**
+
+```{r echo = F}
+hh_data |>
+  group_by(location) |>
+  summarise(mean = mean(total), var = var(total)) |>
+  kable(digits = 3)
+```
+
+:::
+
+::::
+
+### Code
+
+```{r echo=T,eval=F}
+hh_data |>
+  summarise(mean = mean(total), var = var(total)) |>
+  kable(digits = 3)
+```
+
+```{r echo=T,eval=F}
+hh_data |>
+  group_by(location) |>
+  summarise(mean = mean(total), var = var(total)) |>
+  kable(digits = 3)
+```
+
+:::
+
+## Why overdispersion matters {.smaller}
+
+If there is overdispersion, then there is more variation in the response than what's implied by a Poisson model. This means 
+
+`r emo::ji("x")`  The standard errors of the model coefficients are artificially small 
+
+`r emo::ji("x")`  The p-values are artificially small 
+
+`r emo::ji("x")`  This could lead to models that are more complex than what is needed 
+
+. . .
+
+We can take overdispersion into account by
+
+  - inflating standard errors by multiplying them by a dispersion factor
+  - using a negative-binomial regression model
+
+
+
+
+
+# Quasi-poission 
+## Dispersion parameter  {.smaller}
+
+The **dispersion parameter** is represented by $\phi$
+
+
+$$\hat{\phi} =\frac{\text{deviance}}{\text{residual df}} = \frac{\sum_{i=1}^{n}(\text{Pearson residuals})^2}{n - p}$$
+
+where $p$ is the number of terms in the model (including the intercept)
+
+
+- If there is no overdispersion $\hat{\phi} = 1$
+
+- If there is overdispersion $\hat{\phi} >  1$
+
+
+
+## Accounting for dispersion in the model  {.smaller}
+
+We inflate the standard errors of the coefficient by multiplying the variance by $\hat{\phi}$
+
+. . .
+
+$$SE_{Q}(\hat{\beta}) = \sqrt{\hat{\phi}}  * SE(\hat{\beta})$$
+- "Q" stands for **quasi-Poisson**, since this is an ad-hoc solution 
+  - The process for model building and model comparison is called **quasilikelihood** (similar to likelihood without exact underlying distributions)
+
+
+
+
+## Model 3: Quasi-Poisson model  {.smaller}
+
+```{r}
+model3_q <- glm(total ~ age + age2 + location, data = hh_data, 
+                family = quasipoisson) #<<
+```
+
+```{r, echo = F}
+tidy(model3_q, conf.int = T) |> kable(digits = 4)
+```
+
+
+## Poisson vs. Q-Poisson {.smaller}
+
+:::: {.columns}
+
+::: {.column}
+
+**Poisson**
+
+```{r echo = F}
+tidy(model3) |>
+  dplyr::select(term, estimate, std.error) |>
+  kable(digits = 4)
+```
+
+:::
+
+::: {.column}
+
+**Quasi-Poisson**
+
+```{r echo = F}
+tidy(model3_q) |>
+  dplyr::select(estimate, std.error) |>
+  kable(digits = 4)
+```
+
+:::
+
+::::
+
+
+
+## Q-Poisson: Inference for coefficients {.smaller}
+
+:::: {.columns}
+
+::: {.column}
+
+
+```{r echo = F}
+tidy(model3_q) |>
+  dplyr::select(term, estimate, std.error) |>
+  kable(digits = 4)
+```
+
+:::
+
+::: {.column}
+
+**Test statistic**
+$$t = \frac{\hat{\beta} - 0}{SE_{Q}(\hat{\beta})} \sim t_{n-p}$$
+
+:::
+
+::::
+
+
+
+
+
+
+# Negative binomial regression model 
+## Negative binomial regression model  {.smaller}
+
+Another approach to handle overdispersion is to use a **negative binomial regression model** 
+
+- This has more flexibility than the quasi-Poisson model, because there is a new parameter in addition to $\lambda$
+
+<br> 
+
+. . .
+
+Let $Y$ be a **negative binomial random variable**, $Y\sim NegBinom(r, p)$, then 
+
+$$P(Y = y_i) = {y_i + r - 1 \choose r - 1}(1-p)^{y_i}p^r \hspace{5mm} y_i = 0, 1, 2, \ldots, \infty$$
+
+
+
+## Negative binomial regression model  {.smaller}
+
+- **Main idea**: Generate a $\lambda$ for each observation (household) and generate a count using the Poisson random variable with parameter $\lambda$ 
+  - Makes the counts more dispersed than with a single parameter 
+  
+- Think of it as a Poisson model such that $\lambda$ is also random 
+
+. . .
+
+$\begin{aligned} &\text{If }Y|\lambda \sim Poisson(\lambda)\\
+&\text{ and } \lambda \sim Gamma\bigg(r, \frac{1-p}{p}\bigg)\\
+&\text{ then } Y \sim NegBinom(r, p)\end{aligned}$
+
+
+## Negative binomial regression in R {.smaller}
+
+
+```{r}
+library(MASS)
+model3_nb <- glm.nb(total ~ age + age2 + location, data = hh_data)
+tidy(model3_nb) |> 
+  kable(digits = 4)
+```
+
+# Offsets
+## Data: Airbnbs in NYC {.smaller}
+
+The data set [NYCairbnb-sample.csv](data/NYCairbnb-sample.csv) contains information about a random sample of 1000 Airbnbs in New York City. It is a subset of the data on 40628 Airbnbs scraped by Awad et al. (2017).
+
+**Variables**
+
+- `number_of_reviews`: Number of reviews for the unit on Airbnb (proxy for number of rentals)
+- `price`: price per night in US dollars
+- `room_type`: Entire home/apartment, private room, or shared room
+- `days`: Number of days the unit has been listed (date when info scraped - date when unit first listed on Airbnb)
+
+
+::: aside
+Data set pulled from BMLR Section 4.11.3.
+:::
+
+
+## Data: Airbnbs in NYC {.smaller}
+
+```{r}
+airbnb <- read_csv("data/NYCairbnb-sample.csv") |>
+  dplyr::select(id, number_of_reviews, days, room_type, price)
+```
+
+```{r echo = F}
+set.seed(020322)
+airbnb |> sample_n(5) |>
+  kable()
+```
+
+**Goal**: Use the price and room type of Airbnbs to describe variation in the number of reviews (a proxy for number of rentals).
+
+
+
+## EDA {.smaller}
+
+:::{.panel-tabset}
+
+### Plot
+```{r echo = F}
+p1 <- ggplot(data = airbnb, aes(x = number_of_reviews)) + 
+  geom_histogram() + 
+   labs(x = "Number of reviews",
+    title = "Distribution of number of reviews")
+
+p2 <- airbnb |>
+  filter(price <= 2000) |>
+  group_by(price) |>
+  summarise(log_mean = log(mean(number_of_reviews))) |>
+  ggplot(aes(x = price, y = log_mean)) + 
+  geom_point(alpha= 0.7) + 
+  geom_smooth() + 
+  labs(x = "Price in  US dollars",
+    y = "Log(mean # reviews)", 
+    title = "Log mean #  of reviews vs. price", 
+    subtitle = "Airbnbs $2000 or less")
+
+p3 <- airbnb |>
+  filter(price <= 500) |>
+  group_by(price) |>
+  summarise(log_mean = log(mean(number_of_reviews))) |>
+  ggplot(aes(x = price, y = log_mean)) + 
+  geom_point(alpha= 0.7) + 
+  geom_smooth() + 
+  labs(x = "Price in  US dollars",
+    y = "Log(mean # reviews)", 
+    title = "Log mean # of reviews vs. price", 
+    subtitle = "Airbnbs $500 or less")
+
+p1  / (p2 + p3) 
+
+```
+
+### Code
+```{r eval=F}
+p1 <- ggplot(data = airbnb, aes(x = number_of_reviews)) + 
+  geom_histogram() + 
+   labs(x = "Number of reviews",
+    title = "Distribution of number of reviews")
+
+p2 <- airbnb |>
+  filter(price <= 2000) |>
+  group_by(price) |>
+  summarise(log_mean = log(mean(number_of_reviews))) |>
+  ggplot(aes(x = price, y = log_mean)) + 
+  geom_point(alpha= 0.7) + 
+  geom_smooth() + 
+  labs(x = "Price in  US dollars",
+    y = "Log(mean # reviews)", 
+    title = "Log mean #  of reviews vs. price", 
+    subtitle = "Airbnbs $2000 or less")
+
+p3 <- airbnb |>
+  filter(price <= 500) |>
+  group_by(price) |>
+  summarise(log_mean = log(mean(number_of_reviews))) |>
+  ggplot(aes(x = price, y = log_mean)) + 
+  geom_point(alpha= 0.7) + 
+  geom_smooth() + 
+  labs(x = "Price in  US dollars",
+    y = "Log(mean # reviews)", 
+    title = "Log mean # of reviews vs. price", 
+    subtitle = "Airbnbs $500 or less")
+
+p1  / (p2 + p3) 
+
+```
+
+:::
+
+
+## EDA  {.smaller}
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+**Overall** 
+
+```{r echo = F}
+airbnb |>
+  summarise(mean = mean(number_of_reviews), 
+            var = var(number_of_reviews)) |>
+  kable(digits = 3)
+```
+
+
+:::
+
+::: {.column}
+
+**by Room type**
+
+```{r, echo = F}
+airbnb |>
+  group_by(room_type) |>
+  summarise(mean = mean(number_of_reviews), 
+            var = var(number_of_reviews)) |>
+  kable(digits = 3)
+```
+
+:::
+::::
+
+
+
+## Considerations for modeling {.smaller}
+
+We would like to fit the Poisson regression model
+
+$$\log(\lambda) = \beta_0 + \beta_1 ~ price + \beta_2 ~ room\_type1 + \beta_3 ~ room\_type2$$
+
+. . .
+
+Question: 
+- Based on the EDA, what are some potential issues we may want to address in the model building? 
+
+- Suppose any model fit issues are addressed. What are some potential limitations to the conclusions and interpretations from the model? 
+
+
+
+
+
+## Offset  {.smaller}
+
+- Sometimes counts are not directly comparable because the observations differ based on some characteristic directly related to the counts, i.e. the *sampling effort*.
+
+- An **offset** can be used to adjust for differences in sampling effort. 
+
+. . .
+
+- Let $x_{offset}$ be the variable that accounts for differences in sampling effort, then $\log(x_{offset})$ will be added to the model.
+
+. . .
+
+$\log(\lambda_i) = \beta_0 + \beta_1 ~ x_{i1} + \beta_2 ~ x_{i2} + ... + \beta_p ~ x_{ip} + \log(x_{offset_i})$
+
+- The offset is a term in the model with coefficient always equal to 1.
+
+
+
+## Adding an offset to the Airbnb model  {.smaller}
+
+We will add the offset $\log(days)$ to the model. This accounts for the fact that we would expect Airbnbs that have been listed longer to have more reviews. 
+
+$$\log(\lambda_i) = \beta_0 + \beta_1 ~ price_i + \beta_2 ~ room\_type1_i + \beta_3 ~ room\_type2_i + \log(days_i)$$
+<br>
+
+
+**Note:** The response variable for the model is still  $\log(\lambda_i)$, the log mean number of reviews
+
+
+
+## Detail on the offset {.smaller}
+
+We want to adjust for the number of days, so we are interested in $\frac{reviews}{days}$.
+
+. . .
+
+Given $\lambda$ is the mean number of reviews
+
+$$\log\Big(\frac{\lambda}{days}\Big) = \beta_0 + \beta_1 ~ price + \beta_2 ~ room\_type1 + \beta_3 ~ room\_type2$$
+
+. . .
+
+$$\Rightarrow \log({\lambda}) - \log(days) = \beta_0 + \beta_1 ~ price + \beta_2 ~ room\_type1 + \beta_3 ~ room\_type2$$
+
+. . .
+
+$$\Rightarrow \log({\lambda}) = \beta_0 + \beta_1 ~ price + \beta_2 ~ room\_type1 + \beta_3 ~ room\_type2 + \log(days)$$
+
+
+
+## Airbnb model in R {.smaller}
+
+```{r}
+airbnb_model <- glm(number_of_reviews ~ price + room_type, 
+                    data = airbnb, family = poisson, 
+                    offset = log(days)) #<<
+```
+
+```{r echo = F}
+tidy(airbnb_model) |>
+  kable(digits = 4)
+```
+
+. . .
+
+The coefficient for $\log(days)$ is fixed at 1, so it is not in the model output. 
+
+
+
+
+## Interpretations {.smaller}
+
+```{r echo = F}
+tidy(airbnb_model) |>
+  kable(digits = 4)
+```
+
+<br> 
+
+Question: 
+
+- Interpret the coefficient of `price`. 
+- Interpret the coefficient of  `room_typePrivate room`
+
+
+
+
+## Goodness-of-fit {.smaller}
+
+$$\begin{aligned}&H_0: \text{ The model is a good fit for the data}\\
+&H_a: \text{ There is significant lack of fit}\end{aligned}$$
+
+```{r}
+pchisq(airbnb_model$deviance, airbnb_model$df.residual, lower.tail = F)
+```
+
+. . .
+
+There is evidence of significant lack of fit in the model. Therefore, more models would need to be explored that address the issues mentioned earlier. 
+
+. . .
+
+*In practice we would assess goodness-of-fit and finalize the model <b>before</b> any interpretations and conclusions.*
+
+
+
+
+
+# Zero-inflated Poisson model
+## Data: Weekend drinking  {.smaller}
+
+The data [`weekend-drinks.csv`](data/weekend-drinks.csv) contains information from a survey of 77 students in a introductory statistics course on a dry campus. 
+
+**Variables** 
+
+- `drinks`: Number of drinks they had in the past weekend 
+- `off_campus`: 1 - lives off campus, 0 otherwise
+- `first_year`: 1 - student is a first-year, 0 otherwise
+- `sex`: f - student identifies as female, m - student identifies as male 
+
+. . .
+
+**Goal**: The goal is explore factors related to drinking behavior on a dry campus.
+
+::: aside
+Case study in BMLR - Section 4.10
+:::
+
+
+## EDA: Response variable {.smaller}
+
+```{r, echo = F}
+drinks <- read_csv("data/weekend-drinks.csv")
+```
+
+
+```{r echo = F, out.width = "80%"}
+ggplot(data = drinks, aes(x = drinks)) + 
+  geom_histogram(aes(x = drinks), binwidth = 1, alpha = 0.8, fill = "gray", color = "gray") + 
+  labs(title = "Observed number of drinks", 
+       subtitle = "Mean = 2.013")
+```
+
+```{r echo = F, eval = F}
+drinks |>
+  summarise(mean = mean(drinks), var = var(drinks)) |>
+  kable(digits = 3)
+```
+
+
+
+## Observed vs. expected response {.smaller}
+
+```{r echo = F,  out.width = "80%"}
+drinks |>
+  mutate(sim = rpois(77, 2.013)) |>
+ggplot() +   
+  geom_histogram(aes(x = drinks), binwidth = 1, alpha = 0.7, fill = "gray", color = "gray") + 
+  geom_histogram(aes(x = sim), binwidth = 1, fill = "steelblue", alpha = 0.73, color = "steelblue") + 
+  labs(title = "Observed (gray) vs. Expected (blue) in Poisson(2.013)")
+```
+
+. . .
+
+**What does it mean to be a "zero" in this data?**
+
+
+
+## Two types of zeros {.smaller}
+
+There are two types of zeros
+
+- Those who happen to have a zero in the data set (people who drink but happened to not drink last weekend)
+- Those who will always report a value of zero (non-drinkers)
+   - These are called **true zeros** 
+
+. . .
+
+We introduce a new parameter $\alpha$ for the proportion of true zeros,  then fit a model that has two components:
+
+. . .
+
+
+`r emo::ji("one")` The association between mean number of drinks and various characteristics among those who drink 
+
+`r emo::ji("two")` The estimated proportion of non-drinkers
+
+
+## Zero-inflated Poisson model {.smaller}
+
+**Zero-inflated Poisson (ZIP)** model has two parts
+
+. . .
+
+`r emo::ji("one")` Association, among those who drink, between the mean number of drinks and predictors sex and off campus residence
+
+. . .
+
+$$\log(\lambda) = \beta_0 + \beta_1 ~ off\_campus + \beta_2 ~ sex$$
+where $\lambda$ is the mean number of drinks among those who drink
+
+. . .
+
+`r emo::ji("two")` Probability that a student does not drink
+
+$$\text{logit}(\alpha) = \log\Big(\frac{\alpha}{1- \alpha}\Big) = \beta_0 + \beta_1 ~ first\_year$$
+
+where $\alpha$ is the proportion of non-drinkers
+
+. . .
+
+**Note:** The same variables can be used in each component
+
+
+
+## Details of the ZIP model {.smaller}
+
+- The ZIP model is a special case of a **latent variable model**
+  - A type of **mixture model** where observations for one or more groups occur together but the group membership unknown
+
+- Zero-inflated models are a common type of mixture model; they apply beyond Poisson regression
+
+
+
+## ZIP model in R 
+
+Fit ZIP models using the `zeroinfl` function from the **pscl** R package.
+
+```{r}
+library(pscl)
+
+drinks_zip <- zeroinfl(drinks ~ off_campus + sex | first_year,
+                data = drinks)
+drinks_zip
+```
+
+
+
+## Tidy output {.smaller}
+
+Use the `tidy` function from the  **poissonreg** package for tidy model output.
+
+```{r}
+library(poissonreg)
+```
+
+. . .
+
+**Mean number of drinks among those who drink**
+
+```{r}
+tidy(drinks_zip, type = "count") %>% kable(digits = 3)
+```
+
+
+
+## Tidy output
+
+**Proportion of non-drinkers**
+
+```{r}
+tidy(drinks_zip, type = "zero") %>% kable(digits = 3)
+```
+
+
+## Interpreting the model coefficients {.smaller}
+
+```{r echo = F}
+tidy(drinks_zip, type = "count") %>% kable(digits = 3)
+```
+
+<br> 
+
+Questions
+
+- Interpret the intercept.
+- Interpret the coefficients of `off_campus` and `sexm`.
+
+## Estimated proportion zeros {.smaller}
+
+```{r echo = F}
+tidy(drinks_zip, type = "zero") %>% kable(digits = 3)
+```
+
+Questions:
+
+Based on the model...
+
+- What is the probability a first-year student is a non-drinker?
+- What is the probability a upperclass student (sophomore, junior, senior) is a non-drinker?
+
+
+## These are just a few of the many models... {.smaller}
+
+- Use the [Vuong Test](https://bookdown.org/roback/bookdown-BeyondMLR/ch-poissonreg.html#the-vuong-test-optional) to compare the fit of the ZIP model to a regular Poisson model
+  - Why can't we use a drop-in-deviance test?
+
+- We've just discussed the ZIP model here, but there are other model applications beyond the standard Poisson regression model (e.g., hurdle models, Zero-inflated Negative Binomial models, etc. )
+
+
+
+# Likelihoods for Poisson models 
+## Estimating coefficients in Poisson model {.smaller}
+
+- Least squares estimation would not work because the normality and equal variance assumptions don't hold for Poisson regression 
+
+- **Maximum likelihood estimation** is used to estimate the coefficients of Poisson regression. 
+
+- The likelihood is the product of the probabilities for the $n$ *<u>independent</u>* observations in the data 
+
+## Likelihood for regular Poisson model {.smaller}
+
+Let's go back to example about **household size** in the Philippines. We will focus on the model using the main effect of age to understand variability in mean household size. 
+
+. . .
+
+Suppose the first five observations have household sizes of 4, 2, 8, 6, and 1. Then the likelihood is 
+
+. . .
+
+$L = \frac{e^{-\lambda_1}\lambda_1^4}{4!} * \frac{e^{-\lambda_2}\lambda_2^2}{2!} * \frac{e^{-\lambda_3}\lambda_3^8}{8!} * 
+\frac{e^{-\lambda_4}\lambda_4^6}{6!} * \frac{e^{-\lambda_5}\lambda_5^1}{1!}$
+
+## Likelihood for regular Poisson model {.smaller}
+
+
+We will use the log likelihood to make finding the MLE easier 
+
+. . .
+
+$\begin{aligned}\log(L) &= -\lambda_1 + 4\log(\lambda_1) - \lambda_2 + 2\log(\lambda_2) - \lambda_3 + 8\log(\lambda_3)\\ & -\lambda_4 + 6 \log(\lambda_4) - \lambda_5 + \log(\lambda_5) + C \end{aligned}$
+
+where 
+  - $\lambda$ is the mean number in household depending on $x_i$
+  - $C = -[\log(4!) + \log(2!) + \log(8!) + \log(6!)+ \log(1!)]$
+
+
+
+## Likelihood for regular Poisson model {.smaller}
+
+Given the age of the head of the household, we fit the model 
+
+$$\log(\lambda_i) = \beta_0 + \beta_1~age_i$$
+
+Then we replace each $\lambda_i$ in $\log(L)$ with $e^{\beta_0 + \beta_1~age_i}$. 
+
+. . .
+
+Suppose the first five observations have ages $X = (32, 21, 55, 44, 28)$. Then
+
+. . .
+
+$$\begin{aligned} \log(L) &= [-e^{\beta_0 + \beta_132}+ 4(\beta_0 + \beta_1 32)] + [ - e^{\beta_0 + \beta_121} + 2(\beta_0 + \beta_121)] \\ &+  [- e^{\beta_0 + \beta_155} + 8(\beta_0 + \beta_155)] +  [-e^{\beta_0 + \beta_144} + 6(\beta_0 + \beta_144)] \\ &+ [-e^{\beta_0 + \beta_128}(\beta_0 + \beta_128)] + C \end{aligned}$$
+
+. . .
+
+Use search algorithm to find the values of $\beta_0$ and $\beta_1$ that maximize the above equation. 
+
+
+
+## Probabilities under ZIP model {.smaller}
+
+There are three different types of observations in the data:
+
+- Observed zero and will always be 0 (true zeros)
+- Observed 0 but will not always be 0
+- Observed non-zero count and will not always be 0
+
+
+
+## Probabilities under ZIP model {.smaller}
+
+**True zeros**
+
+$$P(0 | \text{true zero})= \alpha$$
+
+. . .
+
+**Observed 0 but will not always be 0**
+
+$$P(0 | \text{not always zero}) = (1 - \alpha)\frac{e^{-\lambda}\lambda^0}{0!}$$
+
+. . .
+
+**Did not observe 0 and will not always be 0**
+
+$$P(z_i | \text{not always zero}) = (1 - \alpha)\frac{e^{-\lambda}\lambda^{z_i}}{z_i!}$$
+
+
+
+## Probabilities under ZIP model {.smaller}
+
+Putting this all together. Let $y_i$ be an observed response then 
+
+$$P(Y_i = y_i | x_i) = \begin{cases}
+\alpha + (1 - \alpha)e^{-\lambda_i} && \text{ if } y_i = 0 \\
+(1 - \alpha)\frac{e^{-\lambda_i}\lambda_i^{y_i}}{y_i!} && \text{ if } y_i > 0
+\end{cases}$$
+
+. . .
+
+Recall from our example, 
+
+$$\lambda_i = e^{\beta_0 + \beta_1~off\_campus_i + \beta_2 ~ sex_i}$$
+
+$$\alpha_i = \frac{e^{\beta_{0\alpha} + \beta_{1\alpha} ~ first\_year_i}}{1 + e^{\beta_{0\alpha} + \beta_{1\alpha} ~ first\_year_i}}$$
+
+- Plug in $\lambda_i$ and $\alpha_i$ into the above equation obtain the likelihood function
+
+
+
+## Acknowledgements
+
+These slides are based on content in [BMLR: Chapter 4](https://bookdown.org/roback/bookdown-BeyondMLR/)
+
+Initial versions of the slides are by Dr. Maria Tackett, Duke University
+
+
+
+

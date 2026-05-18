@@ -1,0 +1,53 @@
+---
+title: 'Chapter 4 - Poisson Regression'
+subtitle: 'Do animals bite more during a full moon?'
+---
+  
+## Questions
+
+1.  Is there initial evidence of more bites during full moon phases?
+
+2.  Why can’t we just perform a t-test comparing full moon periods to non-full moon periods using period-level data (n=10)?
+
+3.  What options can you think of for handling the fact that Period 5 is based on only 2 lunar days? What are the modeling implications of including the number of days in a period as an offset term?
+
+4.  Interpret model parameters from **fit1**.
+
+5.  Is there any evidence of a lack of fit in **fit1**? What factors may lead to a lack of fit?
+
+6.  Does the full moon have an effect above and beyond the linear cycle trend? Interpret the coefficient and a 95% confidence interval for the *fullmoon* term in **fit3**.
+
+7.  What is **fit4** doing? Does it offer an improvement over **fit3**?
+
+8.  Compare **fit5** to the analysis in the original author's paper. Are they the same? Discuss. See the article[ HERE](https://www.bmj.com/content/321/7276/1559.long).
+
+9.  Based on this analysis, does it make you more wary of animal bites during full moons?
+
+### Addressing issues of overdispersion in fit5.
+
+10. Is there evidence of a lack of fit in **fit5**? Cite evidence both from a goodness of fit test and from comparing means and variances by period.
+
+11. If overdispersion goes uncorrected, what are the implications for p-values and CIs for model coefficients?
+
+#### Overdispersion parameter adjustment.
+
+One solution is to simply add a second parameter to inflate variances, so that $Var(Y_i)=\phi\lambda_i$. This is called a “quasi-Poisson” or, in general, a “quasi-likelihood” approach, because our data no longer follows a true Poisson distribution.
+
+#### Negative binomial modeling.
+
+Another solution is to model response using a negative binomial distribution, so that $Y\sim NegBinom(\theta,p)$. This distribution comes about if $Y|λ\sim Poisson(λ)$, but the $\lambda$'s themselves are randomly chosen according to a gamma distribution: $\lambda \sim gamma(θ,\frac{(1-p)}{p})$. In this case, \$E(Y)=\theta \frac{p}{(1-p)}=\mu \$ and $Var(Y)=\theta \frac{p}{(1-p)^2} =\mu+\frac{\mu^2}{\theta}$, so that $\frac{\mu^2}{\theta}$ is the amount of overdispersion.
+
+12. Compare the following estimates, tests, and intervals under usual Poisson regression, quasi-Poisson regression, and negative binomial regression:
+
+|                                | Poisson | Quasi-poisson | Negative Binomial |
+|--------------------------------|---------|---------------|-------------------|
+| $\phi$                         |         |               |                   |
+| $SE(\hat{\beta}_4$)            |         |               |                   |
+| Wald-type test stat            |         |               |                   |
+| Wald-type p-value              |         |               |                   |
+| LRT-type test stat             |         |               |                   |
+| LRT-type test stat             |         |               |                   |
+| LRT-type p-value               |         |               |                   |
+| CI - profile for $e^{\beta_4}$ |         |               |                   |
+| CI-Wald-type for $e^{\beta_4}$ |         |               |                   |
+

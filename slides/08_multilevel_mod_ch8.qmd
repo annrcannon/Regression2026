@@ -1,0 +1,1108 @@
+---
+title: "Multilevel Models"
+subtitle: "BMLR Chapter 8"
+format: 
+  revealjs:
+    output-file: "08_multilevel_mod_ch8.html"
+    slide-number: true
+  html:
+    output-file: "08_multilevel_mod_ch8_o.html"
+logo: "../img/favicon.png"
+---
+
+## Setup
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(GGally)
+library(knitr)
+library(patchwork)
+library(viridis)
+library(ggfortify)
+library(kableExtra)
+library(lme4)
+library(broom.mixed)
+```
+
+## Learning goals (1/2) {.smaller}
+
+- Recognize a potential for correlation in a data set
+- Identify observational units at varying levels 
+- Understand issues correlated data may cause in modeling
+- Understand how random effects models can be used to take correlation into account 
+- Use EDA for multilevel data
+- Conduct univariate and bivariate EDA for multilevel models 
+
+## Learning goals (2/2) {.smaller}
+
+- Write multilevel model , including assumptions about variance components, in by-level and composite forms
+- Interpret the model parameters, fixed effects, and variance components
+- Fit and interpret multilevel models 
+- Compare maximum likelihood (ML) and restricted maximum likelihood (REML) estimation approaches
+- Understand general process for fitting and comparing multilevel models
+
+# Multilevel Models
+
+## Multilevel data {.smaller}
+
+- We can think of correlated data as a multilevel structure
+
+  - Population elements are aggregated into groups
+  - There are observational units and measurements at each level
+  
+. . .
+
+- For now we will focus on data with two levels: 
+
+  - **Level one**: Most basic level of observation 
+  - **Level two**: Groups formed from aggregated level-one observations 
+
+
+
+## Two types of effects {.smaller}
+
+- **Fixed effects**: Effects that are of interest in the study
+  - Can think of these as effects whose interpretations would be included in a write up of the study
+
+. . .
+
+- **Random effects**: Effects we're not interested in studying but whose variability we want to understand 
+  - Can think of these as effects whose interpretations would not necessarily be included in a write up of the study  
+
+
+
+## Practice Questions {.smaller}
+
+Radon is a carcinogen – a naturally occurring radioactive gas whose decay products are also radioactive – known to cause lung cancer in high concentrations. The EPA sampled more than 80,000 homes across the U.S.  Each house came from a randomly selected county and measurements were made on each level of each home.  Uranium measurements at the county level were included to improve the radon estimates.
+
+1. What is the most basic level of observation (Level One)? 
+2. What are the group units (Level Two, Level Three, etc...)
+2. What is the response variable?
+3. Describe the within-group variation. 
+4. What are the fixed effects? What are the random effects?
+
+::: aside
+Ex. 1 from Section 7.10.1 in BMLR
+:::
+ 
+# Multilevel models
+
+## Data: Music performance anxiety {.smaller}
+
+The data [`musicdata.csv`](data/musicdata.csv) come from the Sadler and Miller (2010) study of the emotional state of musicians before performances. The dataset contains information collected from 37 undergraduate music majors who completed the Positive Affect Negative Affect Schedule (PANAS), an instrument produces a measure of anxiety (negative affect) and a measure of happiness (positive affect). This analysis will focus on negative affect as a measure of performance anxiety.
+
+The primary variables we'll use are
+
+- **`na`**: negative affect score on PANAS (the response variable)
+- **`perform_type`**: type of performance (Solo, Large Ensemble, Small Ensemble)
+- **`instrument`**: type of intstrument (Voice, Orchestral, Piano)
+
+## Look at data {.smaller}
+
+:::{.panel-tabset}
+
+### Data View
+```{r echo = F}
+music <- read_csv("data/musicdata.csv")
+music %>%
+  filter(id %in% c(1, 43)) %>%
+  group_by(id) %>%
+  slice(1:3) %>%
+  select(id, diary, perform_type, na, gender, instrument) %>%
+  kable()
+```
+
+### Code
+
+```{r eval=F}
+music <- read_csv("data/musicdata.csv")
+music %>%
+  filter(id %in% c(1, 43)) %>%
+  group_by(id) %>%
+  slice(1:3) %>%
+  select(id, diary, perform_type, na, gender, instrument) %>%
+  kable()
+```
+
+:::
+
+- What are the Level One observations? Level Two observations? 
+
+- What are the Level One variables? Level Two variables?
+
+
+
+## Univariate exploratory data analysis {.smaller}
+
+**Level One variables** 
+
+Two ways to approach univariate EDA (visualizations and summary statistics) for Level One variables: 
+
+- Use individual observations (i.e., treat observations as independent)
+
+- Use aggregated values for each Level Two observation 
+
+. . .
+
+**Level Two variables** 
+
+- Use a data set that contains one row per Level Two observation 
+
+. . .
+
+Let's do some Univariate EDA together
+
+
+## Unviariate EDA {.smaller}
+
+:::{.panel-tabset}
+
+### Plots
+
+```{r echo = F}
+p1 <- ggplot(data = music, aes(x = na)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Individual negative affect", 
+       title = "Negative affect scores")
+
+p2 <- music %>%
+  group_by(id) %>%
+  summarise(mean_na = mean(na)) %>%
+  ggplot(aes(x = mean_na)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Mean negative affect", 
+       title = "Mean negative affect scores")
+
+p1 + p2
+```
+
+### Code
+
+```{r eval = F}
+p1 <- ggplot(data = music, aes(x = na)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Individual negative affect", 
+       title = "Negative affect scores")
+
+p2 <- music %>%
+  group_by(id) %>%
+  summarise(mean_na = mean(na)) %>%
+  ggplot(aes(x = mean_na)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Mean negative affect", 
+       title = "Mean negative affect scores")
+
+p1 + p2
+```
+
+:::
+
+
+## Bivariate exploratory data analysis {.smaller}
+
+**Goals**
+
+- Explore general association between the predictor and response variable 
+- Explore whether subjects at a given level of the predictor tend to have similar mean responses 
+- Explore whether variation in response differs at different levels of a predictor
+
+. . .
+
+There are two ways to visualize these associations: 
+
+- One plot of individual observations (i.e., treat observations as independent)
+
+- Separate plots of responses vs. predictor for each Level Two observation (lattice plots)
+
+. . .
+
+**Now lets do some Bivariate EDA.**
+
+# Fitting the model 
+
+## Questions we want to answer {.smaller}
+
+The goal is to understand variability in performance anxiety (`na`) based on performance-level and musician-level characteristics. Specifically: 
+
+- What is the association between performance type (large ensemble or not) and performance anxiety? Does the association differ based on instrument type (orchestral or not)?  
+
+. . .
+
+**What is the problem with using the following model to draw conclusions?**
+
+:::{.panel-tabset}
+
+### Model Output
+
+```{r echo = F}
+music <- music %>%
+  mutate(orchestra = if_else(instrument == "orchestral instrument", 1, 0), 
+         large_ensemble = if_else(perform_type == "Large Ensemble", 1,0))
+
+ols <- lm(na ~ orchestra + large_ensemble + orchestra * large_ensemble, 
+          data = music)
+tidy(ols) %>% kable(digits = 3)
+```
+
+### Code
+
+```{r eval=F}
+music <- music %>%
+  mutate(orchestra = if_else(instrument == "orchestral instrument", 1, 0), 
+         large_ensemble = if_else(perform_type == "Large Ensemble", 1,0))
+
+ols <- lm(na ~ orchestra + large_ensemble + orchestra * large_ensemble, 
+          data = music)
+tidy(ols) %>% kable(digits = 3)
+```
+
+:::
+
+
+## Other modeling approaches {.smaller}
+
+`r emo::ji("one")`  Condense each musician's set of responses into a single outcome (e.g., mean max, last observation, etc.) and fit a linear model on these condensed observations 
+
+- Leaves few observations (37) to fit the model
+- Ignoring a lot of information in the multiple observations for each musician
+
+. . .
+
+`r emo::ji("two")` Fit a separate model for each musician understand the association between performance type (Level One models). Then fit a system of Level Two models to predict the fitted coefficients in the Level One model for each subject based on instrument type (Level Two model).
+
+. . .
+
+**Let's look at approach #2**
+
+
+
+## Two-level model {.smaller}
+
+We'll start with the Level One model to understand the association between performance type and performance anxiety for the $i^{th}$ musician. 
+
+
+$$na_{ij} = a_i + b_i ~ LargeEnsemble_{ij} + \epsilon_i, \hspace{5mm} \epsilon_{ij} \sim N(0,\sigma^2)$$
+
+. . .
+
+Why is it more meaningful to use performance type for the Level One model than instrument? 
+
+. . .
+
+For now, estimate $a_i$ and $b_i$ using least-squares regression.
+
+
+
+## Example Level One model {.smaller}
+
+Below is partial data for observation #22
+
+```{r}
+music %>%
+  filter(id == 22) %>%
+  select(id, diary, perform_type, instrument, na) %>%
+  slice(1:3, 13:15) %>%
+  kable()
+```
+
+
+
+## Level One model {.smaller}
+
+:::{.panel-tabset}
+
+### Model
+
+```{r,echo = F}
+music %>%
+  filter(id == 22) %>%
+  lm(na ~ large_ensemble, data = .) %>%
+  tidy() %>%
+  kable(digits = 3)
+```
+
+### Code
+```{r,eval = F}
+music %>%
+  filter(id == 22) %>%
+  lm(na ~ large_ensemble, data = .) %>%
+  tidy() %>%
+  kable(digits = 3)
+```
+
+
+. . .
+
+**Repeat for all 37 musicians**
+
+### Slopes and Intercepts
+```{r echo = F}
+# set up tibble for fitted values 
+
+model_stats <- tibble(slopes = rep(0,37), 
+               intercepts = rep(0,37), 
+               r.squared = rep(0, 37))
+
+
+ids <- music %>% distinct(id) %>% pull()
+
+# counter to keep track of row number to store model_stats
+
+count <- 1
+
+for(i in ids){
+level_one_model <- music %>%
+  filter(id == i) %>%
+  lm(na ~ large_ensemble, data = .)
+
+level_one_model_tidy <- tidy(level_one_model)
+
+
+model_stats$slopes[count] <- level_one_model_tidy$estimate[2]
+model_stats$intercepts[count] <- level_one_model_tidy$estimate[1]
+model_stats$r.squared[count] <- glance(level_one_model)$r.squared
+
+count = count + 1
+}
+```
+
+```{r echo = F, fig.cap = "Recreated from BMLR Figure 8.9"}
+p1 <- ggplot(data = model_stats, aes(x = intercepts)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Fitted intercepts", 
+      title  = "Intercepts", 
+      subtitle = "from 37 musicians")
+
+p2 <- ggplot(data = model_stats, aes(x = slopes)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Fitted Slopes", 
+      title  = "Slopes", 
+      subtitle = "from 37 musicians")
+
+p1 + p2
+```
+
+. . .
+
+**Now let's consider if there is an association between the estimated slopes, estimated intercepts, and the type of instrument**
+
+:::
+
+
+## Level Two Model {.smaller}
+
+The slope and intercept for the $i^{th}$ musician can be modeled as
+
+$$\begin{aligned}&a_i = \alpha_0 + \alpha_1 ~ Orchestra_i + u_i \\
+&b_i = \beta_0 + \beta_1 ~ Orchestra_i + v_i\end{aligned}$$
+
+. . .
+
+Note the response variable in the Level Two models are not observed outcomes but the (fitted) slope and intercept from each musician
+
+. . .
+
+**Let's fit a level 2 model**
+
+
+
+## Estimated coefficients by instrument {.smaller}
+
+:::{.panel-tabset}
+
+
+### Output
+
+```{r echo = F,out.width="80%"}
+
+musicians <- music %>%
+  distinct(id, orchestra) %>%
+  bind_cols(model_stats)
+
+p1 <- ggplot(data = musicians, aes(x = intercepts, y = factor(orchestra))) + 
+  geom_boxplot(fill = "steelblue", color = "black") + 
+  labs(x = "Fitted intercepts", 
+       y = "Orchestra")
+
+p2 <- ggplot(data = musicians, aes(x = slopes, y = factor(orchestra))) + 
+  geom_boxplot(fill = "steelblue", color = "black") + 
+  labs(x = "Fitted slopes", 
+       y = "Orchestra")
+
+p1 / p2
+```
+
+### Code
+```{r eval= F}
+
+musicians <- music %>%
+  distinct(id, orchestra) %>%
+  bind_cols(model_stats)
+
+p1 <- ggplot(data = musicians, aes(x = intercepts, y = factor(orchestra))) + 
+  geom_boxplot(fill = "steelblue", color = "black") + 
+  labs(x = "Fitted intercepts", 
+       y = "Orchestra")
+
+p2 <- ggplot(data = musicians, aes(x = slopes, y = factor(orchestra))) + 
+  geom_boxplot(fill = "steelblue", color = "black") + 
+  labs(x = "Fitted slopes", 
+       y = "Orchestra")
+
+p1 / p2
+```
+
+:::
+
+
+## Level Two model {.smaller}
+
+:::{.panel-tabset}
+
+### Models
+
+**Model for intercepts**
+
+```{r echo = F}
+a <- lm(intercepts ~ orchestra, data = musicians) 
+tidy(a) %>%
+  kable(digits = 3)
+```
+
+**Model for slopes**
+
+```{r echo = F}
+b <- lm(slopes ~ orchestra, data = musicians) 
+tidy(b) %>%
+  kable(digits = 3)
+```
+
+
+### Code 
+
+**Model for intercepts**
+
+```{r eval = F}
+a <- lm(intercepts ~ orchestra, data = musicians) 
+tidy(a) %>%
+  kable(digits = 3)
+```
+
+**Model for slopes**
+
+```{r eval = F}
+b <- lm(slopes ~ orchestra, data = musicians) 
+tidy(b) %>%
+  kable(digits = 3)
+```
+
+
+:::
+
+## Writing out the models {.smaller}
+
+**Level One** 
+
+$$\hat{na}_{ij}  = \hat{a}_i + \hat{b}_i ~ LargeEnsemble_{ij}$$
+
+for each musician. 
+
+**Level Two** 
+
+$$\begin{aligned}&\hat{a}_i = 16.283 + 1.441 ~ Orchestra_i \\
+&\hat{b}_i = -0.771 - 1.406 ~ Orchestra_i\end{aligned}$$
+
+
+
+## Composite model {.smaller}
+
+$$\begin{aligned}\hat{na}_i &= 16.283 + 1.441 ~ Orchestra_i - 0.771 ~ LargeEnsemble_{ij} \\
+&- 1.406 ~ Orchestra:LargeEnsemble_{ij}\end{aligned}$$
+
+. . .
+
+(Note that we also have the error terms $\epsilon_{ij}, u_i, v_i$ that we will discuss soon)
+
+- What is the predicted average performance anxiety before solos and small ensemble performances for vocalists and keyboardists? For those who place orchestral instruments? 
+
+- What is the predicted average performance anxiety before large ensemble performances for those who play orchestral instruments?
+
+
+## Disadvantages to this approach {.smaller}
+
+`r emo::ji("warning")` Weighs each musician the same regardless of number of diary entries
+
+`r emo::ji("warning")`  Drops subjects who have missing values for slope (7 individuals who didn't play a large ensemble performance) 
+
+`r emo::ji("warning")`  Does not share strength effectively across individuals 
+
+. . .
+
+
+**We will use a unified approach that utilizes likelihood-based methods to address some of these drawbacks.**
+
+
+
+## Questions
+
+1. How many Level One models are fit? 
+2. How many Level Two models are fit?
+
+
+# Unified approach to two-level modeling
+
+## Framework {.smaller}
+
+Let $Y_{ij}$ be the performance anxiety for the $i^{th}$ musician before performance $j$. 
+
+**Level One**
+
+$$Y_{ij} = a_i + b_i ~ LargeEnsemble + \epsilon_{ij}$$
+
+. . .
+
+**Level Two**
+
+$$\begin{aligned}&a_i = \alpha_0 + \alpha_1 ~ Orchestra_i+ u_i\\
+&b_i = \beta_0 + \beta_1~Orchestra_i + v_i\end{aligned}$$
+
+. . .
+
+This approach uses likelihood-based methods (instead of least squares) to address the previously mentioned disadvantages
+
+
+## Creating a Composite Model {.sortofsmall}
+
+Plug in the equations for $a_i$ and $b_i$ to get the **composite model** 
+
+::::{.columns}
+
+:::{.column}
+
+$$Y_{ij} = a_i + b_i ~ LargeEnsemble + \epsilon_{ij}$$
+
+:::
+
+:::{.column}
+
+$$\begin{aligned}&a_i = \alpha_0 + \alpha_1 ~ Orchestra_i+ u_i\\
+&b_i = \beta_0 + \beta_1~Orchestra_i + v_i\end{aligned}$$
+
+:::
+
+::::
+
+. . .
+
+$$\begin{aligned}Y_{ij} &= a_i \hspace{1.8in}+ \hspace{1.62in} b_i ~ LargeEnsemble  \hspace{2.2in}+ \epsilon_{ij}\\
+&=
+(\alpha_0 + \alpha_1 ~ Orchestra_i+ u_i) + (\beta_0 + \beta_1~Orchestra_i + v_i)LargeEnsemble\hspace{2.17in}+\epsilon_{ij}\\
+&= \space \alpha_0 + \alpha_1 ~ Orchestra_i+ u_i \hspace{.2in} + \beta_0LargeEnsemble+\beta_1Orchestra_iLargeEnsemble+v_iLargeEnsemble+\epsilon_{ij}
+\end{aligned}$$
+
+## lmer Syntax {.smaller}
+
+lmer(response~fixed effect variables + (random effect variables|group variable),data = your_data)
+
+- we determine fixed and random effects based on our composite model
+- terms with Greek letters will be fixed effects
+- terms with random components, usually $u$, $v$, or $w$ will be random effects 
+
+## Fitting our Model with lmer {.sortofsmall}
+
+$$\begin{aligned} Y_{ij}&= \space \alpha_0 + \alpha_1 ~ Orchestra_i+ u_i +\space\space\space \beta_0LargeEnsemble+\beta_1Orchestra_iLargeEnsemble+v_iLargeEnsemble+\epsilon_{ij}\\
+&=\alpha_0 + \alpha_1 ~ Orchestra_i + \beta_0LargeEnsemble+\beta_1Orchestra_iLargeEnsemble+u_i + v_iLargeEnsemble+\epsilon_{ij}
+\end{aligned}$$
+
+- All varibles with greek letters are fixed effects and all variables with $u$, $v$ are random effects. 
+
+. . .
+
+
+lmer(na ~ 1 + Orchastra + LargeEnsemble + Orchestra * LargeEnsemble + (1+LargeEnsemble|id),data = music)
+
+
+
+## Composite model {.smaller}
+
+Plug in the equations for $a_i$ and $b_i$ to get the **composite model** 
+
+
+$$\begin{aligned}Y_{ij} &= (\alpha_0 + \alpha_1 ~ Orchestra_i + \beta_0 ~ LargeEnsemble_{ij} \\ 
+&+ \beta_1 ~ Orchestra_i:LargeEnsemble_{ij})\\
+&+ (u_i + v_i ~ LargeEnsemble_{ij} + \epsilon_{ij})\end{aligned}$$
+
+
+- The **fixed effects** to estimate are $\alpha_0, \alpha_1, \beta_0, \beta_1$
+- The **error terms** are $u_i, v_i, \epsilon_{ij}$
+
+. . .
+
+Note that we no longer need to estimate $a_i$ and $b_i$ directly as we did earlier. They conceptually connect the Level One and Level Two models. 
+
+
+## Notation {.smaller}
+
+- Greek letters denote the fixed effect model parameters to be estimated
+  - e.g., $\alpha_0, \alpha_1, \beta_0, \beta_1$
+  
+- Roman letters denote the preliminary fixed effects at lower levels that will not be estimated directly. 
+  - e.g. $a_i, b_i$
+
+- $\sigma$ and $\rho$ denote variance components that will be estimated 
+
+- $\epsilon_{ij}, u_i, v_i$ denote error terms 
+
+
+
+
+## Error terms {.smaller}
+
+- We generally assume that the error terms are normally distributed, e.g. error associated with each performance of a given musician is $\epsilon_{ij} \sim N(0, \sigma^2)$
+
+- For the Level Two models, the errors are 
+  - $u_i$: deviation of musician $i$ from the mean performance anxiety before solos and small ensembles after accounting for the instrument 
+  - $v_i$: deviance of musician $i$ from the mean difference in performance anxiety between large ensembles and other performance types after accounting for instrument
+
+- Need to account for fact that $u_i$ and $v_i$ are correlated for the $i^{th}$ musician 
+
+
+## Intercept and Slope {.smaller}
+
+:::{.panel-tabset}
+
+### Plot
+
+```{r echo = F, fig.cap = "Recreated from Figure 8.11"}
+musicians %>%
+  filter(!is.na(slopes)) %>%
+ggplot(aes(x = intercepts, y = slopes)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  labs(x = "Fitted intercepts",
+       y = "Fitted slopes", 
+       title = "Fitted slopes and intercepts", 
+       subtitle = paste0("r = ", round(cor(musicians %>% filter(!is.na(slopes)) %>% pull(intercepts), musicians %>% filter(!is.na(slopes)) %>% pull(slopes)),3)))
+```
+
+Question: **Describe what we learn about the association between the slopes and intercepts based on this plot.** 
+
+### Code
+
+```{r eval = F, fig.cap = "Recreated from Figure 8.11"}
+musicians %>%
+  filter(!is.na(slopes)) %>%
+ggplot(aes(x = intercepts, y = slopes)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  labs(x = "Fitted intercepts",
+       y = "Fitted slopes", 
+       title = "Fitted slopes and intercepts", 
+       subtitle = paste0("r = ", round(cor(musicians %>% filter(!is.na(slopes)) %>% pull(intercepts), musicians %>% filter(!is.na(slopes)) %>% pull(slopes)),3)))
+```
+
+:::
+
+
+
+
+
+
+
+## Distribution of Level Two errors {.smaller}
+
+Use a **multivariate normal** distribution for the Level Two error terms
+
+$$\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \rho_{uv}\sigma_{u}\sigma_v \\
+            \rho_{uv}\sigma_{u}\sigma_v & \sigma_{v}^{2}
+          \end{array} \right] \right)$$
+          
+where $\sigma^2_u$ and $\sigma^2_v$ are the variance of $u_i$'s and $v_i$'s respectively, and $\sigma_{uv}  = \rho_{uv}\sigma_u\sigma_v$ is covariance between $u_i$ and $v_i$ 
+
+- What does it mean for $\rho_{uv} > 0$? 
+- What does it mean for $\rho_{uv} < 0$? 
+
+- Being able to write out these mammoth variance-covariance matrices is less important than recognizing the number of variance components that must be estimated by our intended model.
+
+## Visualizing multivariate normal distribution {.smaller}
+
+```{r, include=FALSE}
+library(mnormt)
+#Code for next plot
+e0 <- seq(-8,8,length=51)  
+e1 <- seq(-4,4,length=51)
+xy <- expand.grid(e0,e1)
+
+Sigma <- matrix(c(4,0,0,1),2,2)
+Mu <- c(0,0)
+z <- dmnorm(xy, Mu, Sigma)
+zframe <- data.frame(xy, z)
+density <- xy[z==max(z),]
+con.1 <- ggplot(data = zframe, aes(x = Var1, y = Var2, z = z)) + 
+geom_contour(stat = "contour", lineend = "butt", 
+               linejoin = "round", linemitre = 1, 
+               na.rm = FALSE, colour = "black") + 
+  labs(x = "u", y = "v", title = "Mutlivariate normal density", 
+       subtitle = "no correlation ") + 
+  scale_y_continuous(limits = c(-5,5))
+
+# Positive correlation
+Sigma <- matrix(c(4,1.5,1.5,1),2,2)
+Mu <- c(0,0)
+z <- dmnorm(xy, Mu, Sigma)
+zframe <- data.frame(xy, z)
+density <- xy[z==max(z),]
+con.2 <- ggplot(data = zframe, aes(x = Var1, y = Var2, z = z)) + 
+  geom_contour(stat = "contour", lineend = "butt", 
+               linejoin = "round", linemitre = 1, 
+               na.rm = FALSE, colour = "black") + 
+  labs(x = "u", y = "v", title = "Multivariate normal density", 
+       subtitle = "positive correlation") + 
+  scale_y_continuous(limits = c(-5,5))
+```
+
+```{r contour-boundary2,fig.align="center",out.width="60%", fig.cap='Recreated from Figure 8.12',echo=FALSE, warning=FALSE}
+con.1 + con.2
+```
+
+
+
+## Fit the model (1/2) {.smaller}
+
+Fit multilevel model using the `lmer` function from the **lme4** package. Display results using hte `tidy()` function from the **broom.mixed** package. 
+
+
+:::{.panel-tabset}
+
+### Model Output
+
+```{r echo = F}
+library(lme4)
+library(broom.mixed)
+
+music_model <- lmer(na ~ orchestra + large_ensemble + 
+                      orchestra:large_ensemble + (large_ensemble|id), 
+                    REML = TRUE, data = music)
+
+tidy(music_model) %>% kable(digits = 3)
+```
+
+
+### Code
+
+```{r eval = F}
+library(lme4)
+library(broom.mixed)
+music_model <- lmer(na ~ orchestra + large_ensemble + 
+                      orchestra:large_ensemble + (large_ensemble|id), 
+                    REML = TRUE, data = music)
+
+tidy(music_model) %>% kable(digits = 3)
+```
+
+:::
+
+
+
+## Fit the model in R (2/2) {.smaller}
+
+
+**na ~ orchestra + large_ensemble + orchestra:large_ensemble**: Represents the fixed effects + intercept 
+
+. . .
+
+**(large_ensemble|id)**: Represents the error terms and associated variance components
+  - Specifies two error terms: $u_i$ corresponding to the intercepts, $v_i$ corresponding to effect of large ensemble
+  
+
+
+## Tidy output {.smaller}
+
+Display results using the `tidy` function from the **broom.mixed** package. 
+
+```{r eval = F}
+library(broom.mixed)
+tidy(music_model) 
+```
+
+- Get fixed effects only 
+
+. . .
+
+**tidy(music_model) %>% filter(effect == "fixed")**
+
+- Get errors and variance components only
+
+. . .
+
+**tidy(music_model) %>% filter(effect == "ran_pars")**
+
+
+
+## Model output: Fixed effects {.smaller}
+
+```{r echo = F}
+music_model <- lmer(na ~ orchestra + large_ensemble + 
+                      orchestra:large_ensemble + (large_ensemble|id), data = music)
+
+tidy(music_model) %>% filter(effect == "fixed") %>% kable(digits = 3)
+```
+
+
+. . .
+
+**Label the fixed effects**
+
+
+
+## Model output: Random effects {.smaller}
+
+```{r echo = F}
+tidy(music_model) %>% filter(effect == "ran_pars") %>% kable(digits = 3)
+```
+
+
+. . .
+
+**Label the error terms and variance components**
+
+
+
+## Interpret the effects  {.smaller}
+
+- Split into 3 groups. 
+
+- Each group will write the interpretation for one main effect and one variance component. The terms on each slide do not necessarily have a direct correspondence to each other. 
+
+- One person write the group's interpretations on the board. 
+
+
+## Comparing fixed effects estimates {.smaller}
+
+Below are the estimated coefficients and standard errors for four modeling approaches.
+
+```{r, include=FALSE}
+Variable <- c("Intercept","Orch","Large","Orch*Large")
+Independence <-c("15.72(0.36)", "1.79(0.55)", "-0.28(0.79)", "-1.71(1.06)")
+`Two Stage` <- c("16.28(0.67)", "1.41(0.99)", "-0.77(0.85)", "-1.41(1.20)")
+LVCF <- c("15.20(1.25)", "1.45(1.84)", "-", "-")
+Multilevel <- c("15.93(0.64)", "1.69(0.95)", "-0.91(0.85)", "-1.42(1.10)")
+```
+
+```{r table3chp8,echo=FALSE}
+table3chp8 <- data.frame(Variable, `Independence`, `Two Stage`, 
+                         LVCF, Multilevel)
+kable(table3chp8, booktabs=T, 
+      caption="from BMLR Table 8.3")
+```
+
+
+## Questions
+
+- How do the coefficient estimates compare? 
+- How do the standard errors compare? 
+
+## Pseudo R-squared Values {.smaller}
+
+$$\textrm{Pseudo }R^2_{L1} = \frac{\hat{\sigma}^{2}(\textrm{Model A})-\hat{\sigma}^{2}(\textrm{Model B})}{\hat{\sigma}^{2}(\textrm{Model A})}$$
+
+- Pseudo R-squared values are not universally reliable as measures of model performance. 
+
+- Because of the complexity of estimating fixed effects and variance components at various levels of a multilevel model, it is not unusual to encounter situations in which covariates in a Level Two equation for, say, the intercept remain constant (while other aspects of the model change), yet the associated pseudo R-squared values differ or are negative. For this reason, pseudo R-squared values in multilevel models should be interpreted cautiously.
+
+
+# ML and REML
+
+## ML and REML {.smaller}
+
+Maximum Likelihood (ML) and Restricted (Residual) Maximum Likelihood (REML) are the two most common methods for estimating the fixed effects and variance components
+
+. . .
+
+**Maximum Likelihood (ML)** 
+
+- Jointly estimate the fixed effects and variance components using all the <u>sample data</u>
+- Can be used to draw conclusions about fixed and random effects
+- *Issue*: Fixed effects are treated as known values when estimating variance components
+  - Results in biased estimates of variance components (especially when sample size is small)
+
+
+
+## ML and REML {.smaller}
+
+**Restricted Maximum Likelihood (REML)**
+
+- Estimate the variance components using the <u>sample residuals</u> not the sample data
+- It is conditional on the fixed effects, so it accounts for uncertainty in fixed effects estimates. This results in unbiased estimates of variance components.
+
+. . .
+
+Example using OLS
+
+::: aside
+[See the post [Maximum Likelihood (ML) vs. REML](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for details and illustration of ML vs. REML.
+:::
+
+
+
+## ML or REML? {.smaller}
+
+- Research has not determined one method absolutely superior to the other
+
+- **REML** (`REML = TRUE`; default in `lmer`) is preferable when 
+  - the number of parameters is large or primary, or 
+  - primary objective is to obtain estimates of the model parameters 
+
+- **ML** (`REML = FALSE`) <u>must</u> be used if you want to compare nested fixed effects models using a likelihood ratio test (e.g., a drop-in-deviance test).
+  - For REML, the goodness-of-fit and likelihood ratio tests can only be used to draw conclusions about variance components 
+
+<br> 
+
+::: aside
+Source: Singer, J. D. & Willett, J. B. (2003). *Applied longitudinal data analysis: Modeling change and event occurrence*. Oxford university press.
+:::
+
+
+## Comparing ML and REML {.smaller}
+
+```{r echo = F}
+music_model_ml <- lmer(na ~ orchestra + large_ensemble + 
+                      orchestra:large_ensemble + (large_ensemble|id), 
+                      REML = FALSE, data = music)
+ml <- tidy(music_model_ml) %>%
+  select(term, estimate, std.error) 
+
+reml <- tidy(music_model) %>%
+  select(estimate, std.error) 
+
+full <- bind_cols(ml, reml)
+```
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-7bx6{border-color:inherit;font-family:Tahoma, Geneva, sans-serif !important;font-size:16px;text-align:left;
+  vertical-align:top}
+.tg .tg-k70d{border-color:inherit;font-family:Tahoma, Geneva, sans-serif !important;font-size:16px;font-weight:bold;
+  text-align:center;vertical-align:top}
+.tg .tg-sr1h{border-color:inherit;font-family:Tahoma, Geneva, sans-serif !important;font-size:16px;text-align:right;
+  vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-7bx6"></th>
+    <th class="tg-k70d" colspan="2">Maximum Likelihood</th>
+    <th class="tg-k70d" colspan="2">Restricted Maximum Likelihood</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-k70d">Term</td>
+    <td class="tg-k70d">Estimate</td>
+    <td class="tg-k70d">Std. Error</td>
+    <td class="tg-k70d">Estimate</td>
+    <td class="tg-k70d">Std. Error</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">(Intercept)</td>
+    <td class="tg-sr1h">15.924</td>
+    <td class="tg-sr1h">0.623</td>
+    <td class="tg-sr1h">15.930</td>
+    <td class="tg-sr1h">0.641</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">orchestra1</td>
+    <td class="tg-sr1h">1.696</td>
+    <td class="tg-sr1h">0.919</td>
+    <td class="tg-sr1h">1.693</td>
+    <td class="tg-sr1h">0.945</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">large_ensemble1</td>
+    <td class="tg-sr1h">-0.895</td>
+    <td class="tg-sr1h">0.827</td>
+    <td class="tg-sr1h">-0.911</td>
+    <td class="tg-sr1h">0.845</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">orchestra1:large_ensemble1</td>
+    <td class="tg-sr1h">-1.438</td>
+    <td class="tg-sr1h">1.074</td>
+    <td class="tg-sr1h">-1.424</td>
+    <td class="tg-sr1h">1.099</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">sd__(Intercept)</td>
+    <td class="tg-sr1h">2.286</td>
+    <td class="tg-sr1h">NA</td>
+    <td class="tg-sr1h">2.378</td>
+    <td class="tg-sr1h">NA</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">cor__(Intercept).large_ensemble1</td>
+    <td class="tg-sr1h">-1.00</td>
+    <td class="tg-sr1h">NA</td>
+    <td class="tg-sr1h">-0.635</td>
+    <td class="tg-sr1h">NA</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">sd__large_ensemble1</td>
+    <td class="tg-sr1h">0.385</td>
+    <td class="tg-sr1h">NA</td>
+    <td class="tg-sr1h">0.672</td>
+    <td class="tg-sr1h">NA</td>
+  </tr>
+  <tr>
+    <td class="tg-7bx6">sd__Observation</td>
+    <td class="tg-sr1h">4.665</td>
+    <td class="tg-sr1h">NA</td>
+    <td class="tg-sr1h">4.670</td>
+    <td class="tg-sr1h">NA</td>
+  </tr>
+</tbody>
+</table>
+
+
+
+## Strategy for building multilevel models {.smaller}
+
+- Conduct exploratory data analysis for Level One and Level Two variables 
+
+- Fit model with no covariates to assess variability at each level 
+
+- Create Level One models. Start with a single term, then add terms as needed. 
+
+- Create Level Two models. Start with a single term, then add terms as needed. Start with equation for intercept term. 
+
+- Begin with the full set of variance components, then remove variance terms as needed. 
+
+. . .
+
+*Alternate model building strategy in BMLR Section 8.6*
+
+. . .
+
+See BMLR Sections 8.6 - 8.11 for full step-by-step analysis.
+
+
+## Acknowledgements {.smaller}
+
+The content in the slides is from 
+
+- [BMLR: Chapter 8 - Introduction to Multilevel Models](https://bookdown.org/roback/bookdown-BeyondMLR/ch-multilevelintro.html)
+  - Initial versions of the slides are by Dr. Maria Tackett, Duke University
+- Singer, J. D. & Willett, J. B. (2003). *Applied longitudinal data analysis: Modeling change and event occurrence*. Oxford university press.    
+- Sadler, Michael E., and Christopher J. Miller. 2010. “Performance Anxiety: A Longitudinal Study of the Roles of Personality and Experience in Musicians.” Social Psychological and Personality Science 1 (3): 280–87. http://dx.doi.org/10.1177/1948550610370492.
+- Initial versions of the slides are by Dr. Maria Tackett, Duke University

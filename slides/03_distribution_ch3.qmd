@@ -1,0 +1,553 @@
+---
+title: "Distribution Theory"
+subtitle: "BMLR Chapter 3"
+format: 
+  revealjs:
+    output-file: "03_distribution_ch3.html"
+    slide-number: true
+  html:
+    output-file: "03_distribution_ch3_o.html"
+logo: "../img/favicon.png"
+---
+
+
+ 
+## Learning Objectives {.smaller}
+
+
+\newcommand{\lik}{\mathrm{Lik}}
+\newcommand{\Lik}{\mathrm{Lik}} 
+\newcommand{\bbias}{p_{B|\textrm{BBias}}}
+\newcommand{\neutral}{p_{B|N}}
+\newcommand{\gbias}{p_{B|\textrm{GBias}}}
+\newcommand{\bstop}{p_{S|B1}}
+\newcommand{\nstop}{p_{S|N}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\SD}{\operatorname{SD}}
+
+
+- Write definitions of non-normal random variables in the context of an application.
+- Identify possible values for each random variable.
+- Identify how changing values for a parameter affects the characteristics of the distribution.
+- Recognize a form of the probability density function for each distribution.
+- Identify the mean and variance for each distribution.
+- Match the response for a study to a plausible random variable and provide reasons for ruling out other random variables.
+- Match a histogram of sample data to plausible distributions.
+- Create a mixture of distributions and evaluate the shape, mean, and variance.
+
+
+## Libraries Needed (none new?)
+
+```{r load_packages3, message = FALSE,warning=F}
+# Packages required for Chapter 3
+library(gridExtra)  
+library(knitr) 
+library(kableExtra)
+library(tidyverse)
+```
+
+
+## Introduction {.smaller}
+
+- What if it  is not plausible that a response is normally distributed? 
+- You may want to construct a model to predict whether a prospective student will enroll at a school or  model the lifetimes of patients following a particular surgery.  
+- In the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to  have very skewed data with many similar values and a few hardy souls with extremely long survival. 
+- These responses are not expected to be normally distributed; other distributions will be needed to describe and  model binary or lifetime data. 
+- Non-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models. 
+
+# Discrete Random Variables
+
+## Discrete Random Variables {.smaller}
+
+- A discrete random variable has a countable number of possible values
+  - Ex: we may want to measure the number of people in a household
+  - Ex: model the number of crimes committed on a college campus. 
+
+- With discrete random variables, the associated probabilities can be calculated for each possible value using a __probability mass function__ (pmf). \index{probability mass function (pmf)} 
+- A pmf is a function that calculates $P(Y=y)$, given each variable's parameters.
+
+
+## Binary Random Variable {.smaller}
+
+- Consider the event of flipping a (possibly unfair) coin. 
+- If the coin lands heads, let's consider this a success and record $Y = 1$.
+- A series of these events is a  __Bernoulli process__, \index{Bernoulli process} independent trials that take on one of two values (e.g., 0 or 1). 
+- These values are often referred to as a failure and a success
+  - the probability of success is identical for each trial.
+  
+## Binary Random Variable{.smaller}
+
+- Suppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, $p$. 
+- If we know this value, we can express $P(Y=1) = p$ and $P(Y=0) = 1-p$. 
+- In general, if we have a Bernoulli process with only one trial, we have a __binary distribution__ (also called a __Bernoulli distribution__) \index{Bernoulli distribution} where
+
+. . .
+
+\begin{equation*} 
+P(Y = y) = p^y(1-p)^{1-y} \quad \textrm{for} \quad y = 0, 1.
+\end{equation*}
+
+- If $Y \sim \textrm{Binary}(p)$, then $Y$ has mean $\E(Y) = p$ and standard deviation $\SD(Y) = \sqrt{p(1-p)}$.
+
+## Example 1 {.smaller}
+- Your playlist of 200 songs has 5 which you cannot stand. What is the probability that when you hit shuffle, a song you tolerate comes on?
+- We want to understand the example and be able to translate that into notation/model it with a distribution
+- Assuming all songs have equal odds of playing, we can calculate $p = \frac{200-5}{200} = 0.975$ 
+  - so there is a 97.5\% chance of a song you tolerate playing, since $P(Y=1)=.975^1*(1-.975)^0$.
+
+
+## Binomial Random Variable (1/2) {.smaller}
+
+- Does anybody know how this relates to a Bernoulli random variable? 
+- We can extend our knowledge of binary random variables. 
+- Suppose we flipped an *unfair* coin $n$ times and recorded $Y$, the number of heads after $n$ flips. 
+- If we consider a case where $p = 0.25$ and $n = 4$, then here $P(Y=0)$ represents the probability of no successes in 4 trials
+  - 4 consecutive failures. 
+  - The probability of 4 consecutive failures is $P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4$. 
+  
+## Binomial Random Variable (2/2) {.smaller}
+
+- Next we consider $P(Y = 1)$, and are interested in the probability of exactly 1 success _anywhere_ among the 4 trials. 
+- How many different ways can we get exactly 1 success in the four trials? 
+- To find the probability of this what else do we need to count? 
+- What is the probability? 
+
+- There are $\binom{4}{1} = 4$ ways to have exactly 1 success in 4 trials, 
+$P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3$. 
+
+## Binomial Distribution {.smaller}
+
+- In general, if we carry out a sequence of $n$ Bernoulli trials (with probability of success $p$) and record $Y$, the total number of successes, then $Y$ follows a __binomial distribution__, \index{binomial distribution} where
+
+. . .
+
+\begin{equation}
+P(Y=y) = \binom{n}{y} p^y (1-p)^{n-y} \quad \textrm{for} \quad y = 0, 1, \ldots, n.
+\end{equation}
+
+. . .
+
+- If $Y \sim \textrm{Binomial}(n,p)$, then $\E(Y) = np$ and $\SD(Y) = \sqrt{np(1-p)}$.
+- $E(y)$ is the expected value of $Y$. If we repeated the experiment many times we would expect on average $n*p$ successes. 
+
+
+## Binomial Distribution Graphs {.smaller}
+- Typical shapes of a binomial distribution
+- I will show you these in R
+
+
+## Binomial Distribution Graphs {.smaller}
+- On the left side $n$ remains constant. 
+- We see that as $p$ increases, the center of the distribution ($\E(Y) = np$) shifts right. 
+- $E(\cdot)$ is the mean of a random variable 
+- On the right, $p$ is held constant. 
+- As $n$ increases, the distribution becomes less skewed.
+
+
+
+## Binomial Distribution vs Bernoulli {.smaller}
+
+- Note that if $n=1$,
+
+. . .
+
+\begin{align*}
+ P(Y=y) &= \binom{1}{y} p^y(1-p)^{1-y} \\
+        &= p^y(1-p)^{1-y}\quad \textrm{for}\quad y = 0, 1,
+\end{align*}
+a Bernoulli distribution! 
+
+- In fact, Bernoulli random variables are a special case of binomial random variables where $n=1$.
+
+## Graphing/calling in R 
+- In R we can use the function `dbinom(y, n, p)`, which outputs the probability of $y$ successes given $n$ trials with probability $p$, i.e., $P(Y=y)$ for $Y \sim \textrm{Binomial}(n,p)$.
+- Lets try it
+
+## Example 2 (1/2) {.smaller}
+- While taking a multiple choice test, a student encountered 10 problems where she ended up completely guessing, randomly selecting one of the four options. 
+- What is the chance that she got exactly 2 of the 10 correct?
+- What assumption do we need to make about the questions? 
+- How would we do this without using a distribution? 
+
+## Example 2 (2/2) {.smaller}
+
+- Knowing that the student randomly selected her answers, we assume she has a 25\% chance of a correct response. 
+- n *factorial* is denoted $n!$ and $n!=n\cdot(n-1)\cdot...\cdot 3\cdot 2\cdot 1$ 
+- Here we used a *combination* ${n \choose p}=\frac{n!}{p!(n-p)!}$ read *n choose p*
+- Thus, $P(Y=2) = {10 \choose 2}(.25)^2(.75)^8 = 0.282$. 
+
+. . .
+
+- We can use R to verify this:
+
+. . .
+
+```{r binomEx}
+dbinom(2, size = 10, prob = .25)
+```
+
+Therefore, there is a 28\% chance of exactly 2 correct answers out of 10.
+
+## Negative Binomial Random Variable {.smaller}
+
+- What if we were to carry out multiple independent and identical Bernoulli trails until the $r$^th^ success occurs?
+- If we model $Y$, the number of failures before the $r$^th^ success, then $Y$ follows a __negative binomial distribution__ \index{negative binomial distribution} where
+
+. . .
+
+\begin{equation}
+P(Y=y) = \binom{y + r - 1}{r-1} (1-p)^{y}(p)^r \quad \textrm{for}\quad y = 0, 1, \ldots, \infty.
+\end{equation}
+
+## Negative Binomial RV  {.smaller}
+
+- If $Y \sim \textrm{Negative Binomial}(r, p)$ then $E(Y) = \frac{r(1-p)}{p}$ and $\SD(Y) = \sqrt{\frac{r(1-p)}{p^2}}$. 
+
+## Negative Binomial RV  {.smaller}
+
+:::{.panel-tabset}
+
+### Plot
+
+```{r, multNBinom, fig.align="center",out.width="60%",fig.cap='Negative Binomial', echo=FALSE, warning=FALSE, message=FALSE}
+#negativeBinomialPlots
+plotNBinom <- function(p, r){
+  ynb <- 0:10000
+  nbd <- tibble(x = rnbinom(ynb, r, p))
+  #breaks <- pretty(range(nbd$x), n = nclass.FD(nbd$x), min.n = 1)  # pretty binning
+  #bwidth <- breaks[2] - breaks[1]
+  ggplot(nbd, aes(x = x)) +
+    geom_histogram(aes(y=..count../sum(..count..)), binwidth = .25) +
+    labs(title = paste("p = ", p, ", r = ", r),
+         x = "number of failures",
+         y = "probability") +
+    xlim(-1,30)
+}
+
+NBin1 <- plotNBinom(0.35, 3)
+NBin2 <- plotNBinom(0.35, 5)
+NBin3 <- plotNBinom(0.70, 5)
+grid.arrange(NBin1, NBin2, NBin3, ncol = 1)
+```
+
+- Notice how centers shift right as $r$ increases, and left as $p$ increases.
+
+### Code 
+
+```{r, multNBinom2, eval=F, include=T}
+#negativeBinomialPlots
+plotNBinom <- function(p, r){
+  ynb <- 0:10000
+  nbd <- tibble(x = rnbinom(ynb, r, p))
+  #breaks <- pretty(range(nbd$x), n = nclass.FD(nbd$x), min.n = 1)  # pretty binning
+  #bwidth <- breaks[2] - breaks[1]
+  ggplot(nbd, aes(x = x)) +
+    geom_histogram(aes(y=..count../sum(..count..)), binwidth = .25) +
+    labs(title = paste("p = ", p, ", r = ", r),
+         x = "number of failures",
+         y = "probability") +
+    xlim(-1,30)
+}
+
+NBin1 <- plotNBinom(0.35, 3)
+NBin2 <- plotNBinom(0.35, 5)
+NBin3 <- plotNBinom(0.70, 5)
+grid.arrange(NBin1, NBin2, NBin3, ncol = 1)
+```
+
+:::
+
+
+
+## Negative Binomial RV {.smaller}
+
+- Note that if we set $r=1$, then
+
+. . .
+
+\begin{align*}
+ P(Y=y) &= \binom{y}{0} (1-p)^yp \\
+        &= (1-p)^yp \quad \textrm{for} \quad y = 0, 1, \ldots, \infty,
+\end{align*}
+which is the probability mass function of a geometric random variable! 
+
+- Thus, a geometric random variable is, in fact, a special case of a negative binomial random variable.
+
+- R function `dnbinom(y, r, p)` for the probability of $y$ failures before the $r$^th^ success given probability $p$.
+
+## Poisson Random Variable {.smaller}
+
+- Sometimes, random variables are based on a __Poisson process__. \index{Poisson process} 
+- In a Poisson process, we are counting the number of events per unit of time or space and the number of events depends only on the length or size of the interval. 
+* We can then model $Y$, the number of events in one of these sections with the __Poisson distribution__, \index{Poisson distribution} where
+
+. . .
+
+\begin{equation}
+P(Y=y) = \frac{e^{-\lambda}\lambda^y}{y!} \quad \textrm{for} \quad y = 0, 1, \ldots, \infty,
+\end{equation}
+where $\lambda$ is the mean or expected count in the unit of time or space of interest.
+- This probability mass function has $\E(Y) = \lambda$ and $\SD(Y) = \sqrt{\lambda}$. 
+
+## Poisson Distribution Graphs {.smaller}
+
+:::{.panel-tabset}
+
+### Plot 
+
+
+```{r, multPois, fig.align="center",out.width="60%", echo=FALSE, warning=FALSE, message=FALSE}
+#poissonPlots
+plotPois <- function(lam){
+yp = 0:10000 # possible values
+pd <- data.frame(x=rpois(yp, lam))  # generate random deviates
+breaks <- pretty(range(pd$x), n = nclass.FD(pd$x), min.n = 1)  # pretty binning
+#bwidth <- breaks[2] - breaks[1]
+ggplot(pd, aes(x = x)) + geom_histogram(aes(y=..count../sum(..count..)), binwidth = .25) +
+  xlab("number of events") + ylab("probability") + 
+  labs(title=paste("Poisson lambda = ", lam)) + xlim(-1,13)
+}
+
+Pois1 <- plotPois(0.5)
+Pois2 <- plotPois(1)
+Pois3 <- plotPois(5) + scale_y_continuous(breaks = c(0, 0.1))
+grid.arrange(Pois1,Pois2,Pois3,ncol=1)
+```
+
+- Notice how distributions become more symmetric as $\lambda$ increases.
+- If we wish to use R, `dpois(y, lambda)` outputs the probability of $y$ events given $\lambda$.
+
+
+
+### Code 
+
+```{r, multPois2, eval = F, include=T}
+#poissonPlots
+plotPois <- function(lam){
+yp = 0:10000 # possible values
+pd <- data.frame(x=rpois(yp, lam))  # generate random deviates
+breaks <- pretty(range(pd$x), n = nclass.FD(pd$x), min.n = 1)  # pretty binning
+#bwidth <- breaks[2] - breaks[1]
+ggplot(pd, aes(x = x)) + geom_histogram(aes(y=..count../sum(..count..)), binwidth = .25) +
+  xlab("number of events") + ylab("probability") + 
+  labs(title=paste("Poisson lambda = ", lam)) + xlim(-1,13)
+}
+
+Pois1 <- plotPois(0.5)
+Pois2 <- plotPois(1)
+Pois3 <- plotPois(5) + scale_y_continuous(breaks = c(0, 0.1))
+grid.arrange(Pois1,Pois2,Pois3,ncol=1)
+```
+
+:::
+
+# Continuous Random Variables
+
+## Continuous Random Variables {.smaller}
+
+- A continuous random variable can take on an uncountably infinite number of values. 
+- With continuous random variables, we define probabilities using __probability density functions__ (pdfs). \index{probability density function (pdf)} 
+- Probabilities are calculated by computing the area under the density curve over the interval of interest. So, given a pdf, $f(y)$, we can compute
+
+. . .
+
+\begin{align*}
+P(a \le Y \le b) = \int_a^b f(y)dy.
+\end{align*}
+
+## Continuous Random Variables {.smaller}
+
+A few properties of continuous random variables:
+
+- The area under their density curve is 1. ($\int_{-\infty}^{\infty} f(y)dy = 1$).  
+- For any value $y$, $P(Y = y) =  \int_y^y f(y)dy = 0$.  Why?
+- Because of the above property, $P(y < Y) = P(y \le Y)$. We will typically use the first notation rather than the second, but both are equally valid.
+
+
+## Exponential Random Variable {.smaller}
+
+- Suppose we have a Poisson process with rate $\lambda$, and we wish to model the wait time $Y$ until the first event. 
+- We could model $Y$ using an __exponential distribution__, \index{exponential distribution} where
+
+. . .
+
+\begin{equation}
+f(y) = \lambda e^{-\lambda y} \quad \textrm{for} \quad y > 0,
+\end{equation}
+- $\E(Y) = 1/\lambda$ and $\SD(Y) = 1/\lambda$. 
+
+
+## Exponential Distribution {.smaller}
+
+Exponential distributions with $\lambda = 0.5, 1,$ and $5$.
+
+:::{.panel-tabset}
+
+### Plot 
+
+```{r, multExp, fig.align="center",out.width="60%",fig.cap= 'Exponential Distribution', echo=FALSE, warning=FALSE, message=FALSE}
+#exponentialPlots
+x=seq(0,4,by=0.01)  # possible values
+probex1 <- dexp(x,.5)  # P(Y=y)
+probex2 <- dexp(x,1)
+probex3 <- dexp(x,5)
+Expdf <- tibble(x,probex1, probex2, probex3) %>%
+  rename(x = x,
+         `0.5` = probex1,
+         `1` = probex2,
+         `5` = probex3) %>%
+  gather(2:4, key = "Lambda", value = "value") %>%
+  mutate(Lambda = factor(Lambda, levels = c("0.5", "1", "5")))
+ggplot(data = Expdf, aes(x = x, y = value, color = Lambda)) +
+  geom_line(aes(linetype = Lambda)) +
+  xlab("values") + ylab("density") + 
+  labs(title = "Exponential Distributions") + 
+  xlim(0,4) + ylim(0,3)
+```
+
+- As $\lambda$ increases, $\E(Y)$ tends towards 0, and distributions "die off" quicker. 
+
+### Code 
+
+```{r, multExp2, include=T,eval=F}
+#exponentialPlots
+x=seq(0,4,by=0.01)  # possible values
+probex1 <- dexp(x,.5)  # P(Y=y)
+probex2 <- dexp(x,1)
+probex3 <- dexp(x,5)
+Expdf <- tibble(x,probex1, probex2, probex3) %>%
+  rename(x = x,
+         `0.5` = probex1,
+         `1` = probex2,
+         `5` = probex3) %>%
+  gather(2:4, key = "Lambda", value = "value") %>%
+  mutate(Lambda = factor(Lambda, levels = c("0.5", "1", "5")))
+ggplot(data = Expdf, aes(x = x, y = value, color = Lambda)) +
+  geom_line(aes(linetype = Lambda)) +
+  xlab("values") + ylab("density") + 
+  labs(title = "Exponential Distributions") + 
+  xlim(0,4) + ylim(0,3)
+```
+
+- To use R, `pexp(y, lambda)` outputs the probability $P(Y < y)$ given $\lambda$. 
+
+:::
+
+## Gamma Random Variable {.smaller}
+
+- Once again consider a Poisson process. 
+- When discussing exponential random variables, we modeled the wait time before one event occurred. 
+- If $Y$ represents the wait time before $r$ events occur in a Poisson process with rate $\lambda$, $Y$ follows a __gamma distribution__ \index{gamma distribution} where
+
+. . .
+
+\begin{equation}
+f(y) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}\quad \textrm{for} \quad y >0.
+\end{equation}
+
+- If $Y \sim \textrm{Gamma}(r, \lambda)$ then $\E(Y) = r/\lambda$ and $\SD(Y) = \sqrt{r/\lambda^2}$. 
+- Note: $\Gamma(r)=(r-1)!$ (There is more to it)
+
+## Gamma Distribution {.smaller}
+
+:::{.panel-tabset}
+
+### Plot 
+
+```{r, multGamma, fig.align="center",out.width="60%", echo=FALSE, warning=FALSE, message=FALSE}
+x <- seq(0, 7, by = 0.01)
+`r = 1, lambda = 1` <- dgamma(x, 1, rate = 1)
+`r = 2, lambda = 1` <- dgamma(x, 2, rate = 1) 
+`r = 5, lambda = 5` <- dgamma(x, 5, rate = 5)
+`r = 5, lambda = 7` <- dgamma(x, 5, rate = 7)
+
+gammaDf <- tibble(x, `r = 1, lambda = 1`, `r = 2, lambda = 1`, `r = 5, lambda = 5`, `r = 5, lambda = 7`) %>%
+  gather(2:5, key = "Distribution", value = "value") %>%
+  mutate(Distribution = factor(Distribution, 
+                               levels = c("r = 2, lambda = 1", 
+                                          "r = 1, lambda = 1", 
+                                          "r = 5, lambda = 5", 
+                                          "r = 5, lambda = 7")))
+
+ggplot(data = gammaDf, aes(x = x, y = value, 
+                           color = Distribution)) +
+  geom_line(aes(linetype = Distribution)) +
+  xlab("values") + ylab("density") + 
+  labs(title = "Gamma Distributions") +
+  theme(legend.title = element_blank())
+```
+
+- Means increase as $r$ increases, but decrease as $\lambda$ increases.
+
+### Code
+
+```{r, multGamma2, include=T,eval=F}
+x <- seq(0, 7, by = 0.01)
+`r = 1, lambda = 1` <- dgamma(x, 1, rate = 1)
+`r = 2, lambda = 1` <- dgamma(x, 2, rate = 1) 
+`r = 5, lambda = 5` <- dgamma(x, 5, rate = 5)
+`r = 5, lambda = 7` <- dgamma(x, 5, rate = 7)
+
+gammaDf <- tibble(x, `r = 1, lambda = 1`, `r = 2, lambda = 1`, `r = 5, lambda = 5`, `r = 5, lambda = 7`) %>%
+  gather(2:5, key = "Distribution", value = "value") %>%
+  mutate(Distribution = factor(Distribution, 
+                               levels = c("r = 2, lambda = 1", 
+                                          "r = 1, lambda = 1", 
+                                          "r = 5, lambda = 5", 
+                                          "r = 5, lambda = 7")))
+
+ggplot(data = gammaDf, aes(x = x, y = value, 
+                           color = Distribution)) +
+  geom_line(aes(linetype = Distribution)) +
+  xlab("values") + ylab("density") + 
+  labs(title = "Gamma Distributions") +
+  theme(legend.title = element_blank())
+```
+
+:::
+
+
+## Gamma vs Others {.smaller}
+- Note that if we let $r = 1$, we have the following pdf, 
+
+. . .
+
+\begin{align*}
+ f(y) &= \frac{\lambda}{\Gamma(1)} y^{1-1} e^{-\lambda y} \\
+      &= \lambda e^{-\lambda y} \quad \textrm{for} \quad y > 0,
+\end{align*}
+an exponential distribution. 
+- Just as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!
+
+- Just like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative $r$.
+- In R, `pgamma(y, r, lambda)` outputs the probability $P(Y < y)$ given $r$ and $\lambda$.
+
+
+## Distributions Used in Testing {.smaller}
+
+- We have spent most of this chapter discussing probability distributions that may come in handy when modeling. 
+- The following distributions, while rarely used in modeling, prove useful in hypothesis testing as certain commonly used test statistics follow these distributions. 
+- $\chi^2$ distribution (requires a degree of freedom)
+- Student $t$ distribution
+- $F$ distribution (need 2 different degrees of freedom)
+- Since we have used these In the past, we will leave their definitions to be referenced if needed
+
+
+
+
+## Distribution Table!
+
+- Would not fit on a slide
+
+- Click [HERE](https://bookdown.org/roback/bookdown-BeyondMLR/ch-distthry.html#tab:distTable)
+
+- The "web" of distributions: <https://www.acsu.buffalo.edu/~adamcunn/probability/poisson.html>
+
+## Acknowledgements
+
+These slides are based on content in [BMLR: Chapter 1 - Review of Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-MLRreview.html)
+
+
+
+
+

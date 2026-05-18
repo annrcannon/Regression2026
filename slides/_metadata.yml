@@ -1,0 +1,26 @@
+institute: "{{< var college.name >}} <br> {{< var course.number >}} {{< var course.semester >}}"
+author: "Tyler George"
+footer: "[🔗 {{< var course.url >}}]({{< var course.url >}})"
+logo: "img/favicon.png"
+format:
+  revealjs:
+    theme: custom.scss
+    transition: fade
+    slide-number: true
+    highlight-style: a11y-dark
+    embed-resources: true
+    echo: true
+    message: false
+    warning: false
+    include: true
+    incremental: true
+    cache: true
+  html:
+    embed-resources: true
+editor: visual
+execute:
+  freeze: auto
+knitr:
+  opts_chunk: 
+    R.options:
+      width: 90

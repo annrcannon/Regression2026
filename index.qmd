@@ -1,0 +1,68 @@
+---
+title: "{{< var course.title >}} Schedule"
+---
+
+**Note**: The timeline of topics and assignments might be updated throughout the semester. 
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(googlesheets4)
+library(gt)
+library(tidyverse)
+gs4_deauth()
+d <- read_sheet("https://docs.google.com/spreadsheets/d/130VxkGy1MbO_Kn8RyjChkNw48OC9Q_v0eO6z1lJmggA/edit?usp=sharing")
+```
+
+```{r, echo = FALSE}
+d %>% 
+  mutate(
+    date = as.Date(date),
+    day = ifelse(is.na(day), "", day),
+    topic = ifelse(is.na(topic),"",topic)) %>%
+  select(-admin_notes) |>
+  #Exercises = exercises,
+  rename(Day = day, Date = date, Topic = topic,Slides = notes,
+          Lab = Lab, Homework = HW,Outline = outline,Exam = exam,
+         Project = project) |>
+  
+  gt() %>%
+  text_transform(cells_body(columns = c(Slides)),
+                 fn = function(x){
+                   ifelse(is.na(x), fontawesome::fa('laptop', fill_opacity = 0.1), 
+                          glue::glue("<a href = {x}>{fontawesome::fa('laptop')}</a>"))
+                 }) %>%
+  text_transform(cells_body(columns = c(Outline)),
+               fn = function(x){
+                 ifelse(is.na(x), fontawesome::fa('list', fill_opacity = 0.1), 
+                        glue::glue("<a href = {x}>{fontawesome::fa('list')}</a>"))
+               }) %>%
+  # text_transform(cells_body(columns = c(Exercises)),
+  #                fn = function(x){
+  #                  ifelse(is.na(x), fontawesome::fa('users', fill_opacity = 0.1),
+  #                         glue::glue("<a href = {x}>{fontawesome::fa('users')}</a>"))
+  #                  
+  #                }) %>%
+  text_transform(cells_body(columns = c(Homework)),
+                 fn = function(x){
+                   ifelse(is.na(x), fontawesome::fa('sticky-note', fill_opacity = 0.1), 
+                          glue::glue("<a href = {x}>{fontawesome::fa('sticky-note')}</a>"))
+                   
+                 }) %>%
+  text_transform(cells_body(columns = c(Lab)),
+                 fn = function(x){
+                   ifelse(is.na(x), fontawesome::fa('file-alt', fill_opacity = 0.1), 
+                          glue::glue("<a href = {x}>{fontawesome::fa('flask')}</a>"))
+                 }) %>%
+  text_transform(cells_body(columns = c(Project)),
+         fn = function(x){
+           ifelse(is.na(x), fontawesome::fa('diagram-project', fill_opacity = 0.1), 
+                  glue::glue("<a href = {x}>{fontawesome::fa('diagram-project')}</a>"))
+         }) %>%
+  text_transform(cells_body(columns = c(Exam)),
+           fn = function(x){
+             ifelse(is.na(x), fontawesome::fa('vials', fill_opacity = 0.1), 
+                    glue::glue("<a href = {x}>{fontawesome::fa('vials')}</a>"))
+             }) %>%
+  cols_width(Topic ~ px(300)) |>
+  fmt_date(Date, date_style = 10) %>%
+  sub_missing(columns = Date, missing_text = "")
+```

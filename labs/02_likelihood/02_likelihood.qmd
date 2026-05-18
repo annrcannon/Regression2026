@@ -1,0 +1,201 @@
+---
+title: 'Chapter 2 - Likelihoods'
+subtitle: 'Does having boys or girls run in the family? '
+execute: 
+  warning: false
+---
+
+
+## Lab Setup
+
+1) Copy the project lab folder located at *Home -> STA363_inst_files-> labs*. If you check the box next to the folder name, then click the small gear icon you can "copy to" and put a copy of the folder in your newly created folder. 
+2) Now, click *File-> Open Project* and navigate to the project file in the folder you just copied. 
+3) You can place your responses in the file *qmd* file included. 
+
+## Introduction
+
+Does having boys or girls run in the family?  Using demographic data from the National Longitudinal Survey of Youth, can we identify biases in sex composition patterns of children?  The data is found in Table 2 in the Rodgers and Doughty (2001) article, and relevant R code can be found under below.  
+
+
+## Questions
+
+#### Model 1 – Sex Unconditional Model.  Each child is independent of the others, and there is a constant probability ( ) that a child is a boy.
+
+1. Consider a small example with 3 families with compositions of children given by BBG, GBG, and GG.  
+Find the maximum likelihood estimator (MLE) for   by:
+a)	Conducting a numerical search in R for the largest likelihood over a fine grid of values 0-1.
+
+b)	Conducting a numerical search in R for the largest log-likelihood between 0 and 1.
+Illustrate the process graphically, and report the maximum value of the likelihood and log-likelihood functions.  Does it make sense that both methods would agree (and agree with the mathematical approach)?
+
+
+2. Apply Model 1 to the NLSY data (families in Table 2.4 below who have 3 or fewer children).  Find the MLE for   by adapting the R code for (1). There are 5,626 families in the table. 
+
+
+```{r}
+Famcomp <- c("B","G","BB","BG","GB","GG","BBB","BBG",
+             "BGG","BGB","GBB","GGB","GBG","GGG")
+Numfams <- c(930,951,582,666,666,530,186,177,173,
+             148,151,125,182,159)
+Numchild <- c(930,951,1164,1332,1332,1060,558,531,
+              519,444,453,375,546,477)
+```
+    
+```{r, table4chp2}
+#Family comp data table
+library(tidyverse)
+library(kableExtra)
+
+table5chp2 <- data.frame(Famcomp, Numfams, Numchild)
+
+table5chp2 |> kbl(col.names = c("Family Composition",
+    "Number of families", "Number of children"),
+    caption = 
+    "Table 2.4 Number of families and children in families with given composition in NLSY data.") 
+```
+
+
+#### Model 2 – Sex Conditional Model.  The probability of having a boy depends on whether you’ve had boys previously, so Model 2 will have three parameters:
+
+- probability of a boy when previously have had an equal number of boys and girls (neutral)
+ 
+- probability of a boy when previously have had more boys than girls (boy bias)
+ 
+- probability of a boy when previously have had more girls than boys (girl bias)
+
+3. Write out the likelihood function given Model 2 for the small set of data in (1).  [You could also try BGG, GGB, BBB just for fun.]
+
+
+
+## Code 
+
+```{r, setup, include=FALSE}
+library(tidyverse)
+```
+
+#### Model 1: Sex Unconditional Model
+
+Assumes the sex for each birth is independent of other births
+
+```{r eval=FALSE}
+# Evaluate small set of possible values of pb
+pb <- c(.3, .35, .375, .4, .45)  # possible values for prob a boy is born
+lik <- pb^3 * (1 - pb)^5         # likelihood of getting observed data
+cbind(pb, lik)                   # print table of results
+plot(pb, lik, xlab = "possible values of pb", ylab = "Likelihood")
+max(lik)                         # maximum likelihood over 5 values of pb
+pb[lik == max(lik)]              # value of pb where likelihood maximized
+
+# Evaluate finer grid of possible values of pb
+pb <- seq(0, 1, length = 1001)   # possible values for prob a boy is born
+lik <- pb^3 * (1 - pb)^5         # likelihood of getting observed data
+plot(pb, lik, xlab = "possible values of pb", ylab = "Likelihood", type = "l")
+max(lik)                         # maximum likelihood over 1001 values of pb
+pb[lik == max(lik)]              # value of pb where likelihood maximized
+
+loglik <- 3 * log(pb) + 5 * log(1 - pb)      # find log likelihoods
+plot(pb, loglik, xlab = "possible values of pb", ylab = "Loglikelihood", 
+     type = "l")
+max(loglik)                    # maximum loglikelihood over 1001 values of pb
+pb[loglik == max(loglik)]      # likelihood and loglikelihood max at same spot
+mle_pb_m1_small <- pb[loglik == max(loglik)]
+max_logL_m1_small <- max(loglik)
+
+# Create ggplot of likelihood and log-likelihood functions
+model1grid <- data.frame(pb = pb, lik1 = lik, loglik1 = loglik)
+ggplot(data = model1grid, aes(x = pb, y = lik1)) +
+  geom_line() +
+  labs(x = "possible values of pb", y = "Likelihood")
+ggplot(data = model1grid, aes(x = pb, y = loglik1)) +
+  geom_line() +
+  labs(x = "possible values of pb", y = "log Likelihood")
+
+```
+
+```{r eval=FALSE}
+# Apply Model 1 to NLSY data (for families with 3 or fewer children)
+pb <- seq(0, 1, length = 10001)   # possible values for prob a boy is born
+lik <- pb^5416 * (1 - pb)^5256    # likelihood (too small)
+max(lik)
+summary(lik)  
+
+# loglikelihood of getting observed data
+loglik <- 5416 * log(pb) + 5256 * log(1 - pb)   
+plot(pb, loglik, xlab = "possible values of pb", ylab = "Loglikelihood", 
+     type = "l")
+plot(pb[loglik > (-7500)], loglik[loglik > (-7500)],
+  xlab = "possible values of pb", 
+  ylab = "Loglikelihood", type = "l")  # zoom plot
+max(loglik)                 # maximum loglikelihood over all values of pb
+pb[loglik == max(loglik)]   # MLE of pb
+mle_pb_m1_nlsy <- pb[loglik == max(loglik)]
+max_logL_m1_nlsy <- max(loglik)
+
+# Create ggplot of likelihood and log-likelihood functions
+model1grid <- data.frame(pb = pb, lik1 = lik, loglik1 = loglik)
+ggplot(data = model1grid, aes(x = pb, y = lik1)) +
+  geom_line() +
+  labs(x = "possible values of pb", y = "Likelihood")
+ggplot(data = model1grid, aes(x = pb, y = loglik1)) +
+  geom_line() +
+  labs(x = "possible values of pb", y = "log Likelihood")
+model1grid |>
+  filter(loglik1 > (-7500)) |>
+  ggplot(aes(x = pb, y = loglik1)) +
+    geom_line() +
+    labs(x = "possible values of pb with loglik above -7500", 
+         y = "log Likelihood")
+
+```
+
+#### Model 2: Sex Conditional Model (small 3 famly data set)
+
+Assumes probability of having a boy depends on whether you've had boys previously
+
+```{r eval=FALSE}
+# Find MLEs with 3-dimensional grid search
+pbb <- seq(0, 1, length = 101)
+pbg <- seq(0, 1, length = 101)
+pbn <- seq(0, 1, length = 101)
+model2_grid <- expand.grid(pbb = pbb, pbg = pbg, pbn = pbn)
+
+lik <- model2_grid$pbn^1 * (1 - model2_grid$pbn)^3 * model2_grid$pbb^1 * 
+  (1 - model2_grid$pbb)^1 * model2_grid$pbg^1 * (1 - model2_grid$pbg)^1
+loglik <- 1 * log(model2_grid$pbn) + 3 * log(1 - model2_grid$pbn) + 
+  1 * log(model2_grid$pbb) + 1 * log(1 - model2_grid$pbb) + 
+  1 * log(model2_grid$pbg) + 1 * log(1 - model2_grid$pbg)
+
+# Print results
+max(lik)        # maximum likelihood over all combos of pbb, pbg, pbn
+max(loglik)     # maximum loglikelihood over all combos of pbb, pbg, pbn
+
+model2_grid$pbb[loglik == max(loglik)]   # MLE of pbb
+model2_grid$pbg[loglik == max(loglik)]   # MLE of pbg
+model2_grid$pbn[loglik == max(loglik)]   # MLE of pbn
+
+# Store results
+mle_pbb_m2_small <- model2_grid$pbb[loglik == max(loglik)]   # MLE of pbb
+mle_pbg_m2_small <- model2_grid$pbg[loglik == max(loglik)]   # MLE of pbg
+mle_pbn_m2_small <- model2_grid$pbn[loglik == max(loglik)]   # MLE of pbn
+
+max_L_m2_small <- max(lik)
+max_logL_m2_small <- max(loglik)
+```
+
+### Model comparisons - Model 1 vs. Model 2
+
+```{r eval=FALSE}
+lrt <- 2 * (max_logL_m2_small - max_logL_m1_small)   
+lrt                       # likelihood ratio test statistic
+1 - pchisq(lrt, df = 2)   # p-value for testing Ho: no diff between Models 1&2
+
+# AIC and BIC values for Models 1 and 2
+aic1 <- -2 * max_logL_m1_small + 2 * 1
+aic1
+bic1 <- -2 * max_logL_m1_small + log(8) * 1
+bic1
+aic2 <- -2 * max_logL_m2_small + 2 * 3
+aic2
+bic2 <- -2 * max_logL_m2_small + log(8) * 3
+bic2
+```

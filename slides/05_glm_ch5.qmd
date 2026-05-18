@@ -1,0 +1,316 @@
+---
+title: "Generalized Linear Models (GLMs)"
+subtitle: "BMLR Chapter 5"
+format: 
+  revealjs:
+    output-file: "05_glm_ch5.html"
+    slide-number: true
+  html:
+    output-file: "05_glm_ch5_o.html"
+logo: "/img/favicon.png"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(GGally)
+library(knitr)
+library(patchwork)
+library(viridis)
+library(ggfortify)
+library(gridExtra)
+```
+
+
+## Learning goals 
+
+- Identify the components common to all generalized linear models 
+
+- Find the canonical link based on the distribution of the response variable 
+
+- Explain how coefficients are estimated using iteratively reweighted least squares (IWLS)
+
+
+# Unifying theory of GLMs
+
+## Many models; one family {.smaller}
+
+We have studied models for a variety of response variables
+
+- Least squares (Normal)
+- Logistic (Bernoulli, Binomial, Multinomial)
+- Log-linear (Poisson, Negative Binomial)
+
+. . .
+
+These models are all examples of **generalized linear models**.
+
+GLMs have a similar structure for their likelihoods, MLEs, variances, so we can use a generalized approach to find the model estimates and associated uncertainty.
+
+
+
+## Components of a GLM {.smaller}
+
+[Nelder and Wdderburn (1972)](https://sakai.duke.edu/access/content/group/ec265469-bdb3-47a7-beb0-317956b6f86f/GLM-paper.pdf) defines a broad class of models called **generalized linear models** that generalizes multiple linear regression. GLMs are characterized by three components: 
+
+. . .
+
+`r emo::ji("one")` Response variable with parameter $\theta$ whose probability function can be written in exponential family form (**random component**)
+
+`r emo::ji("two")` A linear combination of predictors, $\eta = \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p$ (**systematic component**)
+
+`r emo::ji("three")` A **link** function $g(\theta)$ that connects $\theta$ to $\eta$
+
+::: aside
+Nelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384.
+:::
+
+
+
+## Exponential family form {.smaller}
+
+Suppose a probability (mass or density) function has a parameter $\theta$. It is said to have a **one-parameter exponential family form** if 
+
+. . .
+
+`r emo::ji("white_check_mark")`  The support (set of possible values) does not depend on $\theta$, and 
+
+. . .
+
+`r emo::ji("white_check_mark")` The probability function can be written in the following form
+
+$f(y;\theta) = e^{[a(y)b(\theta) + c(\theta) + d(y)]}$
+
+. . .
+
+Using this form: 
+
+$$E(Y) = -\frac{c'(\theta)}{b'(\theta)} \hspace{20mm} Var(Y) = \frac{b''(\theta)c'(\theta) - c''(\theta)b'(\theta)}{[b'(\theta)]^3}$$
+
+
+
+## Poisson in exponential family form {.smaller}
+
+$$P(Y = y) = \frac{e^{-\lambda}\lambda^y}{y!} \hspace{10mm} y = 0, 1, 2, \ldots, \infty$$
+
+. . .
+
+$$\begin{aligned}P(Y = y) &= e^{-\lambda}e^{y\log(\lambda)}e^{-\log(y!)}\\
+& = e^{y\log(\lambda) - \lambda - \log(y!)}\end{aligned}$$
+
+. . .
+
+Recall the form: $f(y;\theta) = e^{[a(y)b(\theta) + c(\theta) + d(y)]}$, where the parameter $\theta = \lambda$ for the Poisson distribution
+
+:::: {.columns}
+::: {.column}
+- $a(y) = y$
+- $b(\lambda) = \log(\lambda)$
+
+:::
+
+:::{.column}
+
+- $c(\lambda) = -\lambda$
+- $d(y) = -\log(y!)$
+
+:::
+::::
+
+## Poisson in exponential family form {.smaller}
+
+- The support for the Poisson distribution is $y = 0, 1, 2, \ldots, \infty$. This does not depend on the parameter $\lambda$. 
+
+- The probability mass function can be written in the form $f(y;\theta) = e^{[a(y)b(\theta) + c(\theta) + d(y)]}$
+
+. . .
+
+**The Poisson distribution can be written in one-parameter exponential family form.**
+
+
+
+## Canonical link {.smaller}
+
+Suppose there is a response variable $Y$ from a distribution with parameter $\theta$ and a set of predictors that can be written as a linear combination $\eta = \sum_{j=1}^{p}\beta_jx_j = \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p$
+
+<br>
+
+**(There does not have to be an intercept but generally we also include $\beta_0$)**
+
+<br> 
+
+. . .
+
+A **link function**, $g()$, is a monotonic and differentiable function that connects $\theta$ to $\eta$
+
+. . .
+
+The **canonical link** is a link function such that $g(\theta) = \eta$
+
+- When working with a member of the one-parameter exponential family, the canonical link is $b(\theta)$
+
+
+
+## Canonical link for Poisson {.smaller}
+
+Recall 
+
+$$P(Y = y) = e^{y\log(\lambda) - \lambda - \log(y!)}$$
+
+then the canonical link is $b(\lambda) = \log(\lambda)$
+
+
+
+## GLM framework: Poisson response variable {.smaller}
+
+`r emo::ji("one")` Response variable with parameter $\theta$ whose probability function can be written in exponential family form
+
+$$P(Y = y) = e^{y\log(\lambda) - \lambda - \log(y!)}$$
+
+. . .
+
+`r emo::ji("two")` A linear combination of predictors, $\eta = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p$
+
+. . .
+
+`r emo::ji("three")` A function $g(\lambda)$ that connects $\lambda$ and $\eta$ 
+
+$$\log(\lambda) = \eta =  \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p$$
+
+
+
+## Activity: Identifying canonical link {.smaller}
+
+For the distribution 
+
+- Describe an example of a setting where this random variable may be used.
+
+- Identify the parameter.
+
+- Write the pmf or pdf in one-parameter exponential form. 
+
+- Identify the canonical link function
+
+- One person from each group: Write your response on the board. 
+
+
+
+## Activity {.smaller}
+
+**Distributions**
+
+1. Binary 
+2. Exponential
+3. Negative binomial (with fixed $r$)
+4. Geometric
+5. Normal (with fixed $\sigma$)
+
+- If your group finishes early, try identifying the canonical link for the other distributions. 
+
+- See [BMLR - Section 3.6](https://bookdown.org/roback/bookdown-BeyondMLR/ch-distthry.html#additional-resources) for details on the distributions.
+
+
+
+# Iteratively reweighted least squares (IWLS)
+
+## Data: Noisy Miners {.smaller}
+
+The dataset [`nminer`](data/nminer.csv) contains information about the number of noisy miners (small Australian bird) detected in two woodland patches within the Wimmera Plains of Victoria, Australia. It was obtained from the **GLMsdata** R package. We will use the following variables:
+
+ 
+- **`Minerab`**: The number of noisy miners (abundance) observed in three 20 minute surveys
+- **`Eucs`**: The number of eucalyptus trees in each 2 hectare area (about 4.94 acres)
+
+
+
+
+## Noisy Miner Model {.smaller}
+
+
+```{r echo = F}
+nminer <- read_csv("data/nminer.csv")
+nminer %>%
+  slice(1:5) %>% select(Eucs, Minerab) %>% kable(digits = 1)
+```
+
+. . .
+
+Our goal is to use a Poisson regression model to predict the number of noisy miners observed in three 20 minute surveys based on the number of eucalyptus trees.
+
+$$\log(\lambda_{Minearab}) = \beta_0 + \beta_1 ~ Euc$$
+
+. . .
+
+**What are the best estimates of $\beta_0$ and $\beta_1$?**
+
+
+
+
+## Iteratively reweighted least squares (IWLS) {.smaller}
+
+- The estimates of $\beta_0$ and $\beta_1$ are found using maximum likelihood estimation. 
+
+
+- **Iteratively reweighted least-squares (IWLS)** is used to find the MLEs
+  - Nelder and Wedderburn (1972) show that under certain specifications of the weights and a modified response variable, the estimates found using IWLS are equivalent to the MLEs.
+  
+
+
+## IWLS Set up {.smaller}
+
+**Working response**: Modified response variable at each step of the iteration. 
+
+$$z_i = g(\theta) + g'(\theta)(y_i - \theta_i)$$
+
+For Poisson regression, this is 
+
+$$z_i = \log(\lambda) + \frac{(y_i - \lambda_i)}{\lambda_i}$$
+
+. . .
+
+**Working Weights:** Weights applied to the observations at each step of the iteration 
+
+$$W_i = \frac{\theta^2}{Var(Y)} \hspace{5mm} \Rightarrow \hspace{5mm}  W_i = \frac{\lambda^2}{\lambda} =  \lambda \text{ for Poisson regression}$$
+
+
+
+## IWLS procedure {.smaller}
+
+1. Find initial starting values $\hat{\theta}_i$.
+
+2. Calculate the working response values $z_i$.
+
+3. Calculate the working weights $W_i$.
+
+4. Find the coefficient estimates of the weighted least squares model.
+
+. . .
+
+$z_i = \beta_0 + \beta_1 x \hspace{5mm} \text{ with weights }W_i$
+
+The estimates $\hat{\beta}_0$ and $\hat{\beta}_1$ are the estimates for the model coefficients. 
+
+. . .
+
+Use $\hat{\beta}_0$ and $\hat{\beta}_1$ to calculate updated values of $\hat{\theta}_i$ and repeat steps 2 - 4 until convergence.
+
+
+
+. . .
+
+## Demo in `ch5_iwls.R` in server class files
+
+
+
+## Acknowledgements {.smaller}
+
+- These slides are based on content in [BMLR: Chapter 4](https://bookdown.org/roback/bookdown-BeyondMLR/)
+
+- Initial versions of the slides are by Dr. Maria Tackett, Duke University
+
+- [BMLR: Chapter 5 - Generalized Linear Models: A Unifying Theory](https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html)
+- Nelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384.
+- Generalized Linear Models with Examples in R
+  - Chapter 5 - Generalized Linear Models: Structure
+  - Chapter 6 - Generalized Linear Models: Estimation 
+  

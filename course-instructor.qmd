@@ -1,0 +1,16 @@
+---
+title: "Instructor"
+---
+
+## Instructor
+
+![](images/team/tyler.png){fig-alt="Headshot of Dr. Tyler George" style="float:right;padding: 0 0 0 10px;" width="130"}
+
+[Dr. Tyler George](https://stats-tgeorge.github.io/personal_website/about.html) (he/him) is a Assistant Professor of Statistics at Cornell College. He received his PhD in Statistics and Analytics from Central Michigan University. During his PhD he also studied mathematics and statistics education. His dissertation work involved creating a new lack of fit test for linear regression models. His interests are broadly in statistics, data science and best pedagogy to teach them.
+
+| Office hours                      | Location |
+|-----------------------------------|----------|
+| Monday - Thursday 3:05pm - 4:05pm | West 311 |
+| Other Times by Appointment        | West 311 |
+
+Office hours are for **STUDENTS**. Please take advantage of them to get help with class, advising, and/or getting to know your professor! If you miss class, check out course calendar to verify there have been no changes. 

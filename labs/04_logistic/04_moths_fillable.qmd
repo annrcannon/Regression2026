@@ -1,0 +1,256 @@
+---
+title: 'Chapter 6 - Binomial Regression'
+subtitle: 'Moth Coloration and Natural Selection'
+---
+
+## Setup 
+
+```{r, setup}
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(gridExtra) 
+
+moth <- read_csv("data/moth.csv")
+
+moth <- mutate(moth, notremoved = PLACED - REMOVED, 
+               logit1 = log(REMOVED / notremoved),
+               prop1 = REMOVED / PLACED, 
+               dark = ifelse(MORPH=="dark",1,0) )
+
+moth |> head(5)
+```
+
+
+
+### Code Exercises 0-3
+
+
+```{r eda}
+
+# EDA
+ggplot(data = moth, aes(x = DISTANCE, y = logit1)) + 
+  geom_point() + geom_smooth(method="lm") 
+ggplot(data = moth, aes(x = MORPH, y = logit1)) + 
+  geom_boxplot() 
+
+# Plot empirical logits vs. distance separately by morph
+ggplot(data = moth, aes(x = DISTANCE, y = logit1, color = MORPH, 
+                        shape = MORPH)) + 
+  geom_point() + 
+  geom_smooth(method="lm", alpha = 1/4) 
+
+# Repeat above plot but "Connect the dots" within morph
+ggplot(data = moth, aes(x = DISTANCE, y = logit1, color = MORPH, 
+                        shape = MORPH)) + 
+  geom_point() + 
+  geom_line() 
+
+```
+
+### Code Exercises 3-5
+
+```{r model_breg2}
+# Initial model
+breg2 <- glm(prop1 ~ DISTANCE + dark, weights = PLACED, family = binomial, 
+             data = moth)
+summary(breg2)
+exp(coef(breg2))
+
+# Alternative way to express initial model
+breg2a <- glm(cbind(REMOVED, notremoved) ~ DISTANCE + dark, 
+              family = binomial, data=moth)
+summary(breg2a)
+```
+
+
+```{r model_breg2b}
+# Yet one more way to express initial model
+breg2b <- glm(prop1 ~ DISTANCE + MORPH, weights = PLACED, family = binomial, data = moth)
+summary(breg2b)
+```
+
+### Code Exercises 6-9
+
+
+```{r predictions_coef}
+# Plot initial model (no interaction)
+moth <- mutate(moth, breg2.pred = predict(breg2, type="link") )
+ggplot(data = moth, aes(x = DISTANCE, color = MORPH, shape = MORPH)) + 
+  geom_point(aes(y = logit1)) + 
+  geom_smooth(aes(y = breg2.pred), method="lm") +
+  ggtitle("Initial model (no interaction)")
+
+
+```
+
+```{r model_breg3}
+# Model with interaction (full model)
+breg3 <- glm(prop1 ~ DISTANCE + dark + DISTANCE:dark, weights = PLACED, 
+             family = binomial, data = moth)
+summary(breg3)
+
+# Interpret exponentiated coefficients and associated profile CIs
+exp(coef(breg3))
+exp(confint(breg3))
+
+# Generate CIs - Wald-based method
+betas <- summary(breg3)$coefficients[,1]
+sebetas <- summary(breg3)$coefficients[,2]
+lb <- betas - qnorm(.975)*sebetas
+ub <- betas + qnorm(.975)*sebetas
+cbind(exp(lb),exp(ub))
+
+# Drop in deviance test
+anova(breg2, breg3, test="Chisq")
+
+# Test goodness of fit for full model
+gof <- 1-pchisq(breg3$deviance, breg3$df.residual)
+gof  
+
+# Plot full model (with interaction)
+moth <- mutate(moth, breg3.pred = predict(breg3, type="link") )
+ggplot(data = moth, aes(x = DISTANCE, color = MORPH, shape = MORPH)) + 
+  geom_point(aes(y = logit1)) + 
+  geom_smooth(aes(y = breg3.pred), method="lm") +
+  ggtitle("Full model (with interaction)")
+
+# Construct table of predicted values and prediction errors
+bin.prop = moth$prop1
+model.est = predict(breg3, type="response")
+dev.resid = residuals(breg3, type="deviance")
+pears.resid = residuals(breg3, type="pearson")
+display1 = data.frame(DISTANCE=moth$DISTANCE, MORPH=moth$MORPH, bin.prop, 
+  model.est, dev.resid, pears.resid)
+display1
+```
+
+### Code Exercises 10-11
+
+
+```{r model_breg4}
+
+# Adjusting for extra-binomial variation (overdispersion)
+breg4 <- glm(prop1 ~ DISTANCE + dark + DISTANCE:dark, weights = PLACED,
+             family = quasibinomial, data = moth)
+summary(breg4)
+exp(coef(breg4))
+
+```
+
+
+```{r model_breg4a}
+# Adjusted drop in deviance test
+breg4a <- glm(prop1 ~ DISTANCE + dark, weights = PLACED,
+              family = quasibinomial, data = moth)
+summary(breg4a)
+anova(breg4a, breg4, test = "F")
+
+# Find phi = overdispersion parrameter
+phi.num = sum(pears.resid^2)
+phi.denom = breg3$df.residual   # equals 14-4
+phihat = phi.num / phi.denom
+phihat
+sqrt(phihat)
+
+# Significance tests for interaction term after adjust for overdispersion
+dropindev = breg2$deviance - breg3$deviance
+d = breg2$df.residual - breg3$df.residual
+Fstat = (dropindev/d) / phihat
+pval = 1-pf(Fstat, d, breg3$df.residual)
+Fstat
+pval    # p-value from adjusted Drop in Deviance test
+
+beta = summary(breg4)$coefficients[4,1]
+sebeta = summary(breg4)$coefficients[4,2]
+tstat = beta / sebeta
+pval = 2*(1-pt(tstat, breg4$df.residual))
+tstat
+pval    # p-value from adjusted Wald test
+
+# Generate adjusted CIs - profile likelihood method
+exp(confint(breg4))
+
+# Generate adjusted CIs - Wald-based method
+qlcoef = summary(breg4)$coefficients[,1]
+qlse = summary(breg4)$coefficients[,2]
+lb = qlcoef - qt(.975,breg4$df.residual)*qlse
+ub = qlcoef + qt(.975,breg4$df.residual)*qlse
+cbind(exp(lb),exp(ub))
+
+```
+
+
+```{r relationships}
+# Note relationships between betas and SE(betas) under maximum 
+# likelihood (sebetas) and quasi likelihood (qlse):
+qlse
+sebetas
+sqrt(phihat)
+sebetas*sqrt(phihat)
+qlcoef
+betas
+
+```
+
+
+### Exercises 12 and 13
+
+```{r model_breg5}
+# Distance as factor variable
+moth <- mutate(moth, location = as.factor(DISTANCE) )
+breg5 = glm(prop1 ~ location + dark, weights = PLACED, 
+            family = binomial, data = moth)
+summary(breg5)
+
+```
+
+```{r model_breg5a}
+breg5a = glm(prop1 ~ location + dark + location:dark, weights = PLACED,
+            family = binomial, data = moth)
+summary(breg5a)
+gof = 1-pchisq(breg5a$deviance, breg5a$df.residual)
+gof
+
+```
+
+
+```{r compare_logistic}
+# Try running as logistic regression.  
+#    First must expand data to one row per moth.
+mtemp1 = rep(moth$dark[1],moth$REMOVED[1])
+dtemp1 = rep(moth$DISTANCE[1],moth$REMOVED[1])
+rtemp1 = rep(1,moth$REMOVED[1])
+mtemp1 = c(mtemp1,rep(moth$dark[1],moth$PLACED[1]-moth$REMOVED[1]))
+dtemp1 = c(dtemp1,rep(moth$DISTANCE[1],moth$PLACED[1]-moth$REMOVED[1]))
+rtemp1 = c(rtemp1,rep(0,moth$PLACED[1]-moth$REMOVED[1]))
+for(i in 2:14)  {
+  mtemp1 = c(mtemp1,rep(moth$dark[i],moth$REMOVED[i]))
+  dtemp1 = c(dtemp1,rep(moth$DISTANCE[i],moth$REMOVED[i]))
+  rtemp1 = c(rtemp1,rep(1,moth$REMOVED[i]))
+  mtemp1 = c(mtemp1,rep(moth$dark[i],moth$PLACED[i]-moth$REMOVED[i]))
+  dtemp1 = c(dtemp1,rep(moth$DISTANCE[i],moth$PLACED[i]-moth$REMOVED[i]))
+  rtemp1 = c(rtemp1,rep(0,moth$PLACED[i]-moth$REMOVED[i]))  }
+newdata = data.frame(removed=rtemp1,dark=mtemp1,dist=dtemp1)
+newdata[1:25,]
+
+cdplot(as.factor(rtemp1)~dtemp1)
+lreg1 = glm(rtemp1 ~ mtemp1 + dtemp1 + mtemp1:dtemp1,
+  family=binomial(link="logit") )
+summary(lreg1)
+
+# Try running as a multilevel model
+library(lme4)
+id1 = as.factor(dtemp1)
+model1 = glmer(rtemp1 ~ mtemp1 + dtemp1 + mtemp1:dtemp1 + (1|id1), family=binomial)
+summary(model1)
+
+```
+
+
+
+
+
+
+
+

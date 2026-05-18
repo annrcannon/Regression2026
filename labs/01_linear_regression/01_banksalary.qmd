@@ -1,0 +1,329 @@
+---
+title: 'Stat 363: Multiple Linear Regression Review'
+subtitle: 'Bank Salary Case Study'
+execute: 
+  eval: false
+---
+
+## First Lab Setup
+
+Since this our first lab, I suggest you get setup for files in the following way:
+
+1) Log into the course RStudio Server. <http://turing.cornellcollege.edu:8787/> Make sure to close out of any projects on the top right corner. 
+2) Click the "File" tab in the bottom right corner. Then click "Home" across the top of the panel.
+3) If ones does not exists already, use the "+`r emo::ji("folder")`" button to create a new folder and call it "STA363"
+4) Copy project folder called "01_linear_regression" located at *Home -> STA363_inst_files-> labs*. If you check the box next to the folder name, then click the small gear icon you can "copy to" and put a copy of the folder in your newly created folder. 
+5) Now, click *File-> Open Project* and navigate to the project file in the folder you just copied. 
+6) You can place your responses in the file *01_banksalary_fillable.qmd*.
+
+## Introduction
+
+**Example: Sex discrimination in bank salaries.** In the 1970’s, Harris Trust was sued for sex discrimination in the salaries it paid its employees. One approach to addressing this issue was to examine the starting salaries of all skilled, entry-level clerical workers between 1965 and 1975. The data is saved under banksalary.csv, in the data folder of the project. You will find relevant code at the end of these instructions. 
+
+Data from skilled entry-level clerical workers at bank being sued for sex discrimination in 1970s (from Statistical Sleuth, Ch 12):
+
+- `bsal` = beginning salary (annual salary at time of hire)
+- `sal77` = annual salary in 1977
+- `sex` = MALE or FEMALE
+- `senior` = months since hired
+- `age` = age in months
+- `educ` = years of education
+- `exper` = months of prior work experience
+
+*First, we will speculate on what we expect to find and then we will perform an analysis using the data.*
+
+- Read the data in and use a`view()` to see the data, but do not do anything else with the data on the computer until question 6.
+
+
+## Questions
+
+1.  Identify the observational units, the response variable, and explanatory variables.
+
+2.  Given the mean starting salary of male workers (\$5957) was 16% higher than the mean starting salary of female workers (\$5139): Is this enough evidence to conclude sex discrimination exists? If not, what further evidence would you need?
+
+3.  How would you expect age, experience, and education to each be related to starting salary?
+
+4.  Why might it be important to control for seniority (number of years with the bank) if we are only concerned with the salary when the worker started?
+
+5.  Do you expect any explanatory variables (including sex) to be closely related to each other? What implications would this have for modeling?
+
+Using the data…
+
+One approach is to construct a good model for beginning salaries while requiring sex as a predictor, to determine the significance of sex after controlling for the other covariates. Then we can explore interactions with sex to see if its effect is consistent across levels of other predictors.
+
+6.  Use the data to address the primary question of interest here using only the beginning salary and sex variables. Be sure to discuss plots and summary statistics first, and then look at test(s) of significance.
+
+7.  Construct plots to investigate how each of the potential confounders (age, experience, education) is related to beginning salaries. Describe your findings.
+
+8.  Does seniority play a role in the variation of starting salaries? In what way?
+
+9.  Examine how the explanatory variables (including sex) are related to each other, if at all. What implications would this have for modeling?
+
+10. Fit a simple linear regression model with starting salary as the response and education as the sole explanatory variable. Interpret the intercept and slope of this model; also interpret the R-squared value. Is there a significant relationship between education and starting salary?
+
+Intercept:
+
+Slope:
+
+R2
+
+Significance:
+
+11. Does **model2** from question 10 meet all linear regression assumptions? List each assumption and how you decided if it was met or not.
+
+12. Is a model with all 4 confounding variables better than a model with just education? Justify with an appropriate significance test in addition to summary statistics of model performance.
+
+13. You should have noticed that the term for age was not significant in the model with four predictors (*senior*, *age*, *educ*, and *exper*). What does this imply about age and about future modeling steps?
+
+14. The relationship between experience and beginning salary exhibits some curvature. How might it be interpreted in this context? Determine whether a quadratic term in experience improves a model without curvature (see code for **model5**).
+
+15. Consider a model with the predictors *senior*, *educ*, *exper*, and *male*. What conclusions can be drawn about sex discrimination at Harris Trust? Do these conclusions have to be qualified at all, or are they pretty clear cut? Interpret a 95% confidence interval for the male indicator variable in context to help with your response (see code for **model6**).
+
+16. Do any explanatory variables exhibit an interaction with sex. If so, what are the implications for your answer in (15)?
+
+17. Often salary data is logged before analysis. Would you recommend logging starting salary in this study? Support your decision analytically.
+
+18. **Model6a** predicts *log(bsal)* with predictors *senior*, *educ*, *exper*, and *male*. Regardless of your answer to (17), provide an interpretation for the coefficient for the male coefficient in **model6a** after logging starting salary.
+
+
+## Code 
+
+```{r, setup, include=T}
+library(mosaic)
+library(skimr)   # may have to install
+library(dplyr)  
+library(ggplot2)
+library(gridExtra)
+bank <- read.csv("data/banksalary.csv")
+```
+
+Data from skilled entry-level clerical workers at bank being sued for sex discrimination in 1970s (from Statistical Sleuth, Ch 12):
+
+- `bsal` = beginning salary (annual salary at time of hire)
+- `sal77` = annual salary in 1977
+- `sex` = MALE or FEMALE
+- `senior` = months since hired
+- `age` = age in months
+- `educ` = years of education
+- `exper` = months of prior work experience
+
+```{r}
+# Examine data frame
+head(bank)       # print first 6 rows
+
+# Generate relevant summary statistics for response variable
+favstats(~ bsal, data = bank)
+
+# Look at marginal relationship between sex and beginning salary
+
+# Three options for getting summary statistics
+favstats(~ bsal | sex, data = bank)
+
+bank |>
+  group_by(sex) |>
+  summarize(mean = mean(bsal),
+            median = median(bsal),
+            sd = sd(bsal),
+            iqr = IQR(bsal),
+            n = n())
+
+# Doesn't seem to render as a pdf
+#bank |>
+#  group_by(sex) |>
+#  skim()
+
+# Several options for plotting 1 categorical and 1 numeric variable
+boxplot(bsal ~ sex, ylab="Beginning salary", data = bank)
+bwplot(sex ~ bsal, data = bank)
+ggplot(bank, aes(x = sex, y = bsal)) +
+  geom_boxplot() + coord_flip()
+ggplot(data = bank, mapping = aes(x = bsal, y = ..density..)) + 
+  geom_freqpoly(mapping = aes(colour = sex), binwidth = 250)
+ggplot(data = bank, mapping = aes(x = bsal, y = ..density..)) + 
+  geom_density(mapping = aes(colour = sex))
+ggplot(bank, aes(x=bsal, fill=sex)) +
+  geom_density(alpha=0.4)
+ggplot(bank, aes(x = sex, y = bsal)) +
+  geom_violin() 
+ggplot(data = bank) + 
+  geom_histogram(mapping = aes(x = bsal)) + 
+  facet_wrap(~ sex, nrow = 2)
+ggplot(data = bank) + 
+  geom_histogram(mapping = aes(x = bsal, y = ..density..)) + 
+  facet_wrap(~ sex, nrow = 2)
+
+# Initial analysis of sex vs salary, ignoring other covariates
+t.test(bsal ~ sex, data = bank)
+
+model1 = lm(bsal ~ sex, data = bank)
+summary(model1)
+
+bank <- bank |>
+  mutate(male = ifelse(sex=="MALE",1,0))   # create our own indicator for sex
+t.test(bsal ~ male, var.equal = TRUE, data = bank)
+
+# How are covariates related to response?
+ggplot(bank, aes(y = bsal, age)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+ggplot(bank, aes(y = bsal, exper)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+ggplot(bank, aes(y = bsal, educ)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+ggplot(bank, aes(y = bsal, senior)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+
+# How are explanatory variables related to each other?
+bank0 <- bank |> select(bsal, age, exper, educ, senior, male)
+pairs(bank0)     # matrix of scatterplots 
+cor(bank0)       # matrix of correlations
+
+# How are explanatory variables related to sex?
+favstats(~ age | sex, data = bank)
+ggplot(bank, aes(x = sex, y = age)) +
+  geom_boxplot() + coord_flip()
+
+favstats(~ exper | sex, data = bank)
+ggplot(bank, aes(x = sex, y = exper)) +
+  geom_boxplot() + coord_flip()
+
+favstats(~ educ | sex, data = bank)
+ggplot(bank, aes(x = sex, y = educ)) +
+  geom_boxplot() + coord_flip()
+
+favstats(~ senior | sex, data = bank)
+ggplot(bank, aes(x = sex, y = senior)) +
+  geom_boxplot() + coord_flip()
+
+# Fit linear regression with single predictor (education)
+model2 = lm(bsal ~ educ, data = bank)
+summary(model2)
+```
+
+```{r, echo=TRUE, fig.height=10, fig.width=10}
+# Residual plots - run off the page unless redo margins
+par(mfrow=c(2,2), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
+plot(model2)   # Generate residual diagnostic plots
+par(mfrow=c(1,1))
+```
+
+```{r}
+# Fit multiple regression model with four predictors
+model3 = lm(bsal ~ senior + age + educ + exper, data = bank)
+summary(model3)
+anova(model2, model3, test="F")
+
+# Examine AIC and BIC scores (lower is better)
+AIC(model2)                     # AIC-model2
+AIC(model3)                     # AIC-model3
+AIC(model2, k=log(nrow(bank)))  # BIC-model2
+AIC(model3, k=log(nrow(bank)))  # BIC-model3
+
+# Fit linear regression with experience
+model4 = lm(bsal ~ exper, data = bank)
+summary(model4)
+```
+
+```{r, echo=TRUE, fig.height=10, fig.width=10}
+# Residual plots - run off the page unless redo margins
+par(mfrow=c(2,2), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
+plot(model4)   # Generate residual diagnostic plots
+par(mfrow=c(1,1))
+```
+
+```{r}
+bank <- bank |>
+  mutate(exper2 = exper^2)
+model5 = lm(bsal ~ exper + exper2, data = bank)
+summary(model5)
+```
+
+```{r, echo=TRUE, fig.height=10, fig.width=10}
+# Residual plots - run off the page unless redo margins
+par(mfrow=c(2,2), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
+plot(model5)   # Generate residual diagnostic plots
+par(mfrow=c(1,1))
+```
+
+```{r}
+# One potential final model
+model6 = lm(bsal ~ senior + educ + exper + male, data = bank)
+summary(model6)
+
+# Construct 95% CIs for model coefficients the hard way...
+betas = summary(model6)$coef[,1]   # store model betas
+SEs = summary(model6)$coef[,2]    # store SEs of betas
+tstar = qt(.975,model6$df)
+lb = betas - tstar*SEs
+ub = betas + tstar*SEs
+cbind(lb,ub)
+
+# ... or more simply:
+confint(model6)
+
+# Investigate interactions with sex
+ggplot(bank, aes(y = bsal, x = age, color = sex)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+ggplot(bank, aes(y = bsal, x = exper, color = sex)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+ggplot(bank, aes(y = bsal, x = educ, color = sex)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+ggplot(bank, aes(y = bsal, x = senior, color = sex)) + 
+  geom_point() + 
+  geom_smooth(method = lm)
+
+# Examine interaction between sex and education
+model7 = lm(bsal ~ educ + male + educ:male, data = bank)
+summary(model7)
+
+
+# Should beginning salary be log transformed?
+bank <- bank |> 
+  mutate(logbsal = log(bsal))
+hist1 <- ggplot(bank, aes(bsal)) + geom_histogram(bins = 10)
+hist2 <- ggplot(bank, aes(logbsal)) + geom_histogram(bins = 10)
+grid.arrange(hist1, hist2, ncol=2)
+
+# Look at marginal relationship between sex and beginning salary
+model6a = lm(logbsal ~ senior + educ + exper + male, data = bank)
+summary(model6a)
+```
+
+```{r, echo=TRUE, fig.height=10, fig.width=10}
+# Residual plots - run off the page unless redo margins
+par(mfrow=c(2,2), mar=c(4,4,4,1), oma=c(0.5,0.5,0.5,0))
+plot(model6a)   # Generate residual diagnostic plots
+par(mfrow=c(1,1))
+```
+
+```{r}
+# Bonus code: to help with HW1 when looking at 2 categorical variables
+ytable <- tally(~ sex + educ, data = bank)
+ytable
+mosaicplot(ytable, color = c("blue", "light blue"))
+prop.table(ytable, 1)
+
+# Other ways to visualize two categorical variables
+bank <- bank |>
+  mutate(education = ifelse(educ < 12, "No high school", "High school"),
+         education = ifelse(educ > 12, "Some college", education))
+ggplot(data = bank) + 
+  geom_bar(mapping = aes(x = sex, fill = education)) 
+ggplot(data = bank) + 
+  geom_bar(mapping = aes(x = sex, fill = education), position = "fill") 
+library(ggmosaic)  # need to have ggmosaic package installed
+ggplot(data = bank) +
+   geom_mosaic(aes(x = product(education, sex), fill=education), na.rm = TRUE)
+
+# Other ways to summarize relationship between two categorical variables
+bank |>
+  group_by(sex, education) |>
+  summarise (n = n()) |>
+  mutate(freq = n / sum(n))
+```

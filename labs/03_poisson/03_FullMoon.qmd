@@ -1,0 +1,237 @@
+---
+title: 'Chapter 4 - Poisson Regression'
+subtitle: 'Do animals bite more during a full moon?'
+execute:
+  eval: false
+---
+
+## Lab Setup
+
+1)  Copy the project lab folder located at *Home -\> STA363_inst_files-\> labs*. If you check the box next to the folder name, then click the small gear icon you can "copy to" and put a copy of the folder in your newly created folder.
+2)  Now, click *File-\> Open Project* and navigate to the project file in the folder you just copied.
+3)  You can place your responses in the file *qmd* file included.
+
+## Introduction
+
+An article in the British Medical Journal by Bhattacharjee et al. (2000) investigated whether animals bite more often during full moons. To address this question, the researchers conducted a retrospective observational analysis of 1621 consecutive patients who presented at an English hospital ER between 1997 and 1999 with an animal bite. The data is found in *bites.csv*, and the relevant R code can be found below.
+
+Variables include:
+
+-   *lunar.cycle* = period of lunar cycle (1-10), where 10 = full moon
+-   *n.days* = number of days in that period
+-   *n.bites* = number of patients presenting with an animal bite during that period
+
+Link to the article [HERE](https://www.bmj.com/content/321/7276/1559.long)
+
+## Questions
+
+1.  Is there initial evidence of more bites during full moon phases?
+
+2.  Why can’t we just perform a t-test comparing full moon periods to non-full moon periods using period-level data (n=10)?
+
+3.  What options can you think of for handling the fact that Period 5 is based on only 2 lunar days? What are the modeling implications of including the number of days in a period as an offset term?
+
+4.  Interpret model parameters from **fit1**.
+
+5.  Is there any evidence of a lack of fit in **fit1**? What factors may lead to a lack of fit?
+
+6.  Does the full moon have an effect above and beyond the linear cycle trend? Interpret the coefficient and a 95% confidence interval for the *fullmoon* term in **fit3**.
+
+7.  What is **fit4** doing? Does it offer an improvement over **fit3**?
+
+8.  Compare **fit5** to the analysis in the original author's paper. Are they the same? Discuss. See the article[ HERE](https://www.bmj.com/content/321/7276/1559.long).
+
+9.  Based on this analysis, does it make you more wary of animal bites during full moons?
+
+### Addressing issues of overdispersion in fit5.
+
+10. Is there evidence of a lack of fit in **fit5**? Cite evidence both from a goodness of fit test and from comparing means and variances by period.
+
+11. If overdispersion goes uncorrected, what are the implications for p-values and CIs for model coefficients?
+
+#### Overdispersion parameter adjustment.
+
+One solution is to simply add a second parameter to inflate variances, so that $Var(Y_i)=\phi\lambda_i$. This is called a “quasi-Poisson” or, in general, a “quasi-likelihood” approach, because our data no longer follows a true Poisson distribution.
+
+#### Negative binomial modeling.
+
+Another solution is to model response using a negative binomial distribution, so that $Y\sim NegBinom(\theta,p)$. This distribution comes about if $Y|λ\sim Poisson(λ)$, but the $\lambda$'s themselves are randomly chosen according to a gamma distribution: $\lambda \sim gamma(θ,\frac{(1-p)}{p})$. In this case, \$E(Y)=\theta \frac{p}{(1-p)}=\mu \$ and $Var(Y)=\theta \frac{p}{(1-p)^2} =\mu+\frac{\mu^2}{\theta}$, so that $\frac{\mu^2}{\theta}$ is the amount of overdispersion.
+
+12. Compare the following estimates, tests, and intervals under usual Poisson regression, quasi-Poisson regression, and negative binomial regression:
+
+|                                | Poisson | Quasi-poisson | Negative Binomial |
+|--------------------------------|---------|---------------|-------------------|
+| $\phi$                         |         |               |                   |
+| $SE(\hat{\beta}_4$)            |         |               |                   |
+| Wald-type test stat            |         |               |                   |
+| Wald-type p-value              |         |               |                   |
+| LRT-type test stat             |         |               |                   |
+| LRT-type test stat             |         |               |                   |
+| LRT-type p-value               |         |               |                   |
+| CI - profile for $e^{\beta_4}$ |         |               |                   |
+| CI-Wald-type for $e^{\beta_4}$ |         |               |                   |
+
+## Code
+
+### Setup
+
+```{r, setup}
+library(MASS)
+library(dplyr)
+library(maxLik)   # will have to install first
+library(ggplot2)
+library(gridExtra) 
+
+bites.data <- read.csv("data/bites.csv")
+bites.day <- read.csv("data/bitesbyday.csv")
+```
+
+### bites.csv: analysis and offsets
+
+```{r}
+# Exploratory Data Analysis
+bites.data
+
+# Average n.bites by day for each cycle to make them comparable
+bites.data <- mutate(bites.data, avg.bites=n.bites/n.days, 
+                     fullmoon = ifelse(lunar.cycle==10,1,0))
+with(bites.data, summary(avg.bites))
+with(bites.data, summary(n.bites))
+with(bites.data, by(avg.bites,fullmoon,summary))
+# t.test(avg.bites~fullmoon, data=bites.data)    # produces an error -why?
+
+ggplot(data = bites.data, aes(x = avg.bites)) + 
+  geom_histogram(bins = 4)
+ggplot(data = bites.data, aes(x = n.bites)) + 
+  geom_histogram(bins = 4)
+ggplot(data = bites.data, aes(x = lunar.cycle, y = avg.bites)) + 
+  geom_point() + geom_smooth(method="lm") 
+
+# Now try modeling as Poisson counts for each cycle.
+# However, Cycle 5 contains only 2 days whereas all others have 3.  
+
+# The simplest model (Model 1) uses only an indicator for the full moon cycle
+#   plus an offset for the number of days so the counts are comparable.
+fit1 <-  glm(n.bites ~ fullmoon, family=poisson, offset=log(n.days),
+             data=bites.data)
+summary(fit1)
+exp(fit1$coef)
+exp(confint(fit1))
+
+# Alternative (Wald) confidence intervals
+fit1coef <- summary(fit1)$coefficients[,1]
+fit1se <- summary(fit1)$coefficients[,2]
+lb <- fit1coef - qnorm(.975)*fit1se
+ub <- fit1coef + qnorm(.975)*fit1se
+cbind(exp(lb),exp(ub))
+
+#Signs of lack-of-fit with Simple Model
+gof <- 1-pchisq(fit1$deviance, fit1$df.residual)
+gof 
+
+# Model 2:  Linear cycle trend
+fit2 <-  glm(n.bites ~ lunar.cycle, family=poisson, offset=log(n.days),
+             data=bites.data)
+summary(fit2)
+gof <- 1-pchisq(fit2$deviance, fit2$df.residual)
+gof 
+
+# Model 3: Does full moon have effect above and beyond linear cycle trend?
+fit3 <- glm(n.bites ~ lunar.cycle + fullmoon, family=poisson, 
+            offset=log(n.days), data=bites.data)
+summary(fit3)
+exp(fit3$coef)
+exp(confint(fit3))
+anova(fit2, fit3, test = "Chisq")
+gof <- 1-pchisq(fit3$deviance, fit3$df.residual)
+gof 
+
+# Model 4: What does this model do?
+bites.data4 <- mutate(bites.data, dist = c(3,6,9,12,14.5,12,9,6,3,0))
+fit2a <- glm(n.bites ~ dist, family=poisson, offset=log(n.days), data=bites.data4)
+summary(fit2a)
+
+fit4 <- glm(n.bites ~ dist + fullmoon, family=poisson, offset=log(n.days),
+            data=bites.data4)
+summary(fit4)
+```
+
+### bitesbyday.csv: analysis and overdispersion
+
+```{r}
+# Model 5: Try to replicate model from paper, using daily data I transcribed 
+#          from Figure 1 and matched to period totals
+bites.day <- bites.day %>%
+  mutate(period = factor(period, levels = c(5,1:4,6:10)),
+         period_no4 = factor(period_no4, levels = c(5, 1:3, 6:10))
+)
+
+fit5 <- glm(bites ~ period, family=poisson, data=bites.day)
+summary(fit5)
+exp(fit5$coef)
+exp(confint(fit5))
+gof <- 1-pchisq(fit5$deviance, fit5$df.residual)
+gof 
+
+fit5reduced <- glm(bites ~ period_no4, family = poisson, data = bites.day)
+summary(fit5reduced)
+anova(fit5reduced, fit5, test = "Chisq")
+
+# Alternative (Wald) confidence intervals
+fit5coef <- summary(fit5)$coefficients[,1]
+fit5se <- summary(fit5)$coefficients[,2]
+lb <- fit5coef - qnorm(.975)*fit5se
+ub <- fit5coef + qnorm(.975)*fit5se
+cbind(exp(lb),exp(ub))
+
+
+# Might overdispersion be a factor in lack of fit?
+bites.day %>%
+  group_by(period) %>%
+  summarise(count = n(),
+            mean_bites = mean(bites),
+            var_bites = var(bites))
+
+
+# Adjust fit1 for overdispersion
+fit5a <- glm(bites ~ period, family=quasipoisson, data=bites.day)
+summary(fit5a)
+exp(confint(fit5a))
+
+fit5areduced <- glm(bites ~ period_no4, family = quasipoisson, data = bites.day)
+summary(fit5areduced)
+anova(fit5areduced, fit5a, test = "F")
+
+phi <- sum(resid(fit5, type='pearson')^2) / fit5$df.residual
+phi
+drop.in.dev <- fit5reduced$deviance - fit5$deviance
+diff.in.df <- fit5reduced$df.residual - fit5$df.residual
+Fstat <- drop.in.dev / summary(fit5a)$dispersion
+Fstat
+1-pf(Fstat, diff.in.df, fit5$df.residual)
+
+# Alternative (Wald) confidence intervals with QL
+fit5acoef <- summary(fit5a)$coefficients[,1]
+fit5ase <- summary(fit5a)$coefficients[,2]
+lb <- fit5acoef - qt(.975, fit5a$df.residual)*fit5ase
+ub <- fit5acoef + qt(.975, fit5a$df.residual)*fit5ase
+cbind(exp(lb),exp(ub))
+
+
+# Model fit1 using negative binomial
+fit5b <- glm.nb(bites ~ period, data=bites.day)
+summary(fit5b)
+exp(confint(fit5b))
+
+fit5breduced <- glm.nb(bites ~ period_no4, data = bites.day)
+summary(fit5breduced)
+anova(fit5breduced, fit5b, test = "Chisq")
+
+# Alternative (Wald) confidence intervals with NB
+fit5bcoef <- summary(fit5b)$coefficients[,1]
+fit5bse <- summary(fit5b)$coefficients[,2]
+lb <- fit5bcoef - qnorm(.975)*fit5bse
+ub <- fit5bcoef + qnorm(.975)*fit5bse
+cbind(exp(lb),exp(ub))
+
+```

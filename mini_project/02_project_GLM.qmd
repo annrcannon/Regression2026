@@ -1,0 +1,77 @@
+---
+title: 'Mini Project 2'
+subtitle: 'Generalized Linear Models'
+execute:
+  eval: false
+---
+
+### Getting Started
+
+##### 1) Pick a partner.
+
+##### 2) Find an appropriate data set.
+
+  -   GLM's are broadly applicable and there are no requirements on the type of data the response needs to follow.
+  -   The data you choose should have a few predictors that may be useful when modeling (ideally at least 1 quantitative and 1 categorical).
+
+- **Data Options:** Check out Data Links on the [Useful Links](../course-links.qmd) part of the course website. *TidyTuesday* has quickly accessible data.
+- You can also use any dataset from our Beyond Mulitple Linear Regression textbook, Chapters 1-6, that we have not done data anlaysis on already for homework. 
+
+##### 3) Write out the anticipated cleaning and/or feature engineering steps you will need to take. Some examples
+  -   Creating simplified categorical variables or transforming a continuous variable into categorical.
+  -   Aggregating data
+  -   Converting date columns
+  -   etc.
+
+-   Setup your R Project(s) on the server.
+
+-   Read your data into R. This likely will require you to download the data to your computer and upload the data the server.
+
+### Timing
+
+This project will be in a *workshop* style. The intention is for you to start and finish by the end of class time. We will follow a timeline:
+
+| Task                                       | Timing                                 |
+|--------------------------------------|----------------------------------------------|
+| Clean Data                                 | 9:00 am - 9:30 am                      |
+| Perform EDA                                | 9:30 am - 10:30 am                     |
+| Fit, Assess, and Compare Regression Models | 10:30 am - 11:00 am, 1:00 pm - 2:10 pm |
+| Prepare presentation                       | 2:10 pm - 2:40 pm                      |
+| Present your findings                      | 2:40 pm - 3:00 pm                      |
+| Submit your Final Report                   | Submit HTML Sunday 11/2 at 11:59 pm    |
+
+### Grading
+
+Each Mini Project is worth 50 points. The following rubric applies to the combination of your report and presentation. 
+
+| Category                                                                                                                                                                                                                                        | Points |
+|---------------------------------------------------------|---------------|
+| The data chosen is appropriate, and the cleaning steps are correct and explained.                                                                                                                                                               | 5      |
+| EDA is thorough. All included graphs and tables are paired with a discussion. EDA supports the choice of modeling technique.                                                                                                                    | 15     |
+| The model fitting process has a logical flow. Multiple models are considered and compared using statistical tests and multiple metrics. Any model that is interpreted has been assessed using residual plots and appropriate statistical tests. | 15     |
+| The code follows a sensible order and has been appropriately commented on.                                                                                                                                                                      | 5      |
+| The presentation is concise, describes the data, highlights key parts of the EDA, describes minimally the final model, gives at least 1 interpretation in the context of a coefficient, and discusses limitations and potential future work.    | 5      |
+| The report is well written, with correct spelling and grammar. The used code is included either inline or in an appendix at the end.                                                                                                            | 5      |
+
+### Submission
+
+Add format part of your final report document and then re-render:
+
+```{{r}}
+#| label: yaml_example
+#| eval: false
+---
+title: "Document title"
+author: "my name"
+format:
+  html:
+    embed-resources: true
+---
+```
+
+When you are finished with your report, render the final document. Once rendered, you can download your file by:
+
+-   Finding the .html file in your File pane (on the bottom right of the screen)
+-   Click the check box next to the file
+-   Click the blue gear above and then click "Export" to download
+-   Submit your final html document to the respective assignment on [Moodle]({{< var course.moodle >}})

@@ -1,0 +1,192 @@
+---
+title: Homework 4
+subtitle: Poisson Regression
+---
+
+
+`r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'`
+`r if (knitr:::is_html_output()) '\\newcommand{\\var}{\\operatorname{Var}}'`
+
+
+
+## Setup
+
+Each of your assignments will begin with the following steps.
+
+-   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
+
+-   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_4* and having that project in the course folder you created. 
+
+-   Create a new quarto document and give it a sensible name such as *hw4*.
+
+-   In the `YAML` add the following (add what you don't have). The embed-resources component will make your final rendered `html` self-contained.
+
+```{r}
+#| label: yaml_example
+#| eval: false
+---
+title: "Document title"
+author: "my name"
+format:
+  html:
+    embed-resources: true
+---
+```
+
+## Instructions
+
+Include the relevant R code as well as full sentences answering each of the questions (i.e. if I ask for the average, you can output the answer in R but **also** write a full sentence with the answer). Be sure to frequently save your files!
+
+Data for the homework will be in the STA363_inst_files -> data folder.
+
+## Exercises
+
+All problems are from {{< var course.text >}} Abbreviated BMLR. 
+
+Use the numbering on the left. The codes are for instructor use (Ex: C1).
+
+### Exercise 1 & 2 
+
+Exercises 1 & 2 involve predicting a __response__ using one or more __explanatory variables__, where these examples have response variables that are counts per some unit of time or space. List the response (both what is being counted and over what unit of time or space) and relevant explanatory variables.  
+
+### Exercise 1
+
+1. (C1) Are the number of motorcycle deaths in a given year related to a state's helmet laws?
+
+### Exercise 2
+
+2. (C2) Does the number of employers conducting on-campus interviews during a year differ for public and private colleges? 
+
+### Exercise 3
+
+3. (C5) Models of the form $Y_i=\beta_0+\beta_1X_i+\epsilon_i, \epsilon_i \sim iidN(0,\sigma)$ are fit using the method of least squares. What method is used to fit Poisson regression models?
+
+### Exercise 4
+
+4. (C6) What should be done before adjusting for overdispersion?
+
+### Exercise 5
+
+5. (C7) Why are quasi-Poisson models used, and how do the results typically compare for corresponding models using regular Poisson regression?
+
+### Exercise 6
+
+6. (C8) Why is the log of mean counts, log($\bar{Y}$), not $\bar{Y}$, plotted against X when assessing the assumptions for Poisson regression? 
+
+### Exercise 7
+
+7. (C9) How can the assumption of *mean=variance* be checked for Poisson regression? What if there are not many repeated observations at each level of X?
+
+### Exercise 8
+
+8. (C10) Is it possible that a predictor is significant for a model fit using Poisson regression, but not for a model for the same data fit using quasi-Poisson regression? Explain.
+
+### Exercise 9
+
+9. (C11) __Fish (or, as they say in French, poisson).__ A state wildlife biologist collected data from 250 park visitors as they left at the end of their stay. Each was asked to report the number of fish they caught during their one-week stay. On average, visitors caught 21.5 fish per week.
+    
+a. Define the response. 
+b. What are the possible values for the response?
+c. What does $\lambda$ represent? 
+
+### Exercise 10
+
+10. (G2) __Elephant mating.__ How does age affect male elephant mating patterns? An article by @Poole1989 investigated whether mating success in male elephants increases with age and whether there is a peak age for mating success. To address this question, the research team followed 41 elephants for one year and recorded both their ages and their number of matings. The data [@Ramsey2002] is found in `elephant.csv`, and the variables are:
+    - `MATINGS` = the number of matings in a given year
+    - `AGE` = the age of the elephant in years.
+    a. Create a histogram of MATINGS. Is there preliminary evidence that number of matings could be modeled as a Poisson response? Explain.
+    b. Plot MATINGS by AGE. Add a least squares line. Is there evidence that modeling matings using a linear regression with age might not be appropriate? Explain.  (Hints: fit a smoother; check residual plots).
+    c. For each age, calculate the mean number of matings. Take the log of each mean and plot it by AGE.
+        i. What assumption can be assessed with this plot?
+        ii. Is there evidence of a quadratic trend on this plot?
+    d. Fit a Poisson regression model with a linear term for AGE. Exponentiate and then interpret the coefficient for AGE. 
+    e. Construct a 95\% confidence interval for the slope and interpret in context (you may want to exponentiate endpoints).
+    f. Are the number of matings significantly related to age? Test with
+        i. a Wald test and
+        ii. a drop in deviance test.
+    g. Add a quadratic term in AGE to determine whether there is a maximum age for the number of matings for  elephants. Is a quadratic model preferred to a linear model? To investigate this question, use
+        i. a Wald test and
+        ii. a drop in deviance test.
+    h. What can we say about the goodness-of-fit of the model with age as the sole predictor? Compare the residual deviance for the linear model to a $\chi^2$ distribution with the residual model degrees of freedom.
+    i. Fit the linear model using quasi-Poisson regression. (Why?)
+        i. How do the estimated coefficients change?
+        ii. How do the standard errors change?
+        iii. What is the estimated dispersion parameter?
+        iv. An estimated dispersion parameter greater than 1 suggests overdispersion. When adjusting for overdispersion, are you more or less likely to obtain a significant result when testing coefficients? Why?  
+
+
+### Exercise 11
+
+11. (C15) __Dating online.__ Researchers are interested in the number of dates respondents arranged online and whether the rates differ by age group. Questions which elicit responses similar to this can be found in the Pew Survey concerning dating online and relationships [@Duggan2013]. Each survey respondent was asked how many dates they have arranged online in the past 3 months as well as the typical amount of time, $t$, in hours, they spend online weekly. Some rows of data appear in Table 1.
+	
+    - Identify the response, predictor, and offset in this context.  Does using an offset make sense?
+    - Write out a model for this data. As part of your model description, define the parameter, $\lambda$.
+    - Consider a zero-inflated Poisson model for this data. Describe what the `true zeros' would be in this setting.
+
+```{r, tab2chp4, echo=FALSE}
+Agecol <- c(19,29,38,55)
+TimeOn <- c(35,20,15,10)
+Numdates <- c(3,5,0,0)
+tab2chp4 <- data.frame(Agecol,TimeOn,Numdates)
+colnames(tab2chp4) <- c("Age","Time Online","Number of Dates Arranged Online")
+kableExtra::kable(tab2chp4, booktabs=T,
+      caption="Table 1: Sample data for Exercise 1.") |>
+  kableExtra::kable_styling(full_width = F)
+```
+
+
+## Exercise 12
+
+12. (C16) __Poisson approximation: rare events.__ For rare diseases, the probability of a case occurring, $p$, in a very large population, $n$, is small. With a small $p$ and large $n$, the random variable $Y$= the number of cases out of $n$ people can be approximated using a Poisson random variable with $\lambda = np$. If the count of those with the disease is observed in several different populations independently of one another, the $Y_i$ represents the number of cases in the $i^{th}$ population and can be approximated using a Poisson random variable with $\lambda_i=n_ip_i$ where $p_i$ is the probability of a case for the $i^{th}$ population. Poisson regression can take into account the differences in the population sizes, $n_i$, using as an offset log($n_i$) as well as differences in a population characteristic like $x_i$. The coefficient of the offset is set at one; it is not estimated like the other coefficients.  Thus the model statement has the form: $log(\lambda_i) = \beta_0+\beta_1x_i + log(n_i)$, where $Y_i  \sim$ Poisson($\lambda_i = n_i p_i$). Note that $\lambda_i$ depends on $x_i$ which may differ for the different populations.
+
+    @Scotto1974 wondered if skin cancer rates by age group differ by city.  Based on their data in Table 2, identify and describe the following quantities which appear in the description of the Poisson approximation for rare events:
+
+      - A case,
+      - The population size, $n_i$,
+      - Probability, $p_i$,
+      - Poisson parameter, $\lambda_i$,
+      - Poisson random variables, $Y_i$, and
+      - The predictors, $X_i$.
+
+```{r, tab3chp4, echo=FALSE}
+#skinCancer
+
+Numcases <- c(1,16,"...",226,65)
+Pop <- c(172675,123065,"...",29007,7538)
+Agegroup <- c("15-24","25-34","...","75-84","85+")
+City <- c(1,1,"...",2,2)
+tab3chp4 <- data.frame(Numcases,Pop,Agegroup,City)
+colnames(tab3chp4) <- c("Number of Cases","Population","Age Group","City")
+kableExtra::kable(tab3chp4, booktabs=T,
+      caption="Table 2: Data from Scotto et al. (1974) on the number of cases of non-melanoma skin cancer for women by age group in two metropolitan areas (Minneapolis-St. Paul and Dallas-Ft. Worth); the year is unknown.") |>
+  kableExtra::kable_styling(full_width = F) |>
+  kableExtra::add_footnote(c("The columns contain: number of cases, population size, age group, and city (1=Minneapolis-St. Paul, 2=Dallas-Ft. Worth)."), notation = "none")
+```
+
+### Exercise 13
+
+13. (G6) __U.S. National Medical Expenditure Survey.__ The data set `NMES1988` in the `AER` package contains a sample of individuals over 65 who are covered by Medicare in order to assess the demand for health care through physician office visits, outpatient visits, ER visits, hospital stays, etc.  The data can be accessed by installing and loading the `AER` package and then running `data(NMES1988)`.  More background information and references about the `NMES1988` data can be found in help pages for the `AER` package.  
+
+  a. Show through graphical means that there are more respondents with 0 `visits` than might be expected under a Poisson model.
+  b. Fit a ZIP model for the number of physician office `visits` using `chronic`, `health`, and `insurance` as predictors for the Poisson count, and `chronic` and `insurance` as the predictors for the binary part of the model.  Then, provide interpretations in context for the following model parameters:
+
+  - `chronic` in the Poisson part of the model
+  - poor `health` in the Poisson part of the model
+  - the Intercept in the logistic part of the model
+  - `insurance` in the logistic part of the model
+
+  c. Is there significant evidence that the ZIP model is an improvement over a simple Poisson regression model? 
+  
+  
+# Submission
+
+When you are finished with your homework, be sure to Render the final document. Once rendered, you can download your file by:
+
+-   Finding the .html file in your File pane (on the bottom right of the screen)
+-   Click the check box next to the file
+-   Click the blue gear above and then click "Export" to download
+-   Submit your final html document to the respective assignment on [Moodle]({{< var course.moodle >}})
+
+
+

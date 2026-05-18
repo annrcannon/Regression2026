@@ -1,0 +1,1112 @@
+---
+title: "Welcome and Chapter 1"
+author: "Tyler George"
+format: 
+  revealjs:
+    output-file: "01-welcome_ch1.html"
+    slide-number: true
+  html:
+    output-file: "01-welcome_ch1_o.html"
+logo: "../img/favicon.png"
+---
+
+# Welcome!
+
+## Instructor
+
+- {{< var instructor.name >}}: [{{< var instructor.email >}}](mailto:tgeorge@cornellcollege.edu)
+
+
+
+## Course logistics
+
+- Course Dates: {{< var course.dates >}}
+- Course sessions: {{< var course.time >}}
+- Exam Dates: {{< var course.exam_dates >}}
+
+## Generalized Linear Models {.smaller}
+
+*In statistics, a generalized linear model (GLM) is a flexible generalization of ordinary linear regression. The GLM generalizes linear regression by allowing the linear model to be related to the response variable via a link function and by allowing the magnitude of the variance of each measurement to be a function of its predicted value.* 
+
+::: aside
+
+[Wikipedia](https://en.wikipedia.org/wiki/Generalized_linear_model)
+
+:::
+
+. . .
+
+**Logistic regression**
+
+$$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text{Link function: } \log\big(\frac{\pi}{1-\pi}\big) \\
+&\Rightarrow \log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~x\end{aligned}$$
+
+
+## What we're covering this semester(1/3)
+
+**Generalized Linear Models (Ch 1 - 6)**
+
+- Introduce models for non-normal response variables
+- Estimation, interpretation, and inference
+- Mathematical details showing how GLMs are connected
+
+## What we're covering this semester(2/3)
+
+**Modeling correlated data (Ch 7 - 9)**
+
+- Introduce multilevel models for correlated and longitudinal data
+- Estimation, interpretation, and inference
+- Mathematical details, particularly diving into covariance structures
+
+## What we're covering this semester(3/3)
+
+**More Regression Models (ITSL Chapter 7)**
+- Polynomial Regression
+- Regression Splines
+- Smoothing Splines
+- Generalized Additive Models (GAMS)
+
+
+## Meet your classmates! {.smaller}
+
+- Create larger groups
+- Quick introductions - Name, year, and major
+- Choose a reporter
+  - Need help choosing? Person with birthday closest to December 1st. 
+- Identify 8 things everyone in the group has in common
+  - Not being a Cornell Student
+  - Not clothes (we're all wearing socks)
+  - Not body parts (we all have a nose)
+
+. . .
+
+**Reporter will share list with the class**
+
+## What background is assumed for the course? {.smaller}
+
+. . .
+
+**Pre-reqs**
+
+- STA 201, 202 and DSC 223
+
+. . .
+
+**Background knowledge** 
+
+:::: {.columns}
+
+::: {.column }
+- Statistical content
+  - Linear and logistic regression 
+  - Statistical inference
+  - Basic understanding of random variables
+  
+:::
+
+::: {.column}
+- Computing 
+  - Using R for data analysis
+  - Writing reports using R Markdown or Quarto
+  
+:::
+::::
+
+## Course Toolkit (1/2)
+
+
+- **Website**
+  - [{{< var course.url >}}]({{< var course.url >}})
+  - Central hub for the course
+  - Notes
+  - Labs
+  - Datasets
+
+## Course Toolkit (1/2)
+
+- **Moodle**: 
+  - [{{< var course.moodle >}}]({{< var course.moodle >}})
+  - Submissions
+  - Gradebook
+  - Announcements
+  
+
+
+
+## Class Meetings 
+
+**Lectures**
+
+- Lecture
+- Individual and group labs
+- Bring a fully-charged laptop
+- Mini-projects weekly
+- Exams
+
+. . .
+
+**Attendance is expected (if you are healthy!)**
+
+
+## Textbook
+
+:::: {.columns}
+
+::: {.column }
+
+![](img/bmlr.jpeg)
+
+
+:::
+
+::: {.column}
+*Beyond Multiple Linear Regression* by Paul Roback and Julie Legler
+
+- Available [online](https://bookdown.org/roback/bookdown-BeyondMLR/)
+- Hard copies available for purchase
+
+:::
+::::
+
+## Textbook 2
+
+{{< var course.text2 >}}
+
+- Hard copies available for purchase
+
+
+## Using R / RStudio
+- RStudio Server is installed and should be used
+- [{{< var college.rstudio >}}]({{< var college.rstudio >}})
+
+
+## Activities & Assessments {.smaller}
+
+
+**Readings**
+
+- Primarily from *Beyond Multiple Linear Regression* 
+- Recommend reading assigned text before lecture
+
+. . .
+
+**Homework**
+- Primarily from *Beyond Multiple Linear Regression* 
+
+- Individual assignments
+
+- Work together but must complete your own work. Discuss but don't copy. 
+
+
+## Activities & Assessments {.smaller}
+
+**Mini-projects**
+
+Examples: 
+
+- Mini-project 01: Focused on models for non-normal response variables, such as count data
+- Mini-project 02: Focused on models for correlated data
+
+. . .
+
+- Short write up and short presentation
+- Team-based
+
+
+## Exams
+- Two exams this block, {{< var course.exam_dates >}}. 
+
+- Each will have two components
+  - Component 1 will be on these dates and you will get a choice of oral or written format. 
+  - Component 2 will be a take-home, open-book, open-note, exam. 
+  - You will have 12 hours or more to complete this component. 
+
+
+## Grading
+
+Final grades will be calculated as follows
+
+
+| Category              | Points     |
+|-----------------------|------------|
+| Homework              | 300        |
+| Labs & Participation  | 75         |
+| Mini Projects         | 225        |
+| Exams                 | 400        |
+| Total                 | 1000       |
+
+
+See Syllabus on [website]({{< var course.url >}}) for letter grade thresholds.
+
+
+
+## Resources {.smaller}
+
+- **Office hours** to meet with your instructor in {{< var instructor.office >}}
+  - Typically {{< var instructor.officehrs >}}
+  - Double check [course calendar]({{< var course.coursecal >}})
+  - Make appointments by going to [{{< var instructor.appointment_url >}}]({{< var instructor.appointment_url >}})
+
+- **Email** {{< var instructor.name_no_title >}} for private questions regarding personal matters or grades. 
+
+- College support at [{{< var college.support >}}]({{< var college.support >}}).
+
+# Chapter 1 - MLR Review
+
+## Setup - R Packages
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(latex2exp)
+library(GGally)
+library(knitr)
+library(patchwork)
+library(viridis)
+library(ggfortify)
+```
+
+## Assumptions for linear regression {.smaller}
+
+What are the assumptions for linear regression? 
+. . .
+
+**L**inearity: Linear relationship between mean response and predictor variable(s) 
+
+. . .
+
+**I**ndependence: Residuals are independent. There is no connection between how far any two points lie above or below regression line.
+
+. . .
+
+**N**ormality: Response follows a normal distribution at each level of the predictor (or combination of predictors)
+
+. . .
+
+**E**qual variance: Variability (variance or standard deviation) of the response is equal for all levels of the predictor (or combination of predictors)
+
+. . .
+
+**Use residual plots to check that the conditions hold before using the model for statistical inference.**
+
+
+
+## Assumptions for linear regression {.smaller}
+
+:::: {.columns}
+::: {.column width="40%"}
+```{r echo = F, out.width = "100%"}
+##   Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+
+## Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+
+set.seed(0)
+dat <- data.frame(x=(x=runif(10000, 0, 50)),
+                  y=rnorm(10000, 10*x, 100))
+
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len=5)
+dat$section <- cut(dat$x, breaks)
+
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data=dat))
+
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+    d <- density(x$res, n=50)
+    res <- data.frame(x=max(x$x)- d$y*2000, y=d$x+mean(x$y))
+    res <- res[order(res$y), ]
+    ## Get some data for normal lines as well
+    xs <- seq(min(x$res), max(x$res), len=50)
+    res <- rbind(res, data.frame(y=xs + mean(x$y),
+                                 x=max(x$x) - 2000*dnorm(xs, 0, sd(x$res))))
+    res$type <- rep(c("empirical", "normal"), each=50)
+    res
+}))
+dens$section <- rep(levels(dat$section), each=100)
+
+dens <- dens |>
+  filter(type == "normal")
+
+## Plot both empirical and theoretical
+ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method="lm", fill=NA, se = FALSE, color = "steelblue") +
+  geom_path(data=dens, aes(x, y, group=interaction(section)), color = "red", lwd=1.1) +
+geom_vline(xintercept=breaks, lty=2, color = "grey") +
+  labs(x = "x", 
+       y = "y") +
+  theme_classic() + 
+  annotate("text", x = 10, y = 600, 
+           label = as.character(TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1X$")), color = "steelblue", size = 8,
+           parse=T) +
+  annotate("text", x = 20, y = 400, 
+           label = as.character(TeX("$\\sigma^2$")), color = "red", size = 8,
+           parse = T) +
+  theme(axis.title = element_text(size = 16),
+        axis.ticks = element_blank(), 
+        axis.text.x = element_blank(), 
+       axis.text.y = element_blank()
+      )
+  
+```
+
+
+
+::: aside
+Modified from Figure 1.1. in BMLR]
+:::
+
+:::
+
+::: {.column width = "60%"}
+
+- **L**inearity: Linear relationship between mean of the response $Y$ and the predictor $X$
+
+- **I**ndependence: No connection between how any two points lie above or below the regression line
+
+- **N**ormality: Response, $Y$, follows a normal distribution at each level of the predictor, $X$ (indicated by red curves)
+
+- **E**qual variance: Variance (or standard deviation) of the response, $Y$, is equal for all levels of the predictor, $X$
+
+:::
+::::
+
+
+
+## Questions
+
+How do we assess these conditions? 
+
+
+
+
+## Beyond linear regression {.smaller}
+
+- When we use linear least squares regression to draw conclusions, we do so under the assumption that L.I.N.E. are all met. 
+
+- **Generalized linear models** require different assumptions and can accommodate violations in L.I.N.E.
+  - Relationship between response and predictor(s) can be nonlinear
+  - Response variable can be non-normal 
+  - Variance in response can differ at each level of predictor(s) 
+
+. . .
+
+**But the independence assumption must hold!**
+
+- **Multilevel models** will be used for data with correlated observations
+
+
+## Review of multiple linear regression 
+
+
+
+## Data: Kentucky Derby Winners {.smaller}
+
+
+Today's data is from the Kentucky Derby, an annual 1.25-mile horse race held at the Churchill Downs race track in Louisville, KY. The data is in the file [derbyplus.csv](data/derbyplus.csv) and contains information for races 1896 - 2017. 
+
+. . .
+
+::::{.columns}
+:::{.column}
+
+**Response variable**
+
+- `speed`: Average speed of the winner in feet per second (ft/s)]
+
+**Predictor variables**
+
+- `year`: Year of the race
+- `condition`: Condition of the track (good, fast, slow)
+- `starters`: \# of horses who raced
+
+:::
+
+:::{.column}
+**Additional variable**
+
+- `winner`: Winning horse
+
+
+
+:::
+::::
+
+
+## Data
+
+```{r}
+derby <- read_csv("data/derbyplus.csv")
+```
+
+```{r}
+derby |>
+  head(5) |> kable()
+```
+
+## Data Analysis Life Cycle
+
+![](img/data-analysis-life-cycle.png)
+
+
+
+## Exploratory data analysis (EDA) {.smaller}
+
+- Once you're ready for the statistical analysis (explore), the first step should always be **exploratory data analysis**.
+
+- The EDA will help you 
+  - begin to understand the variables and observations
+  - identify outliers or potential data entry errors
+  - begin to see relationships between variables
+  - identify the appropriate model and identify a strategy
+
+- The EDA is exploratory; formal modeling and statistical inference should be used to draw conclusions.
+
+
+
+## Plots for univariate EDA
+
+
+::: {.panel-tabset}
+
+### Plot 
+
+```{r univar-eda-plot, echo = F}
+p1 <- ggplot(data = derby, aes(x = speed)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Winning speed (ft/s)", y = "Count")
+
+p2 <- ggplot(data = derby, aes(x = starters)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Starters", y = "Count")
+
+p3 <- ggplot(data = derby, aes(x = condition)) +
+   geom_bar(fill = "forestgreen", color = "black", aes(x = ))
+
+p1 + (p2 / p3) + 
+  plot_annotation(title = "Univariate data analysis")
+```
+
+
+### Code 
+
+```{r univar-eda, eval = F}
+p1 <- ggplot(data = derby, aes(x = speed)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Winning speed (ft/s)", y = "Count")
+
+p2 <- ggplot(data = derby, aes(x = starters)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Starters", y = "Count")
+
+p3 <- ggplot(data = derby, aes(x = condition)) +
+   geom_bar(fill = "forestgreen", color = "black", aes(x = ))
+
+p1 + (p2 / p3) + 
+  plot_annotation(title = "Univariate data analysis")
+```
+
+:::
+
+
+## Plots for bivariate EDA {.smaller}
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r bivar-eda-plot, echo = F}
+p4 <- ggplot(data = derby, aes(x = starters, y = speed)) + 
+  geom_point() + 
+  labs(x = "Starters", y = "Speed (ft / s)")
+
+p5 <- ggplot(data = derby, aes(x = year, y = speed)) + 
+  geom_point() + 
+  labs(x = "Year", y = "Speed (ft / s)")
+
+p6 <- ggplot(data = derby, aes(x = condition, y = speed)) + 
+  geom_boxplot(fill = "forestgreen", color = "black") + 
+  labs(x = "Conditions", y = "Speed (ft / s)")
+
+(p4 + p5) / p6 +
+  plot_annotation(title = "Bivariate data analysis")
+```
+
+### Code
+
+
+```{r bivar-eda, eval = F}
+p4 <- ggplot(data = derby, aes(x = starters, y = speed)) + 
+  geom_point() + 
+  labs(x = "Starters", y = "Speed (ft / s)")
+
+p5 <- ggplot(data = derby, aes(x = year, y = speed)) + 
+  geom_point() + 
+  labs(x = "Year", y = "Speed (ft / s)")
+
+p6 <- ggplot(data = derby, aes(x = condition, y = speed)) + 
+  geom_boxplot(fill = "forestgreen", color = "black") + 
+  labs(x = "Conditions", y = "Speed (ft / s)")
+
+(p4 + p5) + p6 +
+  plot_annotation(title = "Bivariate data analysis")
+```
+
+:::
+
+## Scatterplot matrix {.smaller}
+
+
+A **scatterplot matrix** helps quickly visualize relationships between many variable pairs. They are particularly useful to identify potentially correlated predictors.
+
+. . .
+
+::: {.panel-tabset}
+
+### Plot
+```{r scatterplot-matrix-plot, echo = F, fig.height=3.5}
+#library(GGally)
+ggpairs(data = derby, 
+        columns = c("condition", "year", "starters", "speed"))
+```
+
+
+### Code 
+
+```{r scatterplot-matrix, eval = F}
+#library(GGally)
+ggpairs(data = derby, 
+        columns = c("condition", "year", "starters", "speed"))
+```
+
+:::
+
+
+## Plots for multivariate EDA {.smaller}
+
+Plot the relationship between the response and a predictor based on levels of another predictor to assess potential interactions. 
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r multivar-eda-plot, echo = F,fig.height=3.5}
+library(viridis)
+ggplot(data = derby, aes(x = year, y = speed, color = condition, 
+                         shape = condition, linetype = condition)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
+  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
+       title = "Speed vs. year", 
+       subtitle = "by track condition") +
+  guides(lty = FALSE, shape = FALSE) +
+  scale_color_viridis_d(end = 0.9)
+```
+
+### Code 
+
+```{r multivar-eda, eval = F}
+#library(viridis)
+ggplot(data = derby, aes(x = year, y = speed, color = condition, 
+                         shape = condition, linetype = condition)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
+  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
+       title = "Speed vs. year", 
+       subtitle = "by track condition") +
+  guides(lty = FALSE, shape = FALSE) +
+  scale_color_viridis_d(end = 0.9)
+```
+
+:::
+
+
+
+## Model 1: Main effects model
+
+::: {.panel-tabset}
+
+### Output
+
+```{r echo = F}
+model1 <- lm(speed ~ starters + year + condition, data = derby)
+tidy(model1) |> kable(digits = 3)
+```
+
+### Code 
+
+```{r model1-code, eval = F}
+# Fit and display model
+model1 <- lm(speed ~ starters + year + condition, data = derby)
+tidy(model1) |> 
+  kable(digits = 3)
+```
+
+:::
+
+## Interpretation {.smaller}
+
+$$\widehat{speed} = 8.197 - 0.005 ~ starters + 0.023 ~ year - 0.443 ~ good - 1.543 ~ slow$$
+
+
+```{r echo = F}
+model1 <- lm(speed ~ starters + year + condition, data = derby)
+tidy(model1) |> 
+  kable(digits = 3)
+```
+
+. . .
+
+
+1. Write out the interpretations for `starters` and `conditiongood`. 
+2. Does the intercept have a meaningful interpretation? 
+
+
+
+
+## Centering 
+
+**Centering**: Subtract a constant from each observation of a given variable
+
+- Do this to make interpretation of model parameters more meaningful (particularly intercept)
+
+- In STA 202, we used **mean-centering** where we subtracted the mean from each observation of given variable
+
+- How does centering change the model? 
+
+
+
+## Centering `year` {.smaller}
+
+
+```{r}
+derby <- derby |>
+  mutate(yearnew = year - 1896) #1896 = starting year
+```
+
+. . .
+
+```{r echo = F}
+model1Cent <- lm(speed ~ starters + yearnew + condition, data = derby)
+tidy(model1Cent) |> kable(digits = 3)
+```
+
+. . .
+
+$$\widehat{speed} = 52.175 - 0.005 ~ starters + 0.023 ~ yearnew - 0.443 ~ good - 1.543 ~ slow$$
+
+
+
+## Model 1: Check model assumptions {.smaller}
+
+::: {.panel-tabset}
+
+### Plots
+
+```{r, fig.height=3}
+#library(ggfortify)
+autoplot(model1Cent)
+```
+
+### Questions
+
+Which of the model assumptions (LINE) does this pass and/or fail? 
+
+:::
+
+## Model 2: Add quadratic effect for year? {.smaller}
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r year-quad-plot, echo = F,fig.height=3.5}
+ggplot(data = derby, aes(x = yearnew, y = speed)) + 
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
+  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
+  labs(x = "Years since 1896", y = "Speed (ft/s)", 
+       title = "Speed vs. Years since 1896")
+```
+
+### Code 
+
+```{r year-quad, eval = F}
+ggplot(data = derby, aes(x = yearnew, y = speed)) + 
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
+  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
+  labs(x = "Years since 1896", y = "Speed (ft/s)", 
+       title = "Speed vs. Years since 1896")
+```
+
+:::
+
+
+
+## Model 2: Add $yearnew^2$
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r echo = F}
+model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
+             data = derby)
+tidy(model2) |> kable(digits = 4)
+```
+
+### Code 
+
+```{r model2-code, eval = F}
+model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
+             data = derby)
+tidy(model2) |> kable(digits = 4)
+```
+
+:::
+
+
+## Interpreting quadratic effects
+
+$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 ~ x_1  + \hat{\beta}_2 ~ x_2 + \hat{\beta}_3 ~ x_2^2$$
+
+**General interpretation**: When $x_2$ increases from a to b, $y$ is expected to change by $\hat{\beta}_2(b - a) + \hat{\beta}_3(b^2 - a^2)$, holding $x_1$ constant.
+
+. . .
+
+
+
+## Interpreting quadratic effects
+
+$$\begin{aligned}\widehat{speed} = &51.413 - 0.025 ~ starters + 0.070 ~ yearnew \\
+& - 0.0004 ~ yearnew^2 - 0.477 ~ good - 1.393 ~ slow\end{aligned}$$
+
+. . .
+
+Questions: 
+
+*Interpret the effect of year for the 5 most recent years (2013 - 2017).*
+
+
+
+## Model 2: Check model assumptions
+
+```{r, echo = F, out.width = "70%"}
+autoplot(model2)
+```
+
+## Model 3: Include interaction term? {.smaller}
+
+Recall from the EDA...
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r echo = F,fig.height=3}
+library(viridis)
+ggplot(data = derby, aes(x = year, y = speed, color = condition, 
+                         shape = condition, linetype = condition)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
+  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
+       title = "Speed vs. year", 
+       subtitle = "by track condition") +
+  guides(lty = FALSE, shape = FALSE) +
+  scale_color_viridis_d(end = 0.9)
+```
+
+### Code 
+
+```{r eval = F, echo = T}
+library(viridis)
+ggplot(data = derby, aes(x = year, y = speed, color = condition, 
+                         shape = condition, linetype = condition)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
+  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
+       title = "Speed vs. year", 
+       subtitle = "by track condition") +
+  guides(lty = FALSE, shape = FALSE) +
+  scale_color_viridis_d(end = 0.9)
+```
+
+:::
+
+## Model 3: Add interaction term {.smaller}
+
+$$\begin{aligned}\widehat{speed} = & 52.387 - 0.003 ~ starters + 0.020 ~ yearnew - 1.070 ~ good - 2.183 ~ slow \\ &+0.012 ~ yearnew \times good + 0.012 ~ yearnew \times slow \end{aligned}$$
+
+::: {.panel-tabset}
+
+### Output 
+
+```{r echo = F ,out.width = "70%"}
+model3 <- lm(speed ~ starters + yearnew + condition +
+               yearnew * condition, 
+             data = derby)
+tidy(model3) |> kable(digits = 3)
+```
+
+### Code
+
+```{r model3-code, eval = F}
+model3 <- lm(speed ~ starters + yearnew + condition +
+               yearnew * condition, 
+             data = derby)
+tidy(model3) |> kable(digits = 4)
+```
+
+### Assumptions
+
+```{r, echo = F,fig.height=3}
+autoplot(model3)
+```
+
+:::
+
+
+## Interpreting interaction effects {.smaller}
+
+```{r echo = F}
+tidy(model3) |>
+  kable(digits = 3)
+```
+
+- Write out the interpretation of...
+
+## Which model would you choose?
+
+::: {.panel-tabset}
+
+
+### Model 1: Main effects
+
+```{r echo = F}
+glance(model1Cent) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
+```
+
+### Model 2: Main effects + $year^2$
+
+```{r echo = F}
+glance(model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
+```
+
+### Model 3: Main effects + interaction
+
+```{r echo = F}
+glance(model3) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
+```
+
+### Code
+
+```{r eval = FALSE}
+# Model 1
+glance(model1Cent) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
+
+# Model2
+glance(model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
+
+# Model 3
+glance(model3) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
+```
+
+:::
+
+## What are these model quality metrics? 
+
+- **How do we define RSquared?**
+
+- **What is adj.r.squared?**
+
+
+## Measures of model performance {.smaller}
+
+- $\color{#4187aa}{R^2}$: Proportion of variability in the response explained by the model.
+  -  Will always increase as predictors are added, so it shouldn't be used to compare models
+  
+- $\color{#4187aa}{Adj. R^2}$: Similar to $R^2$ with a penalty for extra terms
+
+. . .
+
+- $\color{#4187aa}{AIC}$: Likelihood-based approach balancing model performance and complexity
+
+- $\color{#4187aa}{BIC}$: Similar to AIC with stronger penalty for extra terms
+
+. . . 
+
+- **Nested F Test (extra sum of squares F test)**: Generalization of t-test for individual coefficients to perform significance tests on nested models
+
+
+## Which model would you choose?
+
+Use the **`glance`** function to get model statistics.
+
+::: {.panel-tabset}
+
+### Output
+
+```{r echo = F}
+model1_glance <- glance(model1Cent) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model2_glance <- glance(model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model3_glance <- glance(model3) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+
+model1_glance |>
+  bind_rows(model2_glance) |>
+  bind_rows(model3_glance) |>
+  bind_cols(model = c("Model1", "Model2", "Model3")) |>
+  select(model, everything()) |>
+kable(digits = 3)
+```
+
+
+### Code 
+
+```{r echo = T,eval = F}
+model1_glance <- glance(model1Cent) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model2_glance <- glance(model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model3_glance <- glance(model3) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+
+model1_glance |>
+  bind_rows(model2_glance) |>
+  bind_rows(model3_glance) |>
+  bind_cols(model = c("Model1", "Model2", "Model3")) |>
+  select(model, everything()) |>
+kable(digits = 3)
+```
+
+:::
+
+## Characteristics of a "good" final model {.smaller}
+
+- Model can be used to answer primary research questions
+- Predictor variables control for important covariates
+- Potential interactions have been investigated
+- Variables are centered, as needed, for more meaningful interpretations 
+- unnecessary terms are removed 
+- Assumptions are met and influential points have been addressed
+- model tells a "persuasive story parsimoniously"
+
+::: aside
+[List from Section 1.6.7 of BMLR](https://bookdown.org/roback/bookdown-BeyondMLR/)
+:::
+
+
+## Inference for multiple linear regression {.smaller}
+
+Use statistical inference to 
+
+- Determine if predictors are statistically significant (not necessarily practically significant!)
+- Quantify uncertainty in coefficient estimates
+- Quantify uncertainty in model predictions
+
+. . .
+
+If L.I.N.E. assumptions are met, we can conduct inference using the $t$ distribution and estimated standard errors 
+
+## Inference for regression {.smaller}
+
+::: {.panel-tabset}
+
+### When L.I.N.E. conditions are met 
+
+```{r echo = F, out.width = "100%"}
+##   Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+
+## Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+
+set.seed(0)
+dat <- data.frame(x=(x=runif(10000, 0, 50)),
+                  y=rnorm(10000, 10*x, 100))
+
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len=5)
+dat$section <- cut(dat$x, breaks)
+
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data=dat))
+
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+    d <- density(x$res, n=50)
+    res <- data.frame(x=max(x$x)- d$y*2000, y=d$x+mean(x$y))
+    res <- res[order(res$y), ]
+    ## Get some data for normal lines as well
+    xs <- seq(min(x$res), max(x$res), len=50)
+    res <- rbind(res, data.frame(y=xs + mean(x$y),
+                                 x=max(x$x) - 2000*dnorm(xs, 0, sd(x$res))))
+    res$type <- rep(c("empirical", "normal"), each=50)
+    res
+}))
+dens$section <- rep(levels(dat$section), each=100)
+
+dens <- dens %>%
+  filter(type == "normal")
+
+## Plot both empirical and theoretical
+ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method="lm", fill=NA, se = FALSE, color = "steelblue") +
+  geom_path(data=dens, aes(x, y, group=interaction(section)), color = "red", lwd=1.1) +
+geom_vline(xintercept=breaks, lty=2, color = "grey") +
+  labs(x = "x", 
+       y = "y") +
+  theme_classic() + 
+  annotate("text", x = 10, y = 600, 
+           label = as.character(TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1X$")), 
+           color = "steelblue", size = 8, parse = T) +
+  annotate("text", x = 20, y = 400, 
+           label = as.character(TeX("$\\sigma^2$")), color = "red", size = 8,
+           parse = T) +
+  theme(axis.title = element_text(size = 16),
+        axis.ticks = element_blank(), 
+        axis.text.x = element_blank(), 
+       axis.text.y = element_blank()
+      )
+  
+```
+
+### We can
+
+- Use least squares regression to get the estimates $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\sigma}^2$
+
+- $\hat{\sigma}$ is the **regression standard error** 
+
+
+- $\hat{\sigma} = \sqrt{\frac{\sum_{i=1}^n(y_i - \hat{y}_i)^2}{n - p - 1}} = \sqrt{\frac{\sum_{i=1}^n e_i^2}{n-p-1}}$
+
+:::
+
+
+## Acknowledgements
+
+- These slides are based on content in [BMLR: Chapter 1 - Review of Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-MLRreview.html)
+
+- Initial versions of the slides are by Dr. Maria Tackett, Duke University
+
+
+
+
+

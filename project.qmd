@@ -1,0 +1,135 @@
+---
+title: "Class Project"
+format: 
+  html
+editor_options: 
+  chunk_output_type: console
+---
+
+You will be analyzing a dataset using regression analysis and a classification analysis.
+
+Collaboration: You can work individually or in groups of up to 3. 
+
+
+As one of my past professors liked to say, "Keep it Simple Stupid (KISS)"
+
+| Part | Description                 | Points | Due Date         |
+|------|-----------------------------|--------|------------------|
+| 1    | Research Questions and Data | 100    | 11:59 pm on 4/30 |
+| 2    | EDA                         | 50     | 11:59 pm on 5/1  |
+| 3    | Modeling                    | 100    | 11:59pm on 5/2   |
+| 4    | Tell People About it        | 50     | 11:59pm on 5/6   |
+
+## Part 1: Research Questions and Data
+
+1)  Determine a topic
+
+2)  Find data that goes with that topic. See [HERE](course-links.qmd).
+  a) Must have at least 5 variables that may be useful in a classification and/or regression model. 
+
+3)  Clean and prepare that data.
+
+4)  Write two research questions that you will use that data to investigate.
+  a)  One question that can be answered with regression; make clear the outcome variable and its units.
+  b)  One question that can be answered with classification; make clear the outcome variable and its possible categories.
+  
+5) Submit a _project-proposal_last_names.html_ document that includes
+  a)    source or sources of your data
+  b)    a _glimpse_ of your data (run glimpse())
+  c)    variable definitions
+  d)    Your research questions
+
+Moodle link: [HERE](https://moodle.cornellcollege.edu/mod/assign/view.php?id=299493)
+
+
+## Part 2: EDA
+
+1) Conduct a full EDA on your dataset including any variables being considered for either research question. Minimally this should include the following. *All included graphs/tables must have comments and discussion.* 
+  a) Clearly describe what the cases in the final clean dataset represent.
+  b) Who collected the data? When, why, and how? Answer as much of this as the available information allows.
+  c) Univariate distributions of all variables. 
+  d) Graphs that specifically compare potential predictors to the variables that will be your response variables. 
+
+
+2) Submit a _eda_last_names.html_ document to Moodle [HERE](https://moodle.cornellcollege.edu/mod/assign/view.php?id=299494). 
+
+## Part 3: Modeling
+
+The following should be included in your modeling report (generated from a Quarto file, or files).
+
+### Regression
+
+#### Regression: Methods
+
+- Describe the models used.
+- Describe what you did to evaluate models.
+  - Indicate how you estimated quantitative evaluation metrics.
+  - Indicate what plots you used to evaluate models.
+- Describe the goals / purpose of the methods used in the overall context of your research investigations.
+
+#### Regression: Results
+
+- Summarize your final model and justify your model choice (see below for ways to justify your choice).
+  - Compare the different models in light of evaluation metrics, plots, variable importance, and data context.
+  - Display evaluation metrics for different models in a clean, organized way. This display should include both the estimated CV metric as well as its standard deviation.
+  - Broadly summarize conclusions from looking at these CV evaluation metrics and their measures of uncertainty.
+  - Summarize conclusions from residual plots from initial models (don’t have to display them though).
+- Show and interpret some representative examples of residual plots for your final model. Does the model show acceptable results in terms of any systematic biases?
+
+#### Regression: Conclusions
+
+- Interpret you final model (show plots of estimated non-linear functions, or slope coefficients) for important predictors, and provide some general interpretations of what you learn from these
+- Interpret evaluation metric(s) for the final model in context with units. Does the model show an acceptable amount of error?
+- Summarization should show evidence of acknowledging the data context in thinking about the sensibility of these results.
+
+### Classification
+
+#### Classification: Methods
+
+- Indicate at least 2 different methods used to answer your classification research question.
+  - Describe what you did to evaluate the models explored.
+  - Indicate how you estimated quantitative evaluation metrics.
+- Describe the goals / purpose of the methods used in the overall context of your research investigations.
+
+#### Classification: Results
+
+- Summarize your final model and justify your model choice (see below for ways to justify your choice).
+  - Compare the different classification models tried in light of evaluation metrics, variable importance, and data context.
+  - Display evaluation metrics for different models in a clean, organized way. This display should include both the estimated metric as well as its standard deviation. (This won’t be available from OOB error estimation. If using OOB, don’t worry about reporting the SD.)
+  - Broadly summarize conclusions from looking at these evaluation metrics and their measures of uncertainty.
+
+#### Classification: Conclusions
+
+- Interpret evaluation metric(s) for the final model in context. Does the model show an acceptable amount of error?
+  - If using OOB error estimation, display the test (OOB) confusion matrix, and use it to interpret the strengths and weaknesses of the final model.
+- Summarization should show evidence of acknowledging the data context in thinking about the sensibility of these results.
+
+### Submit
+
+Submit one (or two) _model_last_names.html_ document(s) with your analysis from the parts above. Submit on Moodle [HERE](https://moodle.cornellcollege.edu/mod/assign/view.php?id=299495). 
+
+## Part 4: Tell people about it.
+
+A 5-10 minute video presentation of your project. (Recording the presentation over Zoom is a good option for creating the video. You can record to your computer or to the cloud.)
+
+-   Upload the video to [Google Drive](https://drive.google.com/drive/folders/18ZYwm60Sl9a42kFtfSs9KZ9NUHqfrLFN?usp=sharing).
+
+-   All team members should have an equal speaking role in the presentation.
+
+In order to record your presentation,
+
+1)  Start a Zoom meeting and invite your project mates.
+2)  One of your share your screen with presentation slides (recommended: Quarto Presentation, Google Slides, or Powerpoint).
+3)  Please have everyone turn your video on so that we can see who is speaking.
+4)  When you are ready to start, the host of the meeting (who ever started the meeting) can click Record on this Computer. I highly recommend that someone else start a timer so that you can make sure you keep the presentation to 10 minutes max.
+5)  Start presenting!
+6)  You can Pause the recording, as needed, and then press start recording again.
+7)  When you have finished recording, you can press Stop Recording. When you end the meeting, the recording (an mp4 file) will be downloaded to the computer of the individual who pressed Record.
+8)  Upload the video to Google Drive.
+
+We will watch these in class!
+
+
+Source: Brianna Heggeseth, [STA 253](https://bcheggeseth.github.io/253_fall_2021/)
+
+

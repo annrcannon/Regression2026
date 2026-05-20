@@ -4,7 +4,7 @@
     "href": "syllabus.html",
     "title": "Advanced Regression",
     "section": "",
-    "text": "Instructor Dr. Tyler George\n   Cornell College, West 311\n    tgeorge@cornellcollege.edu \n\n\n\n\nOctober 20th to November 12th\n   Daily, 9am-11am and 1pm-3pm\n   West 308\n\n\n\n\n   MTWTh 3:05pm-4:05pm and by appt.\n   West 311\n   Optional Appointment",
+    "text": "Instructor Dr. Ann Cannon\n   Cornell College, West 317\n    tgeorge@cornellcollege.edu \n\n\n\n\nAugust 24th to September 16th\n   Daily, 9am-11am and 1pm-3pm; No class second Wednesday afternoon\n   West 309\n\n\n\n\n   MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\n   West 317\n   Optional Appointment",
     "crumbs": [
       "Course information",
       "Syllabus"
@@ -1902,21 +1902,21 @@
     "href": "slides/01-welcome_ch1_o.html",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Dr. Tyler George: tgeorge@cornellcollege.edu\n\n\n\n\n\nCourse Dates: October 20th to November 12th\nCourse sessions: Daily, 9am-11am and 1pm-3pm\nExam Dates: Due on October 31st and November 12th\n\n\n\n\nIn statistics, a generalized linear model (GLM) is a flexible generalization of ordinary linear regression. The GLM generalizes linear regression by allowing the linear model to be related to the response variable via a link function and by allowing the magnitude of the variance of each measurement to be a function of its predicted value.\n\n\nWikipedia\n. . .\nLogistic regression\n\\[\\begin{aligned}\\pi = P(y = 1 | x) \\hspace{2mm} &\\Rightarrow \\hspace{2mm} \\text{Link function: } \\log\\big(\\frac{\\pi}{1-\\pi}\\big) \\\\\n&\\Rightarrow \\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1~x\\end{aligned}\\]\n\n\n\nGeneralized Linear Models (Ch 1 - 6)\n\nIntroduce models for non-normal response variables\nEstimation, interpretation, and inference\nMathematical details showing how GLMs are connected\n\n\n\n\nModeling correlated data (Ch 7 - 9)\n\nIntroduce multilevel models for correlated and longitudinal data\nEstimation, interpretation, and inference\nMathematical details, particularly diving into covariance structures\n\n\n\n\nMore Regression Models (ITSL Chapter 7) - Polynomial Regression - Regression Splines - Smoothing Splines - Generalized Additive Models (GAMS)\n\n\n\n\nCreate larger groups\nQuick introductions - Name, year, and major\nChoose a reporter\n\nNeed help choosing? Person with birthday closest to December 1st.\n\nIdentify 8 things everyone in the group has in common\n\nNot being a Cornell Student\nNot clothes (we’re all wearing socks)\nNot body parts (we all have a nose)\n\n\n. . .\nReporter will share list with the class\n\n\n\n. . .\nPre-reqs\n\nSTA 201, 202 and DSC 223\n\n. . .\nBackground knowledge\n\n\n\nStatistical content\n\nLinear and logistic regression\nStatistical inference\nBasic understanding of random variables\n\n\n\n\nComputing\n\nUsing R for data analysis\nWriting reports using R Markdown or Quarto\n\n\n\n\n\n\n\n\nWebsite\n\nhttps://stats-tgeorge.github.io/STA363_AdvRegF25/\nCentral hub for the course\nNotes\nLabs\nDatasets\n\n\n\n\n\n\nMoodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nGradebook\nAnnouncements\n\n\n\n\n\nLectures\n\nLecture\nIndividual and group labs\nBring a fully-charged laptop\nMini-projects weekly\nExams\n\n. . .\nAttendance is expected (if you are healthy!)\n\n\n\n\n\n\n\nBeyond Multiple Linear Regression by Paul Roback and Julie Legler\n\nAvailable online\nHard copies available for purchase\n\n\n\n\n\n\nThe secondary text is: An Introduction to Statistical Learning with Applications in R by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani – it is freely available online. Chapter 7.\n\nHard copies available for purchase\n\n\n\n\n\nRStudio Server is installed and should be used\nhttp://turing.cornellcollege.edu:8787/\n\n\n\n\nReadings\n\nPrimarily from Beyond Multiple Linear Regression\nRecommend reading assigned text before lecture\n\n. . .\nHomework - Primarily from Beyond Multiple Linear Regression\n\nIndividual assignments\nWork together but must complete your own work. Discuss but don’t copy.\n\n\n\n\nMini-projects\nExamples:\n\nMini-project 01: Focused on models for non-normal response variables, such as count data\nMini-project 02: Focused on models for correlated data\n\n. . .\n\nShort write up and short presentation\nTeam-based\n\n\n\n\n\nTwo exams this block, Due on October 31st and November 12th.\nEach will have two components\n\nComponent 1 will be on these dates and you will get a choice of oral or written format.\nComponent 2 will be a take-home, open-book, open-note, exam.\nYou will have 12 hours or more to complete this component.\n\n\n\n\n\nFinal grades will be calculated as follows\n\n\n\nCategory\nPoints\n\n\n\n\nHomework\n300\n\n\nLabs & Participation\n75\n\n\nMini Projects\n225\n\n\nExams\n400\n\n\nTotal\n1000\n\n\n\nSee Syllabus on website for letter grade thresholds.\n\n\n\n\nOffice hours to meet with your instructor in West 311\n\nTypically MTWTh 3:05pm-4:05pm and by appt.\nDouble check course calendar\nMake appointments by going to https://calendar.app.google/TQ5PNChvGmYmGyrg6\n\nEmail Tyler George for private questions regarding personal matters or grades.\nCollege support at https://stats-tgeorge.github.io/personal_website/course-support.html."
+    "text": "Dr. Ann Cannon: acannon@cornellcollege.edu\n\n\n\n\n\nCourse Dates: August 24th to September 16th\nCourse sessions: Daily, 9am-11am and 1pm-3pm; No class second Wednesday afternoon\nExam Dates: due on September 2nd and September 16th\n\n\n\n\nGeneralized Linear Models (Ch 1 - 6)\n\nIntroduce models for non-normal response variables\nEstimation, interpretation, and inference\nMathematical details showing how GLMs are connected\n\n\n\n\nIn statistics, a generalized linear model (GLM) is a flexible generalization of ordinary linear regression. The GLM generalizes linear regression by allowing the linear model to be related to the response variable via a link function and by allowing the magnitude of the variance of each measurement to be a function of its predicted value.\n\n\nWikipedia\n. . .\nLogistic regression\n\\[\\begin{aligned}\\pi = P(y = 1 | x) \\hspace{2mm} &\\Rightarrow \\hspace{2mm} \\text{Link function: } \\log\\big(\\frac{\\pi}{1-\\pi}\\big) \\\\\n&\\Rightarrow \\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1~x\\end{aligned}\\]\n\n\n\nModeling correlated data (Ch 7 - 9)\n\nIntroduce multilevel models for correlated and longitudinal data\nEstimation, interpretation, and inference\nMathematical details, particularly diving into covariance structures\n\n\n\n\nMore Regression Models (ITSL Chapter 7) - Polynomial Regression - Regression Splines - Smoothing Splines - Generalized Additive Models (GAMS)\n\n\n\n. . .\nPre-reqs\n\nSTA 201, 202 and DSC 223\n\n. . .\nBackground knowledge\n\n\n\nStatistical content\n\nLinear and logistic regression\nStatistical inference\nBasic understanding of random variables\n\n\n\n\nComputing\n\nUsing R for data analysis\nWriting reports using R Markdown or Quarto\n\n\n\n\n\n\n\n\nWebsite\n\nhttps://annrcannon.github.io/Regression2026/\nCentral hub for the course\nNotes\nLabs\n\n\n\n\n\n\nMoodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\n\n-R Server: - http://turing.cornellcollege.edu:8787/ - Datasets - Quarto file storage\n\n\n\n\nLecture\nIndividual and group labs\nMini-projects\nExams\nBring a fully-charged laptop\n\n. . .\nAttendance is expected (if you are healthy!)\n\n\n\n\n\n\n\nBeyond Multiple Linear Regression by Paul Roback and Julie Legler\n\nAvailable online\nHard copies available for purchase\n\n\n\n\n\n\nThe secondary text is: An Introduction to Statistical Learning with Applications in R by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani – it is freely available online. Chapter 7.\n\nHard copies available for purchase\n\n\n\n\n\nRStudio Server is installed and should be used\nhttp://turing.cornellcollege.edu:8787/\n\n\n\n\nReadings\n\nPrimarily from Beyond Multiple Linear Regression\nRecommend reading assigned text before lecture\n\n. . .\nHomework - Primarily from Beyond Multiple Linear Regression\n\nIndividual assignments\nWork together but must complete your own work. Discuss but don’t copy.\n\n\n\n\nMini-projects\nExamples:\n\nMini-project 01: Focused on models for non-normal response variables, such as count data\nMini-project 02: Focused on logistic regression models\n\n. . .\n\nShort write up and short presentation\nTeam-based\n\n\n\n\n\nTwo exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete this component.\n\n\n\n\n\nFinal grades will be calculated as follows\n\n\n\nCategory\nPoints\n\n\n\n\nHomework\n300\n\n\nLabs & Participation\n75\n\n\nMini Projects\n225\n\n\nExams\n400\n\n\nTotal\n1000\n\n\n\nSee Syllabus on website for letter grade thresholds.\n\n\n\n\nOffice hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\nDouble check course calendar\nMake appointments by going to ?var:instructor.appointment_url\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#instructor",
     "href": "slides/01-welcome_ch1_o.html#instructor",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Dr. Tyler George: tgeorge@cornellcollege.edu"
+    "text": "Dr. Ann Cannon: acannon@cornellcollege.edu"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#course-logistics",
     "href": "slides/01-welcome_ch1_o.html#course-logistics",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Course Dates: October 20th to November 12th\nCourse sessions: Daily, 9am-11am and 1pm-3pm\nExam Dates: Due on October 31st and November 12th"
+    "text": "Course Dates: August 24th to September 16th\nCourse sessions: Daily, 9am-11am and 1pm-3pm; No class second Wednesday afternoon\nExam Dates: due on September 2nd and September 16th"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#generalized-linear-models",
@@ -1965,7 +1965,7 @@
     "href": "slides/01-welcome_ch1_o.html#course-toolkit-12",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Website\n\nhttps://stats-tgeorge.github.io/STA363_AdvRegF25/\nCentral hub for the course\nNotes\nLabs\nDatasets"
+    "text": "Website\n\nhttps://annrcannon.github.io/Regression2026/\nCentral hub for the course\nNotes\nLabs"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#course-toolkit-12-1",
@@ -1979,7 +1979,7 @@
     "href": "slides/01-welcome_ch1_o.html#class-meetings",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Lectures\n\nLecture\nIndividual and group labs\nBring a fully-charged laptop\nMini-projects weekly\nExams\n\n. . .\nAttendance is expected (if you are healthy!)"
+    "text": "Lecture\nIndividual and group labs\nMini-projects\nExams\nBring a fully-charged laptop\n\n. . .\nAttendance is expected (if you are healthy!)"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#textbook",
@@ -2014,14 +2014,14 @@
     "href": "slides/01-welcome_ch1_o.html#activities-assessments-1",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Mini-projects\nExamples:\n\nMini-project 01: Focused on models for non-normal response variables, such as count data\nMini-project 02: Focused on models for correlated data\n\n. . .\n\nShort write up and short presentation\nTeam-based"
+    "text": "Mini-projects\nExamples:\n\nMini-project 01: Focused on models for non-normal response variables, such as count data\nMini-project 02: Focused on logistic regression models\n\n. . .\n\nShort write up and short presentation\nTeam-based"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#exams",
     "href": "slides/01-welcome_ch1_o.html#exams",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Two exams this block, Due on October 31st and November 12th.\nEach will have two components\n\nComponent 1 will be on these dates and you will get a choice of oral or written format.\nComponent 2 will be a take-home, open-book, open-note, exam.\nYou will have 12 hours or more to complete this component."
+    "text": "Two exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete this component."
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#grading",
@@ -2035,7 +2035,7 @@
     "href": "slides/01-welcome_ch1_o.html#resources",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Office hours to meet with your instructor in West 311\n\nTypically MTWTh 3:05pm-4:05pm and by appt.\nDouble check course calendar\nMake appointments by going to https://calendar.app.google/TQ5PNChvGmYmGyrg6\n\nEmail Tyler George for private questions regarding personal matters or grades.\nCollege support at https://stats-tgeorge.github.io/personal_website/course-support.html."
+    "text": "Office hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\nDouble check course calendar\nMake appointments by going to ?var:instructor.appointment_url\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#setup---r-packages",
@@ -2522,7 +2522,7 @@
     "href": "hw/01_hw_ch1.html",
     "title": "Homework 1",
     "section": "",
-    "text": "Go to our RStudio Server at http://turing.cornellcollege.edu:8787/\nGo to your class folder named “STA363”\nCreate a new folder called FirstInitial_Last_Initial_HW with your initials.\n\n\n\n\nEach of your assignments will begin with the following steps.\n\nFinding the instructions on our website: https://stats-tgeorge.github.io/STA363_AdvRegF25/.\nGoing to our RStudio Server at http://turing.cornellcollege.edu:8787/.\nCreating a new project and giving it a sensible name such as homework_1 and having that project in the course folder you created.\nCreate a new quarto document and give it a sensible name such as hw1.\nIn the YAML add the following (add what you don’t have). The embed-resources component will make your final rendered html self-contained.\n\n---\ntitle: \"Document title\"\nauthor: \"my name\"\nformat:\n  html:\n    embed-resources: true\n---"
+    "text": "Go to our RStudio Server at http://turing.cornellcollege.edu:8787/\nGo to your class folder named “STA363”\nCreate a new folder called FirstInitial_Last_Initial_HW with your initials.\n\n\n\n\nEach of your assignments will begin with the following steps.\n\nFinding the instructions on our website: https://annrcannon.github.io/Regression2026/.\nGoing to our RStudio Server at http://turing.cornellcollege.edu:8787/.\nCreating a new project and giving it a sensible name such as homework_1 and having that project in the course folder you created.\nCreate a new quarto document and give it a sensible name such as hw1.\nIn the YAML add the following (add what you don’t have). The embed-resources component will make your final rendered html self-contained.\n\n---\ntitle: \"Document title\"\nauthor: \"my name\"\nformat:\n  html:\n    embed-resources: true\n---"
   },
   {
     "objectID": "hw/01_hw_ch1.html#this-one-time",
@@ -2536,7 +2536,7 @@
     "href": "hw/01_hw_ch1.html#every-homework",
     "title": "Homework 1",
     "section": "",
-    "text": "Each of your assignments will begin with the following steps.\n\nFinding the instructions on our website: https://stats-tgeorge.github.io/STA363_AdvRegF25/.\nGoing to our RStudio Server at http://turing.cornellcollege.edu:8787/.\nCreating a new project and giving it a sensible name such as homework_1 and having that project in the course folder you created.\nCreate a new quarto document and give it a sensible name such as hw1.\nIn the YAML add the following (add what you don’t have). The embed-resources component will make your final rendered html self-contained.\n\n---\ntitle: \"Document title\"\nauthor: \"my name\"\nformat:\n  html:\n    embed-resources: true\n---"
+    "text": "Each of your assignments will begin with the following steps.\n\nFinding the instructions on our website: https://annrcannon.github.io/Regression2026/.\nGoing to our RStudio Server at http://turing.cornellcollege.edu:8787/.\nCreating a new project and giving it a sensible name such as homework_1 and having that project in the course folder you created.\nCreate a new quarto document and give it a sensible name such as hw1.\nIn the YAML add the following (add what you don’t have). The embed-resources component will make your final rendered html self-contained.\n\n---\ntitle: \"Document title\"\nauthor: \"my name\"\nformat:\n  html:\n    embed-resources: true\n---"
   },
   {
     "objectID": "course-overview.html",
@@ -6475,5 +6475,33 @@
     "title": "Welcome and Chapter 1",
     "section": "Course Toolkit (2/2)",
     "text": "Course Toolkit (2/2)\n\nMoodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\n\n-R Server: - http://turing.cornellcollege.edu:8787/ - Datasets - Quarto file storage"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#what-were-covering-this-block-13",
+    "href": "slides/01-welcome_ch1_o.html#what-were-covering-this-block-13",
+    "title": "Welcome and Chapter 1",
+    "section": "",
+    "text": "Generalized Linear Models (Ch 1 - 6)\n\nIntroduce models for non-normal response variables\nEstimation, interpretation, and inference\nMathematical details showing how GLMs are connected"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#what-were-covering-this-block-23",
+    "href": "slides/01-welcome_ch1_o.html#what-were-covering-this-block-23",
+    "title": "Welcome and Chapter 1",
+    "section": "",
+    "text": "Modeling correlated data (Ch 7 - 9)\n\nIntroduce multilevel models for correlated and longitudinal data\nEstimation, interpretation, and inference\nMathematical details, particularly diving into covariance structures"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#what-were-covering-this-block-33",
+    "href": "slides/01-welcome_ch1_o.html#what-were-covering-this-block-33",
+    "title": "Welcome and Chapter 1",
+    "section": "",
+    "text": "More Regression Models (ITSL Chapter 7) - Polynomial Regression - Regression Splines - Smoothing Splines - Generalized Additive Models (GAMS)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#course-toolkit-22",
+    "href": "slides/01-welcome_ch1_o.html#course-toolkit-22",
+    "title": "Welcome and Chapter 1",
+    "section": "",
+    "text": "Moodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\n\n-R Server: - http://turing.cornellcollege.edu:8787/ - Datasets - Quarto file storage"
   }
 ]

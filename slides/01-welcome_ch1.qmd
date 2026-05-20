@@ -1,6 +1,6 @@
 ---
 title: "Welcome and Chapter 1"
-author: "Tyler George"
+author: "Ann Cannon"
 format: 
   revealjs:
     output-file: "01-welcome_ch1.html"
@@ -14,7 +14,7 @@ logo: "../img/favicon.png"
 
 ## Instructor
 
-- {{< var instructor.name >}}: [{{< var instructor.email >}}](mailto:tgeorge@cornellcollege.edu)
+- {{< var instructor.name >}}: [{{< var instructor.email >}}](mailto:acannon@cornellcollege.edu)
 
 
 
@@ -23,6 +23,16 @@ logo: "../img/favicon.png"
 - Course Dates: {{< var course.dates >}}
 - Course sessions: {{< var course.time >}}
 - Exam Dates: {{< var course.exam_dates >}}
+
+
+## What we're covering this block (1/3)
+
+**Generalized Linear Models (Ch 1 - 6)**
+
+- Introduce models for non-normal response variables
+- Estimation, interpretation, and inference
+- Mathematical details showing how GLMs are connected
+
 
 ## Generalized Linear Models {.smaller}
 
@@ -42,15 +52,9 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
 &\Rightarrow \log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~x\end{aligned}$$
 
 
-## What we're covering this semester(1/3)
 
-**Generalized Linear Models (Ch 1 - 6)**
 
-- Introduce models for non-normal response variables
-- Estimation, interpretation, and inference
-- Mathematical details showing how GLMs are connected
-
-## What we're covering this semester(2/3)
+## What we're covering this block (2/3)
 
 **Modeling correlated data (Ch 7 - 9)**
 
@@ -58,7 +62,7 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
 - Estimation, interpretation, and inference
 - Mathematical details, particularly diving into covariance structures
 
-## What we're covering this semester(3/3)
+## What we're covering this block (3/3)
 
 **More Regression Models (ITSL Chapter 7)**
 - Polynomial Regression
@@ -66,21 +70,6 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
 - Smoothing Splines
 - Generalized Additive Models (GAMS)
 
-
-## Meet your classmates! {.smaller}
-
-- Create larger groups
-- Quick introductions - Name, year, and major
-- Choose a reporter
-  - Need help choosing? Person with birthday closest to December 1st. 
-- Identify 8 things everyone in the group has in common
-  - Not being a Cornell Student
-  - Not clothes (we're all wearing socks)
-  - Not body parts (we all have a nose)
-
-. . .
-
-**Reporter will share list with the class**
 
 ## What background is assumed for the course? {.smaller}
 
@@ -120,28 +109,28 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
   - Central hub for the course
   - Notes
   - Labs
-  - Datasets
 
-## Course Toolkit (1/2)
+
+## Course Toolkit (2/2)
 
 - **Moodle**: 
   - [{{< var course.moodle >}}]({{< var course.moodle >}})
   - Submissions
-  - Gradebook
   - Announcements
   
-
+-**R Server**:
+  - [{{< var college.rstudio >}}]({{ var college.rstudio >}})
+  - Datasets
+  - Quarto file storage
 
 
 ## Class Meetings 
 
-**Lectures**
-
 - Lecture
 - Individual and group labs
-- Bring a fully-charged laptop
-- Mini-projects weekly
+- Mini-projects
 - Exams
+- Bring a fully-charged laptop
 
 . . .
 
@@ -205,7 +194,7 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
 Examples: 
 
 - Mini-project 01: Focused on models for non-normal response variables, such as count data
-- Mini-project 02: Focused on models for correlated data
+- Mini-project 02: Focused on logistic regression models
 
 . . .
 
@@ -217,8 +206,8 @@ Examples:
 - Two exams this block, {{< var course.exam_dates >}}. 
 
 - Each will have two components
-  - Component 1 will be on these dates and you will get a choice of oral or written format. 
-  - Component 2 will be a take-home, open-book, open-note, exam. 
+  - Component 1 will be on these dates and will be a closed-book, closed-note, in-class exam.
+  - Component 2 will be a take-home, open-book, open-note exam. 
   - You will have 12 hours or more to complete this component. 
 
 

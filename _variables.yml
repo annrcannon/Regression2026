@@ -1,30 +1,27 @@
 author: Tyler George
 
 instructor:
-  name: Dr. Tyler George
-  name_no_title: Tyler George
-  email: tgeorge@cornellcollege.edu
-  url: "https://stats-tgeorge.github.io/personal_website/"
+  name: Dr. Ann Cannon
+  name_no_title: Ann Cannon
+  email: acannon@cornellcollege.edu
  # moodle: "https://moodle.cornellcollege.edu/user/profile.php"
-  twitter: stats_tgeorge
-  github: stats-tgeorge
-  office: "West 311"
-  officehrs: "MTWTh 3:05pm-4:05pm and by appt."
-  appointment_url: "https://calendar.app.google/TQ5PNChvGmYmGyrg6"
+  office: "West 317"
+  officehrs: "MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt."
+  # appointment_url: "https://calendar.app.google/TQ5PNChvGmYmGyrg6"
 
 course:
   title: "Advanced Regression"
   subtitle: "Applied Generalized Linear Models and Multilevel Models in R"
   number: "STA 363"
-  semester: "Fall 2025 Block 3"
-  time: "Daily, 9am-11am and 1pm-3pm"
-  dates: "October 20th to November 12th"
-  exam_dates: "Due on October 31st and November 12th"
-  location: "West 308"
-  github: "https://github.com/stats-tgeorge/STA363_AdvRegF25"
-  coursecal: "https://calendar.google.com/calendar/u/0?cid=Y19hMTllMWE2M2IwOGFiNDkzYmQxNmJmNWU3MThhZmM1OWYxODIyN2EwZDhmOGQzZGMyOGRjMzE5YjQ1NmJlYjFiQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"
+  semester: "Fall 2026 Block 1"
+  time: "Daily, 9am-11am and 1pm-3pm; No class second Wednesday afternoon"
+  dates: "August 24th to September 16th"
+  exam_dates: "due on September 2nd and September 16th"
+  location: "West 309"
+  github: "https://github.com/annrcannon/Regression2026"
+  # coursecal: "https://calendar.google.com/calendar/u/0?cid=Y19hMTllMWE2M2IwOGFiNDkzYmQxNmJmNWU3MThhZmM1OWYxODIyN2EwZDhmOGQzZGMyOGRjMzE5YjQ1NmJlYjFiQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"
   moodle: "https://moodle.cornellcollege.edu/course/view.php?id=9443"
-  url: "https://stats-tgeorge.github.io/STA363_AdvRegF25/"
+  url: "https://annrcannon.github.io/Regression2026/"
   copyright_year: "2025"
   text: | 
     The main textbook is: [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Paul Roback and Julie Legler -- it is freely available online. Chapters 1-9.
@@ -35,7 +32,7 @@ college:
   name: Cornell College
   url: "www.cornellcollege.edu"
   rstudio: "http://turing.cornellcollege.edu:8787/"
-  support: "https://stats-tgeorge.github.io/personal_website/course-support.html"
+  #support: "https://stats-tgeorge.github.io/personal_website/course-support.html"
 
 citation:
   websource_1: Dr. Lucy D’Agostino McGowan

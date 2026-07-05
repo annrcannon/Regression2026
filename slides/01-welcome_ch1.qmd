@@ -111,14 +111,14 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
   - Labs
 
 
-## Course Toolkit (2/2)
+## Course Toolkit (2/2){.smaller}
 
 - **Moodle**: 
   - [{{< var course.moodle >}}]({{< var course.moodle >}})
   - Submissions
   - Announcements
   
--**R Server**:
+- **R Server**:
   - [{{< var college.rstudio >}}]({{ var college.rstudio >}})
   - Datasets
   - Quarto file storage
@@ -191,10 +191,9 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
 
 **Mini-projects**
 
-Examples: 
-
-- Mini-project 01: Focused on models for non-normal response variables, such as count data
-- Mini-project 02: Focused on logistic regression models
+- Mini-project 01: Focused on logistic regression models
+- Mini-project 02: Focused on models for response variables that represent count data
+- Mini-project 03: Focused on data collected at multiple levels
 
 . . .
 
@@ -208,7 +207,7 @@ Examples:
 - Each will have two components
   - Component 1 will be on these dates and will be a closed-book, closed-note, in-class exam.
   - Component 2 will be a take-home, open-book, open-note exam. 
-  - You will have 12 hours or more to complete this component. 
+  - You will have 12 hours or more to complete the second component. 
 
 
 ## Grading
@@ -233,14 +232,12 @@ See Syllabus on [website]({{< var course.url >}}) for letter grade thresholds.
 
 - **Office hours** to meet with your instructor in {{< var instructor.office >}}
   - Typically {{< var instructor.officehrs >}}
-  - Double check [course calendar]({{< var course.coursecal >}})
-  - Make appointments by going to [{{< var instructor.appointment_url >}}]({{< var instructor.appointment_url >}})
 
 - **Email** {{< var instructor.name_no_title >}} for private questions regarding personal matters or grades. 
 
 - College support at [{{< var college.support >}}]({{< var college.support >}}).
 
-# Chapter 1 - MLR Review
+# Chapter 1 - Linear Regression Review
 
 ## Setup - R Packages
 
@@ -254,6 +251,36 @@ library(patchwork)
 library(viridis)
 library(ggfortify)
 ```
+
+## Simple linear regression {.smaller}
+
+
+[Simplest case]{.fragment fragment-index=0}
+
+
+[$X=$ explanatory variable]{.fragment fragment-index=1 style="padding-left: 20px;"}
+
+[$Y=$ response variable]{.fragment fragment-index=2 style="padding-left: 20px;"}
+
+[Both variables are quantitative]{.fragment fragment-index=3 style="padding-left: 20px;"}
+
+
+<br>
+
+
+[Model]{.fragment fragment-index=4}
+
+
+[$Y_i = \beta_0 + \beta_1 x_i + \epsilon_i$ where $\epsilon_i \sim N\left( 0,\sigma^2\right)$]{.fragment fragment-index=5 style="padding-left: 20px;"}
+  
+
+::: {#slide-right-box .absolute .fragment top="70%" left="45%" width="30%" height="20%" style="background-color: #e6f2ff; border: 2px solid #0066cc; border-radius: 8px; padding: 20px; font-size: 0.75em;" fragment-index=6}
+### Note 
+The book uses $\sigma^2$ in this notation, not $\sigma$ as we did in STA 201 and STA 202
+
+:::
+
+
 
 ## Assumptions for linear regression {.smaller}
 

@@ -1629,14 +1629,14 @@
     "href": "slides/01-welcome_ch1.html#activities-assessments-1",
     "title": "Welcome and Chapter 1",
     "section": "Activities & Assessments",
-    "text": "Activities & Assessments\nMini-projects\nExamples:\n\nMini-project 01: Focused on models for non-normal response variables, such as count data\nMini-project 02: Focused on logistic regression models\n\n\n\nShort write up and short presentation\nTeam-based"
+    "text": "Activities & Assessments\nMini-projects\n\nMini-project 01: Focused on logistic regression models\nMini-project 02: Focused on models for response variables that represent count data\nMini-project 03: Focused on data collected at multiple levels\n\n\n\nShort write up and short presentation\nTeam-based"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#exams",
     "href": "slides/01-welcome_ch1.html#exams",
     "title": "Welcome and Chapter 1",
     "section": "Exams",
-    "text": "Exams\n\nTwo exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete this component."
+    "text": "Exams\n\nTwo exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete the second component."
   },
   {
     "objectID": "slides/01-welcome_ch1.html#grading",
@@ -1650,7 +1650,7 @@
     "href": "slides/01-welcome_ch1.html#resources",
     "title": "Welcome and Chapter 1",
     "section": "Resources",
-    "text": "Resources\n\nOffice hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\nDouble check course calendar\nMake appointments by going to ?var:instructor.appointment_url\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
+    "text": "Resources\n\nOffice hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
   },
   {
     "objectID": "slides/01-welcome_ch1.html#setup---r-packages",
@@ -6474,7 +6474,7 @@
     "href": "slides/01-welcome_ch1.html#course-toolkit-22",
     "title": "Welcome and Chapter 1",
     "section": "Course Toolkit (2/2)",
-    "text": "Course Toolkit (2/2)\n\nMoodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\n\n-R Server: - http://turing.cornellcollege.edu:8787/ - Datasets - Quarto file storage"
+    "text": "Course Toolkit (2/2)\n\nMoodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\nR Server:\n\nhttp://turing.cornellcollege.edu:8787/\nDatasets\nQuarto file storage"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#what-were-covering-this-block-13",
@@ -6503,5 +6503,12 @@
     "title": "Welcome and Chapter 1",
     "section": "",
     "text": "Moodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\n\n-R Server: - http://turing.cornellcollege.edu:8787/ - Datasets - Quarto file storage"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#simple-linear-regression",
+    "href": "slides/01-welcome_ch1.html#simple-linear-regression",
+    "title": "Welcome and Chapter 1",
+    "section": "Simple linear regression",
+    "text": "Simple linear regression\nSimplest case\n\\(X=\\) explanatory variable\n\\(Y=\\) response variable\nBoth variables are quantitative\n\nModel\n\\(Y_i = \\beta_0 + \\beta_1 x_i + \\epsilon_i\\) where \\(\\epsilon_i \\sim N\\left( 0,\\sigma^2\\right)\\)\n\nNote\nThe book uses \\(\\sigma^2\\) in this notation, not \\(\\sigma\\) as we did in STA 201 and STA 202"
   }
 ]

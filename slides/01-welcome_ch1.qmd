@@ -250,6 +250,8 @@ library(knitr)
 library(patchwork)
 library(viridis)
 library(ggfortify)
+library(tailor)
+derby <- read_csv("data/derbyplus.csv")
 ```
 
 ## Simple linear regression {.smaller}
@@ -390,38 +392,118 @@ Modified from Figure 1.1. in BMLR]
 ::::
 
 
+## Example
 
-## Questions
+Beer and wine data
 
-How do we assess these conditions? 
+```{r}
+beer <- read_csv("data/beer_wine_data.csv")
+head(beer)
+```
 
 
 
+## Is the relationship linear? 
 
-## Beyond linear regression {.smaller}
+::: {.panel-tabset}
 
-- When we use linear least squares regression to draw conclusions, we do so under the assumption that L.I.N.E. are all met. 
+### Plot
 
-- **Generalized linear models** require different assumptions and can accommodate violations in L.I.N.E.
-  - Relationship between response and predictor(s) can be nonlinear
-  - Response variable can be non-normal 
-  - Variance in response can differ at each level of predictor(s) 
+```{r echo = F,fig.height=5}
+ggplot(data = beer, aes(x = Carbs, y = Calories)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Carbs", y = "Calories", 
+       title = "Calories vs. carbs") 
+```
+
+### Code 
+
+```{r eval = F, echo = T}
+ggplot(data = beer, aes(x = Carbs, y = Calories)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)) + 
+  labs(x = "Carbs", y = "Calories", 
+       title = "Calories vs. carbs") 
+```
+
+:::
+
+## Compute the model 
+
+
+::: {.panel-tabset}
+
+### Output
+
+```{r echo = F}
+model1 <- lm(Calories ~ Carbs, data=beer)
+tidy(model1) |> kable(digits = 3)
+```
+
+### Code 
+
+```{r simplemodel-code, eval = F}
+# Fit and display model
+model1 <- lm(Calories ~ Carbs, data=beer)
+tidy(model1) |> kable(digits = 3)
+```
+
+:::
+
+## Interpretation {.smaller}
+
+$$\widehat{Calories} = 109.815 + 4.351 ~ Carbs$$
+
+
+```{r echo = F}
+model1 <- lm(Calories ~ Carbs, data=beer)
+tidy(model1) |> kable(digits = 3)
+```
 
 . . .
 
-**But the independence assumption must hold!**
 
-- **Multilevel models** will be used for data with correlated observations
+1. Write out the interpretations for `Carbs`. 
+2. Does the intercept have a meaningful interpretation? 
+
+
+## Check assumptions {.smaller}
+
+::: {.panel-tabset}
+
+### Output
+
+```{r echo = F}
+par(mfrow=c(2,2))
+
+plot(model1, pch=16, col='#006EA1')
+```
+
+### Code 
+
+```{r diag-plots, eval = F}
+# Plot the diagnostic plots
+par(mfrow=c(2,2))
+
+plot(model1, pch=16, col='#006EA1')
+```
+
+`pch` defines the shape of the plotted symbol
+
+`col` defines the color of the plotted symbol
+:::
+
 
 
 ## Review of multiple linear regression 
 
 
 
-## Data: Kentucky Derby Winners {.smaller}
+## Data: Saratoga house prices {.smaller}
 
 
-Today's data is from the Kentucky Derby, an annual 1.25-mile horse race held at the Churchill Downs race track in Louisville, KY. The data is in the file [derbyplus.csv](data/derbyplus.csv) and contains information for races 1896 - 2017. 
+Data from homes for sale in Saratoga, NY.  The data is about 15 years old.
 
 . . .
 
@@ -430,35 +512,35 @@ Today's data is from the Kentucky Derby, an annual 1.25-mile horse race held at 
 
 **Response variable**
 
-- `speed`: Average speed of the winner in feet per second (ft/s)]
-
-**Predictor variables**
-
-- `year`: Year of the race
-- `condition`: Condition of the track (good, fast, slow)
-- `starters`: \# of horses who raced
+- `Price`: Price of the home in 1000s of dollars
 
 :::
 
 :::{.column}
-**Additional variable**
 
-- `winner`: Winning horse
+**Predictor/Explanatory variables**
 
-
+- `Size`: Size of the home in 1000s of square feet
+- `Baths`: Number of bathrooms
+- `Bedrooms`: Number of bedrooms
+- `Fireplace`: Does it have a fireplace? 0 = No, 1 = Yes
+- `Acres`: Size of the lot in acres
+- `Age`:  Age of the home
 
 :::
+
+
 ::::
 
 
 ## Data
 
 ```{r}
-derby <- read_csv("data/derbyplus.csv")
+saratoga <- read_csv("data/saratoga.csv")
 ```
 
 ```{r}
-derby |>
+saratoga |>
   head(5) |> kable()
 ```
 
@@ -490,15 +572,15 @@ derby |>
 ### Plot 
 
 ```{r univar-eda-plot, echo = F}
-p1 <- ggplot(data = derby, aes(x = speed)) + 
+p1 <- ggplot(data = saratoga, aes(x = Price)) + 
   geom_histogram(fill = "forestgreen", color = "black") + 
-  labs(x = "Winning speed (ft/s)", y = "Count")
+  labs(x = "Price ($1000)", y = "Count")
 
-p2 <- ggplot(data = derby, aes(x = starters)) + 
+p2 <- ggplot(data = saratoga, aes(x = Size)) + 
   geom_histogram(fill = "forestgreen", color = "black") + 
-  labs(x = "Starters", y = "Count")
+  labs(x = "Size (1000 sqft)", y = "Count")
 
-p3 <- ggplot(data = derby, aes(x = condition)) +
+p3 <- ggplot(data = saratoga, aes(x = Baths)) +
    geom_bar(fill = "forestgreen", color = "black", aes(x = ))
 
 p1 + (p2 / p3) + 
@@ -508,16 +590,16 @@ p1 + (p2 / p3) +
 
 ### Code 
 
-```{r univar-eda, eval = F}
-p1 <- ggplot(data = derby, aes(x = speed)) + 
+```{r  eval = F}
+p1 <- ggplot(data = saratoga, aes(x = Price)) + 
   geom_histogram(fill = "forestgreen", color = "black") + 
-  labs(x = "Winning speed (ft/s)", y = "Count")
+  labs(x = "Price ($1000)", y = "Count")
 
-p2 <- ggplot(data = derby, aes(x = starters)) + 
+p2 <- ggplot(data = saratoga, aes(x = Size)) + 
   geom_histogram(fill = "forestgreen", color = "black") + 
-  labs(x = "Starters", y = "Count")
+  labs(x = "Size (1000 sqft)", y = "Count")
 
-p3 <- ggplot(data = derby, aes(x = condition)) +
+p3 <- ggplot(data = saratoga, aes(x = Baths)) +
    geom_bar(fill = "forestgreen", color = "black", aes(x = ))
 
 p1 + (p2 / p3) + 
@@ -527,6 +609,59 @@ p1 + (p2 / p3) +
 :::
 
 
+## Plots for univariate EDA (cont.)
+
+
+::: {.panel-tabset}
+
+### Plot 
+
+```{r univar-eda-plot3, echo = F}
+p1 <- ggplot(data = saratoga, aes(x = Bedrooms)) + 
+  geom_bar(fill = "forestgreen", color = "black", aes(x=))
+
+p2 <- ggplot(data = saratoga, aes(x = Acres)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Size of lot (acres)", y = "Count")
+
+p3 <- ggplot(data = saratoga, aes(x = Fireplace)) +
+   geom_bar(fill = "forestgreen", color = "black", aes(x = ))
+
+p4 <- ggplot(data = saratoga, aes(x = Age)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Age (years", y = "Count")
+
+(p1 + p2) /(p3+p4)  + 
+  plot_annotation(title = "Univariate data analysis")
+```
+
+
+### Code 
+
+```{r  eval = F}
+p1 <- ggplot(data = saratoga, aes(x = Bedrooms)) + 
+  geom_bar(fill = "forestgreen", color = "black", aes(x=))
+
+p2 <- ggplot(data = saratoga, aes(x = Acres)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Size of lot (acres)", y = "Count")
+
+p3 <- ggplot(data = saratoga, aes(x = Fireplace)) +
+   geom_bar(fill = "forestgreen", color = "black", aes(x = ))
+
+p4 <- ggplot(data = saratoga, aes(x = Age)) + 
+  geom_histogram(fill = "forestgreen", color = "black") + 
+  labs(x = "Age (years", y = "Count")
+
+(p1 + p2) / (p3 + p4)  + 
+  plot_annotation(title = "Univariate data analysis")
+```
+
+:::
+
+
+
+
 ## Plots for bivariate EDA {.smaller}
 
 ::: {.panel-tabset}
@@ -534,19 +669,19 @@ p1 + (p2 / p3) +
 ### Plot
 
 ```{r bivar-eda-plot, echo = F}
-p4 <- ggplot(data = derby, aes(x = starters, y = speed)) + 
+p5 <- ggplot(data = saratoga, aes(x = Size, y = Price)) + 
   geom_point() + 
-  labs(x = "Starters", y = "Speed (ft / s)")
+  labs(x = "Size (1000 sq ft)", y = "Price ($1000)")
 
-p5 <- ggplot(data = derby, aes(x = year, y = speed)) + 
+p6 <- ggplot(data = saratoga, aes(x = Age, y = Price)) + 
   geom_point() + 
-  labs(x = "Year", y = "Speed (ft / s)")
+  labs(x = "Age (years)", y = "Price ($1000")
 
-p6 <- ggplot(data = derby, aes(x = condition, y = speed)) + 
+p7 <- ggplot(data = saratoga, aes(x = as.factor(Fireplace), y = Price)) + 
   geom_boxplot(fill = "forestgreen", color = "black") + 
-  labs(x = "Conditions", y = "Speed (ft / s)")
+  labs(x = "Fireplace (0 = no, 1 = yes)", y = "Price ($1000")
 
-(p4 + p5) / p6 +
+(p5 + p6) / p7 +
   plot_annotation(title = "Bivariate data analysis")
 ```
 
@@ -554,19 +689,19 @@ p6 <- ggplot(data = derby, aes(x = condition, y = speed)) +
 
 
 ```{r bivar-eda, eval = F}
-p4 <- ggplot(data = derby, aes(x = starters, y = speed)) + 
+p5 <- ggplot(data = saratoga, aes(x = Size, y = Price)) + 
   geom_point() + 
-  labs(x = "Starters", y = "Speed (ft / s)")
+  labs(x = "Size (1000 sq ft)", y = "Price ($1000)")
 
-p5 <- ggplot(data = derby, aes(x = year, y = speed)) + 
+p6 <- ggplot(data = saratoga, aes(x = Age, y = Price)) + 
   geom_point() + 
-  labs(x = "Year", y = "Speed (ft / s)")
+  labs(x = "Age (years)", y = "Price ($1000")
 
-p6 <- ggplot(data = derby, aes(x = condition, y = speed)) + 
+p7 <- ggplot(data = saratoga, aes(x = as.factor(Fireplace), y = Price)) + 
   geom_boxplot(fill = "forestgreen", color = "black") + 
-  labs(x = "Conditions", y = "Speed (ft / s)")
+  labs(x = "Fireplace (0 = no, 1 = yes)", y = "Price ($1000")
 
-(p4 + p5) + p6 +
+(p5 + p6) / p7 +
   plot_annotation(title = "Bivariate data analysis")
 ```
 
@@ -584,8 +719,7 @@ A **scatterplot matrix** helps quickly visualize relationships between many vari
 ### Plot
 ```{r scatterplot-matrix-plot, echo = F, fig.height=3.5}
 #library(GGally)
-ggpairs(data = derby, 
-        columns = c("condition", "year", "starters", "speed"))
+ggpairs(data = saratoga)
 ```
 
 
@@ -593,8 +727,7 @@ ggpairs(data = derby,
 
 ```{r scatterplot-matrix, eval = F}
 #library(GGally)
-ggpairs(data = derby, 
-        columns = c("condition", "year", "starters", "speed"))
+ggpairs(data = saratoga)
 ```
 
 :::
@@ -610,108 +743,87 @@ Plot the relationship between the response and a predictor based on levels of an
 
 ```{r multivar-eda-plot, echo = F,fig.height=3.5}
 library(viridis)
-ggplot(data = derby, aes(x = year, y = speed, color = condition, 
-                         shape = condition, linetype = condition)) + 
+saratoga$fire <- as.factor(saratoga$Fireplace)
+ggplot(data = saratoga, aes(x = Size, y = Price, color = fire, 
+                         shape = fire, linetype = fire)) + 
   geom_point() + 
-  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
-  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
-       title = "Speed vs. year", 
-       subtitle = "by track condition") +
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = fire)) + 
+  labs(x = "Size (1000 sq ft)", y = "Price ($1000)", color = "Fireplace",
+       title = "Price vs. size", 
+       subtitle = "by whether it has a fireplace or not") +
   guides(lty = FALSE, shape = FALSE) +
-  scale_color_viridis_d(end = 0.9)
+  scale_color_viridis_d(alpha = 0.6, end = 0.8) 
 ```
 
 ### Code 
 
 ```{r multivar-eda, eval = F}
 #library(viridis)
-ggplot(data = derby, aes(x = year, y = speed, color = condition, 
-                         shape = condition, linetype = condition)) + 
+saratoga$fire <- as.factor(saratoga$Fireplace)
+ggplot(data = saratoga, aes(x = Size, y = Price, color = fire, 
+                         shape = fire, linetype = fire)) + 
   geom_point() + 
-  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
-  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
-       title = "Speed vs. year", 
-       subtitle = "by track condition") +
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = fire)) + 
+  labs(x = "Size (1000 sq ft)", y = "Price ($1000)", color = "Fireplace",
+       title = "Price vs. size", 
+       subtitle = "by whether it has a fireplace or not") +
   guides(lty = FALSE, shape = FALSE) +
-  scale_color_viridis_d(end = 0.9)
+  scale_color_viridis_d(alpha = 0.6, end = 0.8) 
 ```
 
 :::
 
 
 
-## Model 1: Main effects model
+## Model 1: Main effects model {.smaller}
 
 ::: {.panel-tabset}
 
 ### Output
 
 ```{r echo = F}
-model1 <- lm(speed ~ starters + year + condition, data = derby)
-tidy(model1) |> kable(digits = 3)
+pr.model1 <- lm(Price ~ Size + Baths + Bedrooms + Size + Acres + Fireplace + Age, data = saratoga)
+tidy(pr.model1) |> kable(digits = 3)
 ```
 
 ### Code 
 
 ```{r model1-code, eval = F}
 # Fit and display model
-model1 <- lm(speed ~ starters + year + condition, data = derby)
-tidy(model1) |> 
-  kable(digits = 3)
+pr.model1 <- lm(Price ~ Size + Baths + Bedrooms + Size + Acres + Fireplace + Age, data = saratoga)
+tidy(pr.model1) |> kable(digits = 3)
 ```
 
 :::
 
-## Interpretation {.smaller}
+## [Interpretation]{style="font-size: 75%;"} {.smaller}
 
-$$\widehat{speed} = 8.197 - 0.005 ~ starters + 0.023 ~ year - 0.443 ~ good - 1.543 ~ slow$$
+$$
+\begin{aligned}
+\widehat{Price} = & 0.950 + 80.073 ~ Size + 25.279 ~ Baths - 9.014 ~ Bedrooms + 1.887 ~ Acres \\
+& + 4.844 ~ Fireplace - 0.064 ~ Age
+ \end{aligned}
+$$
 
+::::{.columns}
+
+:::{.column}
 
 ```{r echo = F}
-model1 <- lm(speed ~ starters + year + condition, data = derby)
-tidy(model1) |> 
-  kable(digits = 3)
+pr.model1 <- lm(Price ~ Size + Baths + Bedrooms + Size + Acres + Fireplace + Age, data = saratoga)
+tidy(pr.model1) |> select(term, estimate) |> kable(digits = 3)
 ```
 
-. . .
+:::
 
+:::{.column}
 
-1. Write out the interpretations for `starters` and `conditiongood`. 
+1. Write out the interpretations for `Size` and `Fireplace`. 
 2. Does the intercept have a meaningful interpretation? 
 
+:::
 
-
-
-## Centering 
-
-**Centering**: Subtract a constant from each observation of a given variable
-
-- Do this to make interpretation of model parameters more meaningful (particularly intercept)
-
-- In STA 202, we used **mean-centering** where we subtracted the mean from each observation of given variable
-
-- How does centering change the model? 
-
-
-
-## Centering `year` {.smaller}
-
-
-```{r}
-derby <- derby |>
-  mutate(yearnew = year - 1896) #1896 = starting year
-```
-
-. . .
-
-```{r echo = F}
-model1Cent <- lm(speed ~ starters + yearnew + condition, data = derby)
-tidy(model1Cent) |> kable(digits = 3)
-```
-
-. . .
-
-$$\widehat{speed} = 52.175 - 0.005 ~ starters + 0.023 ~ yearnew - 0.443 ~ good - 1.543 ~ slow$$
+::::
 
 
 
@@ -721,14 +833,28 @@ $$\widehat{speed} = 52.175 - 0.005 ~ starters + 0.023 ~ yearnew - 0.443 ~ good -
 
 ### Plots
 
-```{r, fig.height=3}
+```{r echo=FALSE}
 #library(ggfortify)
-autoplot(model1Cent)
+par(mfrow=c(2,2))
+
+plot(pr.model1, pch=16, col='#006EA1')
 ```
+
+### Code
+
+```{r eval=FALSE}
+#library(ggfortify)
+par(mfrow=c(2,2))
+
+plot(pr.model1, pch=16, col='#006EA1')
+```
+
+
 
 ### Questions
 
 Which of the model assumptions (LINE) does this pass and/or fail? 
+
 
 :::
 
@@ -739,23 +865,23 @@ Which of the model assumptions (LINE) does this pass and/or fail?
 ### Plot
 
 ```{r year-quad-plot, echo = F,fig.height=3.5}
-ggplot(data = derby, aes(x = yearnew, y = speed)) + 
-  geom_point(alpha = 0.7) +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
-  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
-  labs(x = "Years since 1896", y = "Speed (ft/s)", 
-       title = "Speed vs. Years since 1896")
+#ggplot(data = derby, aes(x = yearnew, y = speed)) + 
+#  geom_point(alpha = 0.7) +
+#  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
+#  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
+#  labs(x = "Years since 1896", y = "Speed (ft/s)", 
+#       title = "Speed vs. Years since 1896")
 ```
 
 ### Code 
 
 ```{r year-quad, eval = F}
-ggplot(data = derby, aes(x = yearnew, y = speed)) + 
-  geom_point(alpha = 0.7) +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
-  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
-  labs(x = "Years since 1896", y = "Speed (ft/s)", 
-       title = "Speed vs. Years since 1896")
+#ggplot(data = derby, aes(x = yearnew, y = speed)) + 
+#  geom_point(alpha = 0.7) +
+#  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
+#  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
+#  labs(x = "Years since 1896", y = "Speed (ft/s)", 
+ #      title = "Speed vs. Years since 1896")
 ```
 
 :::
@@ -769,17 +895,17 @@ ggplot(data = derby, aes(x = yearnew, y = speed)) +
 ### Plot
 
 ```{r echo = F}
-model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
-             data = derby)
-tidy(model2) |> kable(digits = 4)
+#model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
+#             data = derby)
+#tidy(model2) |> kable(digits = 4)
 ```
 
 ### Code 
 
 ```{r model2-code, eval = F}
-model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
-             data = derby)
-tidy(model2) |> kable(digits = 4)
+#model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
+#             data = derby)
+#tidy(model2) |> kable(digits = 4)
 ```
 
 :::
@@ -811,7 +937,7 @@ Questions:
 ## Model 2: Check model assumptions
 
 ```{r, echo = F, out.width = "70%"}
-autoplot(model2)
+#autoplot(model2)
 ```
 
 ## Model 3: Include interaction term? {.smaller}
@@ -861,25 +987,25 @@ $$\begin{aligned}\widehat{speed} = & 52.387 - 0.003 ~ starters + 0.020 ~ yearnew
 ### Output 
 
 ```{r echo = F ,out.width = "70%"}
-model3 <- lm(speed ~ starters + yearnew + condition +
-               yearnew * condition, 
-             data = derby)
-tidy(model3) |> kable(digits = 3)
+#model3 <- lm(speed ~ starters + yearnew + condition +
+#               yearnew * condition, 
+#             data = derby)
+#tidy(model3) |> kable(digits = 3)
 ```
 
 ### Code
 
 ```{r model3-code, eval = F}
-model3 <- lm(speed ~ starters + yearnew + condition +
-               yearnew * condition, 
-             data = derby)
-tidy(model3) |> kable(digits = 4)
+#model3 <- lm(speed ~ starters + yearnew + condition +
+#               yearnew * condition, 
+#             data = derby)
+#tidy(model3) |> kable(digits = 4)
 ```
 
 ### Assumptions
 
 ```{r, echo = F,fig.height=3}
-autoplot(model3)
+#autoplot(model3)
 ```
 
 :::
@@ -888,8 +1014,8 @@ autoplot(model3)
 ## Interpreting interaction effects {.smaller}
 
 ```{r echo = F}
-tidy(model3) |>
-  kable(digits = 3)
+#tidy(model3) |>
+#  kable(digits = 3)
 ```
 
 - Write out the interpretation of...
@@ -902,44 +1028,44 @@ tidy(model3) |>
 ### Model 1: Main effects
 
 ```{r echo = F}
-glance(model1Cent) |>
-  select(r.squared, adj.r.squared, AIC, BIC) |>
-  kable(digits = 3)
+#glance(model1Cent) |>
+#  select(r.squared, adj.r.squared, AIC, BIC) |>
+#  kable(digits = 3)
 ```
 
 ### Model 2: Main effects + $year^2$
 
 ```{r echo = F}
-glance(model2) |>
-  select(r.squared, adj.r.squared, AIC, BIC) |>
-  kable(digits = 3)
+#glance(model2) |>
+#  select(r.squared, adj.r.squared, AIC, BIC) |>
+#  kable(digits = 3)
 ```
 
 ### Model 3: Main effects + interaction
 
 ```{r echo = F}
-glance(model3) |>
-  select(r.squared, adj.r.squared, AIC, BIC) |>
-  kable(digits = 3)
+#glance(model3) |>
+#  select(r.squared, adj.r.squared, AIC, BIC) |>
+#  kable(digits = 3)
 ```
 
 ### Code
 
 ```{r eval = FALSE}
 # Model 1
-glance(model1Cent) |>
-  select(r.squared, adj.r.squared, AIC, BIC) |>
-  kable(digits = 3)
+#glance(model1Cent) |>
+#  select(r.squared, adj.r.squared, AIC, BIC) |>
+#  kable(digits = 3)
 
 # Model2
-glance(model2) |>
-  select(r.squared, adj.r.squared, AIC, BIC) |>
-  kable(digits = 3)
+#glance(model2) |>
+#  select(r.squared, adj.r.squared, AIC, BIC) |>
+#  kable(digits = 3)
 
 # Model 3
-glance(model3) |>
-  select(r.squared, adj.r.squared, AIC, BIC) |>
-  kable(digits = 3)
+#glance(model3) |>
+#  select(r.squared, adj.r.squared, AIC, BIC) |>
+#  kable(digits = 3)
 ```
 
 :::
@@ -978,38 +1104,38 @@ Use the **`glance`** function to get model statistics.
 ### Output
 
 ```{r echo = F}
-model1_glance <- glance(model1Cent) |>
-  select(r.squared, adj.r.squared, AIC, BIC)
-model2_glance <- glance(model2) |>
-  select(r.squared, adj.r.squared, AIC, BIC)
-model3_glance <- glance(model3) |>
-  select(r.squared, adj.r.squared, AIC, BIC)
+#model1_glance <- glance(model1Cent) |>
+#  select(r.squared, adj.r.squared, AIC, BIC)
+#model2_glance <- glance(model2) |>
+#  select(r.squared, adj.r.squared, AIC, BIC)
+#model3_glance <- glance(model3) |>
+##  select(r.squared, adj.r.squared, AIC, BIC)
 
-model1_glance |>
-  bind_rows(model2_glance) |>
-  bind_rows(model3_glance) |>
-  bind_cols(model = c("Model1", "Model2", "Model3")) |>
-  select(model, everything()) |>
-kable(digits = 3)
+#model1_glance |>
+##  bind_rows(model2_glance) |>
+#  bind_rows(model3_glance) |>
+#  bind_cols(model = c("Model1", "Model2", "Model3")) |>
+#  select(model, everything()) |>
+#kable(digits = 3)
 ```
 
 
 ### Code 
 
 ```{r echo = T,eval = F}
-model1_glance <- glance(model1Cent) |>
-  select(r.squared, adj.r.squared, AIC, BIC)
-model2_glance <- glance(model2) |>
-  select(r.squared, adj.r.squared, AIC, BIC)
-model3_glance <- glance(model3) |>
-  select(r.squared, adj.r.squared, AIC, BIC)
+#model1_glance <- glance(model1Cent) |>
+#  select(r.squared, adj.r.squared, AIC, BIC)
+#model2_glance <- glance(model2) |>
+#  select(r.squared, adj.r.squared, AIC, BIC)
+#model3_glance <- glance(model3) |>
+#  select(r.squared, adj.r.squared, AIC, BIC)
 
-model1_glance |>
-  bind_rows(model2_glance) |>
-  bind_rows(model3_glance) |>
-  bind_cols(model = c("Model1", "Model2", "Model3")) |>
-  select(model, everything()) |>
-kable(digits = 3)
+#model1_glance |>
+#  bind_rows(model2_glance) |>
+#  bind_rows(model3_glance) |>
+#  bind_cols(model = c("Model1", "Model2", "Model3")) |>
+#  select(model, everything()) |>
+#kable(digits = 3)
 ```
 
 :::
@@ -1114,6 +1240,23 @@ geom_vline(xintercept=breaks, lty=2, color = "grey") +
 - $\hat{\sigma} = \sqrt{\frac{\sum_{i=1}^n(y_i - \hat{y}_i)^2}{n - p - 1}} = \sqrt{\frac{\sum_{i=1}^n e_i^2}{n-p-1}}$
 
 :::
+
+
+## Beyond linear regression {.smaller}
+
+- When we use linear least squares regression to draw conclusions, we do so under the assumption that L.I.N.E. are all met. 
+
+- **Generalized linear models** require different assumptions and can accommodate violations in L.I.N.E.
+  - Relationship between response and predictor(s) can be nonlinear
+  - Response variable can be non-normal 
+  - Variance in response can differ at each level of predictor(s) 
+
+. . .
+
+**But the independence assumption must hold!**
+
+- **Multilevel models** will be used for data with correlated observations
+
 
 
 ## Acknowledgements

@@ -1,0 +1,141 @@
+﻿Type,Brand,Percent alcohol,Calories,Carbs
+Beer,Budweiser Select 55,2.4,55,2
+Beer,Miller 64,2.8,64,2
+Beer,Corona Premier,4,90,3
+Beer,Budweiser Select,4.3,100,3
+Beer,Busch Light,4.1,100,3
+Beer,Dogfish Head Slightly Mighty Lo-Cal IPA,4,100,3
+Beer,Michelob Ultra or Miller Lite,4.2,100,3
+Beer,Victory Easy Ringer Lo-Cal IPA,4.3,100,3
+Beer,Coors Light,4.2,100,5
+Beer,Corona Light,4,100,5
+Beer,Sufferfest Repeat Kolsch Style,3.5,100,5
+Beer,Heineken Light,3.3,100,7
+Beer,Lagunitas DayTime IPA,4,100,NA
+Beer,Miller High Life Light,4.1,110,6
+Beer,Bud Light,4.2,110,7
+Beer,Busch,4.3,110,7
+Beer,Pabst Blue Ribbon Easy,3.8,110,8
+Beer,Bud Ice,5.5,120,4
+Beer,Michelob Golden,4.6,120,7
+Beer,Michelob Light,4.1,120,9
+Beer,Sam Adams Light,4.3,120,NA
+Beer,Guinness Draught Stout,4.2,130,10
+Beer,Bud Light Platinum,6,140,4
+Beer,Busch Ice,5.9,140,4
+Beer,Allagash Saison,6.1,140,5
+Beer,Dogfish Head SeaQuench Session Sour,4.9,140,8
+Beer,Founders All Day IPA Session Ale,4.7,140,11
+Beer,Heineken,5,140,11
+Beer,Miller Genuine Draft,4.7,140,12
+Beer,Miller High Life,4.6,140,12
+Beer,Pabst Blue Ribbon Original,4.8,140,12
+Beer,Sufferfest Head Start Stout,4.5,140,12
+Beer,New Belgium Dayblazer Easygoing Ale,4.8,140,NA
+Beer,New Belgium Slow Ride Session IPA,4.5,140,NA
+Beer,Budweiser,5,150,11
+Beer,Allagash White,5.2,150,12
+Beer,Coors Banquet,5,150,12
+Beer,Sierra Nevada Sierraveza,5,150,13
+Beer,Corona Extra,4.6,150,14
+Beer,Michelob Lager,4.8,160,14
+Beer,Corona Familiar,4.8,160,15
+Beer,New Belgium Fat Tire Amber Ale,5.2,160,NA
+Beer,Sufferfest FKT Pale Ale,5.5,170,13
+Beer,Blue Moon Belgian White,5.4,170,14
+Beer,Sierra Nevada Sidecar Orange IPA,6.8,170,14
+Beer,Sufferfest Flyby Pilsner,5.1,170,14
+Beer,Shock Top Belgian White,5.2,170,15
+Beer,Bell’s Amber Ale,5.8,180,16
+Beer,Sierra Nevada Pale Ale,5.6,180,17
+Beer,Samuel Adams Boston Lager,5,180,NA
+Beer,Samuel Adams New England Pale Ale,5.5,180,NA
+Beer,Bell’s Official Hazy India Pale Ale,6.4,190,12
+Beer,Dogfish Head 60 Minute IPA,6,190,17
+Beer,Budweiser Copper Lager,6.2,200,16
+Beer,New Belgium Voodoo Ranger IPA,7,200,NA
+Beer,Samuel Adams Rebel IPA,6.5,200,NA
+Beer,Dogfish Head American Beauty Hazy Ripple IPA,7,210,16
+Beer,Bell’s Two Hearted Ale,7,210,17
+Beer,Sierra Nevada Hazy Little Thing IPA,6.7,210,21
+Beer,Sierra Nevada West Coast Style Stout,5.8,210,22
+Beer,Bell’s Kalamazoo Stout,6,220,23
+Beer,Allagash Black,7.4,230,20
+Beer,Allagash Tripel,9.1,240,13
+Beer,Sierra Nevada Torpedo Extra IPA,7.2,240,14
+Beer,New Belgium Trippel,8.5,240,NA
+Beer,Allagash Curieux,10.4,260,12
+Beer,Victory Golden Monkey,9.5,260,NA
+Beer,Dogfish Head 90 Minute IPA,9,290,26
+Beer,Sierra Nevada Hoptimum Triple IPA,9.6,310,30
+Wine,Sutter Home White Zinfandel,NA,130,10
+Wine,Sutter Home Moscato Sangria,NA,130,17
+Wine,Sutter Home Chardonnay,NA,140,5
+Wine,Sutter Home Merlot,NA,140,5
+Wine,Sutter Home Pinot Grigio,NA,140,5
+Wine,Sutter Home Pinot Noir,NA,140,5
+Wine,Sutter Home Rosé,NA,140,5
+Wine,Sutter Home Sauvignon Blanc,NA,150,3
+Wine,Sutter Home Zinfandel,NA,150,5
+Wine,Sutter Home Malbec,NA,150,6
+Wine,Sutter Home Cabernet Sauvignon,NA,150,7
+Wine,Sutter Home Moscato,NA,150,14
+Wine,Cupcake Vineyards Prosecco,NA,160,9
+Wine,Cupcake Vineyards Riesling,NA,160,11
+Wine,Sutter Home Riesling,NA,160,9
+Wine,Sutter Home Sweet Red,NA,160,10
+Wine,Sutter Home Pink Moscato,NA,160,16
+Wine,Cupcake Vineyards Pinot Grigio,NA,170,6
+Wine,Cupcake Vineyards Rosé,NA,170,6
+Wine,Cupcake Vineyards Sauvignon Blanc,NA,170,6
+Wine,Sutter Home Sangria,NA,170,14
+Wine,Sutter Home Red Moscato,NA,170,16
+Wine,Cupcake Vineyards Malbec,NA,180,8
+Wine,Cupcake Vineyards Chardonnay,NA,180,6
+Wine,Cupcake Vineyards Cabernet Sauvignon,NA,180,8
+Wine,Cupcake Vineyards Pinot Noir,NA,180,8
+Wine,Cupcake Vineyards Petite Sirah,NA,180,8
+Wine,Cupcake Vineyards Moscato,NA,180,18
+Wine,Cupcake Vineyards Merlot,NA,190,8
+Wine,Cupcake Vineyards Shiraz,NA,190,8
+Wine,Carlo Rossi Pink Moscato Sangria*,6.5,120,14
+Wine,Carlo Rossi Moscato Sangria*,6.8,120,16
+Wine,Yellow Tail Moscato,7.5,120,10
+Wine,Yellow Tail Pink Moscato,7.5,120,10
+Wine,Carlo Rossi White Zinfandel*,8,110,10
+Wine,Barefoot Riesling*,8,150,18
+Wine,Carlo Rossi Sweet Red*,8,150,19
+Wine,Barefoot White Zinfandel*,9,140,12
+Wine,Barefoot Moscato*,9,160,17
+Wine,Barefoot Pink Moscato*,9,160,18
+Wine,Carlo Rossi Sweet Rosé*,9.2,120,8
+Wine,Carlo Rossi Red Sangria*,10,170,22
+Wine,Barefoot Rosé*,10.5,140,11
+Wine,FitVine Prosecco,11,110,4
+Wine,Yellow Tail Riesling,11.3,120,2
+Wine,Yellow Tail Sangria,11.5,150,10
+Wine,Yellow Tail Sauvignon Blanc,11.6,120,1
+Wine,Yellow Tail Super Crisp Chardonnay,11.7,120,1
+Wine,Yellow Tail Pinot Grigio,11.9,120,2
+Wine,Barefoot Sauvignon Blanc*,12,140,5
+Wine,Barefoot Pinot Grigio*,12,150,7
+Wine,Carlo Rossi Chardonnay*,12,160,12
+Wine,FitVine Rosé,12.4,130,3
+Wine,Barefoot Carbernet Sauvignon*,12.7,150,6
+Wine,Carlo Rossi Cabernet Sauvignon*,12.9,140,6
+Wine,Barefoot Malbec*,13,150,6
+Wine,Barefoot Chardonnay*,13,150,6
+Wine,Barefoot Pinot Noir*,13,150,6
+Wine,Yellow Tail Chardonnay,13.2,130,1
+Wine,FitVine Pinot Grigio,13.4,130,3
+Wine,FitVine Chardonnay,13.4,140,3
+Wine,FitVine Sauvignon Blanc,13.4,140,3
+Wine,Barefoot Merlot*,13.5,160,6
+Wine,Yellow Tail Shiraz Cabernet,13.8,140,1
+Wine,FitVine Pinot Noir,13.9,140,4
+Wine,FitVine Cabernet Sauvignon,13.9,140,5
+Wine,FitVine Syrah,13.9,140,5
+Wine,Yellow Tail Cabernet Sauvignon,13.9,140,1
+Wine,Yellow Tail Merlot,13.9,140,1
+Wine,Yellow Tail Shiraz,13.9,140,1
+Wine,Yellow Tail Pinot Noir,14,140,1

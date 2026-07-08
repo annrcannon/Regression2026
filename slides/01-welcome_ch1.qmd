@@ -858,167 +858,158 @@ Which of the model assumptions (LINE) does this pass and/or fail?
 
 :::
 
-## Model 2: Add quadratic effect for year? {.smaller}
+## Model 2: Add interaction term for Fireplace and Size? {.smaller}
 
 ::: {.panel-tabset}
 
 ### Plot
 
-```{r year-quad-plot, echo = F,fig.height=3.5}
-#ggplot(data = derby, aes(x = yearnew, y = speed)) + 
-#  geom_point(alpha = 0.7) +
-#  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
-#  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
-#  labs(x = "Years since 1896", y = "Speed (ft/s)", 
-#       title = "Speed vs. Years since 1896")
+```{r multivar-eda-plot2, echo = F,fig.height=3.5}
+library(viridis)
+saratoga$fire <- as.factor(saratoga$Fireplace)
+ggplot(data = saratoga, aes(x = Size, y = Price, color = fire, 
+                         shape = fire, linetype = fire)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = fire)) + 
+  labs(x = "Size (1000 sq ft)", y = "Price ($1000)", color = "Fireplace",
+       title = "Price vs. size", 
+       subtitle = "by whether it has a fireplace or not") +
+  guides(lty = FALSE, shape = FALSE) +
+  scale_color_viridis_d(alpha = 0.6, end = 0.8) 
 ```
 
 ### Code 
 
-```{r year-quad, eval = F}
-#ggplot(data = derby, aes(x = yearnew, y = speed)) + 
-#  geom_point(alpha = 0.7) +
-#  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
-#  geom_smooth(se = FALSE, color = "red", linetype = 2) + 
-#  labs(x = "Years since 1896", y = "Speed (ft/s)", 
- #      title = "Speed vs. Years since 1896")
+```{r eval = F}
+#library(viridis)
+#saratoga$fire <- as.factor(saratoga$Fireplace)
+ggplot(data = saratoga, aes(x = Size, y = Price, color = fire, 
+                         shape = fire, linetype = fire)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, aes(linetype = fire)) + 
+  labs(x = "Size (1000 sq ft)", y = "Price ($1000)", color = "Fireplace",
+       title = "Price vs. size", 
+       subtitle = "by whether it has a fireplace or not") +
+  guides(lty = FALSE, shape = FALSE) +
+  scale_color_viridis_d(alpha = 0.6, end = 0.8) 
 ```
 
 :::
 
 
 
-## Model 2: Add $yearnew^2$
+## Model 2: Add $Fireplace * Size$ {.smaller}
 
 ::: {.panel-tabset}
 
-### Plot
+### Output
 
 ```{r echo = F}
-#model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
-#             data = derby)
-#tidy(model2) |> kable(digits = 4)
+pr.model2 <- lm(Price ~ Size + Baths + Bedrooms  + Acres + Fireplace  + Age + Fireplace*Size, data = saratoga)
+tidy(pr.model2) |> kable(digits = 4)
 ```
 
 ### Code 
 
-```{r model2-code, eval = F}
-#model2 <- lm(speed ~ starters + yearnew + I(yearnew^2) + condition, 
-#             data = derby)
-#tidy(model2) |> kable(digits = 4)
+```{r  eval = F}
+pr.model2 <- lm(Price ~ Size + Baths + Bedrooms + Acres + Fireplace + Age +Fireplace*Size, data = saratoga)
+tidy(pr.model2) |> kable(digits = 4)
 ```
 
 :::
 
 
-## Interpreting quadratic effects
+## Interpreting interaction effects with 0/1 variable
 
-$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 ~ x_1  + \hat{\beta}_2 ~ x_2 + \hat{\beta}_3 ~ x_2^2$$
+$$
+\begin{aligned}
+\hat{y}& = \hat{\beta}_0 + \hat{\beta}_1 ~ x_1  + \hat{\beta}_2 ~ x_2 + \hat{\beta}_3 ~x_3 +\hat{\beta}_4 ~ x_1~x_2\\
+ & = \hat{\beta}_0 + \hat{\beta}_1 ~ x_1 + \hat{\beta}_3 ~x_3\hspace{3.9 in} \text{  when } x_2=0\\
+ & = (\hat{\beta}_0 +\hat{\beta}_2) + (\hat{\beta}_1 + \hat{\beta}_4) ~ x_1 +\hat{\beta}_3~x_3\hspace{.75 in} \text{  when } x_2=1
+\end{aligned}
+$$
 
-**General interpretation**: When $x_2$ increases from a to b, $y$ is expected to change by $\hat{\beta}_2(b - a) + \hat{\beta}_3(b^2 - a^2)$, holding $x_1$ constant.
+
+**General interpretation**: When $x_2$ is present, the slope between $x_1$ and $y$ increases(decreases) by $\hat{\beta}_4$ units and the $y$-intercept increases(decreases) by $\hat{\beta}_2$ units when all other variables are held constant.
+
+
+
+
+
+## Interpreting quadratic effects {.smaller}
+
+$$\begin{aligned}\widehat{Price} = &45.00 + 48.33 ~ Size + 25.79 ~ Baths - 8.95 ~ Bedrooms \\
+& + 2.01 ~ Acres - 59.30 ~ Fireplace - 0.05 ~ Age + 40.51~Fireplace * Size\end{aligned}$$
 
 . . .
 
+Question: 
 
-
-## Interpreting quadratic effects
-
-$$\begin{aligned}\widehat{speed} = &51.413 - 0.025 ~ starters + 0.070 ~ yearnew \\
-& - 0.0004 ~ yearnew^2 - 0.477 ~ good - 1.393 ~ slow\end{aligned}$$
-
-. . .
-
-Questions: 
-
-*Interpret the effect of year for the 5 most recent years (2013 - 2017).*
+*Interpret the effect that having a fireplace has on the relationship between size and price.*
 
 
 
 ## Model 2: Check model assumptions
 
-```{r, echo = F, out.width = "70%"}
-#autoplot(model2)
+```{r, echo = F}
+par(mfrow=c(2,2))
+
+plot(pr.model2, pch=16, col='#006EA1')
 ```
 
-## Model 3: Include interaction term? {.smaller}
 
-Recall from the EDA...
+## Model 3: Try ln of response and delete some variables {.smaller}
+
 
 ::: {.panel-tabset}
 
-### Plot
+### Output
 
-```{r echo = F,fig.height=3}
-library(viridis)
-ggplot(data = derby, aes(x = year, y = speed, color = condition, 
-                         shape = condition, linetype = condition)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
-  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
-       title = "Speed vs. year", 
-       subtitle = "by track condition") +
-  guides(lty = FALSE, shape = FALSE) +
-  scale_color_viridis_d(end = 0.9)
+```{r echo = F}
+pr.model3 <- lm(log(Price) ~ Size + Baths + Bedrooms +  Fireplace  + Fireplace*Size, data = saratoga)
+tidy(pr.model3) |> kable(digits = 3)
 ```
 
 ### Code 
 
-```{r eval = F, echo = T}
-library(viridis)
-ggplot(data = derby, aes(x = year, y = speed, color = condition, 
-                         shape = condition, linetype = condition)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se = FALSE, aes(linetype = condition)) + 
-  labs(x = "Year", y = "Speed (ft/s)", color = "Condition",
-       title = "Speed vs. year", 
-       subtitle = "by track condition") +
-  guides(lty = FALSE, shape = FALSE) +
-  scale_color_viridis_d(end = 0.9)
+```{r  eval = F}
+pr.model3 <- lm(log(Price) ~ Size + Baths + Bedrooms  + Fireplace  + Fireplace*Size, data = saratoga)
+tidy(pr.model3) |> kable(digits = 3)
 ```
 
 :::
 
-## Model 3: Add interaction term {.smaller}
+## Model 4: Fewer terms yet {.smaller}
 
-$$\begin{aligned}\widehat{speed} = & 52.387 - 0.003 ~ starters + 0.020 ~ yearnew - 1.070 ~ good - 2.183 ~ slow \\ &+0.012 ~ yearnew \times good + 0.012 ~ yearnew \times slow \end{aligned}$$
 
 ::: {.panel-tabset}
 
-### Output 
+### Output
 
-```{r echo = F ,out.width = "70%"}
-#model3 <- lm(speed ~ starters + yearnew + condition +
-#               yearnew * condition, 
-#             data = derby)
-#tidy(model3) |> kable(digits = 3)
+```{r echo = F}
+pr.model4 <- lm(log(Price) ~ Size + Baths, data = saratoga)
+tidy(pr.model4) |> kable(digits = 3)
 ```
 
-### Code
+### Code 
 
-```{r model3-code, eval = F}
-#model3 <- lm(speed ~ starters + yearnew + condition +
-#               yearnew * condition, 
-#             data = derby)
-#tidy(model3) |> kable(digits = 4)
+```{r  eval = F}
+pr.model4 <- lm(log(Price) ~ Size + Baths, data = saratoga)
+tidy(pr.model4) |> kable(digits = 3)
 ```
+
+
 
 ### Assumptions
 
-```{r, echo = F,fig.height=3}
-#autoplot(model3)
+```{r, echo = F}
+par(mfrow=c(2,2))
+
+plot(pr.model4, pch=16, col='#006EA1')
 ```
+
 
 :::
-
-
-## Interpreting interaction effects {.smaller}
-
-```{r echo = F}
-#tidy(model3) |>
-#  kable(digits = 3)
-```
-
-- Write out the interpretation of...
 
 ## Which model would you choose?
 
@@ -1028,44 +1019,44 @@ $$\begin{aligned}\widehat{speed} = & 52.387 - 0.003 ~ starters + 0.020 ~ yearnew
 ### Model 1: Main effects
 
 ```{r echo = F}
-#glance(model1Cent) |>
-#  select(r.squared, adj.r.squared, AIC, BIC) |>
-#  kable(digits = 3)
+glance(pr.model1) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
 ```
 
-### Model 2: Main effects + $year^2$
+### Model 2: Main effects + interaction
 
 ```{r echo = F}
-#glance(model2) |>
-#  select(r.squared, adj.r.squared, AIC, BIC) |>
-#  kable(digits = 3)
+glance(pr.model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
 ```
 
-### Model 3: Main effects + interaction
+### Model 4: Small model
 
 ```{r echo = F}
-#glance(model3) |>
-#  select(r.squared, adj.r.squared, AIC, BIC) |>
-#  kable(digits = 3)
+glance(pr.model4) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
 ```
 
 ### Code
 
 ```{r eval = FALSE}
 # Model 1
-#glance(model1Cent) |>
-#  select(r.squared, adj.r.squared, AIC, BIC) |>
-#  kable(digits = 3)
+glance(pr.model1) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
 
 # Model2
-#glance(model2) |>
-#  select(r.squared, adj.r.squared, AIC, BIC) |>
-#  kable(digits = 3)
+glance(pr.model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
 
-# Model 3
-#glance(model3) |>
-#  select(r.squared, adj.r.squared, AIC, BIC) |>
-#  kable(digits = 3)
+# Model 4
+glance(pr.model4) |>
+  select(r.squared, adj.r.squared, AIC, BIC) |>
+  kable(digits = 3)
 ```
 
 :::
@@ -1095,7 +1086,7 @@ $$\begin{aligned}\widehat{speed} = & 52.387 - 0.003 ~ starters + 0.020 ~ yearnew
 - **Nested F Test (extra sum of squares F test)**: Generalization of t-test for individual coefficients to perform significance tests on nested models
 
 
-## Which model would you choose?
+## Which model would you choose? {.smaller}
 
 Use the **`glance`** function to get model statistics.
 
@@ -1104,38 +1095,38 @@ Use the **`glance`** function to get model statistics.
 ### Output
 
 ```{r echo = F}
-#model1_glance <- glance(model1Cent) |>
-#  select(r.squared, adj.r.squared, AIC, BIC)
-#model2_glance <- glance(model2) |>
-#  select(r.squared, adj.r.squared, AIC, BIC)
-#model3_glance <- glance(model3) |>
-##  select(r.squared, adj.r.squared, AIC, BIC)
+model1_glance <- glance(pr.model1) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model2_glance <- glance(pr.model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model4_glance <- glance(pr.model4) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
 
-#model1_glance |>
-##  bind_rows(model2_glance) |>
-#  bind_rows(model3_glance) |>
-#  bind_cols(model = c("Model1", "Model2", "Model3")) |>
-#  select(model, everything()) |>
-#kable(digits = 3)
+model1_glance |>
+  bind_rows(model2_glance) |>
+  bind_rows(model4_glance) |>
+  bind_cols(model = c("Model1", "Model2", "Model4")) |>
+  select(model, everything()) |>
+kable(digits = 3)
 ```
 
 
 ### Code 
 
 ```{r echo = T,eval = F}
-#model1_glance <- glance(model1Cent) |>
-#  select(r.squared, adj.r.squared, AIC, BIC)
-#model2_glance <- glance(model2) |>
-#  select(r.squared, adj.r.squared, AIC, BIC)
-#model3_glance <- glance(model3) |>
-#  select(r.squared, adj.r.squared, AIC, BIC)
+model1_glance <- glance(pr.model1) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model2_glance <- glance(pr.model2) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model4_glance <- glance(pr.model4) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
 
-#model1_glance |>
-#  bind_rows(model2_glance) |>
-#  bind_rows(model3_glance) |>
-#  bind_cols(model = c("Model1", "Model2", "Model3")) |>
-#  select(model, everything()) |>
-#kable(digits = 3)
+model1_glance |>
+  bind_rows(model2_glance) |>
+  bind_rows(model4_glance) |>
+  bind_cols(model = c("Model1", "Model2", "Model4")) |>
+  select(model, everything()) |>
+kable(digits = 3)
 ```
 
 :::
@@ -1146,9 +1137,9 @@ Use the **`glance`** function to get model statistics.
 - Predictor variables control for important covariates
 - Potential interactions have been investigated
 - Variables are centered, as needed, for more meaningful interpretations 
-- unnecessary terms are removed 
+- Unnecessary terms are removed 
 - Assumptions are met and influential points have been addressed
-- model tells a "persuasive story parsimoniously"
+- Model tells a "persuasive story parsimoniously"
 
 ::: aside
 [List from Section 1.6.7 of BMLR](https://bookdown.org/roback/bookdown-BeyondMLR/)

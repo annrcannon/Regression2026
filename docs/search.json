@@ -1804,7 +1804,7 @@
     "href": "slides/01-welcome_ch1.html#interpreting-quadratic-effects",
     "title": "Welcome and Chapter 1",
     "section": "Interpreting quadratic effects",
-    "text": "Interpreting quadratic effects\n\\[\\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ x_1  + \\hat{\\beta}_2 ~ x_2 + \\hat{\\beta}_3 ~ x_2^2\\]\nGeneral interpretation: When \\(x_2\\) increases from a to b, \\(y\\) is expected to change by \\(\\hat{\\beta}_2(b - a) + \\hat{\\beta}_3(b^2 - a^2)\\), holding \\(x_1\\) constant."
+    "text": "Interpreting quadratic effects\n\\[\\begin{aligned}\\widehat{Price} = &45.00 + 48.33 ~ Size + 25.79 ~ Baths - 8.95 ~ Bedrooms \\\\\n& + 2.01 ~ Acres - 59.30 ~ Fireplace - 0.05 ~ Age + 40.51~Fireplace * Size\\end{aligned}\\]\n\nQuestion:\nInterpret the effect that having a fireplace has on the relationship between size and price."
   },
   {
     "objectID": "slides/01-welcome_ch1.html#interpreting-quadratic-effects-1",
@@ -1846,7 +1846,7 @@
     "href": "slides/01-welcome_ch1.html#which-model-would-you-choose",
     "title": "Welcome and Chapter 1",
     "section": "Which model would you choose?",
-    "text": "Which model would you choose?\n\nModel 1: Main effectsModel 2: Main effects + \\(year^2\\)Model 3: Main effects + interactionCode\n\n\n\n\n\n\n\n\n\n\n\n\n# Model 1\n#glance(model1Cent) |&gt;\n#  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n#  kable(digits = 3)\n\n# Model2\n#glance(model2) |&gt;\n#  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n#  kable(digits = 3)\n\n# Model 3\n#glance(model3) |&gt;\n#  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n#  kable(digits = 3)"
+    "text": "Which model would you choose?\n\nModel 1: Main effectsModel 2: Main effects + interactionModel 4: Small modelCode\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.621\n0.619\n11432.1\n11471.85\n\n\n\n\n\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.636\n0.633\n11391.88\n11436.6\n\n\n\n\n\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.587\n0.586\n389.812\n409.687\n\n\n\n\n\n\n\n\n# Model 1\nglance(pr.model1) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)\n\n# Model2\nglance(pr.model2) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)\n\n# Model 4\nglance(pr.model4) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#what-are-these-model-quality-metrics",
@@ -1867,14 +1867,14 @@
     "href": "slides/01-welcome_ch1.html#which-model-would-you-choose-1",
     "title": "Welcome and Chapter 1",
     "section": "Which model would you choose?",
-    "text": "Which model would you choose?\nUse the glance function to get model statistics.\n\nOutputCode\n\n\n\n\n\n\n#model1_glance &lt;- glance(model1Cent) |&gt;\n#  select(r.squared, adj.r.squared, AIC, BIC)\n#model2_glance &lt;- glance(model2) |&gt;\n#  select(r.squared, adj.r.squared, AIC, BIC)\n#model3_glance &lt;- glance(model3) |&gt;\n#  select(r.squared, adj.r.squared, AIC, BIC)\n\n#model1_glance |&gt;\n#  bind_rows(model2_glance) |&gt;\n#  bind_rows(model3_glance) |&gt;\n#  bind_cols(model = c(\"Model1\", \"Model2\", \"Model3\")) |&gt;\n#  select(model, everything()) |&gt;\n#kable(digits = 3)"
+    "text": "Which model would you choose?\nUse the glance function to get model statistics.\n\nOutputCode\n\n\n\n\n\n\n\nmodel\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\nModel1\n0.621\n0.619\n11432.097\n11471.847\n\n\nModel2\n0.636\n0.633\n11391.883\n11436.603\n\n\nModel4\n0.587\n0.586\n389.812\n409.687\n\n\n\n\n\n\n\n\nmodel1_glance &lt;- glance(pr.model1) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\nmodel2_glance &lt;- glance(pr.model2) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\nmodel4_glance &lt;- glance(pr.model4) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\n\nmodel1_glance |&gt;\n  bind_rows(model2_glance) |&gt;\n  bind_rows(model4_glance) |&gt;\n  bind_cols(model = c(\"Model1\", \"Model2\", \"Model4\")) |&gt;\n  select(model, everything()) |&gt;\nkable(digits = 3)"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#characteristics-of-a-good-final-model",
     "href": "slides/01-welcome_ch1.html#characteristics-of-a-good-final-model",
     "title": "Welcome and Chapter 1",
     "section": "Characteristics of a “good” final model",
-    "text": "Characteristics of a “good” final model\n\nModel can be used to answer primary research questions\nPredictor variables control for important covariates\nPotential interactions have been investigated\nVariables are centered, as needed, for more meaningful interpretations\nunnecessary terms are removed\nAssumptions are met and influential points have been addressed\nmodel tells a “persuasive story parsimoniously”\n\n\n\nList from Section 1.6.7 of BMLR"
+    "text": "Characteristics of a “good” final model\n\nModel can be used to answer primary research questions\nPredictor variables control for important covariates\nPotential interactions have been investigated\nVariables are centered, as needed, for more meaningful interpretations\nUnnecessary terms are removed\nAssumptions are met and influential points have been addressed\nModel tells a “persuasive story parsimoniously”\n\n\n\nList from Section 1.6.7 of BMLR"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#inference-for-multiple-linear-regression",
@@ -6580,5 +6580,47 @@
     "title": "Welcome and Chapter 1",
     "section": "Plots for univariate EDA (cont.)",
     "text": "Plots for univariate EDA (cont.)\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np1 &lt;- ggplot(data = saratoga, aes(x = Bedrooms)) + \n  geom_bar(fill = \"forestgreen\", color = \"black\", aes(x=))\n\np2 &lt;- ggplot(data = saratoga, aes(x = Acres)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Size of lot (acres)\", y = \"Count\")\n\np3 &lt;- ggplot(data = saratoga, aes(x = Fireplace)) +\n   geom_bar(fill = \"forestgreen\", color = \"black\", aes(x = ))\n\np4 &lt;- ggplot(data = saratoga, aes(x = Age)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Age (years\", y = \"Count\")\n\n(p1 + p2) / (p3 + p4)  + \n  plot_annotation(title = \"Univariate data analysis\")"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#model-2-add-interaction-term-for-fireplace-and-size",
+    "href": "slides/01-welcome_ch1.html#model-2-add-interaction-term-for-fireplace-and-size",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 2: Add interaction term for Fireplace and Size?",
+    "text": "Model 2: Add interaction term for Fireplace and Size?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#library(viridis)\n#saratoga$fire &lt;- as.factor(saratoga$Fireplace)\nggplot(data = saratoga, aes(x = Size, y = Price, color = fire, \n                         shape = fire, linetype = fire)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE, aes(linetype = fire)) + \n  labs(x = \"Size (1000 sq ft)\", y = \"Price ($1000)\", color = \"Fireplace\",\n       title = \"Price vs. size\", \n       subtitle = \"by whether it has a fireplace or not\") +\n  guides(lty = FALSE, shape = FALSE) +\n  scale_color_viridis_d(alpha = 0.6, end = 0.8)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#model-2-add-fireplace-size",
+    "href": "slides/01-welcome_ch1.html#model-2-add-fireplace-size",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 2: Add \\(Fireplace * Size\\)",
+    "text": "Model 2: Add \\(Fireplace * Size\\)\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n45.0000\n10.0209\n4.4906\n0.0000\n\n\nSize\n48.3306\n6.3482\n7.6132\n0.0000\n\n\nBaths\n25.7862\n3.7966\n6.7919\n0.0000\n\n\nBedrooms\n-8.9452\n2.7976\n-3.1974\n0.0014\n\n\nAcres\n2.0120\n2.0400\n0.9863\n0.3242\n\n\nFireplace\n-59.3043\n10.4881\n-5.6544\n0.0000\n\n\nAge\n-0.0518\n0.0503\n-1.0314\n0.3026\n\n\nSize:Fireplace\n40.5109\n6.1967\n6.5375\n0.0000\n\n\n\n\n\n\n\n\npr.model2 &lt;- lm(Price ~ Size + Baths + Bedrooms + Acres + Fireplace + Age +Fireplace*Size, data = saratoga)\ntidy(pr.model2) |&gt; kable(digits = 4)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#interpreting-interaction-effects-with-01-variable",
+    "href": "slides/01-welcome_ch1.html#interpreting-interaction-effects-with-01-variable",
+    "title": "Welcome and Chapter 1",
+    "section": "Interpreting interaction effects with 0/1 variable",
+    "text": "Interpreting interaction effects with 0/1 variable\n\\[\n\\begin{aligned}\n\\hat{y}& = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ x_1  + \\hat{\\beta}_2 ~ x_2 + \\hat{\\beta}_3 ~x_3 +\\hat{\\beta}_4 ~ x_1~x_2\\\\\n& = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ x_1 + \\hat{\\beta}_3 ~x_3\\hspace{3.9 in} \\text{  when } x_2=0\\\\\n& = (\\hat{\\beta}_0 +\\hat{\\beta}_2) + (\\hat{\\beta}_1 + \\hat{\\beta}_4) ~ x_1 +\\hat{\\beta}_3~x_3\\hspace{.75 in} \\text{  when } x_2=1\n\\end{aligned}\n\\]\nGeneral interpretation: When \\(x_2\\) is present, the slope between \\(x_1\\) and \\(y\\) increases(decreases) by \\(\\hat{\\beta}_4\\) units and the \\(y\\)-intercept increases(decreases) by \\(\\hat{\\beta}_2\\) units when all other variables are held constant."
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#model-3-try-ln-of-response-and-delete-some-variables",
+    "href": "slides/01-welcome_ch1.html#model-3-try-ln-of-response-and-delete-some-variables",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 3: Try ln of response and delete some variables",
+    "text": "Model 3: Try ln of response and delete some variables\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n4.092\n0.055\n74.866\n0.000\n\n\nSize\n0.306\n0.035\n8.694\n0.000\n\n\nBaths\n0.177\n0.020\n8.906\n0.000\n\n\nBedrooms\n-0.013\n0.015\n-0.850\n0.396\n\n\nFireplace\n0.081\n0.059\n1.390\n0.165\n\n\nSize:Fireplace\n0.026\n0.035\n0.743\n0.458\n\n\n\n\n\n\n\n\npr.model3 &lt;- lm(log(Price) ~ Size + Baths + Bedrooms  + Fireplace  + Fireplace*Size, data = saratoga)\ntidy(pr.model3) |&gt; kable(digits = 3)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#model-4-fewer-terms-yet",
+    "href": "slides/01-welcome_ch1.html#model-4-fewer-terms-yet",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 4: Fewer terms yet",
+    "text": "Model 4: Fewer terms yet\n\nOutputCodeAssumptions\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n4.026\n0.028\n143.310\n0\n\n\nSize\n0.344\n0.019\n17.817\n0\n\n\nBaths\n0.195\n0.020\n9.790\n0\n\n\n\n\n\n\n\n\npr.model4 &lt;- lm(log(Price) ~ Size + Baths, data = saratoga)\ntidy(pr.model4) |&gt; kable(digits = 3)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#assumptions",
+    "href": "slides/01-welcome_ch1.html#assumptions",
+    "title": "Welcome and Chapter 1",
+    "section": "Assumptions",
+    "text": "Assumptions"
   }
 ]

@@ -394,12 +394,28 @@ Modified from Figure 1.1. in BMLR]
 
 ## Example
 
-Beer and wine data
+Sea ice data
 
 ```{r}
-beer <- read_csv("data/beer_wine_data.csv")
-head(beer)
+si <- read_csv("data/seaice.csv")
+head(si)
 ```
+
+## Sea ice data information {.smaller}
+
+The National Oceanic and Atmospheric Administration measures the amount of sea ice in both the arctic and antarctic on a regular basis (at least daily). 
+
+Our data:
+
+ - Average amount of ice for the month of September in the Arctic
+ 
+ - September is the month with the least amount of ice in the Arctic
+ 
+ - Data from 1979 - 2025 (September isn't over yet so we don't have 2026 yet)
+ - Area = the total region covered by ice
+ 
+ - Extent = the total region with at least 15% ice cover (think about a slice of swiss cheese)
+
 
 
 
@@ -410,21 +426,21 @@ head(beer)
 ### Plot
 
 ```{r echo = F,fig.height=5}
-ggplot(data = beer, aes(x = Carbs, y = Calories)) + 
+ggplot(data = si, aes(x = year, y = extent)) + 
   geom_point() + 
   geom_smooth(method = "lm", se = FALSE) + 
-  labs(x = "Carbs", y = "Calories", 
-       title = "Calories vs. carbs") 
+  labs(x = "Year", y = "Extent of Ice", 
+       title = "Year vs. Extent of Ice") 
 ```
 
 ### Code 
 
 ```{r eval = F, echo = T}
-ggplot(data = beer, aes(x = Carbs, y = Calories)) + 
+ggplot(data = si, aes(x = year, y = extent)) + 
   geom_point() + 
-  geom_smooth(method = "lm", se = FALSE)) + 
-  labs(x = "Carbs", y = "Calories", 
-       title = "Calories vs. carbs") 
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Year", y = "Extent of Ice", 
+       title = "Year vs. Extent of Ice") 
 ```
 
 :::
@@ -437,7 +453,7 @@ ggplot(data = beer, aes(x = Carbs, y = Calories)) +
 ### Output
 
 ```{r echo = F}
-model1 <- lm(Calories ~ Carbs, data=beer)
+model1 <- lm(extent ~ year, data=si)
 tidy(model1) |> kable(digits = 3)
 ```
 
@@ -445,7 +461,7 @@ tidy(model1) |> kable(digits = 3)
 
 ```{r simplemodel-code, eval = F}
 # Fit and display model
-model1 <- lm(Calories ~ Carbs, data=beer)
+model1 <- lm(extent ~ year, data=si)
 tidy(model1) |> kable(digits = 3)
 ```
 
@@ -453,20 +469,70 @@ tidy(model1) |> kable(digits = 3)
 
 ## Interpretation {.smaller}
 
-$$\widehat{Calories} = 109.815 + 4.351 ~ Carbs$$
+$$\widehat{extent} = 158.155 - 0.076 ~ year$$
 
 
 ```{r echo = F}
-model1 <- lm(Calories ~ Carbs, data=beer)
+model1 <- lm(extent ~ year, data=si)
 tidy(model1) |> kable(digits = 3)
 ```
 
 . . .
 
 
-1. Write out the interpretations for `Carbs`. 
+1. Write out the interpretations for `year`. 
 2. Does the intercept have a meaningful interpretation? 
 
+
+## Center the data
+
+::: {.panel-tabset}
+
+### Create new variable
+
+ - We only have data starting in 1979.  So let's call that year 0.  The data at the beginning of the study.
+
+ - Create a new variable: $time = year - 1979$
+ 
+ - This is called centering
+ 
+```{r  eval = T, echo=F}
+# Fit and display model
+si |>
+  mutate(c_year = year-1979) -> si
+``` 
+ 
+### Code 
+
+```{r  eval = F}
+# Fit and display model
+si |>
+  mutate(c_year = year-1979) -> si
+```
+
+:::
+
+## Interpret new model {.smaller}
+
+$$\widehat{extent} = 7.625 - 0.076 ~ year$$
+
+
+```{r echo = F}
+model2 <- lm(extent ~ c_year, data=si)
+tidy(model2) |> kable(digits = 3)
+```
+
+. . .
+
+
+Questions:
+
+ - 1. What is the interpretation of the y-intercept now? 
+ 
+ - 2. Did the slope change?
+
+
+ 
 
 ## Check assumptions {.smaller}
 
@@ -477,7 +543,7 @@ tidy(model1) |> kable(digits = 3)
 ```{r echo = F}
 par(mfrow=c(2,2))
 
-plot(model1, pch=16, col='#006EA1')
+plot(model2, pch=16, col='#006EA1')
 ```
 
 ### Code 
@@ -486,13 +552,71 @@ plot(model1, pch=16, col='#006EA1')
 # Plot the diagnostic plots
 par(mfrow=c(2,2))
 
-plot(model1, pch=16, col='#006EA1')
+plot(model2, pch=16, col='#006EA1')
 ```
 
 `pch` defines the shape of the plotted symbol
 
 `col` defines the color of the plotted symbol
 :::
+
+## What about the curvature?
+
+Try polynomial regression:
+
+$$y_i = \beta_0 + \beta_1 ~ xi + \beta_2 ~x_i^2 + \beta_3 ~ x_i^3 ... + \beta_d ~ x_i^d + \epsilon_i $$
+ 
+ . . .
+
+In this case, maybe a cubic (why?):
+
+$$\widehat{extent} = \hat{\beta}_0 + \hat{\beta}_1 ~ c\_year + \hat{\beta}_2 ~c\_year^2 + \hat{\beta}_3 ~ c\_year^3 $$
+
+## New model
+
+::: {.panel-tabset}
+
+### Output
+
+```{r echo = F}
+model3 <- lm(extent ~ poly(c_year, 3), data=si)
+tidy(model3) |> kable(digits = 3)
+```
+
+### Code 
+
+```{r  eval = F}
+# Fit and display model
+model3 <- lm(extent ~ poly(c_year,3), data=si)
+tidy(model3) |> kable(digits = 3)
+```
+
+:::
+
+## Check assumptions {.smaller}
+
+::: {.panel-tabset}
+
+### Output
+
+```{r echo = F}
+par(mfrow=c(2,2))
+
+plot(model3, pch=16, col='#006EA1')
+```
+
+### Code 
+
+```{r  eval = F}
+# Plot the diagnostic plots
+par(mfrow=c(2,2))
+
+plot(model3, pch=16, col='#006EA1')
+```
+
+
+:::
+
 
 
 

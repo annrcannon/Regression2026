@@ -1762,7 +1762,7 @@
     "href": "slides/01-welcome_ch1.html#interpretation",
     "title": "Welcome and Chapter 1",
     "section": "Interpretation",
-    "text": "Interpretation\n\\[\\widehat{Calories} = 109.815 + 4.351 ~ Carbs\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n109.815\n4.701\n23.358\n0\n\n\nCarbs\n4.351\n0.425\n10.231\n0\n\n\n\n\n\n\n\nWrite out the interpretations for Carbs.\nDoes the intercept have a meaningful interpretation?"
+    "text": "Interpretation\n\\[\\widehat{extent} = 158.155 - 0.076 ~ year\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n158.155\n11.277\n14.025\n0\n\n\nyear\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n\n\nWrite out the interpretations for year.\nDoes the intercept have a meaningful interpretation?"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#centering",
@@ -6516,7 +6516,7 @@
     "href": "slides/01-welcome_ch1.html#example",
     "title": "Welcome and Chapter 1",
     "section": "Example",
-    "text": "Example\nBeer and wine data\n\nbeer &lt;- read_csv(\"data/beer_wine_data.csv\")\nhead(beer)\n\n# A tibble: 6 × 5\n  Type  Brand                                   `Percent alcohol` Calories Carbs\n  &lt;chr&gt; &lt;chr&gt;                                               &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;\n1 Beer  Budweiser Select 55                                   2.4       55     2\n2 Beer  Miller 64                                             2.8       64     2\n3 Beer  Corona Premier                                        4         90     3\n4 Beer  Budweiser Select                                      4.3      100     3\n5 Beer  Busch Light                                           4.1      100     3\n6 Beer  Dogfish Head Slightly Mighty Lo-Cal IPA               4        100     3"
+    "text": "Example\nSea ice data\n\nsi &lt;- read_csv(\"data/seaice.csv\")\nhead(si)\n\n# A tibble: 6 × 6\n   year    mo source_dataset region extent  area\n  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1  1979     9 NSIDC-0051     N        7.05  4.58\n2  1980     9 NSIDC-0051     N        7.67  4.87\n3  1981     9 NSIDC-0051     N        7.14  4.44\n4  1982     9 NSIDC-0051     N        7.3   4.43\n5  1983     9 NSIDC-0051     N        7.39  4.7 \n6  1984     9 NSIDC-0051     N        6.81  4.11"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#assessing-conditions",
@@ -6544,14 +6544,14 @@
     "href": "slides/01-welcome_ch1.html#is-the-relationship-linear",
     "title": "Welcome and Chapter 1",
     "section": "Is the relationship linear?",
-    "text": "Is the relationship linear?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = beer, aes(x = Carbs, y = Calories)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE)) + \n  labs(x = \"Carbs\", y = \"Calories\", \n       title = \"Calories vs. carbs\")"
+    "text": "Is the relationship linear?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = si, aes(x = year, y = extent)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE) + \n  labs(x = \"Year\", y = \"Extent of Ice\", \n       title = \"Year vs. Extent of Ice\")"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#compute-the-model",
     "href": "slides/01-welcome_ch1.html#compute-the-model",
     "title": "Welcome and Chapter 1",
     "section": "Compute the model",
-    "text": "Compute the model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n109.815\n4.701\n23.358\n0\n\n\nCarbs\n4.351\n0.425\n10.231\n0\n\n\n\n\n\n\n\n\n# Fit and display model\nmodel1 &lt;- lm(Calories ~ Carbs, data=beer)\ntidy(model1) |&gt; kable(digits = 3)"
+    "text": "Compute the model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n158.155\n11.277\n14.025\n0\n\n\nyear\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n\n\n\n# Fit and display model\nmodel1 &lt;- lm(extent ~ year, data=si)\ntidy(model1) |&gt; kable(digits = 3)"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#interpretation-1",
@@ -6565,7 +6565,7 @@
     "href": "slides/01-welcome_ch1.html#check-assumptions",
     "title": "Welcome and Chapter 1",
     "section": "Check assumptions",
-    "text": "Check assumptions\n\nOutputCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot the diagnostic plots\npar(mfrow=c(2,2))\n\nplot(model1, pch=16, col='#006EA1')\n\npch defines the shape of the plotted symbol\ncol defines the color of the plotted symbol"
+    "text": "Check assumptions\n\nOutputCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot the diagnostic plots\npar(mfrow=c(2,2))\n\nplot(model2, pch=16, col='#006EA1')\n\npch defines the shape of the plotted symbol\ncol defines the color of the plotted symbol"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#data-saratoga-house-prices",
@@ -6622,5 +6622,47 @@
     "title": "Welcome and Chapter 1",
     "section": "Assumptions",
     "text": "Assumptions"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#sea-ice-data-information",
+    "href": "slides/01-welcome_ch1.html#sea-ice-data-information",
+    "title": "Welcome and Chapter 1",
+    "section": "Sea ice data information",
+    "text": "Sea ice data information\nThe National Oceanic and Atmospheric Administration measures the amount of sea ice in both the arctic and antarctic on a regular basis (at least daily).\nOur data:\n\nAverage amount of ice for the month of September in the Arctic\nSeptember is the month with the least amount of ice in the Arctic\nData from 1979 - 2025 (September isn’t over yet so we don’t have 2026 yet)\nArea = the total region covered by ice\nExtent = the total region with at least 15% ice cover (think about a slice of swiss cheese)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#center-the-data",
+    "href": "slides/01-welcome_ch1.html#center-the-data",
+    "title": "Welcome and Chapter 1",
+    "section": "Center the data",
+    "text": "Center the data\n\nCreate new variableCode\n\n\n\nWe only have data starting in 1979. So let’s call that year 0. The data at the beginning of the study.\nCreate a new variable: \\(time = year - 1979\\)\nThis is called centering\n\n\n\n\n# Fit and display model\nsi |&gt;\n  mutate(c_year = year-1979) -&gt; si"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#interpret-new-model",
+    "href": "slides/01-welcome_ch1.html#interpret-new-model",
+    "title": "Welcome and Chapter 1",
+    "section": "Interpret new model",
+    "text": "Interpret new model\n\\[\\widehat{extent} = 7.625 - 0.076 ~ year\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.625\n0.150\n50.693\n0\n\n\nc_year\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n\nQuestions:\n\n\nWhat is the interpretation of the y-intercept now?\n\n\nDid the slope change?"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#what-about-the-curvature",
+    "href": "slides/01-welcome_ch1.html#what-about-the-curvature",
+    "title": "Welcome and Chapter 1",
+    "section": "What about the curvature?",
+    "text": "What about the curvature?\nTry polynomial regression:\n\\[y_i = \\beta_0 + \\beta_1 ~ xi + \\beta_2 ~x_i^2 + \\beta_3 ~ x_i^3 ... + \\beta_d ~ x_i^d + \\epsilon_i \\]\n\nIn this case, maybe a cubic (why?):\n\\[\\widehat{extent} = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ c\\_year + \\hat{\\beta}_2 ~c\\_year^2 + \\hat{\\beta}_3 ~ c\\_year^3 \\]"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#new-model",
+    "href": "slides/01-welcome_ch1.html#new-model",
+    "title": "Welcome and Chapter 1",
+    "section": "New model",
+    "text": "New model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n5.875\n0.069\n85.003\n0.000\n\n\npoly(c_year, 3)1\n-7.074\n0.474\n-14.928\n0.000\n\n\npoly(c_year, 3)2\n-0.040\n0.474\n-0.084\n0.933\n\n\npoly(c_year, 3)3\n1.640\n0.474\n3.462\n0.001\n\n\n\n\n\n\n\n\n# Fit and display model\nmodel3 &lt;- lm(extent ~ poly(c_year,3), data=si)\ntidy(model3) |&gt; kable(digits = 3)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#check-assumptions-1",
+    "href": "slides/01-welcome_ch1.html#check-assumptions-1",
+    "title": "Welcome and Chapter 1",
+    "section": "Check assumptions",
+    "text": "Check assumptions\n\nOutputCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot the diagnostic plots\npar(mfrow=c(2,2))\n\nplot(model3, pch=16, col='#006EA1')"
   }
 ]

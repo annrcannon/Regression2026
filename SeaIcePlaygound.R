@@ -161,6 +161,78 @@ ggplot(d, aes(x=b1, y=p_4)) +
 
 
 glance(si_cu_sp_3k) |>
-  select(r.squared, adj.r.squared, AIC, BIC)  
+  select(r.squared, adj.r.squared, AIC, BIC) 
 
 
+#Lab stuff
+
+ggplot(seaice, aes(x=c_year, y=area)) +
+  geom_point()
+
+model1 <- lm(area ~ c_year, data = seaice)
+tidy(model1) |> kable(digits=3)
+
+model2 <- lm(area ~ poly(c_year , 2), data = seaice)
+tidy(model2) |> kable(digits=3)
+
+model3 <- lm(area ~ poly(c_year , 3), data = seaice)
+tidy(model3) |> kable(digits=3)
+
+model4 <- lm(area ~ poly(c_year , 4), data = seaice)
+tidy(model4) |> kable(digits=3)
+
+model5 <- lm(area ~ poly(c_year , 5), data = seaice)
+tidy(model5) |> kable(digits=3)
+
+anova(model5)
+anova(model3)
+anova(model1)
+
+ggplot(seaice, aes(x=c_year, y=area)) +
+  geom_point()+
+  geom_smooth(formula = y~poly(x,3), method="lm")
+
+# choose knots at 10, 20, 30
+
+model6 <- lm(area~bs(c_year, knots=c(10,20,30)), data=seaice)
+coef(summary(model6))
+anova(model6)
+
+model7 <- lm(area~bs(c_year, df=6),data=seaice)
+coef(summary(model7))
+
+
+#natural splines
+model8 <- lm(area ~ ns(c_year , df = 6), data = seaice)
+coef(summary(model8))
+
+#compare models
+
+model3_glance <- glance(model3) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model5_glance <- glance(model5) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model6_glance <- glance(model6) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model7_glance <- glance(model7) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+model8_glance <- glance(model8) |>
+  select(r.squared, adj.r.squared, AIC, BIC)
+
+model3_glance |>
+  bind_rows(model5_glance) |>
+  bind_rows(model6_glance) |>
+  bind_rows(model7_glance) |>
+  bind_rows(model8_glance) |>
+  bind_cols(model = c("Model3", "Model5", "Model6",
+                      "Model7", "Model8")) |>
+  select(model, everything()) |>
+  kable(digits = 3)
+
+par(mfrow=c(2,2))
+
+plot(model3)
+plot(model5)
+plot(model6)
+plot(model7)
+plot(model8)

@@ -1,13 +1,13 @@
 ---
 title: "Moving Beyond Linearity - Chapter 7 (ISLR)"
-subtitle: "Wage Data"
+format: html
 ---
 
 ## Lab Setup
 
 1) Copy the project lab folder located at *Home -> STA363_inst_files-> labs*. If you check the box next to the folder name, then click the small gear icon you can "copy to" and put a copy of the folder in your newly created folder. 
 2) Now, click *File-> Open Project* and navigate to the project file in the folder you just copied. 
-3) You can place your responses in the file *qmd* file included. 
+3) You can place your responses in the *qmd* file included. 
 
 ## Packages
 
@@ -23,27 +23,22 @@ library(splines)
 
 ## Data
 
-For this lab, we are using `wage` data adapted from the `ISLR` package. This can be loaded in by running:
+For this lab, we are using `seaice` data downloaded from an NOAA webiste. This can be loaded in by running:
 
-```{r}
-load(here::here("labs/data/wage.rda"))
+```{r eval=FALSE}
+seaice <- read_csv("data/seaice.csv")
 ```
 
 Below is a data dictionary for this dataset:
 
 | variable   | definition                                                                                                                      |
-|-------------|-----------------------------------------------------------|
-| year       | Year that wage information was recorded                                                                                         |
-| age        | Age of worker                                                                                                                   |
-| maritl     | A factor with levels 1. Never Married 2. Married 3. Widowed 4. Divorced and 5. Separated indicating marital status              |
-| race       | A factor with levels 1. White 2. Black 3. Asian and 4. Other indicating race                                                    |
-| education  | A factor with levels 1. \< HS Grad 2. HS Grad 3. Some College 4. College Grad and 5. Advanced Degree indicating education level |
-| region     | Region of the country (mid-atlantic only)                                                                                       |
-| jobclass   | A factor with levels 1. Industrial and 2. Information indicating type of job                                                    |
-| health     | A factor with levels 1. \<=Good and 2. \>=Very Good indicating health level of worker                                           |
-| health_ins | A factor with levels 1. Yes and 2. No indicating whether worker has health insurance                                            |
-| logwage    | Log of workers wage                                                                                                             |
-| wage       | Workers raw wage                                                                                                                |
+|----------------|-----------------------------------------------------------|
+| year           | Year that ice information was recorded                                                                                         |
+| mo             | Month data was recorded - September in all cases here                                                                           |
+| source_dataset | Which NOAA dataset the data came from (all but the most recent observation come from the same dataset)                     |
+| region         | All observations come from the N(orth) or artic region                                                                      |
+| extent         | Total region with at least 15% ice cover                                                                                    |
+| area           | Total region covered by ice                                                                                                 |
 
 
 ### Polynomial Regression
@@ -52,20 +47,20 @@ Polynomial regression can be thought of as doing polynomial expansion on a varia
 
 The following step will take `age` and replace it with the variables `age`, `age^2`, `age^3`, and `age^4` since we set `degree = 4` (this is a lie, keep reading).
 
-```{r}
+```{r eval=FALSE}
 model1 <- lm(wage ~ poly(age , 4), data = wage)
 coef(summary(model1))
 ```
 
 Though we expect `age`, `age^2`, `age^3`, and `age^4`, the function it returns variables that are a basis of orthogonal polynomials, which means that each of the columns is a linear combination of the variables `age`, `age^2`, `age^3`, and `age^4`. We can see this by using `poly()` directly with `raw = FALSE` since it is the default
 
-```{r}
+```{r eval=FALSE}
 poly(1:6, degree = 4, raw = FALSE)
 ```
 
 These variables don't have the format we assumed. But this is still a well-reasoned transformation. We can get the raw polynomial transformation by setting `raw = TRUE`
 
-```{r}
+```{r eval=FALSE}
 poly(1:6, degree = 4, raw = TRUE)
 ```
 

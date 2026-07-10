@@ -572,7 +572,7 @@ In this case, maybe a cubic (why?):
 
 $$\widehat{extent} = \hat{\beta}_0 + \hat{\beta}_1 ~ c\_year + \hat{\beta}_2 ~c\_year^2 + \hat{\beta}_3 ~ c\_year^3 $$
 
-## New model
+## New model {.smaller}
 
 ::: {.panel-tabset}
 

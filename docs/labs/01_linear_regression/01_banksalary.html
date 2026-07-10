@@ -79,9 +79,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9de9f6925d305bcf5b7eb9351f368d06.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e6c2f8e9f8fe309794ad6cce16199876.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-621b01ff075375cfd517395ffb2954ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-e6c2f8e9f8fe309794ad6cce16199876.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-228f38637a3b287bbc908b3339d6cd35.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-37681f591e8b5593a73389242f9899fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-228f38637a3b287bbc908b3339d6cd35.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -427,7 +427,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Stat 363: Multiple Linear Regression Review</h1>
-<p class="subtitle lead">Bank Salary Case Study</p>
 </div>
 
 
@@ -450,7 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Log into the course RStudio Server. <a href="http://turing.cornellcollege.edu:8787/" class="uri">http://turing.cornellcollege.edu:8787/</a> Make sure to close out of any projects on the top right corner.</li>
 <li>Click the “File” tab in the bottom right corner. Then click “Home” across the top of the panel.</li>
-<li>If ones does not exists already, use the “+📂” button to create a new folder and call it “STA363”</li>
+<li>If ones does not exists already, use the “+📁” button to create a new folder and call it “STA363”</li>
 <li>Copy project folder called “01_linear_regression” located at <em>Home -&gt; STA363_inst_files-&gt; labs</em>. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.</li>
 <li>Now, click <em>File-&gt; Open Project</em> and navigate to the project file in the folder you just copied.</li>
 <li>You can place your responses in the file <em>01_banksalary_fillable.qmd</em>.</li>
@@ -471,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><em>First, we will speculate on what we expect to find and then we will perform an analysis using the data.</em></p>
 <ul>
-<li>Read the data in and use a<code>view()</code> to see the data, but do not do anything else with the data on the computer until question 6.</li>
+<li>Read the data in and use a <code>view()</code> to see the data, but do not do anything else with the data on the computer until question 6.</li>
 </ul>
 </section>
 <section id="questions" class="level2">
@@ -510,12 +509,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaic)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)   <span class="co"># may have to install</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/banksalary.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(mosaic)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(skimr)   # may have to install</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#library(dplyr)  </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#library(ggplot2)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#library(gridExtra)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>bank <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/banksalary.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Data from skilled entry-level clerical workers at bank being sued for sex discrimination in 1970s (from Statistical Sleuth, Ch 12):</p>
 <ul>

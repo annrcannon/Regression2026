@@ -1,6 +1,6 @@
 ---
 title: 'Stat 363: Multiple Linear Regression Review'
-subtitle: 'Bank Salary Case Study'
+format: html
 execute: 
   eval: false
 ---
@@ -32,7 +32,7 @@ Data from skilled entry-level clerical workers at bank being sued for sex discri
 
 *First, we will speculate on what we expect to find and then we will perform an analysis using the data.*
 
-- Read the data in and use a`view()` to see the data, but do not do anything else with the data on the computer until question 6.
+- Read the data in and use a `view()` to see the data, but do not do anything else with the data on the computer until question 6.
 
 
 ## Questions
@@ -89,12 +89,12 @@ Significance:
 ## Code 
 
 ```{r, setup, include=T}
-library(mosaic)
-library(skimr)   # may have to install
-library(dplyr)  
-library(ggplot2)
-library(gridExtra)
-bank <- read.csv("data/banksalary.csv")
+#library(mosaic)
+#library(skimr)   # may have to install
+#library(dplyr)  
+#library(ggplot2)
+#library(gridExtra)
+bank <- read_csv("data/banksalary.csv")
 ```
 
 Data from skilled entry-level clerical workers at bank being sued for sex discrimination in 1970s (from Statistical Sleuth, Ch 12):

@@ -45,19 +45,65 @@ library(ggfortify)
 
 # Likelihood
 
+## Why do we need likelihood?
+
+Question: On Monday we reviewed simple linear regression.  How did we determine the equation for the best model for Y given a particular explanatory variable X?
+
+ . . .
+
+Answer: We used the sum of the squared residuals. 
+
+ . . .
+
+But this only works for cases where Y has a Normal distribution.
+
+## Example:
+
+Space Shuttle Challenger:  The space shuttle Challenger mission, set to fly on January 28, 1986, was highlighted across the country as being a mission for students.  For the first time, a high school teacher was chosen for astronaut training and planned to deliver lessons to students across the country from space.
+
+ . . .
+ 
+There was controversy over launching the shuttle that day because the forecasted temperature was $26^\circ$F.  The coldest previous launch was $53^\circ$F.  Engineers were concerned that a part called the O-ring would fail at lower temperatures.
+
+## Predict failure from previous data? {.smaller}
+
+Let's plot whether there were O-ring failures against the launch temperature for all shuttle flights before the fated Challenger flight.
+
+```{r, echo=FALSE}
+shuttle <- read.csv("data/Shuttle.CSV")
+
+ggplot(data=shuttle, aes(x=Temp, y=ODamage)) +
+  geom_point()
+
+```
+
+ . . .
+ 
+Does linear regression make sense? What does a residual mean here?
+
+## New idea
+
+We need a new way to define "best" for a model where least squares doesn't work.  
+
+ - In this chapter we introduce a method called maximum likelihood
+ 
+ - Maximum likelihood uses the idea (and function called) likelihood
+ 
+ - Maximum likelihood plays the same role that least squares played in regression with Normal error terms.
+
 ## What is the likelihood? {.smaller}
 
 A **likelihood** is a function that tells us how likely we are to observe our data for a given parameter value (or values). 
 
-- Unlike Ordinary Least Squares (OLS), they do not require the responses be independent, identically distributed, and normal (iidN)
+- Unlike Ordinary Least Squares (OLS), the likelihood does not require the responses to be independent, identically distributed, and normal (iidN)
 
-- They are **not** the same as probability functions
+- Likelihoods are **not** the same as probability functions
 
-  - **Probability function:** Fixed parameter value(s) + input possible outcomes $\Rightarrow$ probability of seeing the different outcomes given the parameter value(s)
+  - **Probability function:** Fixed parameter value(s). Input possible outcomes $\Rightarrow$ probability of seeing these outcomes given the parameter value(s)
   
 
   
-  - **Likelihood:** Fixed data + input possible parameter values $\Rightarrow$ probability of seeing the fixed data for each parameter value
+  - **Likelihood:** Fixed data.  Input possible parameter values $\Rightarrow$ probability of seeing the fixed data for that particular parameter value
 
 
 
@@ -79,7 +125,7 @@ We are focusing on the first three fouls for this analysis, but this could easil
 :::
 
 
-## Fouls in college basketball games
+## Fouls in college basketball games {.smaller}
 
 ```{r}
 refs <- read_csv("data/04-refs.csv")
@@ -317,7 +363,7 @@ lik_plot + loglik_plot
 
 . . .
 
-Since calculus is not a pre-req, we will forgo this quest. 
+Since calculus is not a pre-req, we will forgo this quest. See STA 347/348.
 
 ## Model 2: Conditional model 
 
@@ -449,7 +495,7 @@ The **maximum likelihood estimate (MLE)** is the value between 0 and 1 where we 
 
 - $\hat{p}_H = 46/90 = 0.511$
 
-. . .
+ . . .
 
 **Model 2 (Conditional Model)**
 
@@ -779,9 +825,11 @@ $$p_H = \frac{e^{\beta_0 + \beta_1x_1 + \dots + \beta_px_p}}{1 + e^{\beta_0 + \b
 
 ## Acknowledgements
 
-These slides are based on content in [BMLR: Chapter 1 - Review of Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-MLRreview.html)
+These slides are based on content in [BMLR: Chapter 2 - Beyond Least Squares: Using Likelihoods](https://bookdown.org/roback/bookdown-BeyondMLR/ch-beyondmost.html)
 
 Initial versions of the slides are by Dr. Maria Tackett, Duke University
+
+Original edits by Tyler George
 
 
 

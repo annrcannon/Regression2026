@@ -1,5 +1,5 @@
 institute: "{{< var college.name >}} <br> {{< var course.number >}} {{< var course.semester >}}"
-author: "Tyler George"
+author: "Ann Cannon"
 footer: "[🔗 {{< var course.url >}}]({{< var course.url >}})"
 logo: "img/favicon.png"
 format:

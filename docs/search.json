@@ -1902,7 +1902,7 @@
     "href": "slides/01-welcome_ch1_o.html",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Dr. Ann Cannon: acannon@cornellcollege.edu\n\n\n\n\n\nCourse Dates: August 24th to September 16th\nCourse sessions: Daily, 9am-11am and 1pm-3pm; No class second Wednesday afternoon\nExam Dates: due on September 2nd and September 16th\n\n\n\n\nGeneralized Linear Models (Ch 1 - 6)\n\nIntroduce models for non-normal response variables\nEstimation, interpretation, and inference\nMathematical details showing how GLMs are connected\n\n\n\n\nIn statistics, a generalized linear model (GLM) is a flexible generalization of ordinary linear regression. The GLM generalizes linear regression by allowing the linear model to be related to the response variable via a link function and by allowing the magnitude of the variance of each measurement to be a function of its predicted value.\n\n\nWikipedia\n. . .\nLogistic regression\n\\[\\begin{aligned}\\pi = P(y = 1 | x) \\hspace{2mm} &\\Rightarrow \\hspace{2mm} \\text{Link function: } \\log\\big(\\frac{\\pi}{1-\\pi}\\big) \\\\\n&\\Rightarrow \\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1~x\\end{aligned}\\]\n\n\n\nModeling correlated data (Ch 7 - 9)\n\nIntroduce multilevel models for correlated and longitudinal data\nEstimation, interpretation, and inference\nMathematical details, particularly diving into covariance structures\n\n\n\n\nMore Regression Models (ITSL Chapter 7) - Polynomial Regression - Regression Splines - Smoothing Splines - Generalized Additive Models (GAMS)\n\n\n\n. . .\nPre-reqs\n\nSTA 201, 202 and DSC 223\n\n. . .\nBackground knowledge\n\n\n\nStatistical content\n\nLinear and logistic regression\nStatistical inference\nBasic understanding of random variables\n\n\n\n\nComputing\n\nUsing R for data analysis\nWriting reports using R Markdown or Quarto\n\n\n\n\n\n\n\n\nWebsite\n\nhttps://annrcannon.github.io/Regression2026/\nCentral hub for the course\nNotes\nLabs\n\n\n\n\n\n\nMoodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\n\n-R Server: - http://turing.cornellcollege.edu:8787/ - Datasets - Quarto file storage\n\n\n\n\nLecture\nIndividual and group labs\nMini-projects\nExams\nBring a fully-charged laptop\n\n. . .\nAttendance is expected (if you are healthy!)\n\n\n\n\n\n\n\nBeyond Multiple Linear Regression by Paul Roback and Julie Legler\n\nAvailable online\nHard copies available for purchase\n\n\n\n\n\n\nThe secondary text is: An Introduction to Statistical Learning with Applications in R by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani – it is freely available online. Chapter 7.\n\nHard copies available for purchase\n\n\n\n\n\nRStudio Server is installed and should be used\nhttp://turing.cornellcollege.edu:8787/\n\n\n\n\nReadings\n\nPrimarily from Beyond Multiple Linear Regression\nRecommend reading assigned text before lecture\n\n. . .\nHomework - Primarily from Beyond Multiple Linear Regression\n\nIndividual assignments\nWork together but must complete your own work. Discuss but don’t copy.\n\n\n\n\nMini-projects\nExamples:\n\nMini-project 01: Focused on models for non-normal response variables, such as count data\nMini-project 02: Focused on logistic regression models\n\n. . .\n\nShort write up and short presentation\nTeam-based\n\n\n\n\n\nTwo exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete this component.\n\n\n\n\n\nFinal grades will be calculated as follows\n\n\n\nCategory\nPoints\n\n\n\n\nHomework\n300\n\n\nLabs & Participation\n75\n\n\nMini Projects\n225\n\n\nExams\n400\n\n\nTotal\n1000\n\n\n\nSee Syllabus on website for letter grade thresholds.\n\n\n\n\nOffice hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\nDouble check course calendar\nMake appointments by going to ?var:instructor.appointment_url\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
+    "text": "Dr. Ann Cannon: acannon@cornellcollege.edu\n\n\n\n\n\nCourse Dates: August 24th to September 16th\nCourse sessions: Daily, 9am-11am and 1pm-3pm; No class second Wednesday afternoon\nExam Dates: due on September 2nd and September 16th\n\n\n\n\nGeneralized Linear Models (Ch 1 - 6)\n\nIntroduce models for non-normal response variables\nEstimation, interpretation, and inference\nMathematical details showing how GLMs are connected\n\n\n\n\nIn statistics, a generalized linear model (GLM) is a flexible generalization of ordinary linear regression. The GLM generalizes linear regression by allowing the linear model to be related to the response variable via a link function and by allowing the magnitude of the variance of each measurement to be a function of its predicted value.\n\n\nWikipedia\n. . .\nLogistic regression\n\\[\\begin{aligned}\\pi = P(y = 1 | x) \\hspace{2mm} &\\Rightarrow \\hspace{2mm} \\text{Link function: } \\log\\big(\\frac{\\pi}{1-\\pi}\\big) \\\\\n&\\Rightarrow \\log\\big(\\frac{\\pi}{1-\\pi}\\big) = \\beta_0 + \\beta_1~x\\end{aligned}\\]\n\n\n\nModeling correlated data (Ch 7 - 9)\n\nIntroduce multilevel models for correlated and longitudinal data\nEstimation, interpretation, and inference\nMathematical details, particularly diving into covariance structures\n\n\n\n\nMore Regression Models (ITSL Chapter 7) - Polynomial Regression - Regression Splines - Smoothing Splines - Generalized Additive Models (GAMS)\n\n\n\n. . .\nPre-reqs\n\nSTA 201, 202 and DSC 223\n\n. . .\nBackground knowledge\n\n\n\nStatistical content\n\nLinear and logistic regression\nStatistical inference\nBasic understanding of random variables\n\n\n\n\nComputing\n\nUsing R for data analysis\nWriting reports using R Markdown or Quarto\n\n\n\n\n\n\n\n\nWebsite\n\nhttps://annrcannon.github.io/Regression2026/\nCentral hub for the course\nNotes\nLabs\n\n\n\n\n\n\nMoodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\nR Server:\n\nhttp://turing.cornellcollege.edu:8787/\nDatasets\nQuarto file storage\n\n\n\n\n\n\nLecture\nIndividual and group labs\nMini-projects\nExams\nBring a fully-charged laptop\n\n. . .\nAttendance is expected (if you are healthy!)\n\n\n\n\n\n\n\nBeyond Multiple Linear Regression by Paul Roback and Julie Legler\n\nAvailable online\nHard copies available for purchase\n\n\n\n\n\n\nThe secondary text is: An Introduction to Statistical Learning with Applications in R by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani – it is freely available online. Chapter 7.\n\nHard copies available for purchase\n\n\n\n\n\nRStudio Server is installed and should be used\nhttp://turing.cornellcollege.edu:8787/\n\n\n\n\nReadings\n\nPrimarily from Beyond Multiple Linear Regression\nRecommend reading assigned text before lecture\n\n. . .\nHomework - Primarily from Beyond Multiple Linear Regression\n\nIndividual assignments\nWork together but must complete your own work. Discuss but don’t copy.\n\n\n\n\nMini-projects\n\nMini-project 01: Focused on logistic regression models\nMini-project 02: Focused on models for response variables that represent count data\nMini-project 03: Focused on data collected at multiple levels\n\n. . .\n\nShort write up and short presentation\nTeam-based\n\n\n\n\n\nTwo exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete the second component.\n\n\n\n\n\nFinal grades will be calculated as follows\n\n\n\nCategory\nPoints\n\n\n\n\nHomework\n300\n\n\nLabs & Participation\n75\n\n\nMini Projects\n225\n\n\nExams\n400\n\n\nTotal\n1000\n\n\n\nSee Syllabus on website for letter grade thresholds.\n\n\n\n\nOffice hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#instructor",
@@ -2014,14 +2014,14 @@
     "href": "slides/01-welcome_ch1_o.html#activities-assessments-1",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Mini-projects\nExamples:\n\nMini-project 01: Focused on models for non-normal response variables, such as count data\nMini-project 02: Focused on logistic regression models\n\n. . .\n\nShort write up and short presentation\nTeam-based"
+    "text": "Mini-projects\n\nMini-project 01: Focused on logistic regression models\nMini-project 02: Focused on models for response variables that represent count data\nMini-project 03: Focused on data collected at multiple levels\n\n. . .\n\nShort write up and short presentation\nTeam-based"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#exams",
     "href": "slides/01-welcome_ch1_o.html#exams",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Two exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete this component."
+    "text": "Two exams this block, due on September 2nd and September 16th.\nEach will have two components\n\nComponent 1 will be on these dates and will be a closed-book, closed-note, in-class exam.\nComponent 2 will be a take-home, open-book, open-note exam.\nYou will have 12 hours or more to complete the second component."
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#grading",
@@ -2035,14 +2035,14 @@
     "href": "slides/01-welcome_ch1_o.html#resources",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Office hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\nDouble check course calendar\nMake appointments by going to ?var:instructor.appointment_url\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
+    "text": "Office hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt.\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at ?var:college.support."
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#setup---r-packages",
     "href": "slides/01-welcome_ch1_o.html#setup---r-packages",
     "title": "Welcome and Chapter 1",
     "section": "Setup - R Packages",
-    "text": "Setup - R Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(latex2exp)\nlibrary(GGally)\nlibrary(knitr)\nlibrary(patchwork)\nlibrary(viridis)\nlibrary(ggfortify)"
+    "text": "Setup - R Packages\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(latex2exp)\nlibrary(GGally)\nlibrary(knitr)\nlibrary(patchwork)\nlibrary(viridis)\nlibrary(ggfortify)\nlibrary(tailor)\nderby &lt;- read_csv(\"data/derbyplus.csv\")"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#assumptions-for-linear-regression",
@@ -2091,7 +2091,7 @@
     "href": "slides/01-welcome_ch1_o.html#data",
     "title": "Welcome and Chapter 1",
     "section": "Data",
-    "text": "Data\n\nderby &lt;- read_csv(\"data/derbyplus.csv\")\n\n\nderby |&gt;\n  head(5) |&gt; kable()\n\n\n\n\nyear\nwinner\ncondition\nspeed\nstarters\n\n\n\n\n1896\nBen Brush\ngood\n51.66\n8\n\n\n1897\nTyphoon II\nslow\n49.81\n6\n\n\n1898\nPlaudit\ngood\n51.16\n4\n\n\n1899\nManuel\nfast\n50.00\n5\n\n\n1900\nLieut. Gibson\nfast\n52.28\n7"
+    "text": "Data\n\nsaratoga &lt;- read_csv(\"data/saratoga.csv\")\n\n\nsaratoga |&gt;\n  head(5) |&gt; kable()\n\n\n\n\nPrice\nSize\nBaths\nBedrooms\nFireplace\nAcres\nAge\n\n\n\n\n142.212\n1.982\n1.0\n3\n0\n2.00\n133\n\n\n134.865\n1.676\n1.5\n3\n1\n0.38\n14\n\n\n118.007\n1.694\n2.0\n3\n1\n0.96\n15\n\n\n138.297\n1.800\n1.0\n2\n1\n0.48\n49\n\n\n129.470\n2.088\n1.0\n3\n1\n1.84\n29"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#data-analysis-life-cycle",
@@ -2112,42 +2112,42 @@
     "href": "slides/01-welcome_ch1_o.html#plots-for-univariate-eda",
     "title": "Welcome and Chapter 1",
     "section": "Plots for univariate EDA",
-    "text": "Plots for univariate EDA\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np1 &lt;- ggplot(data = derby, aes(x = speed)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Winning speed (ft/s)\", y = \"Count\")\n\np2 &lt;- ggplot(data = derby, aes(x = starters)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Starters\", y = \"Count\")\n\np3 &lt;- ggplot(data = derby, aes(x = condition)) +\n   geom_bar(fill = \"forestgreen\", color = \"black\", aes(x = ))\n\np1 + (p2 / p3) + \n  plot_annotation(title = \"Univariate data analysis\")"
+    "text": "Plots for univariate EDA\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np1 &lt;- ggplot(data = saratoga, aes(x = Price)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Price ($1000)\", y = \"Count\")\n\np2 &lt;- ggplot(data = saratoga, aes(x = Size)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Size (1000 sqft)\", y = \"Count\")\n\np3 &lt;- ggplot(data = saratoga, aes(x = Baths)) +\n   geom_bar(fill = \"forestgreen\", color = \"black\", aes(x = ))\n\np1 + (p2 / p3) + \n  plot_annotation(title = \"Univariate data analysis\")"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#plots-for-bivariate-eda",
     "href": "slides/01-welcome_ch1_o.html#plots-for-bivariate-eda",
     "title": "Welcome and Chapter 1",
     "section": "Plots for bivariate EDA",
-    "text": "Plots for bivariate EDA\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np4 &lt;- ggplot(data = derby, aes(x = starters, y = speed)) + \n  geom_point() + \n  labs(x = \"Starters\", y = \"Speed (ft / s)\")\n\np5 &lt;- ggplot(data = derby, aes(x = year, y = speed)) + \n  geom_point() + \n  labs(x = \"Year\", y = \"Speed (ft / s)\")\n\np6 &lt;- ggplot(data = derby, aes(x = condition, y = speed)) + \n  geom_boxplot(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Conditions\", y = \"Speed (ft / s)\")\n\n(p4 + p5) + p6 +\n  plot_annotation(title = \"Bivariate data analysis\")"
+    "text": "Plots for bivariate EDA\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np5 &lt;- ggplot(data = saratoga, aes(x = Size, y = Price)) + \n  geom_point() + \n  labs(x = \"Size (1000 sq ft)\", y = \"Price ($1000)\")\n\np6 &lt;- ggplot(data = saratoga, aes(x = Age, y = Price)) + \n  geom_point() + \n  labs(x = \"Age (years)\", y = \"Price ($1000\")\n\np7 &lt;- ggplot(data = saratoga, aes(x = as.factor(Fireplace), y = Price)) + \n  geom_boxplot(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Fireplace (0 = no, 1 = yes)\", y = \"Price ($1000\")\n\n(p5 + p6) / p7 +\n  plot_annotation(title = \"Bivariate data analysis\")"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#scatterplot-matrix",
     "href": "slides/01-welcome_ch1_o.html#scatterplot-matrix",
     "title": "Welcome and Chapter 1",
     "section": "Scatterplot matrix",
-    "text": "Scatterplot matrix\nA scatterplot matrix helps quickly visualize relationships between many variable pairs. They are particularly useful to identify potentially correlated predictors.\n. . .\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#library(GGally)\nggpairs(data = derby, \n        columns = c(\"condition\", \"year\", \"starters\", \"speed\"))"
+    "text": "Scatterplot matrix\nA scatterplot matrix helps quickly visualize relationships between many variable pairs. They are particularly useful to identify potentially correlated predictors.\n. . .\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#library(GGally)\nggpairs(data = saratoga)"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#plots-for-multivariate-eda",
     "href": "slides/01-welcome_ch1_o.html#plots-for-multivariate-eda",
     "title": "Welcome and Chapter 1",
     "section": "Plots for multivariate EDA",
-    "text": "Plots for multivariate EDA\nPlot the relationship between the response and a predictor based on levels of another predictor to assess potential interactions.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#library(viridis)\nggplot(data = derby, aes(x = year, y = speed, color = condition, \n                         shape = condition, linetype = condition)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE, aes(linetype = condition)) + \n  labs(x = \"Year\", y = \"Speed (ft/s)\", color = \"Condition\",\n       title = \"Speed vs. year\", \n       subtitle = \"by track condition\") +\n  guides(lty = FALSE, shape = FALSE) +\n  scale_color_viridis_d(end = 0.9)"
+    "text": "Plots for multivariate EDA\nPlot the relationship between the response and a predictor based on levels of another predictor to assess potential interactions.\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#library(viridis)\nsaratoga$fire &lt;- as.factor(saratoga$Fireplace)\nggplot(data = saratoga, aes(x = Size, y = Price, color = fire, \n                         shape = fire, linetype = fire)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE, aes(linetype = fire)) + \n  labs(x = \"Size (1000 sq ft)\", y = \"Price ($1000)\", color = \"Fireplace\",\n       title = \"Price vs. size\", \n       subtitle = \"by whether it has a fireplace or not\") +\n  guides(lty = FALSE, shape = FALSE) +\n  scale_color_viridis_d(alpha = 0.6, end = 0.8)"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#model-1-main-effects-model",
     "href": "slides/01-welcome_ch1_o.html#model-1-main-effects-model",
     "title": "Welcome and Chapter 1",
     "section": "Model 1: Main effects model",
-    "text": "Model 1: Main effects model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n8.197\n4.508\n1.818\n0.072\n\n\nstarters\n-0.005\n0.017\n-0.299\n0.766\n\n\nyear\n0.023\n0.002\n9.766\n0.000\n\n\nconditiongood\n-0.443\n0.231\n-1.921\n0.057\n\n\nconditionslow\n-1.543\n0.161\n-9.616\n0.000\n\n\n\n\n\n\n\n\n# Fit and display model\nmodel1 &lt;- lm(speed ~ starters + year + condition, data = derby)\ntidy(model1) |&gt; \n  kable(digits = 3)"
+    "text": "Model 1: Main effects model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.950\n7.562\n0.126\n0.900\n\n\nSize\n80.073\n4.170\n19.204\n0.000\n\n\nBaths\n25.279\n3.870\n6.532\n0.000\n\n\nBedrooms\n-9.014\n2.852\n-3.160\n0.002\n\n\nAcres\n1.887\n2.080\n0.907\n0.364\n\n\nFireplace\n4.844\n3.776\n1.283\n0.200\n\n\nAge\n-0.064\n0.051\n-1.244\n0.214\n\n\n\n\n\n\n\n\n# Fit and display model\npr.model1 &lt;- lm(Price ~ Size + Baths + Bedrooms + Size + Acres + Fireplace + Age, data = saratoga)\ntidy(pr.model1) |&gt; kable(digits = 3)"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#interpretation",
     "href": "slides/01-welcome_ch1_o.html#interpretation",
     "title": "Welcome and Chapter 1",
     "section": "Interpretation",
-    "text": "Interpretation\n\\[\\widehat{speed} = 8.197 - 0.005 ~ starters + 0.023 ~ year - 0.443 ~ good - 1.543 ~ slow\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n8.197\n4.508\n1.818\n0.072\n\n\nstarters\n-0.005\n0.017\n-0.299\n0.766\n\n\nyear\n0.023\n0.002\n9.766\n0.000\n\n\nconditiongood\n-0.443\n0.231\n-1.921\n0.057\n\n\nconditionslow\n-1.543\n0.161\n-9.616\n0.000\n\n\n\n\n\n. . .\n\nWrite out the interpretations for starters and conditiongood.\nDoes the intercept have a meaningful interpretation?"
+    "text": "Interpretation\n\\[\\widehat{extent} = 158.155 - 0.076 ~ year\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n158.155\n11.277\n14.025\n0\n\n\nyear\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n. . .\n\nWrite out the interpretations for year.\nDoes the intercept have a meaningful interpretation?"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#centering",
@@ -2168,7 +2168,7 @@
     "href": "slides/01-welcome_ch1_o.html#model-1-check-model-assumptions",
     "title": "Welcome and Chapter 1",
     "section": "Model 1: Check model assumptions",
-    "text": "Model 1: Check model assumptions\n\nPlotsQuestions\n\n\n\n#library(ggfortify)\nautoplot(model1Cent)\n\n\n\n\n\n\n\n\n\n\nWhich of the model assumptions (LINE) does this pass and/or fail?"
+    "text": "Model 1: Check model assumptions\n\nPlotsCodeQuestions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#library(ggfortify)\npar(mfrow=c(2,2))\n\nplot(pr.model1, pch=16, col='#006EA1')\n\n\n\nWhich of the model assumptions (LINE) does this pass and/or fail?"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#model-2-add-quadratic-effect-for-year",
@@ -2189,7 +2189,7 @@
     "href": "slides/01-welcome_ch1_o.html#interpreting-quadratic-effects",
     "title": "Welcome and Chapter 1",
     "section": "Interpreting quadratic effects",
-    "text": "Interpreting quadratic effects\n\\[\\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ x_1  + \\hat{\\beta}_2 ~ x_2 + \\hat{\\beta}_3 ~ x_2^2\\]\nGeneral interpretation: When \\(x_2\\) increases from a to b, \\(y\\) is expected to change by \\(\\hat{\\beta}_2(b - a) + \\hat{\\beta}_3(b^2 - a^2)\\), holding \\(x_1\\) constant.\n. . ."
+    "text": "Interpreting quadratic effects\n\\[\\begin{aligned}\\widehat{Price} = &45.00 + 48.33 ~ Size + 25.79 ~ Baths - 8.95 ~ Bedrooms \\\\\n& + 2.01 ~ Acres - 59.30 ~ Fireplace - 0.05 ~ Age + 40.51~Fireplace * Size\\end{aligned}\\]\n. . .\nQuestion:\nInterpret the effect that having a fireplace has on the relationship between size and price."
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#interpreting-quadratic-effects-1",
@@ -2231,7 +2231,7 @@
     "href": "slides/01-welcome_ch1_o.html#which-model-would-you-choose",
     "title": "Welcome and Chapter 1",
     "section": "Which model would you choose?",
-    "text": "Which model would you choose?\n\nModel 1: Main effectsModel 2: Main effects + \\(year^2\\)Model 3: Main effects + interactionCode\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.73\n0.721\n259.478\n276.302\n\n\n\n\n\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.827\n0.819\n207.429\n227.057\n\n\n\n\n\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.751\n0.738\n253.584\n276.016\n\n\n\n\n\n\n\n\n# Model 1\nglance(model1Cent) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)\n\n# Model2\nglance(model2) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)\n\n# Model 3\nglance(model3) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)"
+    "text": "Which model would you choose?\n\nModel 1: Main effectsModel 2: Main effects + interactionModel 4: Small modelCode\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.621\n0.619\n11432.1\n11471.85\n\n\n\n\n\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.636\n0.633\n11391.88\n11436.6\n\n\n\n\n\n\n\n\n\n\n\n\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\n0.587\n0.586\n389.812\n409.687\n\n\n\n\n\n\n\n\n# Model 1\nglance(pr.model1) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)\n\n# Model2\nglance(pr.model2) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)\n\n# Model 4\nglance(pr.model4) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC) |&gt;\n  kable(digits = 3)"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#what-are-these-model-quality-metrics",
@@ -2252,14 +2252,14 @@
     "href": "slides/01-welcome_ch1_o.html#which-model-would-you-choose-1",
     "title": "Welcome and Chapter 1",
     "section": "Which model would you choose?",
-    "text": "Which model would you choose?\nUse the glance function to get model statistics.\n\nOutputCode\n\n\n\n\n\n\n\nmodel\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\nModel1\n0.730\n0.721\n259.478\n276.302\n\n\nModel2\n0.827\n0.819\n207.429\n227.057\n\n\nModel3\n0.751\n0.738\n253.584\n276.016\n\n\n\n\n\n\n\n\nmodel1_glance &lt;- glance(model1Cent) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\nmodel2_glance &lt;- glance(model2) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\nmodel3_glance &lt;- glance(model3) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\n\nmodel1_glance |&gt;\n  bind_rows(model2_glance) |&gt;\n  bind_rows(model3_glance) |&gt;\n  bind_cols(model = c(\"Model1\", \"Model2\", \"Model3\")) |&gt;\n  select(model, everything()) |&gt;\nkable(digits = 3)"
+    "text": "Which model would you choose?\nUse the glance function to get model statistics.\n\nOutputCode\n\n\n\n\n\n\n\nmodel\nr.squared\nadj.r.squared\nAIC\nBIC\n\n\n\n\nModel1\n0.621\n0.619\n11432.097\n11471.847\n\n\nModel2\n0.636\n0.633\n11391.883\n11436.603\n\n\nModel4\n0.587\n0.586\n389.812\n409.687\n\n\n\n\n\n\n\n\nmodel1_glance &lt;- glance(pr.model1) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\nmodel2_glance &lt;- glance(pr.model2) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\nmodel4_glance &lt;- glance(pr.model4) |&gt;\n  select(r.squared, adj.r.squared, AIC, BIC)\n\nmodel1_glance |&gt;\n  bind_rows(model2_glance) |&gt;\n  bind_rows(model4_glance) |&gt;\n  bind_cols(model = c(\"Model1\", \"Model2\", \"Model4\")) |&gt;\n  select(model, everything()) |&gt;\nkable(digits = 3)"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#characteristics-of-a-good-final-model",
     "href": "slides/01-welcome_ch1_o.html#characteristics-of-a-good-final-model",
     "title": "Welcome and Chapter 1",
     "section": "Characteristics of a “good” final model",
-    "text": "Characteristics of a “good” final model\n\nModel can be used to answer primary research questions\nPredictor variables control for important covariates\nPotential interactions have been investigated\nVariables are centered, as needed, for more meaningful interpretations\nunnecessary terms are removed\nAssumptions are met and influential points have been addressed\nmodel tells a “persuasive story parsimoniously”\n\n\n\nList from Section 1.6.7 of BMLR"
+    "text": "Characteristics of a “good” final model\n\nModel can be used to answer primary research questions\nPredictor variables control for important covariates\nPotential interactions have been investigated\nVariables are centered, as needed, for more meaningful interpretations\nUnnecessary terms are removed\nAssumptions are met and influential points have been addressed\nModel tells a “persuasive story parsimoniously”\n\n\n\nList from Section 1.6.7 of BMLR"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#inference-for-multiple-linear-regression",
@@ -3114,7 +3114,7 @@
     "href": "slides/02_likelihoods_ch2_o.html#fouls-in-college-basketball-games-1",
     "title": "Beyond Least Squares: Using Likelihoods",
     "section": "Fouls in college basketball games",
-    "text": "Fouls in college basketball games\n\nrefs &lt;- read_csv(\"data/04-refs.csv\")\nrefs %&gt;% slice(1:5) %&gt;% kable()\n\n\n\n\ngame\ndate\nvisitor\nhometeam\nfoul1\nfoul2\nfoul3\n\n\n\n\n166\n20100126\nCLEM\nBC\nV\nV\nV\n\n\n224\n20100224\nDEPAUL\nCIN\nH\nH\nV\n\n\n317\n20100109\nMARQET\nNOVA\nH\nH\nH\n\n\n214\n20100228\nMARQET\nSETON\nV\nV\nH\n\n\n278\n20100128\nSETON\nSFL\nH\nV\nV\n\n\n\n\n\nWe will treat the games as independent in this analysis."
+    "text": "Fouls in college basketball games\n\nrefs &lt;- read_csv(\"data/04-refs.csv\")\n\nRows: 30 Columns: 7\n── Column specification ──────────────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (5): visitor, hometeam, foul1, foul2, foul3\ndbl (2): game, date\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nrefs %&gt;% slice(1:5) %&gt;% kable()\n\n\n\n\ngame\ndate\nvisitor\nhometeam\nfoul1\nfoul2\nfoul3\n\n\n\n\n166\n20100126\nCLEM\nBC\nV\nV\nV\n\n\n224\n20100224\nDEPAUL\nCIN\nH\nH\nV\n\n\n317\n20100109\nMARQET\nNOVA\nH\nH\nH\n\n\n214\n20100228\nMARQET\nSETON\nV\nV\nH\n\n\n278\n20100128\nSETON\nSFL\nH\nV\nV\n\n\n\n\n\nWe will treat the games as independent in this analysis."
   },
   {
     "objectID": "slides/02_likelihoods_ch2_o.html#different-likelihood-models",
@@ -3394,7 +3394,7 @@
     "href": "slides/02_likelihoods_ch2.html#what-is-the-likelihood",
     "title": "Beyond Least Squares: Using Likelihoods",
     "section": "What is the likelihood?",
-    "text": "What is the likelihood?\nA likelihood is a function that tells us how likely we are to observe our data for a given parameter value (or values).\n\nUnlike Ordinary Least Squares (OLS), they do not require the responses be independent, identically distributed, and normal (iidN)\nThey are not the same as probability functions\n\nProbability function: Fixed parameter value(s) + input possible outcomes \\(\\Rightarrow\\) probability of seeing the different outcomes given the parameter value(s)\nLikelihood: Fixed data + input possible parameter values \\(\\Rightarrow\\) probability of seeing the fixed data for each parameter value"
+    "text": "What is the likelihood?\nA likelihood is a function that tells us how likely we are to observe our data for a given parameter value (or values).\n\nUnlike Ordinary Least Squares (OLS), the likelihood does not require the responses to be independent, identically distributed, and normal (iidN)\nLikelihoods are not the same as probability functions\n\nProbability function: Fixed parameter value(s). Input possible outcomes \\(\\Rightarrow\\) probability of seeing these outcomes given the parameter value(s)\nLikelihood: Fixed data. Input possible parameter values \\(\\Rightarrow\\) probability of seeing the fixed data for that particular parameter value"
   },
   {
     "objectID": "slides/02_likelihoods_ch2.html#fouls-in-college-basketball-games",
@@ -3492,7 +3492,7 @@
     "href": "slides/02_likelihoods_ch2.html#find-mle-using-calculus",
     "title": "Beyond Least Squares: Using Likelihoods",
     "section": "Find MLE using calculus",
-    "text": "Find MLE using calculus\n\nFind the MLE by taking the first derivative of the likelihood function.\nThis can be tricky because of the Product Rule, so we can maximize the log(Likelihood) instead. The same value maximizes the likelihood and log(Likelihood)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSince calculus is not a pre-req, we will forgo this quest."
+    "text": "Find MLE using calculus\n\nFind the MLE by taking the first derivative of the likelihood function.\nThis can be tricky because of the Product Rule, so we can maximize the log(Likelihood) instead. The same value maximizes the likelihood and log(Likelihood)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSince calculus is not a pre-req, we will forgo this quest. See STA 347/348."
   },
   {
     "objectID": "slides/02_likelihoods_ch2.html#model-2-conditional-model",
@@ -3667,7 +3667,7 @@
     "href": "slides/02_likelihoods_ch2.html#acknowledgements",
     "title": "Beyond Least Squares: Using Likelihoods",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\nThese slides are based on content in BMLR: Chapter 1 - Review of Multiple Linear Regression\nInitial versions of the slides are by Dr. Maria Tackett, Duke University"
+    "text": "Acknowledgements\nThese slides are based on content in BMLR: Chapter 2 - Beyond Least Squares: Using Likelihoods\nInitial versions of the slides are by Dr. Maria Tackett, Duke University\nOriginal edits by Tyler George"
   },
   {
     "objectID": "slides/04_poisson_ch4_o.html",
@@ -6502,7 +6502,7 @@
     "href": "slides/01-welcome_ch1_o.html#course-toolkit-22",
     "title": "Welcome and Chapter 1",
     "section": "",
-    "text": "Moodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\n\n-R Server: - http://turing.cornellcollege.edu:8787/ - Datasets - Quarto file storage"
+    "text": "Moodle:\n\nhttps://moodle.cornellcollege.edu/course/view.php?id=9443\nSubmissions\nAnnouncements\n\nR Server:\n\nhttp://turing.cornellcollege.edu:8787/\nDatasets\nQuarto file storage"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#simple-linear-regression",
@@ -6832,5 +6832,173 @@
     "title": "Lab 02 SeaIce and Splines",
     "section": "Data",
     "text": "Data\nFor this lab, we are using seaice data downloaded from an NOAA webiste. This can be loaded in by running:\n\nseaice &lt;- read_csv(\"data/seaice.csv\")\n\nBelow is a data dictionary for this dataset:\n\n\n\n\n\n\n\nvariable\ndefinition\n\n\n\n\nyear\nYear that ice information was recorded\n\n\nmo\nMonth data was recorded - September in all cases here\n\n\nsource_dataset\nWhich NOAA dataset the data came from (all but the most recent observation come from the same dataset)\n\n\nregion\nAll observations come from the N(orth) or artic region\n\n\nextent\nTotal region with at least 15% ice cover\n\n\narea\nTotal region covered by ice\n\n\n\nBefore we run any regression models, we should center the year variable (as we did in class). Here we create the new variable c_year.\n\nseaice &lt;- seaice |&gt;\n  mutate(c_year = (year-1979))\n\n\nPolynomial Regression\nPolynomial regression can be thought of as doing polynomial expansion on a variable and passing that expansion into a linear regression model. We will be very explicit in this formulation in this chapter.\nThe following step will take c_year and replace it with the variables c_year, c_year^2, c_year^3, and c_year^4 since we set degree = 4 (actually, that’s not quite true, keep reading).\n\nmodel1 &lt;- lm(extent ~ poly(c_year , 4), data = seaice)\ncoef(summary(model1))\n\n                    Estimate Std. Error      t value     Pr(&gt;|t|)\n(Intercept)       5.87510638 0.06912422  84.99345100 1.230569e-48\npoly(c_year, 4)1 -7.07352721 0.47389181 -14.92646023 2.139807e-18\npoly(c_year, 4)2 -0.03989357 0.47389181  -0.08418287 9.333110e-01\npoly(c_year, 4)3  1.64046481 0.47389181   3.46168637 1.246532e-03\npoly(c_year, 4)4  0.47157847 0.47389181   0.99511844 3.253775e-01\n\n\nThough we expect age, age^2, age^3, and age^4, the function it returns uses variables that are a “basis of orthogonal polynomials”. That is a mathematical way of saying that each of the columns is a linear combination of the variables age, age^2, age^3, and age^4. We can see this by using poly() directly with raw = FALSE since it is the default\n\npoly(1:6, degree = 4, raw = FALSE)\n\n              1          2          3          4\n[1,] -0.5976143  0.5455447 -0.3726780  0.1889822\n[2,] -0.3585686 -0.1091089  0.5217492 -0.5669467\n[3,] -0.1195229 -0.4364358  0.2981424  0.3779645\n[4,]  0.1195229 -0.4364358 -0.2981424  0.3779645\n[5,]  0.3585686 -0.1091089 -0.5217492 -0.5669467\n[6,]  0.5976143  0.5455447  0.3726780  0.1889822\nattr(,\"coefs\")\nattr(,\"coefs\")$alpha\n[1] 3.5 3.5 3.5 3.5\n\nattr(,\"coefs\")$norm2\n[1]  1.00000  6.00000 17.50000 37.33333 64.80000 82.28571\n\nattr(,\"degree\")\n[1] 1 2 3 4\nattr(,\"class\")\n[1] \"poly\"   \"matrix\"\n\n\nThese variables don’t have the format we assumed. But this is still a well-reasoned (mathematically sound) transformation (see MAT 221). We can get the raw polynomial transformation by setting raw = TRUE\n\npoly(1:6, degree = 4, raw = TRUE)\n\n     1  2   3    4\n[1,] 1  1   1    1\n[2,] 2  4   8   16\n[3,] 3  9  27   81\n[4,] 4 16  64  256\n[5,] 5 25 125  625\n[6,] 6 36 216 1296\nattr(,\"degree\")\n[1] 1 2 3 4\nattr(,\"class\")\n[1] \"poly\"   \"matrix\"\n\n\nThese transformations align with what we would expect. It is still recommended to stick with the default of raw = FALSE unless you have a reason not to do that. Just realize that the interpretation will not be as straight-forward. But then the interpretation of a polynomial is not really straight-forward anyway."
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#simple-linear-regression",
+    "href": "slides/01-welcome_ch1_o.html#simple-linear-regression",
+    "title": "Welcome and Chapter 1",
+    "section": "Simple linear regression",
+    "text": "Simple linear regression\nSimplest case\n\\(X=\\) explanatory variable\n\\(Y=\\) response variable\nBoth variables are quantitative\n\nModel\n\\(Y_i = \\beta_0 + \\beta_1 x_i + \\epsilon_i\\) where \\(\\epsilon_i \\sim N\\left( 0,\\sigma^2\\right)\\)\n\n\nNote\nThe book uses \\(\\sigma^2\\) in this notation, not \\(\\sigma\\) as we did in STA 201 and STA 202"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#example",
+    "href": "slides/01-welcome_ch1_o.html#example",
+    "title": "Welcome and Chapter 1",
+    "section": "Example",
+    "text": "Example\nSea ice data\n\nsi &lt;- read_csv(\"data/seaice.csv\")\nhead(si)\n\n# A tibble: 6 × 6\n   year    mo source_dataset region extent  area\n  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1  1979     9 NSIDC-0051     N        7.05  4.58\n2  1980     9 NSIDC-0051     N        7.67  4.87\n3  1981     9 NSIDC-0051     N        7.14  4.44\n4  1982     9 NSIDC-0051     N        7.3   4.43\n5  1983     9 NSIDC-0051     N        7.39  4.7 \n6  1984     9 NSIDC-0051     N        6.81  4.11"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#sea-ice-data-information",
+    "href": "slides/01-welcome_ch1_o.html#sea-ice-data-information",
+    "title": "Welcome and Chapter 1",
+    "section": "Sea ice data information",
+    "text": "Sea ice data information\nThe National Oceanic and Atmospheric Administration measures the amount of sea ice in both the arctic and antarctic on a regular basis (at least daily).\nOur data:\n\nAverage amount of ice for the month of September in the Arctic\nSeptember is the month with the least amount of ice in the Arctic\nData from 1979 - 2025 (September isn’t over yet so we don’t have 2026 yet)\nArea = the total region covered by ice\nExtent = the total region with at least 15% ice cover (think about a slice of swiss cheese)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#is-the-relationship-linear",
+    "href": "slides/01-welcome_ch1_o.html#is-the-relationship-linear",
+    "title": "Welcome and Chapter 1",
+    "section": "Is the relationship linear?",
+    "text": "Is the relationship linear?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = si, aes(x = year, y = extent)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE) + \n  labs(x = \"Year\", y = \"Extent of Ice\", \n       title = \"Year vs. Extent of Ice\")"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#compute-the-model",
+    "href": "slides/01-welcome_ch1_o.html#compute-the-model",
+    "title": "Welcome and Chapter 1",
+    "section": "Compute the model",
+    "text": "Compute the model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n158.155\n11.277\n14.025\n0\n\n\nyear\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n\n\n\n# Fit and display model\nmodel1 &lt;- lm(extent ~ year, data=si)\ntidy(model1) |&gt; kable(digits = 3)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#center-the-data",
+    "href": "slides/01-welcome_ch1_o.html#center-the-data",
+    "title": "Welcome and Chapter 1",
+    "section": "Center the data",
+    "text": "Center the data\n\nCreate new variableCode\n\n\n\nWe only have data starting in 1979. So let’s call that year 0. The data at the beginning of the study.\nCreate a new variable: \\(time = year - 1979\\)\nThis is called centering\n\n\n\n\n# Fit and display model\nsi |&gt;\n  mutate(c_year = year-1979) -&gt; si"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#interpret-new-model",
+    "href": "slides/01-welcome_ch1_o.html#interpret-new-model",
+    "title": "Welcome and Chapter 1",
+    "section": "Interpret new model",
+    "text": "Interpret new model\n\\[\\widehat{extent} = 7.625 - 0.076 ~ year\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.625\n0.150\n50.693\n0\n\n\nc_year\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n. . .\nQuestions:\n\n\nWhat is the interpretation of the y-intercept now?\n\n\nDid the slope change?"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#check-assumptions",
+    "href": "slides/01-welcome_ch1_o.html#check-assumptions",
+    "title": "Welcome and Chapter 1",
+    "section": "Check assumptions",
+    "text": "Check assumptions\n\nOutputCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot the diagnostic plots\npar(mfrow=c(2,2))\n\nplot(model2, pch=16, col='#006EA1')\n\npch defines the shape of the plotted symbol\ncol defines the color of the plotted symbol"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#what-about-the-curvature",
+    "href": "slides/01-welcome_ch1_o.html#what-about-the-curvature",
+    "title": "Welcome and Chapter 1",
+    "section": "What about the curvature?",
+    "text": "What about the curvature?\nTry polynomial regression:\n\\[y_i = \\beta_0 + \\beta_1 ~ xi + \\beta_2 ~x_i^2 + \\beta_3 ~ x_i^3 ... + \\beta_d ~ x_i^d + \\epsilon_i \\]\n. . .\nIn this case, maybe a cubic (why?):\n\\[\\widehat{extent} = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ c\\_year + \\hat{\\beta}_2 ~c\\_year^2 + \\hat{\\beta}_3 ~ c\\_year^3 \\]"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#new-model",
+    "href": "slides/01-welcome_ch1_o.html#new-model",
+    "title": "Welcome and Chapter 1",
+    "section": "New model",
+    "text": "New model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n5.875\n0.069\n85.003\n0.000\n\n\npoly(c_year, 3)1\n-7.074\n0.474\n-14.928\n0.000\n\n\npoly(c_year, 3)2\n-0.040\n0.474\n-0.084\n0.933\n\n\npoly(c_year, 3)3\n1.640\n0.474\n3.462\n0.001\n\n\n\n\n\n\n\n\n# Fit and display model\nmodel3 &lt;- lm(extent ~ poly(c_year,3), data=si)\ntidy(model3) |&gt; kable(digits = 3)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#check-assumptions-1",
+    "href": "slides/01-welcome_ch1_o.html#check-assumptions-1",
+    "title": "Welcome and Chapter 1",
+    "section": "Check assumptions",
+    "text": "Check assumptions\n\nOutputCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot the diagnostic plots\npar(mfrow=c(2,2))\n\nplot(model3, pch=16, col='#006EA1')"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#data-saratoga-house-prices",
+    "href": "slides/01-welcome_ch1_o.html#data-saratoga-house-prices",
+    "title": "Welcome and Chapter 1",
+    "section": "Data: Saratoga house prices",
+    "text": "Data: Saratoga house prices\nData from homes for sale in Saratoga, NY. The data is about 15 years old.\n. . .\n\n\nResponse variable\n\nPrice: Price of the home in 1000s of dollars\n\n\nPredictor/Explanatory variables\n\nSize: Size of the home in 1000s of square feet\nBaths: Number of bathrooms\nBedrooms: Number of bedrooms\nFireplace: Does it have a fireplace? 0 = No, 1 = Yes\nAcres: Size of the lot in acres\nAge: Age of the home"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#plots-for-univariate-eda-cont.",
+    "href": "slides/01-welcome_ch1_o.html#plots-for-univariate-eda-cont.",
+    "title": "Welcome and Chapter 1",
+    "section": "Plots for univariate EDA (cont.)",
+    "text": "Plots for univariate EDA (cont.)\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np1 &lt;- ggplot(data = saratoga, aes(x = Bedrooms)) + \n  geom_bar(fill = \"forestgreen\", color = \"black\", aes(x=))\n\np2 &lt;- ggplot(data = saratoga, aes(x = Acres)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Size of lot (acres)\", y = \"Count\")\n\np3 &lt;- ggplot(data = saratoga, aes(x = Fireplace)) +\n   geom_bar(fill = \"forestgreen\", color = \"black\", aes(x = ))\n\np4 &lt;- ggplot(data = saratoga, aes(x = Age)) + \n  geom_histogram(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Age (years\", y = \"Count\")\n\n(p1 + p2) / (p3 + p4)  + \n  plot_annotation(title = \"Univariate data analysis\")"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#interpretation-1",
+    "href": "slides/01-welcome_ch1_o.html#interpretation-1",
+    "title": "Welcome and Chapter 1",
+    "section": "Interpretation",
+    "text": "Interpretation\n\\[\n\\begin{aligned}\n\\widehat{Price} = & 0.950 + 80.073 ~ Size + 25.279 ~ Baths - 9.014 ~ Bedrooms + 1.887 ~ Acres \\\\\n& + 4.844 ~ Fireplace - 0.064 ~ Age\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\nterm\nestimate\n\n\n\n\n(Intercept)\n0.950\n\n\nSize\n80.073\n\n\nBaths\n25.279\n\n\nBedrooms\n-9.014\n\n\nAcres\n1.887\n\n\nFireplace\n4.844\n\n\nAge\n-0.064\n\n\n\n\n\n\n\nWrite out the interpretations for Size and Fireplace.\nDoes the intercept have a meaningful interpretation?"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#model-2-add-interaction-term-for-fireplace-and-size",
+    "href": "slides/01-welcome_ch1_o.html#model-2-add-interaction-term-for-fireplace-and-size",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 2: Add interaction term for Fireplace and Size?",
+    "text": "Model 2: Add interaction term for Fireplace and Size?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#library(viridis)\n#saratoga$fire &lt;- as.factor(saratoga$Fireplace)\nggplot(data = saratoga, aes(x = Size, y = Price, color = fire, \n                         shape = fire, linetype = fire)) + \n  geom_point() + \n  geom_smooth(method = \"lm\", se = FALSE, aes(linetype = fire)) + \n  labs(x = \"Size (1000 sq ft)\", y = \"Price ($1000)\", color = \"Fireplace\",\n       title = \"Price vs. size\", \n       subtitle = \"by whether it has a fireplace or not\") +\n  guides(lty = FALSE, shape = FALSE) +\n  scale_color_viridis_d(alpha = 0.6, end = 0.8)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#model-2-add-fireplace-size",
+    "href": "slides/01-welcome_ch1_o.html#model-2-add-fireplace-size",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 2: Add \\(Fireplace * Size\\)",
+    "text": "Model 2: Add \\(Fireplace * Size\\)\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n45.0000\n10.0209\n4.4906\n0.0000\n\n\nSize\n48.3306\n6.3482\n7.6132\n0.0000\n\n\nBaths\n25.7862\n3.7966\n6.7919\n0.0000\n\n\nBedrooms\n-8.9452\n2.7976\n-3.1974\n0.0014\n\n\nAcres\n2.0120\n2.0400\n0.9863\n0.3242\n\n\nFireplace\n-59.3043\n10.4881\n-5.6544\n0.0000\n\n\nAge\n-0.0518\n0.0503\n-1.0314\n0.3026\n\n\nSize:Fireplace\n40.5109\n6.1967\n6.5375\n0.0000\n\n\n\n\n\n\n\n\npr.model2 &lt;- lm(Price ~ Size + Baths + Bedrooms + Acres + Fireplace + Age +Fireplace*Size, data = saratoga)\ntidy(pr.model2) |&gt; kable(digits = 4)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#interpreting-interaction-effects-with-01-variable",
+    "href": "slides/01-welcome_ch1_o.html#interpreting-interaction-effects-with-01-variable",
+    "title": "Welcome and Chapter 1",
+    "section": "Interpreting interaction effects with 0/1 variable",
+    "text": "Interpreting interaction effects with 0/1 variable\n\\[\n\\begin{aligned}\n\\hat{y}& = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ x_1  + \\hat{\\beta}_2 ~ x_2 + \\hat{\\beta}_3 ~x_3 +\\hat{\\beta}_4 ~ x_1~x_2\\\\\n& = \\hat{\\beta}_0 + \\hat{\\beta}_1 ~ x_1 + \\hat{\\beta}_3 ~x_3\\hspace{3.9 in} \\text{  when } x_2=0\\\\\n& = (\\hat{\\beta}_0 +\\hat{\\beta}_2) + (\\hat{\\beta}_1 + \\hat{\\beta}_4) ~ x_1 +\\hat{\\beta}_3~x_3\\hspace{.75 in} \\text{  when } x_2=1\n\\end{aligned}\n\\]\nGeneral interpretation: When \\(x_2\\) is present, the slope between \\(x_1\\) and \\(y\\) increases(decreases) by \\(\\hat{\\beta}_4\\) units and the \\(y\\)-intercept increases(decreases) by \\(\\hat{\\beta}_2\\) units when all other variables are held constant."
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#model-3-try-ln-of-response-and-delete-some-variables",
+    "href": "slides/01-welcome_ch1_o.html#model-3-try-ln-of-response-and-delete-some-variables",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 3: Try ln of response and delete some variables",
+    "text": "Model 3: Try ln of response and delete some variables\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n4.092\n0.055\n74.866\n0.000\n\n\nSize\n0.306\n0.035\n8.694\n0.000\n\n\nBaths\n0.177\n0.020\n8.906\n0.000\n\n\nBedrooms\n-0.013\n0.015\n-0.850\n0.396\n\n\nFireplace\n0.081\n0.059\n1.390\n0.165\n\n\nSize:Fireplace\n0.026\n0.035\n0.743\n0.458\n\n\n\n\n\n\n\n\npr.model3 &lt;- lm(log(Price) ~ Size + Baths + Bedrooms  + Fireplace  + Fireplace*Size, data = saratoga)\ntidy(pr.model3) |&gt; kable(digits = 3)"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#model-4-fewer-terms-yet",
+    "href": "slides/01-welcome_ch1_o.html#model-4-fewer-terms-yet",
+    "title": "Welcome and Chapter 1",
+    "section": "Model 4: Fewer terms yet",
+    "text": "Model 4: Fewer terms yet\n\nOutputCodeAssumptions\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n4.026\n0.028\n143.310\n0\n\n\nSize\n0.344\n0.019\n17.817\n0\n\n\nBaths\n0.195\n0.020\n9.790\n0\n\n\n\n\n\n\n\n\npr.model4 &lt;- lm(log(Price) ~ Size + Baths, data = saratoga)\ntidy(pr.model4) |&gt; kable(digits = 3)"
+  },
+  {
+    "objectID": "slides/02_likelihoods_ch2.html#why-do-we-need-likelihood",
+    "href": "slides/02_likelihoods_ch2.html#why-do-we-need-likelihood",
+    "title": "Beyond Least Squares: Using Likelihoods",
+    "section": "Why do we need likelihood?",
+    "text": "Why do we need likelihood?\nQuestion: On Monday we reviewed simple linear regression. How did we determine the equation for the best model for Y given a particular explanatory variable X?\n\nAnswer: We used the sum of the squared residuals.\n\n\nBut this only works for cases where Y has a Normal distribution."
+  },
+  {
+    "objectID": "slides/02_likelihoods_ch2_o.html#why-do-we-need-likelihood",
+    "href": "slides/02_likelihoods_ch2_o.html#why-do-we-need-likelihood",
+    "title": "Beyond Least Squares: Using Likelihoods",
+    "section": "Why do we need likelihood?",
+    "text": "Why do we need likelihood?\nOn Monday we reviewed simple linear regression. How did we determine the equation for the best model for Y given a particular explanatory variable X?\n. . .\nWe used the sum of the squared residuals. But this only works for cases where Y has a Normal distribution."
+  },
+  {
+    "objectID": "slides/02_likelihoods_ch2.html#example",
+    "href": "slides/02_likelihoods_ch2.html#example",
+    "title": "Beyond Least Squares: Using Likelihoods",
+    "section": "Example:",
+    "text": "Example:\nSpace Shuttle Challenger: The space shuttle Challenger mission, set to fly on January 28, 1986, was highlighted across the country as being a mission for students. For the first time, a high school teacher was chosen for astronaut training and planned to deliver lessons to students across the country from space.\n\nThere was controversy over launching the shuttle that day because the forecasted temperature was \\(26^\\circ\\)F. The coldest previous launch was \\(53^\\circ\\)F. Engineers were concerned that a part called the O-ring would fail at lower temperatures."
+  },
+  {
+    "objectID": "slides/02_likelihoods_ch2.html#predict-failure-from-previous-data",
+    "href": "slides/02_likelihoods_ch2.html#predict-failure-from-previous-data",
+    "title": "Beyond Least Squares: Using Likelihoods",
+    "section": "Predict failure from previous data?",
+    "text": "Predict failure from previous data?\nLet’s plot whether there were O-ring failures against the launch temperature for all shuttle flights before the fated Challenger flight.\n\n\nDoes linear regression make sense? What does a residual mean here?"
+  },
+  {
+    "objectID": "slides/02_likelihoods_ch2.html#new-idea",
+    "href": "slides/02_likelihoods_ch2.html#new-idea",
+    "title": "Beyond Least Squares: Using Likelihoods",
+    "section": "New idea",
+    "text": "New idea\nWe need a new way to define “best” for a model where least squares doesn’t work.\n\nIn this chapter we introduce a method called maximum likelihood\nMaximum likelihood uses the idea (and function called) likelihood\nMaximum likelihood plays the same role that least squares played in regression with Normal error terms."
   }
 ]

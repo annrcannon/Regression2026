@@ -237,7 +237,7 @@ Andualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., ... &
 - Is the response a Bernoulli or Binomial? 
 
 - What is the strongest predictor of having good COVID-19 infection prevention practices?
-  - It's often unreliable to look answer this question just based on the model output. Why are we able to answer this question based on the model output in this case? 
+  - It's often unreliable to answer this question just based on the model output. Why are we able to answer this question based on the model output in this case? 
   
 - Describe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment. 
 

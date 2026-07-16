@@ -5095,7 +5095,7 @@
     "href": "slides/06_logistic_ch6.html#interpreting-the-results",
     "title": "Logistic Regression",
     "section": "Interpreting the results",
-    "text": "Interpreting the results\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\n\nIt’s often unreliable to look answer this question just based on the model output. Why are we able to answer this question based on the model output in this case?\n\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
+    "text": "Interpreting the results\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\n\nIt’s often unreliable to answer this question just based on the model output. Why are we able to answer this question based on the model output in this case?\n\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#access-to-personal-protective-equipment",

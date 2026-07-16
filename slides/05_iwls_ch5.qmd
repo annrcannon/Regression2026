@@ -1,0 +1,127 @@
+---
+title: "Iteratively reweighted least squares"
+subtitle: "BMLR Chapter 5"
+format: 
+  revealjs:
+    output-file: "05_iwls_ch5.html"
+    slide-number: true
+  html:
+    output-file: "05_iwls_ch5_o.html"
+logo: "../img/favicon.png"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(GGally)
+library(knitr)
+library(patchwork)
+library(viridis)
+library(ggfortify)
+library(gridExtra)
+```
+
+
+
+# Iteratively reweighted least squares (IWLS)
+
+## Data: Noisy Miners {.smaller}
+
+The dataset [`nminer`](data/nminer.csv) contains information about the number of noisy miners (small Australian bird) detected in two woodland patches within the Wimmera Plains of Victoria, Australia. It was obtained from the **GLMsdata** R package. We will use the following variables:
+
+ 
+- **`Minerab`**: The number of noisy miners (abundance) observed in three 20 minute surveys
+- **`Eucs`**: The number of eucalyptus trees in each 2 hectare area (about 4.94 acres)
+
+
+
+
+## Noisy Miner Model {.smaller}
+
+
+```{r echo = F}
+nminer <- read_csv("data/nminer.csv")
+nminer %>%
+  slice(1:5) %>% select(Eucs, Minerab) %>% kable(digits = 1)
+```
+
+. . .
+
+Our goal is to use a Poisson regression model to predict the number of noisy miners observed in three 20 minute surveys based on the number of eucalyptus trees.
+
+$$\log(\lambda_{Minearab}) = \beta_0 + \beta_1 ~ Euc$$
+
+. . .
+
+**What are the best estimates of $\beta_0$ and $\beta_1$?**
+
+
+
+
+## Iteratively reweighted least squares (IWLS) {.smaller}
+
+- The estimates of $\beta_0$ and $\beta_1$ are found using maximum likelihood estimation. 
+
+
+- **Iteratively reweighted least-squares (IWLS)** is used to find the MLEs
+  - Nelder and Wedderburn (1972) show that under certain specifications of the weights and a modified response variable, the estimates found using IWLS are equivalent to the MLEs.
+  
+
+
+## IWLS Set up {.smaller}
+
+**Working response**: Modified response variable at each step of the iteration. 
+
+$$z_i = g(\theta) + g'(\theta)(y_i - \theta_i)$$
+
+For Poisson regression, this is 
+
+$$z_i = \log(\lambda) + \frac{(y_i - \lambda_i)}{\lambda_i}$$
+
+. . .
+
+**Working Weights:** Weights applied to the observations at each step of the iteration 
+
+$$W_i = \frac{\theta^2}{Var(Y)} \hspace{5mm} \Rightarrow \hspace{5mm}  W_i = \frac{\lambda^2}{\lambda} =  \lambda \text{ for Poisson regression}$$
+
+
+
+## IWLS procedure {.smaller}
+
+1. Find initial starting values $\hat{\theta}_i$.
+
+2. Calculate the working response values $z_i$.
+
+3. Calculate the working weights $W_i$.
+
+4. Find the coefficient estimates of the weighted least squares model.
+
+. . .
+
+$z_i = \beta_0 + \beta_1 x \hspace{5mm} \text{ with weights }W_i$
+
+The estimates $\hat{\beta}_0$ and $\hat{\beta}_1$ are the estimates for the model coefficients. 
+
+. . .
+
+Use $\hat{\beta}_0$ and $\hat{\beta}_1$ to calculate updated values of $\hat{\theta}_i$ and repeat steps 2 - 4 until convergence.
+
+
+
+. . .
+
+## Demo in `ch5_iwls.R` in server class files
+
+
+## Acknowledgements {.smaller}
+
+- These slides are based on content in [BMLR: Chapter 4](https://bookdown.org/roback/bookdown-BeyondMLR/)
+
+- Initial versions of the slides are by Dr. Maria Tackett, Duke University
+
+- [BMLR: Chapter 5 - Generalized Linear Models: A Unifying Theory](https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html)
+- Nelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384.
+- Generalized Linear Models with Examples in R
+  - Chapter 5 - Generalized Linear Models: Structure
+  - Chapter 6 - Generalized Linear Models: Estimation 
+  

@@ -42,7 +42,7 @@ pbinom(500000,1000000,.5,lower.tail = F)
 # Test example
 dbinom(2, size = 10, prob = .25)
 
-# probability of getting 2 or less correct
+# probability of getting 2 or fewer correct
 p1 <- dbinom(0, size = 10, prob = .25)
 p2 <-dbinom(1, size = 10, prob = .25)
 p3 <-dbinom(2, size = 10, prob = .25)

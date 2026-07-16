@@ -810,35 +810,35 @@
     "href": "slides/05_glm_ch5.html#learning-goals",
     "title": "Generalized Linear Models (GLMs)",
     "section": "Learning goals",
-    "text": "Learning goals\n\nIdentify the components common to all generalized linear models\nFind the canonical link based on the distribution of the response variable\nExplain how coefficients are estimated using iteratively reweighted least squares (IWLS)"
+    "text": "Learning goals\n\nExplain the use of generalized linear models\nIdentify the components common to all generalized linear models\nFind the canonical link based on the distribution of the response variable"
   },
   {
     "objectID": "slides/05_glm_ch5.html#many-models-one-family",
     "href": "slides/05_glm_ch5.html#many-models-one-family",
     "title": "Generalized Linear Models (GLMs)",
     "section": "Many models; one family",
-    "text": "Many models; one family\nWe have studied models for a variety of response variables\n\nLeast squares (Normal)\nLogistic (Bernoulli, Binomial, Multinomial)\nLog-linear (Poisson, Negative Binomial)\n\n\nThese models are all examples of generalized linear models.\nGLMs have a similar structure for their likelihoods, MLEs, variances, so we can use a generalized approach to find the model estimates and associated uncertainty."
+    "text": "Many models; one family\nWe will see three different situations where glms are appropriate:\n\nlinear regression (response has a Normal distribution)\nlogistic regression (response has a Bernoulli or Binomial distribution)\npoisson regression (response has a Poisson or Negative Binomial distribution)\n\n\nAll of these cases lead to models that are examples of generalized linear models.\nGLMs have a similar structure for their likelihoods, MLEs, and variances, so we can use a generalized approach to find the model estimates and associated uncertainty."
   },
   {
     "objectID": "slides/05_glm_ch5.html#components-of-a-glm",
     "href": "slides/05_glm_ch5.html#components-of-a-glm",
     "title": "Generalized Linear Models (GLMs)",
     "section": "Components of a GLM",
-    "text": "Components of a GLM\nNelder and Wdderburn (1972) defines a broad class of models called generalized linear models that generalizes multiple linear regression. GLMs are characterized by three components:\n\n1️⃣ Response variable with parameter \\(\\theta\\) whose probability function can be written in exponential family form (random component)\n2️⃣ A linear combination of predictors, \\(\\eta = \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\) (systematic component)\n3️⃣ A link function \\(g(\\theta)\\) that connects \\(\\theta\\) to \\(\\eta\\)\n\n\n\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384."
+    "text": "Components of a GLM\nNelder and Wdderburn (1972) define a broad class of models called generalized linear models that generalizes multiple linear regression. GLMs are characterized by three components:\n\n1️⃣ The response variable has a probability function with parameter \\(\\theta\\) that can be written in exponential family form (random component)\n\n\n2️⃣ There exists a linear combination of predictors, \\(\\eta = \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\) (systematic component) so that:\n\n\n3️⃣ A link function \\(g(\\theta)\\) exists that connects \\(\\theta\\) to \\(\\eta\\)\n\n\n\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384."
   },
   {
     "objectID": "slides/05_glm_ch5.html#exponential-family-form",
     "href": "slides/05_glm_ch5.html#exponential-family-form",
     "title": "Generalized Linear Models (GLMs)",
     "section": "Exponential family form",
-    "text": "Exponential family form\nSuppose a probability (mass or density) function has a parameter \\(\\theta\\). It is said to have a one-parameter exponential family form if\n\n✅ The support (set of possible values) does not depend on \\(\\theta\\), and\n\n\n✅ The probability function can be written in the following form\n\\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\)\n\n\nUsing this form:\n\\[E(Y) = -\\frac{c'(\\theta)}{b'(\\theta)} \\hspace{20mm} Var(Y) = \\frac{b''(\\theta)c'(\\theta) - c''(\\theta)b'(\\theta)}{[b'(\\theta)]^3}\\]"
+    "text": "Exponential family form\nSuppose a probability (mass or density) function has a parameter \\(\\theta\\). It is said to have a one-parameter exponential family form if\n\n✅ The support (set of possible values) does not depend on \\(\\theta\\), and\n\n\n✅ The probability function can be written in the following form\n\\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\)\n\n\nUsing this form:\n\\[E(Y) = -\\frac{c'(\\theta)}{b'(\\theta)} \\hspace{20mm} Var(Y) = \\frac{b''(\\theta)c'(\\theta) - c''(\\theta)b'(\\theta)}{[b'(\\theta)]^3}\\]\n\n\nNote these last two equations use calculus, so we will not use them."
   },
   {
     "objectID": "slides/05_glm_ch5.html#poisson-in-exponential-family-form",
     "href": "slides/05_glm_ch5.html#poisson-in-exponential-family-form",
     "title": "Generalized Linear Models (GLMs)",
     "section": "Poisson in exponential family form",
-    "text": "Poisson in exponential family form\n\\[P(Y = y) = \\frac{e^{-\\lambda}\\lambda^y}{y!} \\hspace{10mm} y = 0, 1, 2, \\ldots, \\infty\\]\n\n\\[\\begin{aligned}P(Y = y) &= e^{-\\lambda}e^{y\\log(\\lambda)}e^{-\\log(y!)}\\\\\n& = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\end{aligned}\\]\n\n\nRecall the form: \\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\), where the parameter \\(\\theta = \\lambda\\) for the Poisson distribution\n\n\n\n\\(a(y) = y\\)\n\\(b(\\lambda) = \\log(\\lambda)\\)\n\n\n\n\\(c(\\lambda) = -\\lambda\\)\n\\(d(y) = -\\log(y!)\\)"
+    "text": "Poisson in exponential family form\nWhat if our response variable has a Poisson distribution? Can we write the distribution funciton in exponential family form?\n\\[P(Y = y) = \\frac{e^{-\\lambda}\\lambda^y}{y!} \\hspace{10mm} y = 0, 1, 2, \\ldots, \\infty\\]\n\n\\[\\begin{aligned}P(Y = y) &= e^{-\\lambda}e^{y\\log(\\lambda)}e^{-\\log(y!)}\\\\\n& = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\end{aligned}\\]\n\n\nRecall the form: \\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\), where the parameter \\(\\theta = \\lambda\\) for the Poisson distribution\n\n\n\n\\(a(y) = y\\)\n\\(b(\\lambda) = \\log(\\lambda)\\)\n\n\n\n\\(c(\\lambda) = -\\lambda\\)\n\\(d(y) = -\\log(y!)\\)"
   },
   {
     "objectID": "slides/05_glm_ch5.html#poisson-in-exponential-family-form-1",
@@ -866,7 +866,7 @@
     "href": "slides/05_glm_ch5.html#glm-framework-poisson-response-variable",
     "title": "Generalized Linear Models (GLMs)",
     "section": "GLM framework: Poisson response variable",
-    "text": "GLM framework: Poisson response variable\n1️⃣ Response variable with parameter \\(\\theta\\) whose probability function can be written in exponential family form\n\\[P(Y = y) = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\]\n\n2️⃣ A linear combination of predictors, \\(\\eta = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\)\n\n\n3️⃣ A function \\(g(\\lambda)\\) that connects \\(\\lambda\\) and \\(\\eta\\)\n\\[\\log(\\lambda) = \\eta =  \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\]"
+    "text": "GLM framework: Poisson response variable\n1️⃣ Response variable with parameter \\(\\theta\\) whose probability function can be written in exponential family form\n\\[P(Y = y) = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\]\n\n2️⃣ A linear combination of predictors, \\(\\eta = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\)\n\n\n3️⃣ A function \\(g(\\lambda)\\) that connects \\(\\lambda\\) and \\(\\eta\\)\n\\[\\log(\\lambda) = \\eta =  \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\] This means that our linear model will estimate \\(\\log(\\lambda)\\) rather than just \\(\\lambda\\)."
   },
   {
     "objectID": "slides/05_glm_ch5.html#activity-identifying-canonical-link",
@@ -1083,28 +1083,28 @@
     "href": "slides/03_distribution_ch3.html#introduction",
     "title": "Distribution Theory",
     "section": "Introduction",
-    "text": "Introduction\n\nWhat if it is not plausible that a response is normally distributed?\nYou may want to construct a model to predict whether a prospective student will enroll at a school or model the lifetimes of patients following a particular surgery.\n\nIn the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to have very skewed data with many similar values and a few hardy souls with extremely long survival.\nThese responses are not expected to be normally distributed; other distributions will be needed to describe and model binary or lifetime data.\nNon-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models."
+    "text": "Introduction\n\nWhat if it is not plausible that a response is normally distributed?\nYou may want to construct a model to predict whether a prospective student will enroll at a school or model the lifetimes of patients following a particular surgery.\n\nIn the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to have very skewed data with many similar values and a few hardy souls with extremely long survival.\nThese responses are not expected to be normally distributed; other distributions will be needed to describe and model binary or lifetime data.\nNon-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models.\nAll information in this chapter is covered in much greater depth in STA 347."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#discrete-random-variables-1",
     "href": "slides/03_distribution_ch3.html#discrete-random-variables-1",
     "title": "Distribution Theory",
     "section": "Discrete Random Variables",
-    "text": "Discrete Random Variables\n\nA discrete random variable has a countable number of possible values\n\nEx: we may want to measure the number of people in a household\nEx: model the number of crimes committed on a college campus.\n\nWith discrete random variables, the associated probabilities can be calculated for each possible value using a probability mass function (pmf). \nA pmf is a function that calculates \\(P(Y=y)\\), given each variable’s parameters."
+    "text": "Discrete Random Variables\n\nA discrete random variable has a countable number of possible values\n\nEx: we may want to measure the number of people in a household\nEx: model the number of crimes committed on a college campus.\n\nWith discrete random variables, the associated probabilities can be calculated for each possible value using a probability mass function (pmf). \nA pmf is a function that calculates \\(P(Y=y)\\), given each variable’s parameters.\nWe use \\(\\operatorname{E}(Y)=\\mu\\) to represent the mean of the distribution\nWe use \\(\\operatorname{SD}(Y)=\\sigma\\) to represent the standard deviation of the distribution"
   },
   {
     "objectID": "slides/03_distribution_ch3.html#binary-random-variable",
     "href": "slides/03_distribution_ch3.html#binary-random-variable",
     "title": "Distribution Theory",
     "section": "Binary Random Variable",
-    "text": "Binary Random Variable\n\nConsider the event of flipping a (possibly unfair) coin.\nIf the coin lands heads, let’s consider this a success and record \\(Y = 1\\).\nA series of these events is a Bernoulli process, independent trials that take on one of two values (e.g., 0 or 1).\nThese values are often referred to as a failure and a success\n\nthe probability of success is identical for each trial."
+    "text": "Binary Random Variable\n\nConsider the event of flipping a (possibly unfair) coin.\nIf the coin lands heads, let’s consider this a success and record \\(Y = 1\\).\nIf the coin lands tails, then we record \\(Y=0\\).\nA series of these events is a Bernoulli process, independent trials that take on one of two values (e.g., 0 or 1).\nThese values are often referred to as a failure and a success\n\nthe probability of success is identical for each trial."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#binary-random-variable-1",
     "href": "slides/03_distribution_ch3.html#binary-random-variable-1",
     "title": "Distribution Theory",
     "section": "Binary Random Variable",
-    "text": "Binary Random Variable\n\nSuppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, \\(p\\).\nIf we know this value, we can express \\(P(Y=1) = p\\) and \\(P(Y=0) = 1-p\\).\nIn general, if we have a Bernoulli process with only one trial, we have a binary distribution (also called a Bernoulli distribution) where\n\n\n\\[\\begin{equation*}\nP(Y = y) = p^y(1-p)^{1-y} \\quad \\textrm{for} \\quad y = 0, 1.\n\\end{equation*}\\]\n\nIf \\(Y \\sim \\textrm{Binary}(p)\\), then \\(Y\\) has mean \\(\\operatorname{E}(Y) = p\\) and standard deviation \\(\\operatorname{SD}(Y) = \\sqrt{p(1-p)}\\)."
+    "text": "Binary Random Variable\n\nSuppose we only flip the coin once, so we only have one parameter, the probability of flipping heads, \\(p\\).\nIf we know this value, we can express \\(P(Y=1) = p\\) and \\(P(Y=0) = 1-p\\).\nIn general, if we have a Bernoulli process with only one trial, we have a binary distribution (also called a Bernoulli distribution) where\n\n\n\\[\\begin{equation*}\nP(Y = y) = p^y(1-p)^{1-y} \\quad \\textrm{for} \\quad y = 0, 1.\n\\end{equation*}\\]\n\nIf \\(Y \\sim \\textrm{Binary}(p)\\) , then \\(Y\\) has mean \\(\\operatorname{E}(Y) = p\\) and standard deviation \\(\\operatorname{SD}(Y) = \\sqrt{p(1-p)}\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#example-1",
@@ -1125,7 +1125,7 @@
     "href": "slides/03_distribution_ch3.html#binomial-random-variable-22",
     "title": "Distribution Theory",
     "section": "Binomial Random Variable (2/2)",
-    "text": "Binomial Random Variable (2/2)\n\nNext we consider \\(P(Y = 1)\\), and are interested in the probability of exactly 1 success anywhere among the 4 trials.\nHow many different ways can we get exactly 1 success in the four trials?\nTo find the probability of this what else do we need to count?\nWhat is the probability?\nThere are \\(\\binom{4}{1} = 4\\) ways to have exactly 1 success in 4 trials, \\(P(Y = 1) = \\binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\\)."
+    "text": "Binomial Random Variable (2/2)\n\nNext we consider \\(P(Y = 1)\\), and are interested in the probability of exactly 1 success anywhere among the 4 trials.\nHow many different ways can we get exactly 1 success in the four trials?\nTo find the probability of this what else do we need to count?\nWhat is the probability?\nThere are \\(\\binom{4}{1} = \\frac{4!}{1!(4-1)!}=4\\) ways to have exactly 1 success in 4 trials, \\(P(Y = 1) = \\binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#binomial-distribution",
@@ -1265,14 +1265,14 @@
     "href": "slides/03_distribution_ch3.html#gamma-vs-others",
     "title": "Distribution Theory",
     "section": "Gamma vs Others",
-    "text": "Gamma vs Others\n\nNote that if we let \\(r = 1\\), we have the following pdf,\n\n\n\\[\\begin{align*}\nf(y) &= \\frac{\\lambda}{\\Gamma(1)} y^{1-1} e^{-\\lambda y} \\\\\n      &= \\lambda e^{-\\lambda y} \\quad \\textrm{for} \\quad y &gt; 0,\n\\end{align*}\\] an exponential distribution. - Just as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!\n\nJust like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative \\(r\\).\nIn R, pgamma(y, r, lambda) outputs the probability \\(P(Y &lt; y)\\) given \\(r\\) and \\(\\lambda\\)."
+    "text": "Gamma vs Others\n\nNote that if we let \\(r = 1\\), we have the following pdf,\n\n\n\\[\\begin{align*}\nf(y) &= \\frac{\\lambda}{\\Gamma(1)} y^{1-1} e^{-\\lambda y} \\\\\n      &= \\lambda e^{-\\lambda y} \\quad \\textrm{for} \\quad y &gt; 0,\n\\end{align*}\\] an exponential distribution.\n\nJust as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!\nJust like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative \\(r\\).\nIn R, pgamma(y, r, lambda) outputs the probability \\(P(Y &lt; y)\\) given \\(r\\) and \\(\\lambda\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#distributions-used-in-testing",
     "href": "slides/03_distribution_ch3.html#distributions-used-in-testing",
     "title": "Distribution Theory",
     "section": "Distributions Used in Testing",
-    "text": "Distributions Used in Testing\n\nWe have spent most of this chapter discussing probability distributions that may come in handy when modeling.\nThe following distributions, while rarely used in modeling, prove useful in hypothesis testing as certain commonly used test statistics follow these distributions.\n\\(\\chi^2\\) distribution (requires a degree of freedom)\nStudent \\(t\\) distribution\n\\(F\\) distribution (need 2 different degrees of freedom)\nSince we have used these In the past, we will leave their definitions to be referenced if needed"
+    "text": "Distributions Used in Testing\n\nWe have spent most of this chapter discussing probability distributions that may come in handy when modeling.\nThe following distributions, while rarely used in modeling, prove useful in hypothesis testing as certain commonly used test statistics follow these distributions.\n\\(\\chi^2\\) distribution (requires a degree of freedom)\nStudent’s \\(t\\) distribution\n\\(F\\) distribution (need 2 different degrees of freedom)\nSince we have used these in the past, we will leave their definitions to be referenced if needed"
   },
   {
     "objectID": "slides/03_distribution_ch3.html#distribution-table",
@@ -1286,7 +1286,7 @@
     "href": "slides/03_distribution_ch3.html#acknowledgements",
     "title": "Distribution Theory",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\nThese slides are based on content in BMLR: Chapter 1 - Review of Multiple Linear Regression"
+    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 1 - Review of Multiple Linear Regression\nEdited from slides by Tyler George"
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html",
@@ -7000,5 +7000,89 @@
     "title": "Beyond Least Squares: Using Likelihoods",
     "section": "New idea",
     "text": "New idea\nWe need a new way to define “best” for a model where least squares doesn’t work.\n\nIn this chapter we introduce a method called maximum likelihood\nMaximum likelihood uses the idea (and function called) likelihood\nMaximum likelihood plays the same role that least squares played in regression with Normal error terms."
+  },
+  {
+    "objectID": "slides/05_glm_ch5.html#math-identities-that-are-needed",
+    "href": "slides/05_glm_ch5.html#math-identities-that-are-needed",
+    "title": "Generalized Linear Models (GLMs)",
+    "section": "Math identities that are needed",
+    "text": "Math identities that are needed\n\n\\(a=e^{\\log(a)}\\)\n\\(a^x = e ^ {x\\log(a)}\\)\n\\(\\log(ab)= \\log(a) + \\log(b)\\)\n\\(\\log\\left(\\frac{a}{b}\\right) = \\log(a)-\\log(b)\\)"
+  },
+  {
+    "objectID": "slides/05_glm_ch5.html#normal-distribution-in-exponential-family-form",
+    "href": "slides/05_glm_ch5.html#normal-distribution-in-exponential-family-form",
+    "title": "Generalized Linear Models (GLMs)",
+    "section": "Normal distribution in exponential family form",
+    "text": "Normal distribution in exponential family form\nLet’s suppose that our response variable \\(Y\\) has a Normal distribution with mean \\(\\mu\\) and variance \\(\\sigma^2\\). For now \\(\\sigma^2\\) will be treated as being known. The parameter in question is \\(\\mu\\).\n\n\\[f(y|\\mu) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-(y-\\mu)^2/(2\\sigma^2)} \\]\n\n\nNotice that \\(\\frac{1}{\\sqrt{2\\pi\\sigma^2}}\\) is really just a constant. (Remember that we are treating \\(\\sigma^2\\) as a constant.)\n\n\nSo let’s just focus on \\(e^{-(y-\\mu)^2/(2\\sigma^2)}\\)."
+  },
+  {
+    "objectID": "slides/05_glm_ch5.html#normal-distribution-in-exponential-family-form-12",
+    "href": "slides/05_glm_ch5.html#normal-distribution-in-exponential-family-form-12",
+    "title": "Generalized Linear Models (GLMs)",
+    "section": "Normal distribution in exponential family form (1/2)",
+    "text": "Normal distribution in exponential family form (1/2)\nLet’s suppose that our response variable \\(Y\\) has a Normal distribution with mean \\(\\mu\\) and variance \\(\\sigma^2\\). For now \\(\\sigma^2\\) will be treated as being known. The parameter in question is \\(\\mu\\).\n\n\\[f(y|\\mu) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-(y-\\mu)^2/(2\\sigma^2)} \\]\n\n\nNotice that \\(\\frac{1}{\\sqrt{2\\pi\\sigma^2}}\\) is really just a constant. (Remember that we are treating \\(\\sigma^2\\) as a constant.)\n\n\nSo let’s just focus on rewriting \\(e^{-(y-\\mu)^2/(2\\sigma^2)}\\)."
+  },
+  {
+    "objectID": "slides/05_glm_ch5.html#normal-in-exponential-form-22",
+    "href": "slides/05_glm_ch5.html#normal-in-exponential-form-22",
+    "title": "Generalized Linear Models (GLMs)",
+    "section": "Normal in exponential form (2/2)",
+    "text": "Normal in exponential form (2/2)\n\\(e^{-(y-\\mu)^2/(2\\sigma^2)}=e^{-(y^2 - y\\mu + \\mu^2)/(2\\sigma^2)}\\)"
+  },
+  {
+    "objectID": "slides/05_iwls_ch5.html#data-noisy-miners",
+    "href": "slides/05_iwls_ch5.html#data-noisy-miners",
+    "title": "Iteratively reweighted least squares",
+    "section": "Data: Noisy Miners",
+    "text": "Data: Noisy Miners\nThe dataset nminer contains information about the number of noisy miners (small Australian bird) detected in two woodland patches within the Wimmera Plains of Victoria, Australia. It was obtained from the GLMsdata R package. We will use the following variables:\n\nMinerab: The number of noisy miners (abundance) observed in three 20 minute surveys\nEucs: The number of eucalyptus trees in each 2 hectare area (about 4.94 acres)"
+  },
+  {
+    "objectID": "slides/05_iwls_ch5.html#noisy-miner-model",
+    "href": "slides/05_iwls_ch5.html#noisy-miner-model",
+    "title": "Iteratively reweighted least squares",
+    "section": "Noisy Miner Model",
+    "text": "Noisy Miner Model\n\n\n\n\n\nEucs\nMinerab\n\n\n\n\n2\n0\n\n\n10\n0\n\n\n16\n3\n\n\n20\n2\n\n\n19\n8\n\n\n\n\n\n\nOur goal is to use a Poisson regression model to predict the number of noisy miners observed in three 20 minute surveys based on the number of eucalyptus trees.\n\\[\\log(\\lambda_{Minearab}) = \\beta_0 + \\beta_1 ~ Euc\\]\n\n\nWhat are the best estimates of \\(\\beta_0\\) and \\(\\beta_1\\)?"
+  },
+  {
+    "objectID": "slides/05_iwls_ch5.html#iteratively-reweighted-least-squares-iwls-1",
+    "href": "slides/05_iwls_ch5.html#iteratively-reweighted-least-squares-iwls-1",
+    "title": "Iteratively reweighted least squares",
+    "section": "Iteratively reweighted least squares (IWLS)",
+    "text": "Iteratively reweighted least squares (IWLS)\n\nThe estimates of \\(\\beta_0\\) and \\(\\beta_1\\) are found using maximum likelihood estimation.\nIteratively reweighted least-squares (IWLS) is used to find the MLEs\n\nNelder and Wedderburn (1972) show that under certain specifications of the weights and a modified response variable, the estimates found using IWLS are equivalent to the MLEs."
+  },
+  {
+    "objectID": "slides/05_iwls_ch5.html#iwls-set-up",
+    "href": "slides/05_iwls_ch5.html#iwls-set-up",
+    "title": "Iteratively reweighted least squares",
+    "section": "IWLS Set up",
+    "text": "IWLS Set up\nWorking response: Modified response variable at each step of the iteration.\n\\[z_i = g(\\theta) + g'(\\theta)(y_i - \\theta_i)\\]\nFor Poisson regression, this is\n\\[z_i = \\log(\\lambda) + \\frac{(y_i - \\lambda_i)}{\\lambda_i}\\]\n\nWorking Weights: Weights applied to the observations at each step of the iteration\n\\[W_i = \\frac{\\theta^2}{Var(Y)} \\hspace{5mm} \\Rightarrow \\hspace{5mm}  W_i = \\frac{\\lambda^2}{\\lambda} =  \\lambda \\text{ for Poisson regression}\\]"
+  },
+  {
+    "objectID": "slides/05_iwls_ch5.html#iwls-procedure",
+    "href": "slides/05_iwls_ch5.html#iwls-procedure",
+    "title": "Iteratively reweighted least squares",
+    "section": "IWLS procedure",
+    "text": "IWLS procedure\n\nFind initial starting values \\(\\hat{\\theta}_i\\).\nCalculate the working response values \\(z_i\\).\nCalculate the working weights \\(W_i\\).\nFind the coefficient estimates of the weighted least squares model.\n\n\n\\(z_i = \\beta_0 + \\beta_1 x \\hspace{5mm} \\text{ with weights }W_i\\)\nThe estimates \\(\\hat{\\beta}_0\\) and \\(\\hat{\\beta}_1\\) are the estimates for the model coefficients.\n\n\nUse \\(\\hat{\\beta}_0\\) and \\(\\hat{\\beta}_1\\) to calculate updated values of \\(\\hat{\\theta}_i\\) and repeat steps 2 - 4 until convergence."
+  },
+  {
+    "objectID": "slides/05_iwls_ch5.html#demo-in-ch5_iwls.r-in-server-class-files",
+    "href": "slides/05_iwls_ch5.html#demo-in-ch5_iwls.r-in-server-class-files",
+    "title": "Iteratively reweighted least squares",
+    "section": "Demo in ch5_iwls.R in server class files",
+    "text": "Demo in ch5_iwls.R in server class files"
+  },
+  {
+    "objectID": "slides/05_iwls_ch5.html#acknowledgements",
+    "href": "slides/05_iwls_ch5.html#acknowledgements",
+    "title": "Iteratively reweighted least squares",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 4\nInitial versions of the slides are by Dr. Maria Tackett, Duke University\nBMLR: Chapter 5 - Generalized Linear Models: A Unifying Theory\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384.\nGeneralized Linear Models with Examples in R\n\nChapter 5 - Generalized Linear Models: Structure\nChapter 6 - Generalized Linear Models: Estimation"
+  },
+  {
+    "objectID": "slides/05_glm_ch5.html#why-are-glms-useful",
+    "href": "slides/05_glm_ch5.html#why-are-glms-useful",
+    "title": "Generalized Linear Models (GLMs)",
+    "section": "Why are GLMs useful?",
+    "text": "Why are GLMs useful?\n\nLinear regression models are used to predict \\(\\mu_{y|x}\\).\n\nWe assume that \\(Y\\) has a normal distribution with mean \\(\\mu_{y|x}\\) and variance \\(\\sigma^2\\).\nThe model we use is \\(\\mu_{y|x}=\\beta_0 + \\beta_1~x_1 + \\beta_2~x_2 +...\\)\nNote the unknown parameter is on the left and a linear combination of the predictor variables is on the right.\n\nWhat if the response variable \\(Y\\) doesn’t have a normal distribution? Can we estimate a relevant parameter of its actual distribution?\n\nIf a GLM exists, then it gives us a way of estimating the relevant parameter using a linear combination of the predictor variables."
   }
 ]

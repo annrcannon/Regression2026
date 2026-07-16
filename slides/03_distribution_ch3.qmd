@@ -55,6 +55,8 @@ library(tidyverse)
 - These responses are not expected to be normally distributed; other distributions will be needed to describe and  model binary or lifetime data. 
 - Non-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models. 
 
+- All information in this chapter is covered in much greater depth in STA 347.
+
 # Discrete Random Variables
 
 ## Discrete Random Variables {.smaller}
@@ -65,12 +67,15 @@ library(tidyverse)
 
 - With discrete random variables, the associated probabilities can be calculated for each possible value using a __probability mass function__ (pmf). \index{probability mass function (pmf)} 
 - A pmf is a function that calculates $P(Y=y)$, given each variable's parameters.
+- We use $\E(Y)=\mu$ to represent the mean of the distribution
+- We use $\SD(Y)=\sigma$ to represent the standard deviation of the distribution
 
 
 ## Binary Random Variable {.smaller}
 
 - Consider the event of flipping a (possibly unfair) coin. 
 - If the coin lands heads, let's consider this a success and record $Y = 1$.
+- If the coin lands tails, then we record $Y=0$.
 - A series of these events is a  __Bernoulli process__, \index{Bernoulli process} independent trials that take on one of two values (e.g., 0 or 1). 
 - These values are often referred to as a failure and a success
   - the probability of success is identical for each trial.
@@ -87,7 +92,7 @@ library(tidyverse)
 P(Y = y) = p^y(1-p)^{1-y} \quad \textrm{for} \quad y = 0, 1.
 \end{equation*}
 
-- If $Y \sim \textrm{Binary}(p)$, then $Y$ has mean $\E(Y) = p$ and standard deviation $\SD(Y) = \sqrt{p(1-p)}$.
+- If $Y \sim \textrm{Binary}(p)$ \left[or $Y \sim \textrm{Ber}(p)$\right], then $Y$ has mean $\E(Y) = p$ and standard deviation $\SD(Y) = \sqrt{p(1-p)}$.
 
 ## Example 1 {.smaller}
 - Your playlist of 200 songs has 5 which you cannot stand. What is the probability that when you hit shuffle, a song you tolerate comes on?
@@ -112,7 +117,7 @@ P(Y = y) = p^y(1-p)^{1-y} \quad \textrm{for} \quad y = 0, 1.
 - To find the probability of this what else do we need to count? 
 - What is the probability? 
 
-- There are $\binom{4}{1} = 4$ ways to have exactly 1 success in 4 trials, 
+- There are $\binom{4}{1} = \frac{4!}{1!(4-1)!}=4$ ways to have exactly 1 success in 4 trials, 
 $P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3$. 
 
 ## Binomial Distribution {.smaller}
@@ -517,6 +522,7 @@ ggplot(data = gammaDf, aes(x = x, y = value,
       &= \lambda e^{-\lambda y} \quad \textrm{for} \quad y > 0,
 \end{align*}
 an exponential distribution. 
+
 - Just as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!
 
 - Just like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative $r$.
@@ -528,9 +534,9 @@ an exponential distribution.
 - We have spent most of this chapter discussing probability distributions that may come in handy when modeling. 
 - The following distributions, while rarely used in modeling, prove useful in hypothesis testing as certain commonly used test statistics follow these distributions. 
 - $\chi^2$ distribution (requires a degree of freedom)
-- Student $t$ distribution
+- Student's $t$ distribution
 - $F$ distribution (need 2 different degrees of freedom)
-- Since we have used these In the past, we will leave their definitions to be referenced if needed
+- Since we have used these in the past, we will leave their definitions to be referenced if needed
 
 
 
@@ -545,8 +551,8 @@ an exponential distribution.
 
 ## Acknowledgements
 
-These slides are based on content in [BMLR: Chapter 1 - Review of Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-MLRreview.html)
-
+- These slides are based on content in [BMLR: Chapter 1 - Review of Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-MLRreview.html)
+- Edited from slides by Tyler George
 
 
 

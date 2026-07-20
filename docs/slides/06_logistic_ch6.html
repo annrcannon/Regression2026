@@ -1718,15 +1718,22 @@ Ann Cannon
 </div></aside></section>
 <section id="residuals" class="slide level2 smaller">
 <h2>Residuals</h2>
-<p>Similar to Poisson regression, there are two types of residuals: Pearson and deviance residuals</p>
+<p>For logistic regression, there are two types of residuals: Pearson and deviance residuals</p>
 <div class="fragment">
 <p><strong>Pearson residuals</strong></p>
 <p><span class="math display">\[\text{Pearson residual}_i = \frac{\text{actual count} - \text{predicted count}}{\text{SD count}} = \frac{Y_i - m_i\hat{p}_i}{\sqrt{m_i\hat{p}_i(1 - \hat{p}_i)}}\]</span></p>
 </div>
-<div class="fragment">
+</section>
+<section id="deviance-residuals" class="slide level2">
+<h2>Deviance residuals</h2>
+<p>The <strong>deviance residual</strong> indicates how much the observed data deviates from the fitted model</p>
 <p><strong>Deviance residuals</strong></p>
-<p><span class="math display">\[d_i = \text{sign}(Y_i - m_i\hat{p}_i)\sqrt{2\Big[Y_i\log\Big(\frac{Y_i}{m_i\hat{p}_i}\Big) + (m_i - Y_i)\log\Big(\frac{m_i - Y_i}{m_i - m_i\hat{p}_i}\Big)\Big]}\]</span></p>
-</div>
+<p><span class="math display">\[d_i = \text{sign}(Y_i - m_i\hat{p}_i)\sqrt{2\Big[Y_i\log\Big(\frac{Y_i}{m_i\hat{p}_i}\Big) + (m_i - Y_i)\log\Big(\frac{m_i - Y_i}{m_i - m_i\hat{p}_i}\Big)\Big]}\]</span> where</p>
+<p><span class="math display">\[\text{sign}(y_i - m_i\hat{p}_i)  =  \begin{cases}
+1 &amp; \text{ if }(y_i - m_i\hat{p}_i) &gt; 0 \\
+-1 &amp; \text{ if }(y_i - m_i\hat{p}_i) &lt; 0 \\
+0 &amp; \text{ if }(y_i - m_i\hat{p}_i) = 0
+\end{cases}\]</span></p>
 </section>
 <section id="plot-of-deviance-residuals" class="slide level2 smaller">
 <h2>Plot of deviance residuals</h2>

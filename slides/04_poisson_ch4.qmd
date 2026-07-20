@@ -40,6 +40,8 @@ library(gridExtra)
 
 - Use Goodness-of-fit to assess model fit 
 
+- Summarize GLMs for independent observations
+
 ## Learning goals (2/2) {.smaller}
 
 - Identify overdispersion 

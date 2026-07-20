@@ -5011,14 +5011,14 @@
     "href": "slides/06_logistic_ch6.html#learning-goals",
     "title": "Logistic Regression",
     "section": "Learning goals",
-    "text": "Learning goals\n\nIdentify Bernoulli and binomial random variables\nWrite GLM for binomial response variable\nInterpret the coefficients for a logistic regression model\nVisualizations for logistic regression\nInterpret coefficients and results from an ordinal logistic regression model\nSummarize GLMs for independent observations"
+    "text": "Learning goals\n\nIdentify Bernoulli and binomial random variables\nWrite GLM for binomial response variable\nInterpret the coefficients for a logistic regression model\nVisualizations for logistic regression\nInterpret coefficients and results from an ordinal logistic regression model"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#bernoulli-binomial-random-variables-12",
     "href": "slides/06_logistic_ch6.html#bernoulli-binomial-random-variables-12",
     "title": "Logistic Regression",
     "section": "Bernoulli + Binomial random variables (1/2)",
-    "text": "Bernoulli + Binomial random variables (1/2)\nLogistic regression is used to analyze data with two types of responses:\n\nBinary: These responses take on two values success \\((Y = 1)\\) or failure \\((Y = 0)\\), yes \\((Y = 1)\\) or no \\((Y = 0)\\), etc.\n\n\n\\[P(Y = y) = p^y(1-p)^{1-y} \\hspace{10mm} y = 0, 1\\]"
+    "text": "Bernoulli + Binomial random variables (1/2)\nLogistic regression is used to analyze data with two types of responses:\n\nBinary: These responses take on two values: success \\((Y = 1)\\) or failure \\((Y = 0)\\), yes \\((Y = 1)\\) or no \\((Y = 0)\\), etc.\n\n\n\\[P(Y = y) = p^y(1-p)^{1-y} \\hspace{10mm} y = 0, 1\\]"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#bernoulli-binomial-random-variables-22",
@@ -5039,7 +5039,7 @@
     "href": "slides/06_logistic_ch6.html#logistic-regression-model",
     "title": "Logistic Regression",
     "section": "Logistic regression model",
-    "text": "Logistic regression model\n\\(\\log\\Big(\\frac{p}{1-p}\\Big) = \\beta_0 + \\beta_1x_1 + \\beta_2x_2 + \\dots + \\beta_px_p\\)\n\nThe response variable, \\(\\log\\Big(\\frac{p}{1-p}\\Big)\\), is the log(odds) of success, i.e. the logit\nUse the model to calculate the probability of success \\(\\hat{p} = \\frac{e^{\\beta_0 + \\beta_1x_1 + \\beta_2x_2 + \\dots + \\beta_px_p}}{1 + e^{\\beta_0 + \\beta_1x_1 + \\beta_2x_2 + \\dots + \\beta_px_p}}\\)\nWhen the response is a Bernoulli random variable, the probabilities can be used to classify each observation as a success or failure"
+    "text": "Logistic regression model\nSo the glm model for both cases is:\n\\(\\log\\Big(\\frac{p}{1-p}\\Big) = \\beta_0 + \\beta_1x_1 + \\beta_2x_2 + \\dots + \\beta_px_p\\)\n\nThe response variable, \\(\\log\\Big(\\frac{p}{1-p}\\Big)\\), is the log(odds) of success, i.e. the logit\nUse the model to calculate the probability of success \\(\\hat{p} = \\frac{e^{\\beta_0 + \\beta_1x_1 + \\beta_2x_2 + \\dots + \\beta_px_p}}{1 + e^{\\beta_0 + \\beta_1x_1 + \\beta_2x_2 + \\dots + \\beta_px_p}}\\)\nWhen the response is a Bernoulli random variable, the probabilities can be used to classify each observation as a success or failure"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#logistic-vs-linear-regression-model",
@@ -5102,7 +5102,7 @@
     "href": "slides/06_logistic_ch6.html#access-to-personal-protective-equipment",
     "title": "Logistic Regression",
     "section": "Access to personal protective equipment",
-    "text": "Access to personal protective equipment\nWe will use the data from Andualem et al. (2022) to explore the association between age, sex, years of service, and whether someone works at a food establishment with access to personal protective equipment (PPE) as of August 2020. We will use access to PPE as a proxy for wearing PPE.\n\nPlotCode\n\n\n\n\n\n\n\nage\nsex\nyears\nppe_access\n\n\n\n\n34\nMale\n2\n1\n\n\n32\nFemale\n3\n1\n\n\n32\nFemale\n1\n1\n\n\n40\nMale\n4\n1\n\n\n32\nMale\n10\n1\n\n\n\n\n\n\n\n\ncovid_df &lt;- read_csv(\"data/covid-prevention-study.csv\") |&gt;\n  rename(age = \"Age of food handlers\", \n         years = \"Years of service\", \n         ppe_access = \"Availability of PPEs\") |&gt;\n  mutate(sex = factor(if_else(Sex == 2, \"Female\", \"Male\"))) |&gt;\n  select(age, sex, years, ppe_access) \n\ncovid_df |&gt; slice(1:5) |&gt; kable()"
+    "text": "Access to personal protective equipment\nWe will use the data from Andualem et al. (2022) to explore the association between age, sex, years of service, and whether someone works at a food establishment with access to personal protective equipment (PPE) as of August 2020. We will use access to PPE as a proxy for wearing PPE.\n\nDataCode\n\n\n\n\n\n\n\nage\nsex\nyears\nppe_access\n\n\n\n\n34\nMale\n2\n1\n\n\n32\nFemale\n3\n1\n\n\n32\nFemale\n1\n1\n\n\n40\nMale\n4\n1\n\n\n32\nMale\n10\n1\n\n\n\n\n\n\n\n\ncovid_df &lt;- read_csv(\"data/covid-prevention-study.csv\") |&gt;\n  rename(age = \"Age of food handlers\", \n         years = \"Years of service\", \n         ppe_access = \"Availability of PPEs\") |&gt;\n  mutate(sex = factor(if_else(Sex == 2, \"Female\", \"Male\"))) |&gt;\n  select(age, sex, years, ppe_access) \n\ncovid_df |&gt; slice(1:5) |&gt; kable()"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#eda-for-binary-response-12",
@@ -5165,14 +5165,14 @@
     "href": "slides/06_logistic_ch6.html#eda-33",
     "title": "Logistic Regression",
     "section": "EDA (3/3)",
-    "text": "EDA (3/3)\n\nrr &lt;- rr |&gt;\n  mutate(inFavor = if_else(pctYes &gt; 0.5, \"Yes\", \"No\"))\n\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr, aes(x = distance, y = pctBlack, color = inFavor)) + \n  geom_point() + \n  geom_smooth(method  = \"lm\", se = FALSE, aes(lty = inFavor)) + \n  labs(x = \"Distance to proposed railroad\", \n       y = \"% Black residents\",\n       title = \"% Black residents vs. distance\", \n       subtitle = \"Based on vote outcome\") + \n  scale_color_viridis_d(end = 0.85)\n\n\n\n\n\nCheck for potential multicollinearity and interaction effect."
+    "text": "EDA (3/3)\n\nrr &lt;- rr |&gt;\n  mutate(inFavor = if_else(pctYes &gt; 0.5, \"Yes\", \"No\"))\n\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr, aes(x = distance, y = pctBlack, color = inFavor)) + \n  geom_point() + \n  geom_smooth(method  = \"lm\", se = FALSE, aes(lty = inFavor)) + \n  labs(x = \"Distance to proposed railroad\", \n       y = \"% Black residents\",\n       title = \"% Black residents vs. distance\", \n       subtitle = \"Based on vote outcome. Check for potential multicollinearity and interaction effect\") + \n  scale_color_viridis_d(end = 0.85)"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#model",
     "href": "slides/06_logistic_ch6.html#model",
     "title": "Logistic Regression",
     "section": "Model",
-    "text": "Model\nLet \\(p\\) be the percent of yes votes in a county. We’ll start by fitting the following model:\n\\[\\log\\Big(\\frac{p}{1-p}\\Big)  = \\beta_0 + \\beta_1 ~ dist + \\beta_2 ~ pctBlack\\]\n\nLikelihood\n\\[\\begin{aligned}L(p) &= \\prod_{i=1}^{n} {m_i \\choose y_i}p_i^{y_i}(1 - p_i)^{m_i - y_i} \\\\\n&= \\prod_{i=1}^{n} {m_i \\choose y_i}\\Big[\\frac{e^{\\beta_0 + \\beta_1 ~ dist_i + \\beta_2 ~ pctBlack_i}}{1 + e^{\\beta_0 + \\beta_1 ~ dist_i + \\beta_2 ~ pctBlack_i}}\\Big]^{y_i}\\Big[\\frac{1}{e^{\\beta_0 + \\beta_1 ~ dist_i + \\beta_2 ~ pctBlack_i}}\\Big]^{m_i - y_i} \\\\\\end{aligned}\\]\nUse IWLS to find \\(\\hat{\\beta}_0, \\hat{\\beta}_1, \\hat{\\beta}_2\\)."
+    "text": "Model\nLet \\(p\\) be the percent of yes votes in a county. We’ll start by fitting the following model:\n\\[\\log\\Big(\\frac{p}{1-p}\\Big)  = \\beta_0 + \\beta_1 ~ dist + \\beta_2 ~ pctBlack\\]"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#model-in-r",
@@ -7084,5 +7084,12 @@
     "title": "Generalized Linear Models (GLMs)",
     "section": "Why are GLMs useful?",
     "text": "Why are GLMs useful?\n\nLinear regression models are used to predict \\(\\mu_{y|x}\\).\n\nWe assume that \\(Y\\) has a normal distribution with mean \\(\\mu_{y|x}\\) and variance \\(\\sigma^2\\).\nThe model we use is \\(\\mu_{y|x}=\\beta_0 + \\beta_1~x_1 + \\beta_2~x_2 +...\\)\nNote the unknown parameter is on the left and a linear combination of the predictor variables is on the right.\n\nWhat if the response variable \\(Y\\) doesn’t have a normal distribution? Can we estimate a relevant parameter of its actual distribution?\n\nIf a GLM exists, then it gives us a way of estimating the relevant parameter using a linear combination of the predictor variables."
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#logit-link-1",
+    "href": "slides/06_logistic_ch6.html#logit-link-1",
+    "title": "Logistic Regression",
+    "section": "Logit link",
+    "text": "Logit link\nBernoulli and Binomial random variables can be written in one-parameter exponential family form, \\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\)\n\nBernoulli\n\\[f(y;p) = e^{y\\log(\\frac{p}{1-p}) + \\log(1-p)}\\]\n\n\nBinomial\n\\[f(y;n,p) = e^{y\\log(\\frac{p}{1-p}) + n\\log(1-p) + \\log{n \\choose y}}\\]\n\n\nThey have the same canonical link \\(b(p) = \\log\\big(\\frac{p}{1-p}\\big)\\)"
   }
 ]

@@ -36,7 +36,6 @@ library(gridExtra)
 
 - Interpret coefficients and results from an ordinal logistic regression model 
 
-- Summarize GLMs for independent observations
 
 
 # Basics of logistic regression
@@ -44,7 +43,7 @@ library(gridExtra)
 
 Logistic regression is used to analyze data with two types of responses: 
 
-- **Binary**: These responses take on two values success $(Y = 1)$ or failure $(Y = 0)$, yes $(Y = 1)$ or no $(Y = 0)$, etc.
+- **Binary**: These responses take on two values: success $(Y = 1)$ or failure $(Y = 0)$, yes $(Y = 1)$ or no $(Y = 0)$, etc.
 
 . . .
 
@@ -79,8 +78,32 @@ For each example, identify if the response is a Bernoulli or Binomial response
 
 4. Use offensive and defensive statistics from the 2017-2018 NBA season to predict a team's winning percentage.
 
+## Logit link {.smaller}
+
+Bernoulli and Binomial random variables can be written in one-parameter exponential family form, $f(y;\theta) = e^{[a(y)b(\theta) + c(\theta) + d(y)]}$
+
+. . .
+
+**Bernoulli**
+
+$$f(y;p) = e^{y\log(\frac{p}{1-p}) + \log(1-p)}$$
+
+. . .
+
+**Binomial** 
+
+$$f(y;n,p) = e^{y\log(\frac{p}{1-p}) + n\log(1-p) + \log{n \choose y}}$$
+
+. . .
+
+They have the same canonical link $b(p) = \log\big(\frac{p}{1-p}\big)$
+
+
+
 
 ## Logistic regression model {.smaller}
+
+So the glm model for both cases is: 
 
 $\log\Big(\frac{p}{1-p}\Big) = \beta_0 + \beta_1x_1 + \beta_2x_2 + \dots + \beta_px_p$
 
@@ -149,26 +172,6 @@ ggplot() +
 ```
 
 :::
-
-## Logit link {.smaller}
-
-Bernoulli and Binomial random variables can be written in one-parameter exponential family form, $f(y;\theta) = e^{[a(y)b(\theta) + c(\theta) + d(y)]}$
-
-. . .
-
-**Bernoulli**
-
-$$f(y;p) = e^{y\log(\frac{p}{1-p}) + \log(1-p)}$$
-
-. . .
-
-**Binomial** 
-
-$$f(y;n,p) = e^{y\log(\frac{p}{1-p}) + n\log(1-p) + \log{n \choose y}}$$
-
-. . .
-
-They have the same canonical link $b(p) = \log\big(\frac{p}{1-p}\big)$
 
 
 
@@ -252,7 +255,7 @@ We will use the data from [Andualem et al. (2022)](https://journals.plos.org/plo
 
 ::: {.panel-tabset}
 
-### Plot 
+### Data 
 
 ```{r echo = F}
 covid_df <- read_csv("data/covid-prevention-study.csv") |>
@@ -322,7 +325,7 @@ ggplot(data = covid_df, aes(x = sex, fill = factor(ppe_access))) +
 :::
 
 
-## Model results
+## Model results {.smaller}
 
 ```{r}
 ppe_model <- glm(factor(ppe_access) ~ age + sex + years, data = covid_df, 
@@ -367,7 +370,7 @@ The data set [`RR_Data_Hale.csv`](data/RR_Data_Hale.csv) contains information on
 
 
 
-## The data
+## The data {.smaller}
 
 ```{r}
 rr <- read_csv("data/RR_Data_Hale.csv")
@@ -444,7 +447,7 @@ ggplot(data = rr, aes(x = distance, y = pctBlack, color = inFavor)) +
   labs(x = "Distance to proposed railroad", 
        y = "% Black residents",
        title = "% Black residents vs. distance", 
-       subtitle = "Based on vote outcome") + 
+       subtitle = "Based on vote outcome. Check for potential multicollinearity and interaction effect") + 
   scale_color_viridis_d(end = 0.85)
 ```
 
@@ -457,32 +460,19 @@ ggplot(data = rr, aes(x = distance, y = pctBlack, color = inFavor)) +
   labs(x = "Distance to proposed railroad", 
        y = "% Black residents",
        title = "% Black residents vs. distance", 
-       subtitle = "Based on vote outcome") + 
+       subtitle = "Based on vote outcome. Check for potential multicollinearity and interaction effect") + 
   scale_color_viridis_d(end = 0.85)
 ```
 
 :::
 
-. . .
 
-Check for potential multicollinearity and interaction effect. 
-
-
-
-## Model {.smaller}
+## Model 
 
 Let $p$ be the percent of yes votes in a county. We'll start by fitting the following model: 
 
 $$\log\Big(\frac{p}{1-p}\Big)  = \beta_0 + \beta_1 ~ dist + \beta_2 ~ pctBlack$$
 
-. . .
-
-**Likelihood** 
-
-$$\begin{aligned}L(p) &= \prod_{i=1}^{n} {m_i \choose y_i}p_i^{y_i}(1 - p_i)^{m_i - y_i} \\ 
-&= \prod_{i=1}^{n} {m_i \choose y_i}\Big[\frac{e^{\beta_0 + \beta_1 ~ dist_i + \beta_2 ~ pctBlack_i}}{1 + e^{\beta_0 + \beta_1 ~ dist_i + \beta_2 ~ pctBlack_i}}\Big]^{y_i}\Big[\frac{1}{e^{\beta_0 + \beta_1 ~ dist_i + \beta_2 ~ pctBlack_i}}\Big]^{m_i - y_i} \\\end{aligned}$$
-
-Use IWLS to find $\hat{\beta}_0, \hat{\beta}_1, \hat{\beta}_2$. 
 
 
 

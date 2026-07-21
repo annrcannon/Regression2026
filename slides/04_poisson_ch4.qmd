@@ -1579,7 +1579,23 @@ $$\alpha_i = \frac{e^{\beta_{0\alpha} + \beta_{1\alpha} ~ first\_year_i}}{1 + e^
 
 - Plug in $\lambda_i$ and $\alpha_i$ into the above equation obtain the likelihood function
 
+# Wrap up GLM for independent observations
 
+
+## Wrap up {.smaller}
+
+- Covered fitting, interpreting, and drawing conclusions from GLMs
+  - Looked at Poisson, Negative Binomial, and Logistic (binary, binomial, ordinal) in detail
+
+- Used Pearson and deviance residuals to assess model fit and determine if new variables should be added to the model 
+
+- Addressed issues of overdispersion and zero-inflation 
+
+- Used the properties of the one-parameter exponential family to identify the best link function for any GLM
+
+. . .
+
+Everything we've done thus far as been under the assumption that the observations are *independent*. Looking ahead we will consider models for data with  **dependent (correlated) observations**. 
 
 ## Acknowledgements
 

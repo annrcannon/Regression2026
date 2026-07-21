@@ -502,15 +502,17 @@ For logistic regression, there are two types of residuals: Pearson and deviance 
 
 **Pearson residuals** 
 
+Pearson residuals look at the differences between actual and predicted counts.
+
 $$\text{Pearson residual}_i = \frac{\text{actual count} - \text{predicted count}}{\text{SD count}} = \frac{Y_i - m_i\hat{p}_i}{\sqrt{m_i\hat{p}_i(1 - \hat{p}_i)}}$$
 
-## Deviance residuals
+## Deviance residuals {.smaller}
 
-The **deviance residual** indicates how much the observed data deviates from the fitted model
+The deviance residual also compare the actual and predicted counts, but do so using the theory of likelihoods.
 
 **Deviance residuals** 
 
-$$d_i = \text{sign}(Y_i - m_i\hat{p}_i)\sqrt{2\Big[Y_i\log\Big(\frac{Y_i}{m_i\hat{p}_i}\Big) + (m_i - Y_i)\log\Big(\frac{m_i - Y_i}{m_i - m_i\hat{p}_i}\Big)\Big]}$$
+$$d_i = \text{sign}(Y_i - m_i\hat{p}_i)\sqrt{2\left[Y_i\log\left(\frac{Y_i}{m_i\hat{p}_i}\right) + (m_i - Y_i)\log\left(\frac{m_i - Y_i}{m_i - m_i\hat{p}_i}\right)\right]}$$
 where 
 
 $$\text{sign}(y_i - m_i\hat{p}_i)  =  \begin{cases}
@@ -519,19 +521,29 @@ $$\text{sign}(y_i - m_i\hat{p}_i)  =  \begin{cases}
 0 & \text{ if }(y_i - m_i\hat{p}_i) = 0
 \end{cases}$$
 
+## Meaning of Residuals {.smaller}
+
+Both types of residuals indicate how much the observed data deviates from the fitted model. What happens when the actual count and the predicted count are the same for each type of residual?
+
+. . .
+
+$$\text{Pearson residual}_i = \frac{\text{actual count} - \text{predicted count}}{\text{SD count}} = \frac{Y_i - m_i\hat{p}_i}{\sqrt{m_i\hat{p}_i(1 - \hat{p}_i)}}$$
+
+. . .
+
+$$d_i = \text{sign}(Y_i - m_i\hat{p}_i)\sqrt{2\left[Y_i\log\left(\frac{Y_i}{m_i\hat{p}_i}\right) + (m_i - Y_i)\log\left(\frac{m_i - Y_i}{m_i - m_i\hat{p}_i}\right)\right]}$$
+
 ## Plot of deviance residuals {.smaller}
 
 :::{.panel-tabset}
 
-### Model
+### Model {.smaller}
 
 ```{r, warning=F,message=F}
 rr_int_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +
                       distance*pctBlack, 
                 data = rr, family = binomial)
-```
 
-```{r, warning=F,message=F}
 rr_int_aug <- augment(rr_int_model, type.predict = "response", 
                         type.residuals = "deviance")
 
@@ -567,7 +579,7 @@ ggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) +
 
 ## Goodness of fit {.smaller}
 
-Similar to Poisson regression, the sum of the squared deviance residuals is used to assess goodness of fit. 
+We use the sum of the squared deviance residuals to assess goodness of fit of the model. 
 
 $$\begin{aligned} &H_0: \text{ Model is a good fit} \\
 &H_a: \text{ Model is not a good fit}\end{aligned}$$
@@ -578,6 +590,77 @@ $$\begin{aligned} &H_0: \text{ Model is a good fit} \\
 
 - If the model fits, we expect the residual deviance to be approximately what value? 
 
+## Goodness of fit test {.smaller}
+
+:::{.panel-tabset}
+
+### Model {.smaller}
+
+```{r, warning=F,message=F}
+rr_int_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +
+                      distance*pctBlack, 
+                data = rr, family = binomial)
+
+rr_int_model
+```
+
+
+### Test 
+
+The test statistic is the residual deviance: 274.2
+
+The degrees of freedom are the residual df: 7
+
+We find the p-value using the chi-square distribution r function
+
+
+```{r}
+
+1-pchisq(274.2, 7)
+
+```
+
+The p-value is quite small, so there is significant evidence that the model is not a good fit.
+:::
+
+## Drop-in-deviance test {.smaller}
+
+Is our last model better than just a model with distance in it?  We can test that with a drop-in-deviance test.
+
+:::{.panel-tabset}
+
+### Test information
+
+The hypotheses are:
+
+$$\begin{aligned} &H_0: \text{ Simpler model is enough} \\
+&H_a: \text{ More complete model is better}\end{aligned}$$
+
+- Note that one observation was omitted in the more complicated model because it was missing the race information.  To compare the models, we must use the same exact data set, so in running the simpler model, I eliminated that data point.
+
+### Simpler Model {.smaller}
+
+```{r, warning=F,message=F}
+rr_simp_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance, 
+                data = rr[-11,], family = binomial)
+
+rr_simp_model
+```
+
+
+### Test 
+
+
+```{r}
+
+drop_in_dev <- anova(rr_simp_model, rr_int_model, test= "Chisq")
+drop_in_dev
+
+```
+
+So even though there are issues with the larger model, it is significantly better than the simpler one.
+
+:::
 
 # Overdispersion 
 
@@ -672,37 +755,6 @@ $$\begin{aligned} &H_0: \text{ Model is a good fit} \\
 
 <!-- Use the results from both models to describe the effect of triage level (red = urgent, green = non-urgent) on the wait and treatment times in the ED. Note that "red" is the baseline level. Is this what you expected?  -->
 
-
-
-
-
-
-# Wrap up GLM for independent observations
-
-
-## Wrap up {.smaller}
-
-- Covered fitting, interpreting, and drawing conclusions from GLMs
-  - Looked at Poisson, Negative Binomial, and Logistic (binary, binomial, ordinal) in detail
-
-- Used Pearson and deviance residuals to assess model fit and determine if new variables should be added to the model 
-
-- Addressed issues of overdispersion and zero-inflation 
-
-- Used the properties of the one-parameter exponential family to identify the best link function for any GLM
-
-. . .
-
-Everything we've done thus far as been under the assumption that the observations are *independent*. Looking ahead we will consider models for data with  **dependent (correlated) observations**. 
-
-
-
-## Acknowledgements
-
-These slides are based on content in 
-
-- [BMLR: Chapter 6 - Logistic Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html)
-
   
   
 
@@ -713,5 +765,6 @@ These slides are based on content in
 - [BMLR: Chapter 6 - Logistic Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-logreg.html)
 
 - Initial versions of the slides are by Dr. Maria Tackett, Duke University
+- Originally edited by Tyler George
 
   

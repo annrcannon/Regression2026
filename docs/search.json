@@ -5186,21 +5186,21 @@
     "href": "slides/06_logistic_ch6.html#residuals",
     "title": "Logistic Regression",
     "section": "Residuals",
-    "text": "Residuals\nFor logistic regression, there are two types of residuals: Pearson and deviance residuals\n\nPearson residuals\n\\[\\text{Pearson residual}_i = \\frac{\\text{actual count} - \\text{predicted count}}{\\text{SD count}} = \\frac{Y_i - m_i\\hat{p}_i}{\\sqrt{m_i\\hat{p}_i(1 - \\hat{p}_i)}}\\]"
+    "text": "Residuals\nFor logistic regression, there are two types of residuals: Pearson and deviance residuals\n\nPearson residuals\nPearson residuals look at the differences between actual and predicted counts.\n\\[\\text{Pearson residual}_i = \\frac{\\text{actual count} - \\text{predicted count}}{\\text{SD count}} = \\frac{Y_i - m_i\\hat{p}_i}{\\sqrt{m_i\\hat{p}_i(1 - \\hat{p}_i)}}\\]"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#plot-of-deviance-residuals",
     "href": "slides/06_logistic_ch6.html#plot-of-deviance-residuals",
     "title": "Logistic Regression",
     "section": "Plot of deviance residuals",
-    "text": "Plot of deviance residuals\n\nModelResidual PlotPlot Code\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\n\nrr_int_aug &lt;- augment(rr_int_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_int_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.2075801\n7.964510\n0.4663943\n5.0884957\n32.9667672\n\n\n2\n0\n15\n7\n92.40\n0.6776101\n-5.827504\n0.0492925\n6.3049338\n0.4298496\n\n\n3\n4\n38\n15\n18.28\n0.2024659\n-1.885115\n0.6433983\n6.6366201\n3.7828247\n\n\n4\n1790\n14\n0\n59.38\n0.9760416\n5.230746\n0.8996698\n0.5044966\n452.2582760\n\n\n5\n0\n15\n7\n55.51\n0.8513123\n-7.561561\n0.0240118\n5.9951340\n0.5412285\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\", \n       subtitle = \"for model with interaction term\")"
+    "text": "Plot of deviance residuals\n\nModelResidual PlotPlot Code\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\nrr_int_aug &lt;- augment(rr_int_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_int_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.2075801\n7.964510\n0.4663943\n5.0884957\n32.9667672\n\n\n2\n0\n15\n7\n92.40\n0.6776101\n-5.827504\n0.0492925\n6.3049338\n0.4298496\n\n\n3\n4\n38\n15\n18.28\n0.2024659\n-1.885115\n0.6433983\n6.6366201\n3.7828247\n\n\n4\n1790\n14\n0\n59.38\n0.9760416\n5.230746\n0.8996698\n0.5044966\n452.2582760\n\n\n5\n0\n15\n7\n55.51\n0.8513123\n-7.561561\n0.0240118\n5.9951340\n0.5412285\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\", \n       subtitle = \"for model with interaction term\")"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#goodness-of-fit",
     "href": "slides/06_logistic_ch6.html#goodness-of-fit",
     "title": "Logistic Regression",
     "section": "Goodness of fit",
-    "text": "Goodness of fit\nSimilar to Poisson regression, the sum of the squared deviance residuals is used to assess goodness of fit.\n\\[\\begin{aligned} &H_0: \\text{ Model is a good fit} \\\\\n&H_a: \\text{ Model is not a good fit}\\end{aligned}\\]\n\nWhen \\(m_i\\) is large and the model is a good fit \\((H_0 \\text{ true})\\) the residual deviance follows a \\(\\chi^2\\) distribution with \\(n - p\\) degrees of freedom.\n\nRecall \\(n - p\\) is the residual degrees of freedom.\n\nIf the model fits, we expect the residual deviance to be approximately what value?"
+    "text": "Goodness of fit\nWe use the sum of the squared deviance residuals to assess goodness of fit of the model.\n\\[\\begin{aligned} &H_0: \\text{ Model is a good fit} \\\\\n&H_a: \\text{ Model is not a good fit}\\end{aligned}\\]\n\nWhen \\(m_i\\) is large and the model is a good fit \\((H_0 \\text{ true})\\) the residual deviance follows a \\(\\chi^2\\) distribution with \\(n - p\\) degrees of freedom.\n\nRecall \\(n - p\\) is the residual degrees of freedom.\n\nIf the model fits, we expect the residual deviance to be approximately what value?"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-12",
@@ -5228,7 +5228,7 @@
     "href": "slides/06_logistic_ch6.html#acknowledgements",
     "title": "Logistic Regression",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\nThese slides are based on content in\n\nBMLR: Chapter 6 - Logistic Regression"
+    "text": "Acknowledgements\nThese slides are based on content in\n\nBMLR: Chapter 6 - Logistic Regression\nInitial versions of the slides are by Dr. Maria Tackett, Duke University\nOriginally edited by Tyler George"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#acknowledgements-1",
@@ -7097,6 +7097,34 @@
     "href": "slides/06_logistic_ch6.html#deviance-residuals",
     "title": "Logistic Regression",
     "section": "Deviance residuals",
-    "text": "Deviance residuals\nThe deviance residual indicates how much the observed data deviates from the fitted model\nDeviance residuals\n\\[d_i = \\text{sign}(Y_i - m_i\\hat{p}_i)\\sqrt{2\\Big[Y_i\\log\\Big(\\frac{Y_i}{m_i\\hat{p}_i}\\Big) + (m_i - Y_i)\\log\\Big(\\frac{m_i - Y_i}{m_i - m_i\\hat{p}_i}\\Big)\\Big]}\\] where\n\\[\\text{sign}(y_i - m_i\\hat{p}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - m_i\\hat{p}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - m_i\\hat{p}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - m_i\\hat{p}_i) = 0\n\\end{cases}\\]"
+    "text": "Deviance residuals\nThe deviance residual also compare the actual and predicted counts, but do so using the theory of likelihoods.\nDeviance residuals\n\\[d_i = \\text{sign}(Y_i - m_i\\hat{p}_i)\\sqrt{2\\left[Y_i\\log\\left(\\frac{Y_i}{m_i\\hat{p}_i}\\right) + (m_i - Y_i)\\log\\left(\\frac{m_i - Y_i}{m_i - m_i\\hat{p}_i}\\right)\\right]}\\] where\n\\[\\text{sign}(y_i - m_i\\hat{p}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - m_i\\hat{p}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - m_i\\hat{p}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - m_i\\hat{p}_i) = 0\n\\end{cases}\\]"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#meaning-of-residuals",
+    "href": "slides/06_logistic_ch6.html#meaning-of-residuals",
+    "title": "Logistic Regression",
+    "section": "Meaning of Residuals",
+    "text": "Meaning of Residuals\nBoth types of residuals indicate how much the observed data deviates from the fitted model. What happens when the actual count and the predicted count are the same for each type of residual?\n\n\\[\\text{Pearson residual}_i = \\frac{\\text{actual count} - \\text{predicted count}}{\\text{SD count}} = \\frac{Y_i - m_i\\hat{p}_i}{\\sqrt{m_i\\hat{p}_i(1 - \\hat{p}_i)}}\\]\n\n\n\\[d_i = \\text{sign}(Y_i - m_i\\hat{p}_i)\\sqrt{2\\left[Y_i\\log\\left(\\frac{Y_i}{m_i\\hat{p}_i}\\right) + (m_i - Y_i)\\log\\left(\\frac{m_i - Y_i}{m_i - m_i\\hat{p}_i}\\right)\\right]}\\]"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#goodness-of-fit-test",
+    "href": "slides/06_logistic_ch6.html#goodness-of-fit-test",
+    "title": "Logistic Regression",
+    "section": "Goodness of fit test",
+    "text": "Goodness of fit test\n\nModelTest\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\nrr_int_model\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + \n    pctBlack + distance * pctBlack, family = binomial, data = rr)\n\nCoefficients:\n      (Intercept)           distance           pctBlack  distance:pctBlack  \n         7.550902          -0.614005          -0.064731           0.005367  \n\nDegrees of Freedom: 10 Total (i.e. Null);  7 Residual\n  (1 observation deleted due to missingness)\nNull Deviance:      988.4 \nResidual Deviance: 274.2    AIC: 320.5\n\n\n\n\nThe test statistic is the residual deviance: 274.2\nThe degrees of freedom are the residual df: 7\nWe find the p-value using the chi-square distribution r function\n\n1-pchisq(274.2, 7)\n\n[1] 0\n\n\nThe p-value is quite small, so there is significant evidence that the model is not a good fit."
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#drop-in-deviance-test",
+    "href": "slides/06_logistic_ch6.html#drop-in-deviance-test",
+    "title": "Logistic Regression",
+    "section": "Drop-in-deviance test",
+    "text": "Drop-in-deviance test\nIs our last model better than just a model with distance in it? We can test that with a drop-in-deviance test.\n\nTest informationSimpler ModelTest\n\n\nThe hypotheses are:\n\\[\\begin{aligned} &H_0: \\text{ Simpler model is enough} \\\\\n&H_a: \\text{ More complete model is better}\\end{aligned}\\]\n\nNote that one observation was omitted in the more complicated model because it was missing the race information. To compare the models, we must use the same exact data set, so in running the simpler model, I eliminated that data point.\n\n\n\n\nrr_simp_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance, \n                data = rr[-11,], family = binomial)\n\nrr_simp_model\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance, \n    family = binomial, data = rr[-11, ])\n\nCoefficients:\n(Intercept)     distance  \n     3.3093      -0.2876  \n\nDegrees of Freedom: 10 Total (i.e. Null);  9 Residual\nNull Deviance:      988.4 \nResidual Deviance: 318.4    AIC: 360.7\n\n\n\n\n\ndrop_in_dev &lt;- anova(rr_simp_model, rr_int_model, test= \"Chisq\")\ndrop_in_dev\n\nAnalysis of Deviance Table\n\nModel 1: cbind(YesVotes, NumVotes - YesVotes) ~ distance\nModel 2: cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + \n    distance * pctBlack\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1         9     318.44                          \n2         7     274.23  2   44.206 2.517e-10 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nSo even though there are issues with the larger model, it is significantly better than the simpler one."
+  },
+  {
+    "objectID": "slides/04_poisson_ch4.html#wrap-up",
+    "href": "slides/04_poisson_ch4.html#wrap-up",
+    "title": "Poisson Regression",
+    "section": "Wrap up",
+    "text": "Wrap up\n\nCovered fitting, interpreting, and drawing conclusions from GLMs\n\nLooked at Poisson, Negative Binomial, and Logistic (binary, binomial, ordinal) in detail\n\nUsed Pearson and deviance residuals to assess model fit and determine if new variables should be added to the model\nAddressed issues of overdispersion and zero-inflation\nUsed the properties of the one-parameter exponential family to identify the best link function for any GLM\n\n\nEverything we’ve done thus far as been under the assumption that the observations are independent. Looking ahead we will consider models for data with dependent (correlated) observations."
   }
 ]

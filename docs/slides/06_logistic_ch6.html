@@ -1998,11 +1998,89 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <h1>Overdispersion</h1>
 
 </section>
+<section id="overdispersion-1" class="slide level2 smaller">
+<h2>Overdispersion</h2>
+<p><strong>Overdispersion</strong>: There is more variability in the response than what is assumed by the Logistic model</p>
+<div class="panel-tabset">
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-9-1">Estimated variance</a></li><li><a href="#tabset-9-2">Binomial variance</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1">
+<div class="columns">
+<div class="column">
+<p><strong>Overall <span class="math inline">\(\hat{p}\)</span></strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>over_p_hat <span class="ot">&lt;-</span> <span class="fu">sum</span>(rr<span class="sc">$</span>YesVotes)<span class="sc">/</span><span class="fu">sum</span>(rr<span class="sc">$</span>NumVotes)</span>
+<span id="cb26-2"><a></a>over_p_hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8815944</code></pre>
+</div>
+</div>
+</div><div class="column">
+<p><strong><span class="math inline">\(\hat{p}\)</span> by Location summary stats</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>rr <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">p_hat =</span> YesVotes<span class="sc">/</span>NumVotes) <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(p_hat), <span class="at">var =</span> <span class="fu">var</span>(p_hat)) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">var</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.517</td>
+<td style="text-align: right;">0.148</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></div>
+</div>
+<div id="tabset-9-2">
+<p>The variance for the count in a binomial setting is <span class="math inline">\(np(1-p)\)</span>. Here we want the variance of <span class="math inline">\(\hat{p}\)</span> instead of the count. That variance is <span class="math inline">\(\frac{p(1-p)}{n}\)</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>var_p_hat <span class="ot">&lt;-</span> over_p_hat<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>over_p_hat)<span class="sc">/</span><span class="dv">12</span></span>
+<span id="cb29-2"><a></a>var_p_hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.008698811</code></pre>
+</div>
+</div>
+<p>Notice that our estimated variance of <span class="math inline">\(\hat{p}\)</span> is 0.148, but our model assumes a variance of approximately 0.009.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-overdispersion-matters" class="slide level2 smaller">
+<h2>Why overdispersion matters</h2>
+<p>If there is overdispersion, then there is more variation in the response than what’s assumed by a Binomial model. This means</p>
+<p>❌ The standard errors of the model coefficients are artificially small</p>
+<p>❌ The p-values are artificially small</p>
+<p>❌ This could lead to models that are more complex than what is needed</p>
+<div class="fragment">
+<p>We can take overdispersion into account by</p>
+<ul>
+<li class="fragment">inflating standard errors by multiplying them by a dispersion factor</li>
+</ul>
+</div>
+</section>
+<section id="dispersion-parameter" class="slide level2 smaller">
+<h2>Dispersion parameter</h2>
+<p>The <strong>dispersion parameter</strong> is represented by <span class="math inline">\(\phi\)</span></p>
+<p><span class="math display">\[\hat{\phi} =\frac{\text{deviance}}{\text{residual df}} = \frac{\sum_{i=1}^{n}(\text{Pearson residuals})^2}{n - p}\]</span></p>
+<p>where <span class="math inline">\(p\)</span> is the number of terms in the model (including the intercept)</p>
+<ul>
+<li class="fragment"><p>If there is no overdispersion <span class="math inline">\(\hat{\phi} = 1\)</span></p></li>
+<li class="fragment"><p>If there is overdispersion <span class="math inline">\(\hat{\phi} &gt;  1\)</span></p></li>
+</ul>
+</section>
 <section id="adjusting-for-overdispersion-12" class="slide level2 smaller">
 <h2>Adjusting for overdispersion (1/2)</h2>
 <ul>
-<li class="fragment"><p>Overdispersion occurs when there is <strong>extra-binomial variation</strong>, i.e. the variance is greater than what we would expect, <span class="math inline">\(np(1-p)\)</span>.</p></li>
-<li class="fragment"><p>Similar to Poisson regression, we can adjust for overdispersion in the binomial regression model by using a dispersion parameter <span class="math display">\[\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}\]</span></p>
+<li class="fragment">We can adjust for overdispersion in the binomial regression model by using a dispersion parameter <span class="math display">\[\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}\]</span>
 <ul>
 <li class="fragment">By multiplying by <span class="math inline">\(\hat{\phi}\)</span>, we are accounting for the reduction in information we would expect from independent observations.</li>
 </ul></li>

@@ -664,13 +664,94 @@ So even though there are issues with the larger model, it is significantly bette
 
 # Overdispersion 
 
+## Overdispersion  {.smaller}
+
+**Overdispersion**: There is more variability in the response than what is assumed by the Logistic model 
+
+:::{.panel-tabset}
+
+### Estimated variance
+
+:::: {.columns}
+
+::: {.column}
+
+**Overall $\hat{p}$**
+
+```{r}
+
+over_p_hat <- sum(rr$YesVotes)/sum(rr$NumVotes)
+over_p_hat
+
+```
+
+:::
+
+::: {.column}
+
+**$\hat{p}$ by Location summary stats**
+
+```{r}
+rr |> mutate(p_hat = YesVotes/NumVotes) |>
+  summarise(mean = mean(p_hat), var = var(p_hat)) |>
+  kable(digits = 3)
+```
+
+:::
+
+::::
+
+### Binomial variance
+
+The variance for the count in a binomial setting is $np(1-p)$.  Here we want the variance of $\hat{p}$ instead of the count.  That variance is $\frac{p(1-p)}{n}$
+
+```{r echo=T}
+var_p_hat <- over_p_hat*(1-over_p_hat)/12
+var_p_hat
+```
+
+Notice that our estimated variance of $\hat{p}$ is 0.148, but our model assumes a variance of approximately 0.009.
+
+:::
+
+## Why overdispersion matters {.smaller}
+
+If there is overdispersion, then there is more variation in the response than what's assumed by a Binomial model. This means 
+
+`r emo::ji("x")`  The standard errors of the model coefficients are artificially small 
+
+`r emo::ji("x")`  The p-values are artificially small 
+
+`r emo::ji("x")`  This could lead to models that are more complex than what is needed 
+
+. . .
+
+We can take overdispersion into account by
+
+  - inflating standard errors by multiplying them by a dispersion factor
+ 
+
+## Dispersion parameter  {.smaller}
+
+The **dispersion parameter** is represented by $\phi$
+
+
+$$\hat{\phi} =\frac{\text{deviance}}{\text{residual df}} = \frac{\sum_{i=1}^{n}(\text{Pearson residuals})^2}{n - p}$$
+
+where $p$ is the number of terms in the model (including the intercept)
+
+
+- If there is no overdispersion $\hat{\phi} = 1$
+
+- If there is overdispersion $\hat{\phi} >  1$
+
+
 
 
 ## Adjusting for overdispersion (1/2) {.smaller} 
 
-- Overdispersion occurs when there is **extra-binomial variation**, i.e. the variance is greater than what we would expect, $np(1-p)$.
 
-- Similar to Poisson regression, we can adjust for overdispersion in the binomial regression model by using a dispersion parameter $$\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}$$
+- We can adjust for overdispersion in the binomial regression model by using a dispersion parameter $$\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}$$
   -  By multiplying by $\hat{\phi}$, we are accounting for the reduction in information we would expect from independent observations. 
 
 

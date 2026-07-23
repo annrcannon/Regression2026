@@ -5207,7 +5207,7 @@
     "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-12",
     "title": "Logistic Regression",
     "section": "Adjusting for overdispersion (1/2)",
-    "text": "Adjusting for overdispersion (1/2)\n\nOverdispersion occurs when there is extra-binomial variation, i.e. the variance is greater than what we would expect, \\(np(1-p)\\).\nSimilar to Poisson regression, we can adjust for overdispersion in the binomial regression model by using a dispersion parameter \\[\\hat{\\phi} = \\sum \\frac{(\\text{Pearson residuals})^2}{n-p}\\]\n\nBy multiplying by \\(\\hat{\\phi}\\), we are accounting for the reduction in information we would expect from independent observations."
+    "text": "Adjusting for overdispersion (1/2)\n\nWe can adjust for overdispersion in the binomial regression model by using a dispersion parameter \\[\\hat{\\phi} = \\sum \\frac{(\\text{Pearson residuals})^2}{n-p}\\]\n\nBy multiplying by \\(\\hat{\\phi}\\), we are accounting for the reduction in information we would expect from independent observations."
   },
   {
     "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-22",
@@ -7126,5 +7126,26 @@
     "title": "Poisson Regression",
     "section": "Wrap up",
     "text": "Wrap up\n\nCovered fitting, interpreting, and drawing conclusions from GLMs\n\nLooked at Poisson, Negative Binomial, and Logistic (binary, binomial, ordinal) in detail\n\nUsed Pearson and deviance residuals to assess model fit and determine if new variables should be added to the model\nAddressed issues of overdispersion and zero-inflation\nUsed the properties of the one-parameter exponential family to identify the best link function for any GLM\n\n\nEverything we’ve done thus far as been under the assumption that the observations are independent. Looking ahead we will consider models for data with dependent (correlated) observations."
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#overdispersion-1",
+    "href": "slides/06_logistic_ch6.html#overdispersion-1",
+    "title": "Logistic Regression",
+    "section": "Overdispersion",
+    "text": "Overdispersion\nOverdispersion: There is more variability in the response than what is assumed by the Logistic model\n\nEstimated varianceBinomial variance\n\n\n\n\nOverall \\(\\hat{p}\\)\n\nover_p_hat &lt;- sum(rr$YesVotes)/sum(rr$NumVotes)\nover_p_hat\n\n[1] 0.8815944\n\n\n\n\\(\\hat{p}\\) by Location summary stats\n\nrr |&gt; mutate(p_hat = YesVotes/NumVotes) |&gt;\n  summarise(mean = mean(p_hat), var = var(p_hat)) |&gt;\n  kable(digits = 3)\n\n\n\n\nmean\nvar\n\n\n\n\n0.517\n0.148\n\n\n\n\n\n\n\n\nThe variance for the count in a binomial setting is \\(np(1-p)\\). Here we want the variance of \\(\\hat{p}\\) instead of the count. That variance is \\(\\frac{p(1-p)}{n}\\)\n\nvar_p_hat &lt;- over_p_hat*(1-over_p_hat)/12\nvar_p_hat\n\n[1] 0.008698811\n\n\nNotice that our estimated variance of \\(\\hat{p}\\) is 0.148, but our model assumes a variance of approximately 0.009."
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#why-overdispersion-matters",
+    "href": "slides/06_logistic_ch6.html#why-overdispersion-matters",
+    "title": "Logistic Regression",
+    "section": "Why overdispersion matters",
+    "text": "Why overdispersion matters\nIf there is overdispersion, then there is more variation in the response than what’s assumed by a Binomial model. This means\n❌ The standard errors of the model coefficients are artificially small\n❌ The p-values are artificially small\n❌ This could lead to models that are more complex than what is needed\n\nWe can take overdispersion into account by\n\ninflating standard errors by multiplying them by a dispersion factor"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#dispersion-parameter",
+    "href": "slides/06_logistic_ch6.html#dispersion-parameter",
+    "title": "Logistic Regression",
+    "section": "Dispersion parameter",
+    "text": "Dispersion parameter\nThe dispersion parameter is represented by \\(\\phi\\)\n\\[\\hat{\\phi} =\\frac{\\text{deviance}}{\\text{residual df}} = \\frac{\\sum_{i=1}^{n}(\\text{Pearson residuals})^2}{n - p}\\]\nwhere \\(p\\) is the number of terms in the model (including the intercept)\n\nIf there is no overdispersion \\(\\hat{\\phi} = 1\\)\nIf there is overdispersion \\(\\hat{\\phi} &gt;  1\\)"
   }
 ]

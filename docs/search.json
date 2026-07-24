@@ -7111,14 +7111,14 @@
     "href": "slides/06_logistic_ch6.html#goodness-of-fit-test",
     "title": "Logistic Regression",
     "section": "Goodness of fit test",
-    "text": "Goodness of fit test\n\nModelTest\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\nrr_int_model\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + \n    pctBlack + distance * pctBlack, family = binomial, data = rr)\n\nCoefficients:\n      (Intercept)           distance           pctBlack  distance:pctBlack  \n         7.550902          -0.614005          -0.064731           0.005367  \n\nDegrees of Freedom: 10 Total (i.e. Null);  7 Residual\n  (1 observation deleted due to missingness)\nNull Deviance:      988.4 \nResidual Deviance: 274.2    AIC: 320.5\n\n\n\n\nThe test statistic is the residual deviance: 274.2\nThe degrees of freedom are the residual df: 7\nWe find the p-value using the chi-square distribution r function\n\n1-pchisq(274.2, 7)\n\n[1] 0\n\n\nThe p-value is quite small, so there is significant evidence that the model is not a good fit."
+    "text": "Goodness of fit test\n\nModelTest\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\ntidy(rr_int_model) |&gt; kable(digits=3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.551\n0.638\n11.828\n0\n\n\ndistance\n-0.614\n0.057\n-10.701\n0\n\n\npctBlack\n-0.065\n0.009\n-7.057\n0\n\n\ndistance:pctBlack\n0.005\n0.001\n5.974\n0\n\n\n\n\n\n\n\nThe test statistic is the residual deviance: 274.2\nThe degrees of freedom are the residual df: 7\nWe find the p-value using the chi-square distribution r function\n\n1-pchisq(274.2, 7)\n\n[1] 0\n\n\nThe p-value is quite small, so there is significant evidence that the model is not a good fit."
   },
   {
     "objectID": "slides/06_logistic_ch6.html#drop-in-deviance-test",
     "href": "slides/06_logistic_ch6.html#drop-in-deviance-test",
     "title": "Logistic Regression",
     "section": "Drop-in-deviance test",
-    "text": "Drop-in-deviance test\nIs our last model better than just a model with distance in it? We can test that with a drop-in-deviance test.\n\nTest informationSimpler ModelTest\n\n\nThe hypotheses are:\n\\[\\begin{aligned} &H_0: \\text{ Simpler model is enough} \\\\\n&H_a: \\text{ More complete model is better}\\end{aligned}\\]\n\nNote that one observation was omitted in the more complicated model because it was missing the race information. To compare the models, we must use the same exact data set, so in running the simpler model, I eliminated that data point.\n\n\n\n\nrr_simp_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance, \n                data = rr[-11,], family = binomial)\n\nrr_simp_model\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance, \n    family = binomial, data = rr[-11, ])\n\nCoefficients:\n(Intercept)     distance  \n     3.3093      -0.2876  \n\nDegrees of Freedom: 10 Total (i.e. Null);  9 Residual\nNull Deviance:      988.4 \nResidual Deviance: 318.4    AIC: 360.7\n\n\n\n\n\ndrop_in_dev &lt;- anova(rr_simp_model, rr_int_model, test= \"Chisq\")\ndrop_in_dev\n\nAnalysis of Deviance Table\n\nModel 1: cbind(YesVotes, NumVotes - YesVotes) ~ distance\nModel 2: cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + \n    distance * pctBlack\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1         9     318.44                          \n2         7     274.23  2   44.206 2.517e-10 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nSo even though there are issues with the larger model, it is significantly better than the simpler one."
+    "text": "Drop-in-deviance test\nIs our last model better than just a model with distance in it? We can test that with a drop-in-deviance test.\n\nTest informationSimpler ModelTest\n\n\nThe hypotheses are:\n\\[\\begin{aligned} &H_0: \\text{ Simpler model is enough} \\\\\n&H_a: \\text{ More complete model is better}\\end{aligned}\\]\n\nNote that one observation was omitted in the more complicated model because it was missing the race information. To compare the models, we must use the same exact data set, so in running the simpler model, I eliminated that data point.\n\n\n\n\nrr_simp_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance, \n                data = rr[-11,], family = binomial)\n\ntidy(rr_simp_model) |&gt; kable(digits=3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n3.309\n0.113\n29.252\n0\n\n\ndistance\n-0.288\n0.013\n-22.085\n0\n\n\n\n\n\n\n\n\ndrop_in_dev &lt;- anova(rr_simp_model, rr_int_model, test= \"Chisq\")\ndrop_in_dev\n\nAnalysis of Deviance Table\n\nModel 1: cbind(YesVotes, NumVotes - YesVotes) ~ distance\nModel 2: cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + \n    distance * pctBlack\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1         9     318.44                          \n2         7     274.23  2   44.206 2.517e-10 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nSo even though there are issues with the larger model, it is significantly better than the simpler one."
   },
   {
     "objectID": "slides/04_poisson_ch4.html#wrap-up",
@@ -7147,5 +7147,54 @@
     "title": "Logistic Regression",
     "section": "Dispersion parameter",
     "text": "Dispersion parameter\nThe dispersion parameter is represented by \\(\\phi\\)\n\\[\\hat{\\phi} =\\frac{\\text{deviance}}{\\text{residual df}} = \\frac{\\sum_{i=1}^{n}(\\text{Pearson residuals})^2}{n - p}\\]\nwhere \\(p\\) is the number of terms in the model (including the intercept)\n\nIf there is no overdispersion \\(\\hat{\\phi} = 1\\)\nIf there is overdispersion \\(\\hat{\\phi} &gt;  1\\)"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-13",
+    "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-13",
+    "title": "Logistic Regression",
+    "section": "Adjusting for overdispersion (1/3)",
+    "text": "Adjusting for overdispersion (1/3)\n\nWe can adjust for overdispersion in the binomial regression model by using the dispersion parameter \\[\\hat{\\phi} = \\sum \\frac{(\\text{Pearson residuals})^2}{n-p}\\]\n\nBy multiplying by \\(\\hat{\\phi}\\), we are accounting for the reduction in information we would expect from independent observations."
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-23",
+    "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-23",
+    "title": "Logistic Regression",
+    "section": "Adjusting for overdispersion (2/3)",
+    "text": "Adjusting for overdispersion (2/3)\n\nWe adjust for overdispersion using a quasibinomial model.\n\n“Quasi” reflects the fact we are no longer using a binomial model with true likelihood.\n\nThe standard errors of the coefficients are \\(SE_{Q}(\\hat{\\beta}_j) = \\sqrt{\\hat{\\phi}} SE(\\hat{\\beta})\\)\n\nInference is done using the \\(t\\) distribution to account for extra variability"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-33",
+    "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-33",
+    "title": "Logistic Regression",
+    "section": "Adjusting for overdispersion (3/3)",
+    "text": "Adjusting for overdispersion (3/3)\n\nQuasibinomial outputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.551\n4.585\n1.647\n0.144\n\n\ndistance\n-0.614\n0.412\n-1.490\n0.180\n\n\npctBlack\n-0.065\n0.066\n-0.982\n0.359\n\n\ndistance:pctBlack\n0.005\n0.006\n0.832\n0.433\n\n\n\n\n\n\n\n\nrr_qua_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + distance*pctBlack, data = rr, family = quasibinomial)\n\ntidy(rr_qua_model) |&gt; kable(digits=3)"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-14",
+    "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-14",
+    "title": "Logistic Regression",
+    "section": "Adjusting for overdispersion (1/4)",
+    "text": "Adjusting for overdispersion (1/4)\n\nWe can adjust for overdispersion in the binomial regression model by using the dispersion parameter \\[\\hat{\\phi} = \\sum \\frac{(\\text{Pearson residuals})^2}{n-p}\\]\n\nBy multiplying by \\(\\hat{\\phi}\\), we are accounting for the reduction in information we would expect from independent observations."
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-24",
+    "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-24",
+    "title": "Logistic Regression",
+    "section": "Adjusting for overdispersion (2/4)",
+    "text": "Adjusting for overdispersion (2/4)\n\nWe adjust for overdispersion using a quasibinomial model.\n\n“Quasi” reflects the fact we are no longer using a binomial model with true likelihood.\n\nThe standard errors of the coefficients are \\(SE_{Q}(\\hat{\\beta}_j) = \\sqrt{\\hat{\\phi}} SE(\\hat{\\beta})\\)\n\nInference is done using the \\(t\\) distribution to account for extra variability"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-34",
+    "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-34",
+    "title": "Logistic Regression",
+    "section": "Adjusting for overdispersion (3/4)",
+    "text": "Adjusting for overdispersion (3/4)\n\nQuasibinomial outputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.551\n4.585\n1.647\n0.144\n\n\ndistance\n-0.614\n0.412\n-1.490\n0.180\n\n\npctBlack\n-0.065\n0.066\n-0.982\n0.359\n\n\ndistance:pctBlack\n0.005\n0.006\n0.832\n0.433\n\n\n\n\n\n\n\n\nrr_qua_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + distance*pctBlack, data = rr, family = quasibinomial)\n\ntidy(rr_qua_model) |&gt; kable(digits=3)"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-44",
+    "href": "slides/06_logistic_ch6.html#adjusting-for-overdispersion-44",
+    "title": "Logistic Regression",
+    "section": "Adjusting for overdispersion (4/4)",
+    "text": "Adjusting for overdispersion (4/4)\n\nWithout interaction outputSimple model output\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n4.222\n1.990\n2.121\n0.067\n\n\ndistance\n-0.292\n0.088\n-3.323\n0.010\n\n\npctBlack\n-0.013\n0.026\n-0.506\n0.626\n\n\n\n\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + \n    pctBlack, family = quasibinomial, data = rr)\n\nCoefficients:\n(Intercept)     distance     pctBlack  \n    4.22202     -0.29173     -0.01323  \n\nDegrees of Freedom: 10 Total (i.e. Null);  8 Residual\n  (1 observation deleted due to missingness)\nNull Deviance:      988.4 \nResidual Deviance: 307.2    AIC: NA\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n3.340\n0.692\n4.824\n0.001\n\n\ndistance\n-0.289\n0.080\n-3.608\n0.005\n\n\n\n\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance, \n    family = quasibinomial, data = rr)\n\nCoefficients:\n(Intercept)     distance  \n     3.3399      -0.2893  \n\nDegrees of Freedom: 11 Total (i.e. Null);  10 Residual\nNull Deviance:      995.3 \nResidual Deviance: 321.2    AIC: NA"
   }
 ]

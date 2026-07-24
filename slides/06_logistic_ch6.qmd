@@ -601,7 +601,7 @@ rr_int_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +
                       distance*pctBlack, 
                 data = rr, family = binomial)
 
-rr_int_model
+tidy(rr_int_model) |> kable(digits=3)
 ```
 
 
@@ -644,7 +644,7 @@ $$\begin{aligned} &H_0: \text{ Simpler model is enough} \\
 rr_simp_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance, 
                 data = rr[-11,], family = binomial)
 
-rr_simp_model
+tidy(rr_simp_model) |> kable(digits=3)
 ```
 
 
@@ -748,15 +748,15 @@ where $p$ is the number of terms in the model (including the intercept)
 
 
 
-## Adjusting for overdispersion (1/2) {.smaller} 
+## Adjusting for overdispersion (1/4) {.smaller} 
 
 
-- We can adjust for overdispersion in the binomial regression model by using a dispersion parameter $$\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}$$
+- We can adjust for overdispersion in the binomial regression model by using the dispersion parameter $$\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}$$
   -  By multiplying by $\hat{\phi}$, we are accounting for the reduction in information we would expect from independent observations. 
 
 
 
-## Adjusting for overdispersion (2/2) {.smaller}
+## Adjusting for overdispersion (2/4) {.smaller}
 
 - We adjust for overdispersion using a **quasibinomial** model. 
   - "Quasi" reflects the fact we are no longer using a binomial model with true likelihood. 
@@ -764,6 +764,54 @@ where $p$ is the number of terms in the model (including the intercept)
 - The standard errors of the coefficients are $SE_{Q}(\hat{\beta}_j) = \sqrt{\hat{\phi}} SE(\hat{\beta})$
   - Inference is done using the $t$ distribution to account for extra variability 
 
+## Adjusting for overdispersion (3/4) {.smaller}
+
+:::{.panel-tabset}
+
+### Quasibinomial output {.smaller}
+
+```{r, echo=F}
+rr_qua_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + distance*pctBlack, data = rr, family = quasibinomial)
+
+tidy(rr_qua_model) |> kable(digits=3)
+```
+
+
+### Code 
+
+```{r, eval=F}
+rr_qua_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + distance*pctBlack, data = rr, family = quasibinomial)
+
+tidy(rr_qua_model) |> kable(digits=3)
+```
+:::
+
+## Adjusting for overdispersion (4/4) {.smaller}
+
+:::{.panel-tabset}
+
+### Without interaction output {.smaller}
+
+```{r, echo=F}
+rr_qua2_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack, data = rr, family = quasibinomial)
+
+tidy(rr_qua2_model) |> kable(digits=3)
+
+rr_qua2_model
+```
+
+
+### Simple model output 
+
+```{r, echo=F}
+rr_qua3_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance, data = rr, family = quasibinomial)
+
+tidy(rr_qua3_model) |> kable(digits=3)
+
+rr_qua3_model
+```
+
+:::
 
 
 <!-- # Predicting emergency department wait and treatment times  -->

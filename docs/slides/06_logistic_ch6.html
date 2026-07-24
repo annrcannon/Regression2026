@@ -1904,20 +1904,49 @@ Ann Cannon
 <span id="cb18-2"><a></a>                      distance<span class="sc">*</span>pctBlack, </span>
 <span id="cb18-3"><a></a>                <span class="at">data =</span> rr, <span class="at">family =</span> binomial)</span>
 <span id="cb18-4"><a></a></span>
-<span id="cb18-5"><a></a>rr_int_model</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + 
-    pctBlack + distance * pctBlack, family = binomial, data = rr)
-
-Coefficients:
-      (Intercept)           distance           pctBlack  distance:pctBlack  
-         7.550902          -0.614005          -0.064731           0.005367  
-
-Degrees of Freedom: 10 Total (i.e. Null);  7 Residual
-  (1 observation deleted due to missingness)
-Null Deviance:      988.4 
-Residual Deviance: 274.2    AIC: 320.5</code></pre>
+<span id="cb18-5"><a></a><span class="fu">tidy</span>(rr_int_model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">7.551</td>
+<td style="text-align: right;">0.638</td>
+<td style="text-align: right;">11.828</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance</td>
+<td style="text-align: right;">-0.614</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">-10.701</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pctBlack</td>
+<td style="text-align: right;">-0.065</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">-7.057</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance:pctBlack</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">5.974</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1926,7 +1955,7 @@ Residual Deviance: 274.2    AIC: 320.5</code></pre>
 <p>The degrees of freedom are the residual df: 7</p>
 <p>We find the p-value using the chi-square distribution r function</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(<span class="fl">274.2</span>, <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(<span class="fl">274.2</span>, <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -1952,29 +1981,45 @@ Residual Deviance: 274.2    AIC: 320.5</code></pre>
 </div>
 <div id="tabset-8-2">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>rr_simp_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(YesVotes, NumVotes <span class="sc">-</span> YesVotes) <span class="sc">~</span> distance, </span>
-<span id="cb22-2"><a></a>                <span class="at">data =</span> rr[<span class="sc">-</span><span class="dv">11</span>,], <span class="at">family =</span> binomial)</span>
-<span id="cb22-3"><a></a></span>
-<span id="cb22-4"><a></a>rr_simp_model</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance, 
-    family = binomial, data = rr[-11, ])
-
-Coefficients:
-(Intercept)     distance  
-     3.3093      -0.2876  
-
-Degrees of Freedom: 10 Total (i.e. Null);  9 Residual
-Null Deviance:      988.4 
-Residual Deviance: 318.4    AIC: 360.7</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>rr_simp_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(YesVotes, NumVotes <span class="sc">-</span> YesVotes) <span class="sc">~</span> distance, </span>
+<span id="cb21-2"><a></a>                <span class="at">data =</span> rr[<span class="sc">-</span><span class="dv">11</span>,], <span class="at">family =</span> binomial)</span>
+<span id="cb21-3"><a></a></span>
+<span id="cb21-4"><a></a><span class="fu">tidy</span>(rr_simp_model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">3.309</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">29.252</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance</td>
+<td style="text-align: right;">-0.288</td>
+<td style="text-align: right;">0.013</td>
+<td style="text-align: right;">-22.085</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="tabset-8-3">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>drop_in_dev <span class="ot">&lt;-</span> <span class="fu">anova</span>(rr_simp_model, rr_int_model, <span class="at">test=</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb24-2"><a></a>drop_in_dev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>drop_in_dev <span class="ot">&lt;-</span> <span class="fu">anova</span>(rr_simp_model, rr_int_model, <span class="at">test=</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb22-2"><a></a>drop_in_dev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Deviance Table
 
@@ -2009,8 +2054,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div class="column">
 <p><strong>Overall <span class="math inline">\(\hat{p}\)</span></strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>over_p_hat <span class="ot">&lt;-</span> <span class="fu">sum</span>(rr<span class="sc">$</span>YesVotes)<span class="sc">/</span><span class="fu">sum</span>(rr<span class="sc">$</span>NumVotes)</span>
-<span id="cb26-2"><a></a>over_p_hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>over_p_hat <span class="ot">&lt;-</span> <span class="fu">sum</span>(rr<span class="sc">$</span>YesVotes)<span class="sc">/</span><span class="fu">sum</span>(rr<span class="sc">$</span>NumVotes)</span>
+<span id="cb24-2"><a></a>over_p_hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8815944</code></pre>
 </div>
@@ -2018,9 +2063,9 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div><div class="column">
 <p><strong><span class="math inline">\(\hat{p}\)</span> by Location summary stats</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>rr <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">p_hat =</span> YesVotes<span class="sc">/</span>NumVotes) <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(p_hat), <span class="at">var =</span> <span class="fu">var</span>(p_hat)) <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>rr <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">p_hat =</span> YesVotes<span class="sc">/</span>NumVotes) <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(p_hat), <span class="at">var =</span> <span class="fu">var</span>(p_hat)) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
@@ -2043,8 +2088,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div id="tabset-9-2">
 <p>The variance for the count in a binomial setting is <span class="math inline">\(np(1-p)\)</span>. Here we want the variance of <span class="math inline">\(\hat{p}\)</span> instead of the count. That variance is <span class="math inline">\(\frac{p(1-p)}{n}\)</span></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>var_p_hat <span class="ot">&lt;-</span> over_p_hat<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>over_p_hat)<span class="sc">/</span><span class="dv">12</span></span>
-<span id="cb29-2"><a></a>var_p_hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>var_p_hat <span class="ot">&lt;-</span> over_p_hat<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>over_p_hat)<span class="sc">/</span><span class="dv">12</span></span>
+<span id="cb27-2"><a></a>var_p_hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.008698811</code></pre>
 </div>
@@ -2077,17 +2122,17 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <li class="fragment"><p>If there is overdispersion <span class="math inline">\(\hat{\phi} &gt;  1\)</span></p></li>
 </ul>
 </section>
-<section id="adjusting-for-overdispersion-12" class="slide level2 smaller">
-<h2>Adjusting for overdispersion (1/2)</h2>
+<section id="adjusting-for-overdispersion-14" class="slide level2 smaller">
+<h2>Adjusting for overdispersion (1/4)</h2>
 <ul>
-<li class="fragment">We can adjust for overdispersion in the binomial regression model by using a dispersion parameter <span class="math display">\[\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}\]</span>
+<li class="fragment">We can adjust for overdispersion in the binomial regression model by using the dispersion parameter <span class="math display">\[\hat{\phi} = \sum \frac{(\text{Pearson residuals})^2}{n-p}\]</span>
 <ul>
 <li class="fragment">By multiplying by <span class="math inline">\(\hat{\phi}\)</span>, we are accounting for the reduction in information we would expect from independent observations.</li>
 </ul></li>
 </ul>
 </section>
-<section id="adjusting-for-overdispersion-22" class="slide level2 smaller">
-<h2>Adjusting for overdispersion (2/2)</h2>
+<section id="adjusting-for-overdispersion-24" class="slide level2 smaller">
+<h2>Adjusting for overdispersion (2/4)</h2>
 <ul>
 <li class="fragment">We adjust for overdispersion using a <strong>quasibinomial</strong> model.
 <ul>
@@ -2098,6 +2143,176 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <li class="fragment">Inference is done using the <span class="math inline">\(t\)</span> distribution to account for extra variability</li>
 </ul></li>
 </ul>
+</section>
+<section id="adjusting-for-overdispersion-34" class="slide level2 smaller">
+<h2>Adjusting for overdispersion (3/4)</h2>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-10-1">Quasibinomial output</a></li><li><a href="#tabset-10-2">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">7.551</td>
+<td style="text-align: right;">4.585</td>
+<td style="text-align: right;">1.647</td>
+<td style="text-align: right;">0.144</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance</td>
+<td style="text-align: right;">-0.614</td>
+<td style="text-align: right;">0.412</td>
+<td style="text-align: right;">-1.490</td>
+<td style="text-align: right;">0.180</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pctBlack</td>
+<td style="text-align: right;">-0.065</td>
+<td style="text-align: right;">0.066</td>
+<td style="text-align: right;">-0.982</td>
+<td style="text-align: right;">0.359</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance:pctBlack</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">0.832</td>
+<td style="text-align: right;">0.433</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-10-2">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>rr_qua_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(YesVotes, NumVotes <span class="sc">-</span> YesVotes) <span class="sc">~</span> distance <span class="sc">+</span> pctBlack <span class="sc">+</span> distance<span class="sc">*</span>pctBlack, <span class="at">data =</span> rr, <span class="at">family =</span> quasibinomial)</span>
+<span id="cb29-2"><a></a></span>
+<span id="cb29-3"><a></a><span class="fu">tidy</span>(rr_qua_model) <span class="sc">|&gt;</span> <span class="fu">kable</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="adjusting-for-overdispersion-44" class="slide level2 smaller">
+<h2>Adjusting for overdispersion (4/4)</h2>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-11-1">Without interaction output</a></li><li><a href="#tabset-11-2">Simple model output</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">4.222</td>
+<td style="text-align: right;">1.990</td>
+<td style="text-align: right;">2.121</td>
+<td style="text-align: right;">0.067</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance</td>
+<td style="text-align: right;">-0.292</td>
+<td style="text-align: right;">0.088</td>
+<td style="text-align: right;">-3.323</td>
+<td style="text-align: right;">0.010</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pctBlack</td>
+<td style="text-align: right;">-0.013</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">-0.506</td>
+<td style="text-align: right;">0.626</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + 
+    pctBlack, family = quasibinomial, data = rr)
+
+Coefficients:
+(Intercept)     distance     pctBlack  
+    4.22202     -0.29173     -0.01323  
+
+Degrees of Freedom: 10 Total (i.e. Null);  8 Residual
+  (1 observation deleted due to missingness)
+Null Deviance:      988.4 
+Residual Deviance: 307.2    AIC: NA</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-2">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">3.340</td>
+<td style="text-align: right;">0.692</td>
+<td style="text-align: right;">4.824</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance</td>
+<td style="text-align: right;">-0.289</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-3.608</td>
+<td style="text-align: right;">0.005</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance, 
+    family = quasibinomial, data = rr)
+
+Coefficients:
+(Intercept)     distance  
+     3.3399      -0.2893  
+
+Degrees of Freedom: 11 Total (i.e. Null);  10 Residual
+Null Deviance:      995.3 
+Residual Deviance: 321.2    AIC: NA</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <!-- # Predicting emergency department wait and treatment times  -->
 <!-- ## Predicting ED wait and treatment times {.smaller} -->
 <!-- [Ataman and Sariyer (2021)](https://sakai.duke.edu/access/content/group/ec265469-bdb3-47a7-beb0-317956b6f86f/ataman-sariyer-2021.pdf) use ordinal logistic regression to predict patient wait and treatment times in an emergency department (ED).  The goal is to identify relevant factors that can be used to inform recommendations for reducing wait and treatment times, thus improving the quality of care in the ED.  -->

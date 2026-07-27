@@ -67,7 +67,7 @@ library(gridExtra)
 
 . . .
 
-Each response variable is a count per a unit of time or space.
+Each response variable is a count per unit of time or space.
 
 
 
@@ -230,20 +230,33 @@ hh_data |>
 ::::
 
 
-## Why the least-squares model doesn't work {.smaller}
+## Use GLM to find a model for $\lambda$? {.smaller}
 
 The goal is to model $\lambda$, the expected number of people in the household (other than the head), as a function of the predictors (covariates)
 
-. . .
+:::{.panel-tabset}
 
-We might be tempted to try a linear model $$\lambda_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_px_{ip}$$
+### Questions
 
-. . .
+1. Can the distribution of the response variable be written in a one-parameter exponential family form? $f(y;\lambda)=e^{[a(y)b(\lambda)+c(\lambda)+d(y)]}$
 
-This model won't work because...
 
-- It could produce negative values of $\lambda$ for certain values of the predictors 
-- The equal variance assumption required to conduct inference for linear regression is violated. 
+
+2. Does the support depend on the parameter $(\lambda)$?
+
+
+- If the answer to 1 is yes and the answer to 2 is no, then we can use the canonical link and try modeling $b(\lambda)= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ...$
+
+### Answers
+
+1. $P(Y=y)=\frac{e^{-\lambda}\lambda^y}{y!}=e^{-\lambda}e^{ylog\lambda}e^{-\log(y!)}=e^{y\log\lambda-\lambda-\log(y!)}$ which is in the one-parameter exponential family form.
+
+2. The support of the probabilty function is $y=0,1,2,...$ which does not depend on $\lambda$.
+
+- This suggests that the model should be in the form $\log(\lambda)=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + ...$
+
+:::
+
 
 
 
@@ -261,7 +274,7 @@ $$\log(\lambda_i) = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p 
 
 
 
-## Poisson vs. multiple linear regression 
+## Poisson vs. multiple linear regression {.smaller}
 
 ```{r, OLSpois, fig.align="center",out.width="80%", fig.cap='Regression models: Linear regression (left) and Poisson regression (right).',echo=FALSE, warning=FALSE, message=FALSE}
 ## Sample data for graph of OLS normality assumption
@@ -507,7 +520,7 @@ p1 + p2 + p3 + plot_annotation(tag_levels = 'A')
 
 :::
 
-## Model 2: Add a quadratic effect for `age`
+## Model 2: Add a quadratic effect for `age` {.smaller}
 
 ```{r}
 hh_data <- hh_data |> 
@@ -535,29 +548,11 @@ We can determine whether to keep $age^2$ in the model in two ways:
 
 
 
-## Deviance {.smaller}
-
-A **deviance** is a way to measure how the observed data deviates from the model predictions.
-
-- It's a measure unexplained variability in the response variable (similar to SSE in linear regression ) 
-
-- Lower deviance means the model is a better fit to the data 
-
-. . .
-
-We can calculate the "deviance residual" for each observation in the data (more on the formula later). Let $(\text{deviance residual}_i$ be the deviance residual for the $i^{th}$ observation, then 
-
-$$\text{deviance} = \sum(\text{deviance residual})_i^2$$
-
-. . .
-
-*Note: Deviance is also known as the "residual deviance"*
-
 
 
 ## Drop-in-Deviance Test {.smaller}
 
-We can use a **drop-in-deviance test** to compare two models. To conduct the test 
+As with logistic regression, we can use a **drop-in-deviance test** to compare two models. To conduct the test 
 
 `r emo::ji("one")` Compute the deviance for each model 
 
@@ -1281,7 +1276,7 @@ There is evidence of significant lack of fit in the model. Therefore, more model
 # Zero-inflated Poisson model
 ## Data: Weekend drinking  {.smaller}
 
-The data [`weekend-drinks.csv`](data/weekend-drinks.csv) contains information from a survey of 77 students in a introductory statistics course on a dry campus. 
+The data [`weekend-drinks.csv`](data/weekend-drinks.csv) contains information from a survey of 77 students in an introductory statistics course on a dry campus. 
 
 **Variables** 
 

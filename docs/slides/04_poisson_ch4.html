@@ -1114,7 +1114,7 @@ Ann Cannon
 <li class="fragment"><p>Does the number of paint defects per square foot of wall differ based on the years of experience of the painter?</p></li>
 </ul>
 <div class="fragment">
-<p>Each response variable is a count per a unit of time or space.</p>
+<p>Each response variable is a count per unit of time or space.</p>
 </div>
 </section>
 <section id="poisson-distribution" class="slide level2 smaller">
@@ -1326,18 +1326,31 @@ Ann Cannon
 </div>
 </div></div>
 </section>
-<section id="why-the-least-squares-model-doesnt-work" class="slide level2 smaller">
-<h2>Why the least-squares model doesn’t work</h2>
+<section id="use-glm-to-find-a-model-for-lambda" class="slide level2 smaller">
+<h2>Use GLM to find a model for <span class="math inline">\(\lambda\)</span>?</h2>
 <p>The goal is to model <span class="math inline">\(\lambda\)</span>, the expected number of people in the household (other than the head), as a function of the predictors (covariates)</p>
-<div class="fragment">
-<p>We might be tempted to try a linear model <span class="math display">\[\lambda_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_px_{ip}\]</span></p>
-</div>
-<div class="fragment">
-<p>This model won’t work because…</p>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-2-1">Questions</a></li><li><a href="#tabset-2-2">Answers</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ol type="1">
+<li class="fragment"><p>Can the distribution of the response variable be written in a one-parameter exponential family form? <span class="math inline">\(f(y;\lambda)=e^{[a(y)b(\lambda)+c(\lambda)+d(y)]}\)</span></p></li>
+<li class="fragment"><p>Does the support depend on the parameter <span class="math inline">\((\lambda)\)</span>?</p></li>
+</ol>
 <ul>
-<li class="fragment">It could produce negative values of <span class="math inline">\(\lambda\)</span> for certain values of the predictors</li>
-<li class="fragment">The equal variance assumption required to conduct inference for linear regression is violated.</li>
+<li class="fragment">If the answer to 1 is yes and the answer to 2 is no, then we can use the canonical link and try modeling <span class="math inline">\(b(\lambda)= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ...\)</span></li>
 </ul>
+</div>
+<div id="tabset-2-2">
+<ol type="1">
+<li class="fragment"><p><span class="math inline">\(P(Y=y)=\frac{e^{-\lambda}\lambda^y}{y!}=e^{-\lambda}e^{ylog\lambda}e^{-\log(y!)}=e^{y\log\lambda-\lambda-\log(y!)}\)</span> which is in the one-parameter exponential family form.</p></li>
+<li class="fragment"><p>The support of the probabilty function is <span class="math inline">\(y=0,1,2,...\)</span> which does not depend on <span class="math inline">\(\lambda\)</span>.</p></li>
+</ol>
+<ul>
+<li class="fragment">This suggests that the model should be in the form <span class="math inline">\(\log(\lambda)=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + ...\)</span></li>
+</ul>
+</div>
+</div>
 </div>
 </section>
 <section id="poisson-regression-model" class="slide level2 smaller">
@@ -1349,7 +1362,7 @@ Ann Cannon
 <li class="fragment"><p><span class="math inline">\(\lambda\)</span> determines the mean and variance, so we don’t need to estimate a separate error term</p></li>
 </ul>
 </section>
-<section id="poisson-vs.-multiple-linear-regression" class="slide level2">
+<section id="poisson-vs.-multiple-linear-regression" class="slide level2 smaller">
 <h2>Poisson vs. multiple linear regression</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1427,7 +1440,7 @@ Ann Cannon
 <p>Question: The coefficient for <code>age</code> is -0.0047. Interpret this coefficient in context.</p>
 </div>
 </section>
-<section id="answers" class="slide level2 smaller">
+<section id="answers-1" class="slide level2 smaller">
 <h2>Answers</h2>
 <ul>
 <li class="fragment"><p>Each additional year older the head of household is, the estimated average log of the number of people in the household is .0047 lower.</p></li>
@@ -1556,9 +1569,9 @@ Ann Cannon
 <section id="which-can-help-determine-if-model-1-is-a-good-fit" class="slide level2 smaller">
 <h2><strong>Which can help determine if Model 1 is a good fit?</strong></h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-2-1">Plots</a></li><li><a href="#tabset-2-2">Code</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-3-1">Plots</a></li><li><a href="#tabset-3-2">Code</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
+<div id="tabset-3-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1569,7 +1582,7 @@ Ann Cannon
 </div>
 </div>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-3-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> hh_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
 <span id="cb6-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
@@ -1598,7 +1611,7 @@ Ann Cannon
 </div>
 </div>
 </section>
-<section id="model-2-add-a-quadratic-effect-for-age" class="slide level2">
+<section id="model-2-add-a-quadratic-effect-for-age" class="slide level2 smaller">
 <h2>Model 2: Add a quadratic effect for <code>age</code></h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>hh_data <span class="ot">&lt;-</span> hh_data <span class="sc">|&gt;</span> </span>
@@ -1723,24 +1736,9 @@ Ann Cannon
 <p>1️⃣ Use the p-value (or confidence interval) for the coefficient (since we are adding a single term to the model)</p>
 <p>2️⃣ Conduct a drop-in-deviance test</p>
 </section>
-<section id="deviance" class="slide level2 smaller">
-<h2>Deviance</h2>
-<p>A <strong>deviance</strong> is a way to measure how the observed data deviates from the model predictions.</p>
-<ul>
-<li class="fragment"><p>It’s a measure unexplained variability in the response variable (similar to SSE in linear regression )</p></li>
-<li class="fragment"><p>Lower deviance means the model is a better fit to the data</p></li>
-</ul>
-<div class="fragment">
-<p>We can calculate the “deviance residual” for each observation in the data (more on the formula later). Let <span class="math inline">\((\text{deviance residual}_i\)</span> be the deviance residual for the <span class="math inline">\(i^{th}\)</span> observation, then</p>
-<p><span class="math display">\[\text{deviance} = \sum(\text{deviance residual})_i^2\]</span></p>
-</div>
-<div class="fragment">
-<p><em>Note: Deviance is also known as the “residual deviance”</em></p>
-</div>
-</section>
 <section id="drop-in-deviance-test" class="slide level2 smaller">
 <h2>Drop-in-Deviance Test</h2>
-<p>We can use a <strong>drop-in-deviance test</strong> to compare two models. To conduct the test</p>
+<p>As with logistic regression, we can use a <strong>drop-in-deviance test</strong> to compare two models. To conduct the test</p>
 <p>1️⃣ Compute the deviance for each model</p>
 <p>2️⃣ Calculate the drop in deviance</p>
 <p><span class="math display">\[\text{drop-in-deviance =  Deviance(reduced model) - Deviance(larger model)}\]</span></p>
@@ -1990,9 +1988,9 @@ Ann Cannon
 <span id="cb11-2"><a></a>model3_aug_deviance <span class="ot">&lt;-</span> <span class="fu">augment</span>(model3, <span class="at">type.residuals =</span> <span class="st">&quot;deviance&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-3-1">Plots</a></li><li><a href="#tabset-3-2">Code</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-4-1">Plots</a></li><li><a href="#tabset-4-2">Code</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-4-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2003,7 +2001,7 @@ Ann Cannon
 </div>
 </div>
 </div>
-<div id="tabset-3-2">
+<div id="tabset-4-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> model3_aug_pearson, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span> </span>
 <span id="cb12-2"><a></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
@@ -2081,9 +2079,9 @@ Ann Cannon
 <h2>Overdispersion</h2>
 <p><strong>Overdispersion</strong>: There is more variability in the response than what is implied by the Poisson model</p>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-4-1">Tables</a></li><li><a href="#tabset-4-2">Code</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-5-1">Tables</a></li><li><a href="#tabset-5-2">Code</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-5-1">
 <div class="columns">
 <div class="column">
 <p><strong>Overall</strong></p>
@@ -2149,7 +2147,7 @@ Ann Cannon
 </div>
 </div></div>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-5-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>hh_data <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(total), <span class="at">var =</span> <span class="fu">var</span>(total)) <span class="sc">|&gt;</span></span>
@@ -2645,9 +2643,9 @@ Ann Cannon
 <section id="eda" class="slide level2 smaller">
 <h2>EDA</h2>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-5-1">Plot</a></li><li><a href="#tabset-5-2">Code</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default href="#tabset-6-1">Plot</a></li><li><a href="#tabset-6-2">Code</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-6-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2658,7 +2656,7 @@ Ann Cannon
 </div>
 </div>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-6-2">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> airbnb, <span class="fu">aes</span>(<span class="at">x =</span> number_of_reviews)) <span class="sc">+</span> </span>
 <span id="cb24-2"><a></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
@@ -2935,7 +2933,7 @@ Ann Cannon
 </section>
 <section id="data-weekend-drinking" class="slide level2 smaller">
 <h2>Data: Weekend drinking</h2>
-<p>The data <a href="data/weekend-drinks.csv"><code>weekend-drinks.csv</code></a> contains information from a survey of 77 students in a introductory statistics course on a dry campus.</p>
+<p>The data <a href="data/weekend-drinks.csv"><code>weekend-drinks.csv</code></a> contains information from a survey of 77 students in an introductory statistics course on a dry campus.</p>
 <p><strong>Variables</strong></p>
 <ul>
 <li class="fragment"><code>drinks</code>: Number of drinks they had in the past weekend</li>

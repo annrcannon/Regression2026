@@ -4241,7 +4241,7 @@
     "href": "slides/04_poisson_ch4.html#scenarios-to-use-poisson-regression",
     "title": "Poisson Regression",
     "section": "Scenarios to use Poisson regression",
-    "text": "Scenarios to use Poisson regression\n\nDoes the number of employers conducting on-campus interviews during a year differ for public and private colleges?\nDoes the daily number of asthma-related visits to an Emergency Room differ depending on air pollution indices?\nDoes the number of paint defects per square foot of wall differ based on the years of experience of the painter?\n\n\nEach response variable is a count per a unit of time or space."
+    "text": "Scenarios to use Poisson regression\n\nDoes the number of employers conducting on-campus interviews during a year differ for public and private colleges?\nDoes the daily number of asthma-related visits to an Emergency Room differ depending on air pollution indices?\nDoes the number of paint defects per square foot of wall differ based on the years of experience of the painter?\n\n\nEach response variable is a count per unit of time or space."
   },
   {
     "objectID": "slides/04_poisson_ch4.html#poisson-distribution",
@@ -4388,7 +4388,7 @@
     "href": "slides/04_poisson_ch4.html#drop-in-deviance-test",
     "title": "Poisson Regression",
     "section": "Drop-in-Deviance Test",
-    "text": "Drop-in-Deviance Test\nWe can use a drop-in-deviance test to compare two models. To conduct the test\n1️⃣ Compute the deviance for each model\n2️⃣ Calculate the drop in deviance\n\\[\\text{drop-in-deviance =  Deviance(reduced model) - Deviance(larger model)}\\]\n\n3️⃣ Given the reduced model is the true model \\((H_0 \\text{ true})\\), then \\[\\text{drop-in-deviance} \\sim \\chi_d^2\\]\nwhere \\(d\\) is the difference in degrees of freedom between the two models (i.e., the difference in number of terms)"
+    "text": "Drop-in-Deviance Test\nAs with logistic regression, we can use a drop-in-deviance test to compare two models. To conduct the test\n1️⃣ Compute the deviance for each model\n2️⃣ Calculate the drop in deviance\n\\[\\text{drop-in-deviance =  Deviance(reduced model) - Deviance(larger model)}\\]\n\n3️⃣ Given the reduced model is the true model \\((H_0 \\text{ true})\\), then \\[\\text{drop-in-deviance} \\sim \\chi_d^2\\]\nwhere \\(d\\) is the difference in degrees of freedom between the two models (i.e., the difference in number of terms)"
   },
   {
     "objectID": "slides/04_poisson_ch4.html#drop-in-deviance---model1-and-model2",
@@ -4619,7 +4619,7 @@
     "href": "slides/04_poisson_ch4.html#data-weekend-drinking",
     "title": "Poisson Regression",
     "section": "Data: Weekend drinking",
-    "text": "Data: Weekend drinking\nThe data weekend-drinks.csv contains information from a survey of 77 students in a introductory statistics course on a dry campus.\nVariables\n\ndrinks: Number of drinks they had in the past weekend\noff_campus: 1 - lives off campus, 0 otherwise\nfirst_year: 1 - student is a first-year, 0 otherwise\nsex: f - student identifies as female, m - student identifies as male\n\n\nGoal: The goal is explore factors related to drinking behavior on a dry campus.\n\n\n\nCase study in BMLR - Section 4.10"
+    "text": "Data: Weekend drinking\nThe data weekend-drinks.csv contains information from a survey of 77 students in an introductory statistics course on a dry campus.\nVariables\n\ndrinks: Number of drinks they had in the past weekend\noff_campus: 1 - lives off campus, 0 otherwise\nfirst_year: 1 - student is a first-year, 0 otherwise\nsex: f - student identifies as female, m - student identifies as male\n\n\nGoal: The goal is explore factors related to drinking behavior on a dry campus.\n\n\n\nCase study in BMLR - Section 4.10"
   },
   {
     "objectID": "slides/04_poisson_ch4.html#eda-response-variable",
@@ -7196,5 +7196,26 @@
     "title": "Logistic Regression",
     "section": "Adjusting for overdispersion (4/4)",
     "text": "Adjusting for overdispersion (4/4)\n\nWithout interaction outputSimple model output\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n4.222\n1.990\n2.121\n0.067\n\n\ndistance\n-0.292\n0.088\n-3.323\n0.010\n\n\npctBlack\n-0.013\n0.026\n-0.506\n0.626\n\n\n\n\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + \n    pctBlack, family = quasibinomial, data = rr)\n\nCoefficients:\n(Intercept)     distance     pctBlack  \n    4.22202     -0.29173     -0.01323  \n\nDegrees of Freedom: 10 Total (i.e. Null);  8 Residual\n  (1 observation deleted due to missingness)\nNull Deviance:      988.4 \nResidual Deviance: 307.2    AIC: NA\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n3.340\n0.692\n4.824\n0.001\n\n\ndistance\n-0.289\n0.080\n-3.608\n0.005\n\n\n\n\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance, \n    family = quasibinomial, data = rr)\n\nCoefficients:\n(Intercept)     distance  \n     3.3399      -0.2893  \n\nDegrees of Freedom: 11 Total (i.e. Null);  10 Residual\nNull Deviance:      995.3 \nResidual Deviance: 321.2    AIC: NA"
+  },
+  {
+    "objectID": "slides/04_poisson_ch4.html#can-we-use-glm-to-find-a-model-for-lambda",
+    "href": "slides/04_poisson_ch4.html#can-we-use-glm-to-find-a-model-for-lambda",
+    "title": "Poisson Regression",
+    "section": "Can we use GLM to find a model for \\(\\lambda\\)?",
+    "text": "Can we use GLM to find a model for \\(\\lambda\\)?\nThe goal is to model \\(\\lambda\\), the expected number of people in the household (other than the head), as a function of the predictors (covariates)\n\n\nCan the distribution of the response variable be written in a one-parameter exponential family form?\n\n\n\n\nDoes the support depend on the parameter (\\(\\lambd\\))?"
+  },
+  {
+    "objectID": "slides/04_poisson_ch4.html#use-glm-to-find-a-model-for-lambda",
+    "href": "slides/04_poisson_ch4.html#use-glm-to-find-a-model-for-lambda",
+    "title": "Poisson Regression",
+    "section": "Use GLM to find a model for \\(\\lambda\\)?",
+    "text": "Use GLM to find a model for \\(\\lambda\\)?\nThe goal is to model \\(\\lambda\\), the expected number of people in the household (other than the head), as a function of the predictors (covariates)\n\nQuestionsAnswers\n\n\n\nCan the distribution of the response variable be written in a one-parameter exponential family form? \\(f(y;\\lambda)=e^{[a(y)b(\\lambda)+c(\\lambda)+d(y)]}\\)\nDoes the support depend on the parameter \\((\\lambda)\\)?\n\n\nIf the answer to 1 is yes and the answer to 2 is no, then we can use the canonical link and try modeling \\(b(\\lambda)= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + ...\\)\n\n\n\n\n\\(P(Y=y)=\\frac{e^{-\\lambda}\\lambda^y}{y!}=e^{-\\lambda}e^{ylog\\lambda}e^{-\\log(y!)}=e^{y\\log\\lambda-\\lambda-\\log(y!)}\\) which is in the one-parameter exponential family form.\nThe support of the probabilty function is \\(y=0,1,2,...\\) which does not depend on \\(\\lambda\\).\n\n\nThis suggests that the model should be in the form \\(\\log(\\lambda)=\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + ...\\)"
+  },
+  {
+    "objectID": "slides/04_poisson_ch4.html#answers-1",
+    "href": "slides/04_poisson_ch4.html#answers-1",
+    "title": "Poisson Regression",
+    "section": "Answers",
+    "text": "Answers\n\nEach additional year older the head of household is, the estimated average log of the number of people in the household is .0047 lower.\nEach additional year older the head of household is, the estimated average number of people in the household reduces by 0.5%.\nEach additional year older the head of household is the estimated average number of people in the household changes by a factor of .995.\nFor every 10 years older the head of household is, the estimated average number of people in the household reduces by 5%."
   }
 ]

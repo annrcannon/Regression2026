@@ -1,8 +1,6 @@
 project:
   type: website
   execute-dir: file
-  render:
-    - "*.qmd"
   resources:
     - "img/"
     - "www/"

@@ -23,7 +23,7 @@ Each of your assignments will begin with the following steps.
     author: "my name"
     format:
       html:
-    embed-resources: true
+        embed-resources: true
     ---
     ```
 

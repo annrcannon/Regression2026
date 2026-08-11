@@ -4255,7 +4255,7 @@
     "href": "slides/04_poisson_ch4.html#poisson-features",
     "title": "Poisson Regression",
     "section": "Poisson Features",
-    "text": "Poisson Features\n\n\\(E(Y) = Var(Y) = \\lambda\\)\nThe distribution is typically skewed right, particularly if \\(\\lambda\\) is small\nThe distribution becomes more symmetric as \\(\\lambda\\) increases\n\nIf \\(\\lambda\\) is sufficiently large, it can be approximated using a normal distribution (Click here for an example.)"
+    "text": "Poisson Features\n\n\\(E(Y) = \\mu = Var(Y) = \\sigma^2 = \\lambda\\)\nThe distribution is typically skewed right, particularly if \\(\\lambda\\) is small\nThe distribution becomes more symmetric as \\(\\lambda\\) increases\n\nIf \\(\\lambda\\) is sufficiently large, it can be approximated using a normal distribution (Click here for an example.)"
   },
   {
     "objectID": "slides/04_poisson_ch4.html#poisson-graphs",

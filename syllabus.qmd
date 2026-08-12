@@ -22,7 +22,7 @@ Instructor [{{< var instructor.name >}}]({{< var instructor.url >}})
 
 `r fontawesome::fa('university')` &nbsp; {{< var college.name >}}, {{< var instructor.office >}}
 
-{{< fa solid envelope >}} &nbsp; <a href="mailto:tgeorge@cornellcollege.edu"> tgeorge\@cornellcollege.edu </a>
+{{< fa solid envelope >}} &nbsp; <a href="mailto:acannon@cornellcollege.edu"> acannon\@cornellcollege.edu </a>
 
 
 
@@ -49,15 +49,12 @@ Instructor [{{< var instructor.name >}}]({{< var instructor.url >}})
 
 `r fontawesome::fa("location-dot")` &nbsp; {{< var instructor.office >}}
 
-`r fontawesome::fa("calendar-check")` &nbsp; [Optional Appointment]({{< var instructor.appointment_url >}})
+
 
 :::
 
 :::
 
-### You Are A Priority
-
-My goal for this block is to help you learn the material. I want to first and foremost recognize that you are an individual and thus unique, and may learn uniquely. Additionally, your health and well-being are priority one. Learning cannot happen effectively if you don’t meet your other personal needs. That being said, I have structured the class in a way that, based on my experience teaching and learning, I believe will be most beneficial for most students. I promise to do my best to create an inclusive and engaging learning environment. I kindly request that you maintain an open line of communication with me when you need help or require flexibility. You and your learning are why I am here.
 
 ### Course Description
 
@@ -158,7 +155,7 @@ bind_rows(assignments, assignments_total) %>%
 
 <div class="centered-table">
 
-```{r show-grades-table, echo=FALSE, results="asis"}
+```{r show-grades-table, eval=FALSE, echo=FALSE, results="asis"}
 grading %>%
   pandoc.table(justify = "lclc", 
                col.names = c("Grade", "Range", "Grade", "Range"))
@@ -185,7 +182,7 @@ Cornell College expects all members of the Cornell community to act with academi
 
 ### Illness Policy
 
-If you are experiencing COVID-19 symptoms, do not attend class. Perform a home test or contact Director of Student Health Services Lynn O’Brien at **student_health@cornellcollege.edu** immediately to arrange a COVID-19 test at the Health Center.
+If you are experiencing COVID-19 symptoms, do not attend class. Perform a home test or contact Director of Student Health Services Marchia Sisk  at **student_health@cornellcollege.edu** immediately to arrange a COVID-19 test at the Health Center.
 
 ### Mandatory Reporter Reminder
 

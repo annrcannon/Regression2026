@@ -4,7 +4,7 @@ instructor:
   name: Dr. Ann Cannon
   name_no_title: Ann Cannon
   email: acannon@cornellcollege.edu
- # moodle: "https://moodle.cornellcollege.edu/user/profile.php"
+  # moodle: "https://moodle.cornellcollege.edu/user/profile.php"
   office: "West 317"
   officehrs: "MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt."
   # appointment_url: "https://calendar.app.google/TQ5PNChvGmYmGyrg6"
@@ -20,7 +20,7 @@ course:
   location: "West 309"
   github: "https://github.com/annrcannon/Regression2026"
   # coursecal: "https://calendar.google.com/calendar/u/0?cid=Y19hMTllMWE2M2IwOGFiNDkzYmQxNmJmNWU3MThhZmM1OWYxODIyN2EwZDhmOGQzZGMyOGRjMzE5YjQ1NmJlYjFiQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"
-  moodle: "https://moodle.cornellcollege.edu/course/view.php?id=9443"
+  moodle: "https://moodle.cornellcollege.edu/course/view.php?id=9632"
   url: "https://annrcannon.github.io/Regression2026/"
   copyright_year: "2025"
   text: | 
@@ -32,7 +32,7 @@ college:
   name: Cornell College
   url: "www.cornellcollege.edu"
   rstudio: "http://turing.cornellcollege.edu:8787/"
-  #support: "https://stats-tgeorge.github.io/personal_website/course-support.html"
+  support: "https://www.cornellcollege.edu/academics/support-services/index.shtml"
 
 citation:
   websource_1: Dr. Lucy D’Agostino McGowan

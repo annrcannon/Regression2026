@@ -224,7 +224,7 @@ Final grades will be calculated as follows
 | Total                 | 1000       |
 
 
-See Syllabus on [website]({{< var course.url >}}) for letter grade thresholds.
+
 
 
 

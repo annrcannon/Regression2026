@@ -1,5 +1,5 @@
 ---
-title: Homework 8
+title: Homework 2
 subtitle: 'Chapter 7: Moving Beyond Linearity, ISLR'
 ---
 
@@ -14,9 +14,9 @@ Each of your assignments will begin with the following steps.
 
 -   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
 
--   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_8* and having that project in the course folder you created. 
+-   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_2* and having that project in the course folder you created. 
 
--   Create a new quarto document and give it a sensible name such as *hw8*.
+-   Create a new quarto document and give it a sensible name such as *hw2*.
 
 -   In the `YAML` add the following (add what you don't have). The embed-resources component will make your final rendered `html` self-contained.
 
@@ -83,13 +83,13 @@ library(ISLR2)
 ```
 
 
-1. Suppose we fit a curve with basis functions $b_1(X) = X,\space b_2(X) = (X − 1)^2I(X \geq 1)$. (Note that $I(X \geq 1)$ equals 1 for $X \geq 1$ and 0 otherwise.) We fit the linear regression model 
+1. (ISLR, Chapter 7, Exercise 3) Suppose we fit a curve with basis functions $b_1(X) = X,\space b_2(X) = (X − 1)^2I(X \geq 1)$. (Note that $I(X \geq 1)$ equals 1 for $X \geq 1$ and 0 otherwise.) We fit the linear regression model 
 
 $$Y = \beta_0 + \beta_1b_1(X) + \beta_2b_2(X) + \epsilon,$$ <br>
 
 and obtain coefficient estimates $\hat{\beta}_0 = 1,\space \hat{\beta}_1 = 1,\space \hat{\beta}_2 = −2$. Sketch the estimated curve between $X = −2$ and $X = 2$. Note the intercepts, slopes, and other relevant information.
 
-2. (ISLR,7,9) This question uses the variables `dis` (the weighted mean of distances to five Boston employment centers) and `nox` (nitrogen oxides concentration in parts per 10 million) from the Boston data (in package `ISLR2`). We will treat `dis` as the predictor and `nox` as the response.
+2. (ISLR, Chapter 7, Exercise 9, edited) This question uses the variables `dis` (the weighted mean of distances to five Boston employment centers) and `nox` (nitrogen oxides concentration in parts per 10 million) from the Boston data (in package `ISLR2`). We will treat `dis` as the predictor and `nox` as the response.
 
   (a) Use the `poly()` function to fit a cubic polynomial regression to predict `nox` using `dis`. Report the regression output, and plot the resulting data and polynomial fits.
   

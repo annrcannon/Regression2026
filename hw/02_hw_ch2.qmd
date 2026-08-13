@@ -1,5 +1,5 @@
 ---
-title: Homework 2
+title: Homework 3
 subtitle: Likelihoods
 ---
 
@@ -10,9 +10,9 @@ Each of your assignments will begin with the following steps.
 
 -   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
 
--   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_2* and having that project in the course folder you created. 
+-   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_3* and having that project in the course folder you created. 
 
--   Create a new quarto document and give it a sensible name such as *hw2*.
+-   Create a new quarto document and give it a sensible name such as *hw3*.
 
 -   In the `YAML` add the following (add what you don't have). The embed-resources component will make your final rendered `html` self-contained.
 

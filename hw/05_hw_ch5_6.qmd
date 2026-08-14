@@ -1,6 +1,6 @@
 ---
 title: Homework 5
-subtitle: 'Ch 5 & 6: GLMs and Logistic'
+subtitle: Logistic Regression
 ---
 
 `r if (knitr:::is_html_output()) '\\newcommand{\\E}{\\operatorname{E}}'` `r if (knitr:::is_html_output()) '\\newcommand{\\SD}{\\operatorname{SD}}'` `r if (knitr:::is_html_output()) '\\newcommand{\\var}{\\operatorname{Var}}'`
@@ -41,28 +41,8 @@ All problems are from {{< var course.text >}} Abbreviated BMLR.
 
 Use the numbering on the left. The codes are for instructor use (Ex: C1).
 
-## Part 1: GLMs
 
-## Exercise 1
-
-4.  (C1) For each distribution below,
-
--   Write the pmf or pdf in one-parameter exponential form, if possible.
--   Describe an example of a setting where this random variable might be used.
--   Identify the canonical link function, and
--   (For Fun) Compute $\mu = -\frac{c'(\theta)}{b'(\theta)}$ and $\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}$ and compare with known $\E(Y)$ and $\var(Y)$.
-
-a)  Binomial (for fixed $n$): Y = number of successes in $n$ independent, identical trials
-
-$$P(Y=y;p)=\left(\begin{array} {c}  n\\y  \end{array}\right) p^y(1-p)^{(n-y)}$$
-
-b)  Gamma (for fixed $r$): Y = time spent waiting for the $r^{th}$ event in a Poisson process with an average rate of $\lambda$ events per unit of time
-
-$$f(y; \lambda) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}$$
-
-## Part 2: Logistic Regression
-
-### Exercise 2
+### Exercise 1
 
 1.  (C2) Interpret the odds ratios in the following abstract.
 
@@ -74,7 +54,7 @@ $$f(y; \lambda) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}$$
 
 -   **Results**. In a logistic regression controlling for confounding, children in daycare centers had more often nightly cough (adjusted odds ratio, 1.89; 95% confidence interval 1.34-2.67), and blocked or runny nose without common cold (1.55; 1.07-1.61) during the past 12 months compared with children in home care.
 
-### Exercise 3
+### Exercise 2
 
 2.  (C3) Construct a table and calculate the corresponding odds and odds ratios. Comment on the reported and calculated results in this *New York Times* article from [Kolata2009](https://www.nytimes.com/2009/02/17/health/17ivf.html). Once you get to the article, print it to file or paper so you don't have to go back to the NY Times site. 
 
@@ -82,7 +62,7 @@ $$f(y; \lambda) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}$$
 
 -   The findings are considered preliminary, and researchers say they believe IVF does not carry excessive risks. There is a 3% chance that any given baby will have a birth defect.
 
-### Exercise 4
+### Exercise 3
 
 3.  (G4) **Birdkeeping and lung cancer: a retrospective observational study.** A 1972-1981 health survey in The Hague, Netherlands, discovered an association between keeping pet birds and increased risk of lung cancer. To investigate birdkeeping as a risk factor, researchers conducted a case-control study of patients in 1985 at four hospitals in The Hague. They identified 49 cases of lung cancer among patients who were registered with a general practice, who were age 65 or younger, and who had resided in the city since 1965. Each patient (case) with cancer was matched with two control subjects (without cancer) by age and sex. Further details can be found in [Holst1988](https://bookdown.org/roback/bookdown-BeyondMLR/ch-logreg.html#ref-Holst1988).
 
@@ -99,7 +79,7 @@ Age, sex, and smoking history are all known to be associated with lung cancer in
 
 a.  Perform an exploratory data analysis to see how each explanatory variable is related to the response (`cancer`). Summarize each relationship in one sentence.
 
-b.  For quantitative explanatory variables (`age`, `yrsmoke`, `cigsday`), produce a *cdplot's* (conditional density plots, `geom_density_ridges2()` from *ggridges* can do this), a boxplot, and summary statistics by cancer diagnosis.
+i.  For quantitative explanatory variables (`age`, `yrsmoke`, `cigsday`), produce a *cdplot's* (conditional density plots, `geom_density_ridges2()` from *ggridges* can do this), a boxplot, and summary statistics by cancer diagnosis.
 
 ii. For categorical explanatory variables (`female` or `sex`, `highstatus` or `socioecon_status`, `bird` or `keep_bird`), produce a segmented bar chart and an appropriate table of proportions showing the relationship with cancer diagnosis.
 
@@ -148,7 +128,7 @@ birds <- read_csv("data/birdkeeping.csv") %>%
 
 # Submission
 
-When you are finished with your homework, be render the final document. Once rendered, you can download your file by:
+When you are finished with your homework,  render the final document. Once rendered, you can download your file by:
 
 -   Finding the .html file in your File pane (on the bottom right of the screen)
 -   Click the check box next to the file

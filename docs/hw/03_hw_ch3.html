@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Homework 3 – STA 363 Advanced Regression</title>
+<title>Homework 4 – STA 363 Advanced Regression</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -315,7 +315,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Homework 3</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Homework 4</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -444,7 +444,8 @@ window.Quarto = {
   <ul>
   <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#part-1-distribution-theory" id="toc-part-1-distribution-theory" class="nav-link" data-scroll-target="#part-1-distribution-theory">Part 1: Distribution Theory</a>
   <ul class="collapse">
   <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
   <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
@@ -452,6 +453,8 @@ window.Quarto = {
   <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
   <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
   </ul></li>
+  <li><a href="#part-2-glms" id="toc-part-2-glms" class="nav-link" data-scroll-target="#part-2-glms">Part 2: GLMs</a></li>
+  <li><a href="#exercise-1-1" id="toc-exercise-1-1" class="nav-link" data-scroll-target="#exercise-1-1">Exercise 1</a></li>
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
   </ul>
 </nav>
@@ -462,8 +465,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework 3</h1>
-<p class="subtitle lead">Distribution Theory</p>
+<h1 class="title">Homework 4</h1>
+<p class="subtitle lead">Ch 3 and 5: Distribution Theory and GLMs</p>
 </div>
 
 
@@ -485,8 +488,8 @@ window.Quarto = {
 <p>Each of your assignments will begin with the following steps.</p>
 <ul>
 <li><p>Going to our RStudio Server at <a href="http://turing.cornellcollege.edu:8787/" class="uri">http://turing.cornellcollege.edu:8787/</a></p></li>
-<li><p>Creating a new <em>R project</em>, inside your homework folder on the server, and giving it a sensible name such as <em>homework_3</em> and having that project in the course folder you created.</p></li>
-<li><p>Create a new quarto document and give it a sensible name such as <em>hw3</em>.</p></li>
+<li><p>Creating a new <em>R project</em>, inside your homework folder on the server, and giving it a sensible name such as <em>homework_4</em> and having that project in the course folder you created.</p></li>
+<li><p>Create a new quarto document and give it a sensible name such as <em>hw4</em>.</p></li>
 <li><p>In the <code>YAML</code> add the following (add what you don’t have). The embed-resources component will make your final rendered <code>html</code> self-contained.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
@@ -508,6 +511,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <p>All problems are from The main textbook is: <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Paul Roback and Julie Legler – it is freely available online. Chapters 1-9.. Abbreviated BMLR.</p>
 <p>Use the numbering on the left. The codes are for instructor use (Ex: C1).</p>
+</section>
+<section id="part-1-distribution-theory" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-distribution-theory">Part 1: Distribution Theory</h2>
 <section id="exercise-1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
 <ol type="1">
@@ -546,6 +552,29 @@ window.Quarto = {
 <li>Plot a histogram of these <span class="math inline">\(z_i\)</span> and compare it to your original histogram of <span class="math inline">\(X\)</span> (where <span class="math inline">\(X \sim \textrm{Poisson}(1.5)\)</span>). How do the means and standard deviations compare?</li>
 </ul>
 </section>
+</section>
+<section id="part-2-glms" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-glms">Part 2: GLMs</h2>
+</section>
+<section id="exercise-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-1">Exercise 1</h2>
+<ol start="6" type="1">
+<li>(C1) For each distribution below,</li>
+</ol>
+<ul>
+<li>Write the pmf or pdf in one-parameter exponential form, if possible.</li>
+<li>Describe an example of a setting where this random variable might be used.</li>
+<li>Identify the canonical link function, and</li>
+<li>(For Fun) Compute <span class="math inline">\(\mu = -\frac{c'(\theta)}{b'(\theta)}\)</span> and <span class="math inline">\(\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}\)</span> and compare with known <span class="math inline">\(\E(Y)\)</span> and <span class="math inline">\(\var(Y)\)</span>.</li>
+</ul>
+<ol type="a">
+<li>Binomial (for fixed <span class="math inline">\(n\)</span>): Y = number of successes in <span class="math inline">\(n\)</span> independent, identical trials</li>
+</ol>
+<p><span class="math display">\[P(Y=y;p)=\left(\begin{array} {c}  n\\y  \end{array}\right) p^y(1-p)^{(n-y)}\]</span></p>
+<ol start="2" type="a">
+<li>Gamma (for fixed <span class="math inline">\(r\)</span>): Y = time spent waiting for the <span class="math inline">\(r^{th}\)</span> event in a Poisson process with an average rate of <span class="math inline">\(\lambda\)</span> events per unit of time</li>
+</ol>
+<p><span class="math display">\[f(y; \lambda) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}\]</span></p>
 </section>
 <section id="submission" class="level1">
 <h1>Submission</h1>

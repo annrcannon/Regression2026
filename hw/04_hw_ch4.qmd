@@ -1,5 +1,5 @@
 ---
-title: Homework 4
+title: Homework 6
 subtitle: Poisson Regression
 ---
 
@@ -16,9 +16,9 @@ Each of your assignments will begin with the following steps.
 
 -   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
 
--   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_4* and having that project in the course folder you created. 
+-   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_6* and having that project in the course folder you created. 
 
--   Create a new quarto document and give it a sensible name such as *hw4*.
+-   Create a new quarto document and give it a sensible name such as *hw6*.
 
 -   In the `YAML` add the following (add what you don't have). The embed-resources component will make your final rendered `html` self-contained.
 

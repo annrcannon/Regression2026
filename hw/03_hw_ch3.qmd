@@ -1,6 +1,6 @@
 ---
-title: Homework 3
-subtitle: Distribution Theory
+title: Homework 4
+subtitle: 'Ch 3 and 5: Distribution Theory and GLMs'
 ---
 
 ## Setup
@@ -9,9 +9,9 @@ Each of your assignments will begin with the following steps.
 
 -   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
 
--   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_3* and having that project in the course folder you created.
+-   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_4* and having that project in the course folder you created.
 
--   Create a new quarto document and give it a sensible name such as *hw3*.
+-   Create a new quarto document and give it a sensible name such as *hw4*.
 
 -   In the `YAML` add the following (add what you don't have). The embed-resources component will make your final rendered `html` self-contained.
 
@@ -39,6 +39,8 @@ All problems are from {{< var course.text >}}. Abbreviated BMLR.
 
 Use the numbering on the left. The codes are for instructor use (Ex: C1).
 
+## Part 1: Distribution Theory
+
 ### Exercise 1
 
 1.  (C1) At what value of $p$ is the standard deviation of a binary random variable smallest? When is standard deviation largest?
@@ -65,6 +67,26 @@ Use the numbering on the left. The codes are for instructor use (Ex: C1).
 -   Now, consider 10,000 different Poisson distributions where $\lambda_i = y_i$.
 -   Randomly generate one $z_i$ from each Poisson distribution.
 -   Plot a histogram of these $z_i$ and compare it to your original histogram of $X$ (where $X \sim \textrm{Poisson}(1.5)$). How do the means and standard deviations compare?
+
+## Part 2: GLMs
+
+## Exercise 1
+
+6.  (C1) For each distribution below,
+
+-   Write the pmf or pdf in one-parameter exponential form, if possible.
+-   Describe an example of a setting where this random variable might be used.
+-   Identify the canonical link function, and
+-   (For Fun) Compute $\mu = -\frac{c'(\theta)}{b'(\theta)}$ and $\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}$ and compare with known $\E(Y)$ and $\var(Y)$.
+
+a)  Binomial (for fixed $n$): Y = number of successes in $n$ independent, identical trials
+
+$$P(Y=y;p)=\left(\begin{array} {c}  n\\y  \end{array}\right) p^y(1-p)^{(n-y)}$$
+
+b)  Gamma (for fixed $r$): Y = time spent waiting for the $r^{th}$ event in a Poisson process with an average rate of $\lambda$ events per unit of time
+
+$$f(y; \lambda) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}$$
+
 
 # Submission
 

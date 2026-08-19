@@ -1,5 +1,5 @@
 ---
-title: "Lab 02 SeaIce and Splines"
+title: "Lab 02 Sea Ice and Splines"
 format: html
 ---
 

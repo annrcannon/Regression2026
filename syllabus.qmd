@@ -1,9 +1,7 @@
 ---
 title: "{{< var course.title >}}"
 subtitle: "{{< var course.semester >}}"
-format:
-  html: default
-  pdf: default
+format: html
 ---
 
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}

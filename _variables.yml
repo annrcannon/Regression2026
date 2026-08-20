@@ -31,7 +31,7 @@ course:
 college:
   name: Cornell College
   url: "www.cornellcollege.edu"
-  rstudio: "http://turing.cornellcollege.edu:8787/"
+  rstudio: "https://csgateway.cornellcollege.edu:8787/"
   support: "https://www.cornellcollege.edu/academics/support-services/index.shtml"
 
 citation:

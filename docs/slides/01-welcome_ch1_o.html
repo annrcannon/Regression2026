@@ -4359,7 +4359,7 @@ window.Quarto = {
   <li><a href="#model-2-add-interaction-term-for-fireplace-and-size" id="toc-model-2-add-interaction-term-for-fireplace-and-size" class="nav-link" data-scroll-target="#model-2-add-interaction-term-for-fireplace-and-size">Model 2: Add interaction term for Fireplace and Size?</a></li>
   <li><a href="#model-2-add-fireplace-size" id="toc-model-2-add-fireplace-size" class="nav-link" data-scroll-target="#model-2-add-fireplace-size">Model 2: Add <span class="math inline">\(Fireplace * Size\)</span></a></li>
   <li><a href="#interpreting-interaction-effects-with-01-variable" id="toc-interpreting-interaction-effects-with-01-variable" class="nav-link" data-scroll-target="#interpreting-interaction-effects-with-01-variable">Interpreting interaction effects with 0/1 variable</a></li>
-  <li><a href="#interpreting-quadratic-effects" id="toc-interpreting-quadratic-effects" class="nav-link" data-scroll-target="#interpreting-quadratic-effects">Interpreting quadratic effects</a></li>
+  <li><a href="#interpreting-interaction-effects" id="toc-interpreting-interaction-effects" class="nav-link" data-scroll-target="#interpreting-interaction-effects">Interpreting interaction effects</a></li>
   <li><a href="#model-2-check-model-assumptions" id="toc-model-2-check-model-assumptions" class="nav-link" data-scroll-target="#model-2-check-model-assumptions">Model 2: Check model assumptions</a></li>
   <li><a href="#model-3-try-ln-of-response-and-delete-some-variables" id="toc-model-3-try-ln-of-response-and-delete-some-variables" class="nav-link" data-scroll-target="#model-3-try-ln-of-response-and-delete-some-variables">Model 3: Try ln of response and delete some variables</a></li>
   <li><a href="#model-4-fewer-terms-yet" id="toc-model-4-fewer-terms-yet" class="nav-link" data-scroll-target="#model-4-fewer-terms-yet">Model 4: Fewer terms yet</a></li>
@@ -4450,16 +4450,16 @@ window.Quarto = {
 </section>
 <section id="what-were-covering-this-block-23" class="level2">
 <h2 class="anchored" data-anchor-id="what-were-covering-this-block-23">What we’re covering this block (2/3)</h2>
+<p><strong>More Regression Models (ITSL Chapter 7)</strong> - Polynomial Regression - Regression Splines - Smoothing Splines - Generalized Additive Models (GAMS)</p>
+</section>
+<section id="what-were-covering-this-block-33" class="level2">
+<h2 class="anchored" data-anchor-id="what-were-covering-this-block-33">What we’re covering this block (3/3)</h2>
 <p><strong>Modeling correlated data (Ch 7 - 9)</strong></p>
 <ul>
 <li>Introduce multilevel models for correlated and longitudinal data</li>
 <li>Estimation, interpretation, and inference</li>
 <li>Mathematical details, particularly diving into covariance structures</li>
 </ul>
-</section>
-<section id="what-were-covering-this-block-33" class="level2">
-<h2 class="anchored" data-anchor-id="what-were-covering-this-block-33">What we’re covering this block (3/3)</h2>
-<p><strong>More Regression Models (ITSL Chapter 7)</strong> - Polynomial Regression - Regression Splines - Smoothing Splines - Generalized Additive Models (GAMS)</p>
 </section>
 <section id="what-background-is-assumed-for-the-course" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="what-background-is-assumed-for-the-course">What background is assumed for the course?</h2>
@@ -4514,7 +4514,7 @@ window.Quarto = {
 </ul></li>
 <li><strong>R Server</strong>:
 <ul>
-<li><a href="{{ var college.rstudio &gt;}}">http://turing.cornellcollege.edu:8787/</a></li>
+<li><a href="{{ var college.rstudio &gt;}}">https://csgateway.cornellcollege.edu:8787/</a></li>
 <li>Datasets</li>
 <li>Quarto file storage</li>
 </ul></li>
@@ -4557,7 +4557,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="using-r-rstudio">Using R / RStudio</h2>
 <ul>
 <li>RStudio Server is installed and should be used</li>
-<li><a href="http://turing.cornellcollege.edu:8787/">http://turing.cornellcollege.edu:8787/</a></li>
+<li><a href="https://csgateway.cornellcollege.edu:8787/">https://csgateway.cornellcollege.edu:8787/</a></li>
 </ul>
 </section>
 <section id="activities-assessments" class="level2 smaller">
@@ -4964,7 +4964,7 @@ window.Quarto = {
 <section id="what-about-the-curvature" class="level2">
 <h2 class="anchored" data-anchor-id="what-about-the-curvature">What about the curvature?</h2>
 <p>Try polynomial regression:</p>
-<p><span class="math display">\[y_i = \beta_0 + \beta_1 ~ xi + \beta_2 ~x_i^2 + \beta_3 ~ x_i^3 ... + \beta_d ~ x_i^d + \epsilon_i \]</span></p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 ~ x_i + \beta_2 ~x_i^2 + \beta_3 ~ x_i^3 ... + \beta_d ~ x_i^d + \epsilon_i \]</span></p>
 <p>. . .</p>
 <p>In this case, maybe a cubic (why?):</p>
 <p><span class="math display">\[\widehat{extent} = \hat{\beta}_0 + \hat{\beta}_1 ~ c\_year + \hat{\beta}_2 ~c\_year^2 + \hat{\beta}_3 ~ c\_year^3 \]</span></p>
@@ -5084,8 +5084,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data">Data</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>saratoga <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/saratoga.csv&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -5655,8 +5655,8 @@ window.Quarto = {
 \]</span></p>
 <p><strong>General interpretation</strong>: When <span class="math inline">\(x_2\)</span> is present, the slope between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(y\)</span> increases(decreases) by <span class="math inline">\(\hat{\beta}_4\)</span> units and the <span class="math inline">\(y\)</span>-intercept increases(decreases) by <span class="math inline">\(\hat{\beta}_2\)</span> units when all other variables are held constant.</p>
 </section>
-<section id="interpreting-quadratic-effects" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="interpreting-quadratic-effects">Interpreting quadratic effects</h2>
+<section id="interpreting-interaction-effects" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="interpreting-interaction-effects">Interpreting interaction effects</h2>
 <p><span class="math display">\[\begin{aligned}\widehat{Price} = &amp;45.00 + 48.33 ~ Size + 25.79 ~ Baths - 8.95 ~ Bedrooms \\
 &amp; + 2.01 ~ Acres - 59.30 ~ Fireplace - 0.05 ~ Age + 40.51~Fireplace * Size\end{aligned}\]</span></p>
 <p>. . .</p>

@@ -1,6 +1,10 @@
 project:
   type: website
   execute-dir: file
+  render:
+    - "*.qmd"
+    - "!readme.md"
+    - "!**/readme.md"
   resources:
     - "img/"
     - "www/"

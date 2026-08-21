@@ -10,6 +10,12 @@ format:
 logo: "../img/favicon.png"
 ---
 
+```{r check-paths, echo=TRUE}
+.libPaths()
+R.version.string
+```
+
+
 # Welcome!
 
 ## Instructor

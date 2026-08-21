@@ -1,5 +1,5 @@
 ---
-title: 'Mini Project 2'
+title: 'Mini Project 1'
 subtitle: 'Generalized Linear Models'
 execute:
   eval: false

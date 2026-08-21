@@ -9,7 +9,7 @@ execute:
 
 Since this our first lab, I suggest you get setup for files in the following way:
 
-1) Log into the course RStudio Server. <http://turing.cornellcollege.edu:8787/> Make sure to close out of any projects on the top right corner. 
+1) Log into the course RStudio Server. <https://csgateway.cornellcollege.edu:8787/> Make sure to close out of any projects on the top right corner. 
 2) Click the "File" tab in the bottom right corner. Then click "Home" across the top of the panel.
 3) If ones does not exists already, use the "+`r emo::ji("folder")`" button to create a new folder and call it "STA363"
 4) Copy project folder called "01_linear_regression" located at *Home -> STA363_inst_files-> labs*. If you check the box next to the folder name, then click the small gear icon you can "copy to" and put a copy of the folder in your newly created folder. 

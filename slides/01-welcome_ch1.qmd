@@ -56,19 +56,21 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
 
 ## What we're covering this block (2/3)
 
+**More Regression Models (ITSL Chapter 7)**
+- Polynomial Regression
+- Regression Splines
+- Smoothing Splines
+- Generalized Additive Models (GAMS)
+
+
+## What we're covering this block (3/3)
+
 **Modeling correlated data (Ch 7 - 9)**
 
 - Introduce multilevel models for correlated and longitudinal data
 - Estimation, interpretation, and inference
 - Mathematical details, particularly diving into covariance structures
 
-## What we're covering this block (3/3)
-
-**More Regression Models (ITSL Chapter 7)**
-- Polynomial Regression
-- Regression Splines
-- Smoothing Splines
-- Generalized Additive Models (GAMS)
 
 
 ## What background is assumed for the course? {.smaller}
@@ -564,7 +566,7 @@ plot(model2, pch=16, col='#006EA1')
 
 Try polynomial regression:
 
-$$y_i = \beta_0 + \beta_1 ~ xi + \beta_2 ~x_i^2 + \beta_3 ~ x_i^3 ... + \beta_d ~ x_i^d + \epsilon_i $$
+$$y_i = \beta_0 + \beta_1 ~ x_i + \beta_2 ~x_i^2 + \beta_3 ~ x_i^3 ... + \beta_d ~ x_i^d + \epsilon_i $$
  
  . . .
 
@@ -657,7 +659,7 @@ Data from homes for sale in Saratoga, NY.  The data is about 15 years old.
 ::::
 
 
-## Data
+## Data {.smaller}
 
 ```{r}
 saratoga <- read_csv("data/saratoga.csv")
@@ -1060,7 +1062,7 @@ $$
 
 
 
-## Interpreting quadratic effects {.smaller}
+## Interpreting interaction effects {.smaller}
 
 $$\begin{aligned}\widehat{Price} = &45.00 + 48.33 ~ Size + 25.79 ~ Baths - 8.95 ~ Bedrooms \\
 & + 2.01 ~ Acres - 59.30 ~ Fireplace - 0.05 ~ Age + 40.51~Fireplace * Size\end{aligned}$$

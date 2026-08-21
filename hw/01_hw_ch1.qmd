@@ -11,7 +11,7 @@ subtitle: Review on R, RStudio, and MLR
 
 ## This One Time
 
--   Go to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
+-   Go to our RStudio Server at <https://csgateway.cornellcollege.edu:8787/>
 
 -   Go to your class folder named "STA363"
 
@@ -23,7 +23,7 @@ Each of your assignments will begin with the following steps.
 
 -   Finding the instructions on our website: [{{< var course.url >}}]({{< var course.url >}}).
 
--   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>.
+-   Going to our RStudio Server at <https://csgateway.cornellcollege.edu:8787/>.
 
 -   Creating a new *project* and giving it a sensible name such as *homework_1* and having that project in the course folder you created.
 

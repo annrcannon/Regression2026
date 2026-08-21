@@ -7,7 +7,7 @@ subtitle: 'Ch 3 and 5: Distribution Theory and GLMs'
 
 Each of your assignments will begin with the following steps.
 
--   Going to our RStudio Server at <http://turing.cornellcollege.edu:8787/>
+-   Going to our RStudio Server at <https://csgateway.cornellcollege.edu:8787/>
 
 -   Creating a new *R project*, inside your homework folder on the server, and giving it a sensible name such as *homework_4* and having that project in the course folder you created.
 

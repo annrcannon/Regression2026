@@ -64,8 +64,6 @@ website:
             text: Overview
           - href: course-support.qmd
             text: Support
-          - href: course-instructor.qmd
-            text: Instructor
           - href: computing-access.qmd
             text: R/RStudio Access
      

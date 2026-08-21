@@ -1,5 +1,5 @@
 ---
-title: 'Mini Project 1'
+title: 'Mini Project 2'
 subtitle: 'Poisson Regression'
 execute:
   eval: false

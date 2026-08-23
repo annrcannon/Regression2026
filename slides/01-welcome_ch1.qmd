@@ -30,6 +30,7 @@ logo: "../img/favicon.png"
 
 **Generalized Linear Models (Ch 1 - 6)**
 
+- Review linear regression (normal response variables)
 - Introduce models for non-normal response variables
 - Estimation, interpretation, and inference
 - Mathematical details showing how GLMs are connected
@@ -112,6 +113,7 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
   - Central hub for the course
   - Notes
   - Labs
+  - Homework
 
 
 ## Course Toolkit (2/2){.smaller}
@@ -170,6 +172,7 @@ $$\begin{aligned}\pi = P(y = 1 | x) \hspace{2mm} &\Rightarrow \hspace{2mm} \text
 ## Using R / RStudio
 - RStudio Server is installed and should be used
 - [{{< var college.rstudio >}}]({{< var college.rstudio >}})
+- All of you have accounts from last spring.  You should use that password.  If you don't remember your password, please see Ajit Chavan in the CS department to get it changed.
 
 
 ## Activities & Assessments {.smaller}
@@ -234,11 +237,19 @@ Final grades will be calculated as follows
 ## Resources {.smaller}
 
 - **Office hours** to meet with your instructor in {{< var instructor.office >}}
-  - Typically {{< var instructor.officehrs >}}
+  - Typically {{< var instructor.officehrs >}}  Note that if my door is open, you are welcome to come ask questions!
 
 - **Email** {{< var instructor.name_no_title >}} for private questions regarding personal matters or grades. 
 
 - College support at [{{< var college.support >}}]({{< var college.support >}}).
+
+## Course and College Policies
+
+- AI policy
+- Accommodations
+- Academic Honesty
+- Illness
+- Mandatory Reporter
 
 # Chapter 1 - Linear Regression Review
 
@@ -500,7 +511,7 @@ tidy(model1) |> kable(digits = 3)
  - This is called centering
  
 ```{r  eval = T, echo=F}
-# Fit and display model
+#create centered year variable
 si |>
   mutate(c_year = year-1979) -> si
 ``` 
@@ -508,7 +519,7 @@ si |>
 ### Code 
 
 ```{r  eval = F}
-# Fit and display model
+# create centered year variable
 si |>
   mutate(c_year = year-1979) -> si
 ```
@@ -517,7 +528,7 @@ si |>
 
 ## Interpret new model {.smaller}
 
-$$\widehat{extent} = 7.625 - 0.076 ~ year$$
+$$\widehat{extent} = 7.625 - 0.076 ~ c\_year$$
 
 
 ```{r echo = F}
@@ -530,9 +541,9 @@ tidy(model2) |> kable(digits = 3)
 
 Questions:
 
- - 1. What is the interpretation of the y-intercept now? 
+ - What is the interpretation of the y-intercept now? 
  
- - 2. Did the slope change?
+ - Did the slope change?
 
 
  
@@ -563,6 +574,16 @@ plot(model2, pch=16, col='#006EA1')
 `col` defines the color of the plotted symbol
 :::
 
+## Scatterplot again
+
+```{r echo = F,fig.height=5}
+ggplot(data = si, aes(x = year, y = extent)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Year", y = "Extent of Ice", 
+       title = "Year vs. Extent of Ice") 
+```
+
 ## What about the curvature?
 
 Try polynomial regression:
@@ -582,7 +603,11 @@ $$\widehat{extent} = \hat{\beta}_0 + \hat{\beta}_1 ~ c\_year + \hat{\beta}_2 ~c\
 ### Output
 
 ```{r echo = F}
-model3 <- lm(extent ~ poly(c_year, 3), data=si)
+si |>
+  mutate(yearsq = c_year*c_year) |>
+  mutate(yearcu = yearsq*c_year) -> si
+
+model3 <- lm(extent ~ year+ yearsq + yearcu, data=si)
 tidy(model3) |> kable(digits = 3)
 ```
 
@@ -590,7 +615,11 @@ tidy(model3) |> kable(digits = 3)
 
 ```{r  eval = F}
 # Fit and display model
-model3 <- lm(extent ~ poly(c_year,3), data=si)
+si |>
+  mutate(yearsq = c_year*c_year) |>
+  mutate(yearcu = yearsq*c_year) -> si
+
+model3 <- lm(extent ~ year+ yearsq + yearcu, data=si)
 tidy(model3) |> kable(digits = 3)
 ```
 
@@ -802,11 +831,11 @@ p5 <- ggplot(data = saratoga, aes(x = Size, y = Price)) +
 
 p6 <- ggplot(data = saratoga, aes(x = Age, y = Price)) + 
   geom_point() + 
-  labs(x = "Age (years)", y = "Price ($1000")
+  labs(x = "Age (years)", y = "Price ($1000)")
 
 p7 <- ggplot(data = saratoga, aes(x = as.factor(Fireplace), y = Price)) + 
   geom_boxplot(fill = "forestgreen", color = "black") + 
-  labs(x = "Fireplace (0 = no, 1 = yes)", y = "Price ($1000")
+  labs(x = "Fireplace (0 = no, 1 = yes)", y = "Price ($1000)")
 
 (p5 + p6) / p7 +
   plot_annotation(title = "Bivariate data analysis")
@@ -822,11 +851,11 @@ p5 <- ggplot(data = saratoga, aes(x = Size, y = Price)) +
 
 p6 <- ggplot(data = saratoga, aes(x = Age, y = Price)) + 
   geom_point() + 
-  labs(x = "Age (years)", y = "Price ($1000")
+  labs(x = "Age (years)", y = "Price ($1000)")
 
 p7 <- ggplot(data = saratoga, aes(x = as.factor(Fireplace), y = Price)) + 
   geom_boxplot(fill = "forestgreen", color = "black") + 
-  labs(x = "Fireplace (0 = no, 1 = yes)", y = "Price ($1000")
+  labs(x = "Fireplace (0 = no, 1 = yes)", y = "Price ($1000)")
 
 (p5 + p6) / p7 +
   plot_annotation(title = "Bivariate data analysis")

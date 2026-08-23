@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Advanced Regression – STA 363 Advanced Regression</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -32,19 +35,18 @@ ul.task-list li input[type="checkbox"] {
 <link href=".//img/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4c7b890cc350be7067044af900615741.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4c7b890cc350be7067044af900615741.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4c7b890cc350be7067044af900615741.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-9de9f6925d305bcf5b7eb9351f368d06.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-9de9f6925d305bcf5b7eb9351f368d06.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-9de9f6925d305bcf5b7eb9351f368d06.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b15ed0f1a43a873608ef63a698f96ad9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-0652c0fabde5cf324e2cd5852c03680e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-b15ed0f1a43a873608ef63a698f96ad9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-228f38637a3b287bbc908b3339d6cd35.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-37681f591e8b5593a73389242f9899fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-228f38637a3b287bbc908b3339d6cd35.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -379,7 +381,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#evaluations-and-grades" id="toc-evaluations-and-grades" class="nav-link" data-scroll-target="#evaluations-and-grades">Evaluations and grades</a></li>
   <li><a href="#ai-policy" id="toc-ai-policy" class="nav-link" data-scroll-target="#ai-policy">AI Policy</a>
   <ul class="collapse">
-  <li><a href="#disabilities-and-accomodations-policy" id="toc-disabilities-and-accomodations-policy" class="nav-link" data-scroll-target="#disabilities-and-accomodations-policy">DISABILITIES AND ACCOMODATIONS POLICY</a></li>
+  <li><a href="#disabilities-and-accommodations-policy" id="toc-disabilities-and-accommodations-policy" class="nav-link" data-scroll-target="#disabilities-and-accommodations-policy">DISABILITIES AND ACCOMMODATIONS POLICY</a></li>
   <li><a href="#academic-honesty-policy" id="toc-academic-honesty-policy" class="nav-link" data-scroll-target="#academic-honesty-policy">ACADEMIC HONESTY POLICY</a></li>
   <li><a href="#illness-policy" id="toc-illness-policy" class="nav-link" data-scroll-target="#illness-policy">Illness Policy</a></li>
   <li><a href="#mandatory-reporter-reminder" id="toc-mandatory-reporter-reminder" class="nav-link" data-scroll-target="#mandatory-reporter-reminder">Mandatory Reporter Reminder</a></li>
@@ -532,8 +534,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Work, including writing, code, and analysis (such as graphs, tables, models, etc.), created by AI tools will not be considered original work and will instead be considered automated plagiarism. It is derived from previously created texts from other sources that the models were trained on; however, it doesn’t cite these sources.</p>
 <p>AI models have built-in biases (ie, they are trained on limited underlying sources; they reproduce, rather than challenge, errors in the sources) AI tools have limitations (ie, they lack critical thinking to evaluate and reflect on criteria; they lack deductive reasoning to make judgments with incomplete information at hand; they make up or use inaccurate information and may “hallucinate” sources that do not exist)</p>
 <p>In this course, the use of AI is only permitted when specified. You can use it as a learning tool, but no submissions should contain any text or code written by a Large Language Model (e.g., ChatGPT, Gemini). These tools are not familiar with the content of this class, and they will provide incorrect answers. By taking this class, you are learning content that it does not know. Writing tools, such as Grammarly, are allowed. If you are unsure if the tool you want to use is OK, please ask.</p>
-<section id="disabilities-and-accomodations-policy" class="level3">
-<h3 class="anchored" data-anchor-id="disabilities-and-accomodations-policy">DISABILITIES AND ACCOMODATIONS POLICY</h3>
+<section id="disabilities-and-accommodations-policy" class="level3">
+<h3 class="anchored" data-anchor-id="disabilities-and-accommodations-policy">DISABILITIES AND ACCOMMODATIONS POLICY</h3>
 <p>Cornell College makes reasonable accommodations for persons with disabilities. Students should notify the Office of Academic Support and Advising and their course instructor of any disability related accommodations within the first three days of the term for which the accommodations are required, due to the fast pace of the block format. For more <a href="http://www.cornellcollege.edu/academic-support-and-advising/disabilities/index.shtml">information on the documentation required to establish the need for accommodations and the process of requesting the accommodations.</a></p>
 </section>
 <section id="academic-honesty-policy" class="level3">

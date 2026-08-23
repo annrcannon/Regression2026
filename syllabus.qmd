@@ -170,7 +170,7 @@ AI models have built-in biases (ie, they are trained on limited underlying sourc
 In this course, the use of AI is only permitted when specified. You can use it as a learning tool, but no submissions should contain any text or code written by a Large Language Model (e.g., ChatGPT, Gemini). These tools are not familiar with the content of this class, and they will provide incorrect answers. By taking this class, you are learning content that it does not know. Writing tools, such as Grammarly, are allowed. If you are unsure if the tool you want to use is OK, please ask. 
 
 
-### DISABILITIES AND ACCOMODATIONS POLICY
+### DISABILITIES AND ACCOMMODATIONS POLICY
 
 Cornell College makes reasonable accommodations for persons with disabilities. Students should notify the Office of Academic Support and Advising and their course instructor of any disability related accommodations within the first three days of the term for which the accommodations are required, due to the fast pace of the block format. For more [information on the documentation required to establish the need for accommodations and the process of requesting the accommodations.](http://www.cornellcollege.edu/academic-support-and-advising/disabilities/index.shtml)
 

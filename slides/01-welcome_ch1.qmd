@@ -506,7 +506,7 @@ tidy(model1) |> kable(digits = 3)
 
  - We only have data starting in 1979.  So let's call that year 0.  The data at the beginning of the study.
 
- - Create a new variable: $time = year - 1979$
+ - Create a new variable: $c\_year = year - 1979$
  
  - This is called centering
  

@@ -4072,7 +4072,7 @@
     "href": "slides/01-welcome_ch1.html#center-the-data",
     "title": "Welcome and Chapter 1",
     "section": "Center the data",
-    "text": "Center the data\n\nCreate new variableCode\n\n\n\nWe only have data starting in 1979. So let’s call that year 0. The data at the beginning of the study.\nCreate a new variable: \\(time = year - 1979\\)\nThis is called centering\n\n\n\n\n# create centered year variable\nsi |&gt;\n  mutate(c_year = year-1979) -&gt; si"
+    "text": "Center the data\n\nCreate new variableCode\n\n\n\nWe only have data starting in 1979. So let’s call that year 0. The data at the beginning of the study.\nCreate a new variable: \\(c\\_year = year - 1979\\)\nThis is called centering\n\n\n\n\n# create centered year variable\nsi |&gt;\n  mutate(c_year = year-1979) -&gt; si"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#interpret-new-model",

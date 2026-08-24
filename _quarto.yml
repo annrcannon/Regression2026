@@ -12,7 +12,7 @@ project:
   
 website:
   title: "STA 363 Advanced Regression"
-  site-url: https://stats-tgeorge.github.io/STA363_AdvRegF25/
+  site-url: https://annrcannon.github.io/Regression2026/
   sidebar:
     background: "#BBBCBC"
     logo: "img/favicon.png" # This is where I put my hex
@@ -20,26 +20,18 @@ website:
     align: center
     tools:
       - icon: github
-        href: https://github.com/stats-tgeorge/STA363_AdvRegF25
+        href: https://github.com/annrcannon/Regression2026
         text: "GitHub organization"
       - icon: code-square
-        href: http://turing.cornellcollege.edu:8787/
+        href: https://csgateway.cornellcollege.edu:8787
         text: "RStudio Server"
       - icon: book
         href: https://bookdown.org/roback/bookdown-BeyondMLR/
         text: "Book"
       - icon: person-fill
         text: "Moodle"
-        menu:
-          - text: Announcements
-            url: https://moodle.cornellcollege.edu/mod/forum/view.php?id=330671
-          - text: Gradebook
-            url: https://moodle.cornellcollege.edu/grade/report/grader/index.php?id=9443
-          - text: Homepage
-            url: https://moodle.cornellcollege.edu/course/view.php?id=9443
-      - icon: calendar
-        href: https://calendar.google.com/calendar/u/0?cid=Y19hMTllMWE2M2IwOGFiNDkzYmQxNmJmNWU3MThhZmM1OWYxODIyN2EwZDhmOGQzZGMyOGRjMzE5YjQ1NmJlYjFiQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20
-        text: Course Calendar
+        href: https://moodle.cornellcollege.edu/course/view.php?id=9632
+          
 
     style: "docked"
     search: true

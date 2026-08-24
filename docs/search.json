@@ -2861,14 +2861,14 @@
     "href": "labs/01_linear_regression/01_banksalary.html",
     "title": "Stat 363: Multiple Linear Regression Review",
     "section": "",
-    "text": "Since this our first lab, I suggest you get setup for files in the following way:\n\nLog into the course RStudio Server. https://csgateway.cornellcollege.edu:8787/ Make sure to close out of any projects on the top right corner.\nClick the “File” tab in the bottom right corner. Then click “Home” across the top of the panel.\nIf ones does not exists already, use the “+📁” button to create a new folder and call it “STA363”\nCopy project folder called “01_linear_regression” located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click File-&gt; Open Project and navigate to the project file in the folder you just copied.\nYou can place your responses in the file 01_banksalary_fillable.qmd."
+    "text": "Since this our first lab, I suggest you get setup for files in the following way:\n\nLog into the course RStudio Server. https://csgateway.cornellcollege.edu:8787/ Make sure to close out of any projects on the top right corner.\nClick the “File” tab in the bottom right corner. Then click “Home” across the top of the panel.\nIf ones does not exists already, use the “+📂” button to create a new folder and call it “STA363”\nCopy lab folder called “01_linear_regression” located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click Project:(None) in the top right corner of your screen and choose New Project and “Don’t Save”.\nChoose Existing Directory and navigate to the directory you just copied.\nYou can use 01_banksalary.qmd for exploring with code.\nPlace your responses in the file 01_banksalary_fillable.qmd."
   },
   {
     "objectID": "labs/01_linear_regression/01_banksalary.html#first-lab-setup",
     "href": "labs/01_linear_regression/01_banksalary.html#first-lab-setup",
     "title": "Stat 363: Multiple Linear Regression Review",
     "section": "",
-    "text": "Since this our first lab, I suggest you get setup for files in the following way:\n\nLog into the course RStudio Server. https://csgateway.cornellcollege.edu:8787/ Make sure to close out of any projects on the top right corner.\nClick the “File” tab in the bottom right corner. Then click “Home” across the top of the panel.\nIf ones does not exists already, use the “+📁” button to create a new folder and call it “STA363”\nCopy project folder called “01_linear_regression” located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click File-&gt; Open Project and navigate to the project file in the folder you just copied.\nYou can place your responses in the file 01_banksalary_fillable.qmd."
+    "text": "Since this our first lab, I suggest you get setup for files in the following way:\n\nLog into the course RStudio Server. https://csgateway.cornellcollege.edu:8787/ Make sure to close out of any projects on the top right corner.\nClick the “File” tab in the bottom right corner. Then click “Home” across the top of the panel.\nIf ones does not exists already, use the “+📂” button to create a new folder and call it “STA363”\nCopy lab folder called “01_linear_regression” located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click Project:(None) in the top right corner of your screen and choose New Project and “Don’t Save”.\nChoose Existing Directory and navigate to the directory you just copied.\nYou can use 01_banksalary.qmd for exploring with code.\nPlace your responses in the file 01_banksalary_fillable.qmd."
   },
   {
     "objectID": "labs/01_linear_regression/01_banksalary.html#introduction",
@@ -3638,14 +3638,14 @@
     "href": "slides/01-welcome_ch1_o.html#center-the-data",
     "title": "Welcome and Chapter 1",
     "section": "Center the data",
-    "text": "Center the data\n\nCreate new variableCode\n\n\n\nWe only have data starting in 1979. So let’s call that year 0. The data at the beginning of the study.\nCreate a new variable: \\(time = year - 1979\\)\nThis is called centering\n\n\n\n\n# Fit and display model\nsi |&gt;\n  mutate(c_year = year-1979) -&gt; si"
+    "text": "Center the data\n\nCreate new variableCode\n\n\n\nWe only have data starting in 1979. So let’s call that year 0. The data at the beginning of the study.\nCreate a new variable: \\(c\\_year = year - 1979\\)\nThis is called centering\n\n\n\n\n# create centered year variable\nsi |&gt;\n  mutate(c_year = year-1979) -&gt; si"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#interpret-new-model",
     "href": "slides/01-welcome_ch1_o.html#interpret-new-model",
     "title": "Welcome and Chapter 1",
     "section": "Interpret new model",
-    "text": "Interpret new model\n\\[\\widehat{extent} = 7.625 - 0.076 ~ year\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.625\n0.150\n50.693\n0\n\n\nc_year\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n. . .\nQuestions:\n\n\nWhat is the interpretation of the y-intercept now?\n\n\nDid the slope change?"
+    "text": "Interpret new model\n\\[\\widehat{extent} = 7.625 - 0.076 ~ c\\_year\\]\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.625\n0.150\n50.693\n0\n\n\nc_year\n-0.076\n0.006\n-13.504\n0\n\n\n\n\n\n. . .\nQuestions:\n\nWhat is the interpretation of the y-intercept now?\nDid the slope change?"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#check-assumptions",
@@ -3666,7 +3666,7 @@
     "href": "slides/01-welcome_ch1_o.html#new-model",
     "title": "Welcome and Chapter 1",
     "section": "New model",
-    "text": "New model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n5.875\n0.069\n85.003\n0.000\n\n\npoly(c_year, 3)1\n-7.074\n0.474\n-14.928\n0.000\n\n\npoly(c_year, 3)2\n-0.040\n0.474\n-0.084\n0.933\n\n\npoly(c_year, 3)3\n1.640\n0.474\n3.462\n0.001\n\n\n\n\n\n\n\n\n# Fit and display model\nmodel3 &lt;- lm(extent ~ poly(c_year,3), data=si)\ntidy(model3) |&gt; kable(digits = 3)"
+    "text": "New model\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-149.736\n96.553\n-1.551\n0.128\n\n\nyear\n0.079\n0.049\n1.628\n0.111\n\n\nyearsq\n-0.008\n0.002\n-3.426\n0.001\n\n\nyearcu\n0.000\n0.000\n3.462\n0.001\n\n\n\n\n\n\n\n\n# Fit and display model\nsi |&gt;\n  mutate(yearsq = c_year*c_year) |&gt;\n  mutate(yearcu = yearsq*c_year) -&gt; si\n\nmodel3 &lt;- lm(extent ~ year+ yearsq + yearcu, data=si)\ntidy(model3) |&gt; kable(digits = 3)"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#check-assumptions-1",
@@ -3729,7 +3729,7 @@
     "href": "slides/01-welcome_ch1_o.html#plots-for-bivariate-eda",
     "title": "Welcome and Chapter 1",
     "section": "Plots for bivariate EDA",
-    "text": "Plots for bivariate EDA\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np5 &lt;- ggplot(data = saratoga, aes(x = Size, y = Price)) + \n  geom_point() + \n  labs(x = \"Size (1000 sq ft)\", y = \"Price ($1000)\")\n\np6 &lt;- ggplot(data = saratoga, aes(x = Age, y = Price)) + \n  geom_point() + \n  labs(x = \"Age (years)\", y = \"Price ($1000\")\n\np7 &lt;- ggplot(data = saratoga, aes(x = as.factor(Fireplace), y = Price)) + \n  geom_boxplot(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Fireplace (0 = no, 1 = yes)\", y = \"Price ($1000\")\n\n(p5 + p6) / p7 +\n  plot_annotation(title = \"Bivariate data analysis\")"
+    "text": "Plots for bivariate EDA\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np5 &lt;- ggplot(data = saratoga, aes(x = Size, y = Price)) + \n  geom_point() + \n  labs(x = \"Size (1000 sq ft)\", y = \"Price ($1000)\")\n\np6 &lt;- ggplot(data = saratoga, aes(x = Age, y = Price)) + \n  geom_point() + \n  labs(x = \"Age (years)\", y = \"Price ($1000)\")\n\np7 &lt;- ggplot(data = saratoga, aes(x = as.factor(Fireplace), y = Price)) + \n  geom_boxplot(fill = \"forestgreen\", color = \"black\") + \n  labs(x = \"Fireplace (0 = no, 1 = yes)\", y = \"Price ($1000)\")\n\n(p5 + p6) / p7 +\n  plot_annotation(title = \"Bivariate data analysis\")"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#scatterplot-matrix",
@@ -6758,6 +6758,13 @@
   {
     "objectID": "slides/01-welcome_ch1.html#scatterplot-again",
     "href": "slides/01-welcome_ch1.html#scatterplot-again",
+    "title": "Welcome and Chapter 1",
+    "section": "Scatterplot again",
+    "text": "Scatterplot again"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#scatterplot-again",
+    "href": "slides/01-welcome_ch1_o.html#scatterplot-again",
     "title": "Welcome and Chapter 1",
     "section": "Scatterplot again",
     "text": "Scatterplot again"

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/syllabus.html</loc>
-    <lastmod>2026-08-23T19:57:23.931Z</lastmod>
+    <lastmod>2026-08-24T16:26:26.721Z</lastmod>
   </url>
   <url>
     <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/09_longitudinal_ch9.html</loc>
@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/01_linear_regression/01_banksalary.html</loc>
-    <lastmod>2026-08-23T19:31:42.650Z</lastmod>
+    <lastmod>2026-08-24T16:41:47.202Z</lastmod>
   </url>
   <url>
     <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/08_hw_ch7ISLR.html</loc>
@@ -166,7 +166,7 @@
   </url>
   <url>
     <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/01-welcome_ch1_o.html</loc>
-    <lastmod>2026-08-23T19:56:30.926Z</lastmod>
+    <lastmod>2026-08-24T16:26:26.691Z</lastmod>
   </url>
   <url>
     <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/01-welcome_ch1.html</loc>
@@ -211,5 +211,9 @@
   <url>
     <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/10_non_linear_ch7.html</loc>
     <lastmod>2026-05-18T18:22:25.574Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/labs/01_linear_regression/01_banksalary.html</loc>
+    <lastmod>2026-08-24T16:41:47.202Z</lastmod>
   </url>
 </urlset>

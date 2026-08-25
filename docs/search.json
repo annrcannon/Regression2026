@@ -2798,14 +2798,14 @@
     "href": "labs/02_seaice.html",
     "title": "Lab 02 SeaIce and Splines",
     "section": "",
-    "text": "Copy the project lab folder located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click File-&gt; Open Project and navigate to the project file in the folder you just copied.\nYou can place your responses in the qmd file included."
+    "text": "Copy the project lab folder located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click Project:(None) in the top right corner of your screen and choose New Project and “Don’t Save”.\nChoose Existing Directory and navigate to the directory you just copied.\nYou can place your responses in the qmd file included. (There is only one qmd file in this directory.)"
   },
   {
     "objectID": "labs/02_seaice.html#lab-setup",
     "href": "labs/02_seaice.html#lab-setup",
     "title": "Lab 02 SeaIce and Splines",
     "section": "",
-    "text": "Copy the project lab folder located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click File-&gt; Open Project and navigate to the project file in the folder you just copied.\nYou can place your responses in the qmd file included."
+    "text": "Copy the project lab folder located at Home -&gt; STA363_inst_files-&gt; labs. If you check the box next to the folder name, then click the small gear icon you can “copy to” and put a copy of the folder in your newly created folder.\nNow, click Project:(None) in the top right corner of your screen and choose New Project and “Don’t Save”.\nChoose Existing Directory and navigate to the directory you just copied.\nYou can place your responses in the qmd file included. (There is only one qmd file in this directory.)"
   },
   {
     "objectID": "labs/02_seaice.html#packages",
@@ -3571,6 +3571,13 @@
     "text": "Office hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt. Note that if my door is open, you are welcome to come ask questions!\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at https://www.cornellcollege.edu/academics/support-services/index.shtml."
   },
   {
+    "objectID": "slides/01-welcome_ch1_o.html#course-and-college-policies",
+    "href": "slides/01-welcome_ch1_o.html#course-and-college-policies",
+    "title": "Welcome and Chapter 1",
+    "section": "",
+    "text": "AI policy\nAccommodations\nAcademic Honesty\nIllness\nMandatory Reporter"
+  },
+  {
     "objectID": "slides/01-welcome_ch1_o.html#setup---r-packages",
     "href": "slides/01-welcome_ch1_o.html#setup---r-packages",
     "title": "Welcome and Chapter 1",
@@ -3653,6 +3660,13 @@
     "title": "Welcome and Chapter 1",
     "section": "Check assumptions",
     "text": "Check assumptions\n\nOutputCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot the diagnostic plots\npar(mfrow=c(2,2))\n\nplot(model2, pch=16, col='#006EA1')\n\npch defines the shape of the plotted symbol\ncol defines the color of the plotted symbol"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1_o.html#scatterplot-again",
+    "href": "slides/01-welcome_ch1_o.html#scatterplot-again",
+    "title": "Welcome and Chapter 1",
+    "section": "Scatterplot again",
+    "text": "Scatterplot again"
   },
   {
     "objectID": "slides/01-welcome_ch1_o.html#what-about-the-curvature",
@@ -4005,6 +4019,13 @@
     "text": "Resources\n\nOffice hours to meet with your instructor in West 317\n\nTypically MWThF 11:00am-12:00pm, Tu 3:00pm-4pm, and by appt. Note that if my door is open, you are welcome to come ask questions!\n\nEmail Ann Cannon for private questions regarding personal matters or grades.\nCollege support at https://www.cornellcollege.edu/academics/support-services/index.shtml."
   },
   {
+    "objectID": "slides/01-welcome_ch1.html#course-and-college-policies",
+    "href": "slides/01-welcome_ch1.html#course-and-college-policies",
+    "title": "Welcome and Chapter 1",
+    "section": "Course and College Policies",
+    "text": "Course and College Policies\n\nAI policy\nAccommodations\nAcademic Honesty\nIllness\nMandatory Reporter"
+  },
+  {
     "objectID": "slides/01-welcome_ch1.html#setup---r-packages",
     "href": "slides/01-welcome_ch1.html#setup---r-packages",
     "title": "Welcome and Chapter 1",
@@ -4087,6 +4108,13 @@
     "title": "Welcome and Chapter 1",
     "section": "Check assumptions",
     "text": "Check assumptions\n\nOutputCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Plot the diagnostic plots\npar(mfrow=c(2,2))\n\nplot(model2, pch=16, col='#006EA1')\n\npch defines the shape of the plotted symbol\ncol defines the color of the plotted symbol"
+  },
+  {
+    "objectID": "slides/01-welcome_ch1.html#scatterplot-again",
+    "href": "slides/01-welcome_ch1.html#scatterplot-again",
+    "title": "Welcome and Chapter 1",
+    "section": "Scatterplot again",
+    "text": "Scatterplot again"
   },
   {
     "objectID": "slides/01-welcome_ch1.html#what-about-the-curvature",
@@ -6301,6 +6329,13 @@
     "text": "Polynomial Regression\nPolynomials have notoriously bad tail behavior (so they can be bad for extrapolation)\n. . .\n\nWhat does this mean?"
   },
   {
+    "objectID": "slides/10_non_linear_ch7_o.html#scatterplot-again",
+    "href": "slides/10_non_linear_ch7_o.html#scatterplot-again",
+    "title": "Moving Beyond Linearity",
+    "section": "Scatterplot again",
+    "text": "Scatterplot again"
+  },
+  {
     "objectID": "slides/10_non_linear_ch7_o.html#step-functions",
     "href": "slides/10_non_linear_ch7_o.html#step-functions",
     "title": "Moving Beyond Linearity",
@@ -6392,6 +6427,13 @@
     "text": "Linear Splines\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = ifelse(b1 &gt; 35, b1 - 35, 0),\n  b3 = ifelse(b1 &gt; 65, b1 - 65, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3, data = d),\n             newdata = newdat)\n\nggplot(newdat, aes(x = b1, y = p)) +\n  geom_point() + \n  labs(x = \"X\",\n       y = expression(hat(y)))"
   },
   {
+    "objectID": "slides/10_non_linear_ch7_o.html#how-does-it-fit-the-data",
+    "href": "slides/10_non_linear_ch7_o.html#how-does-it-fit-the-data",
+    "title": "Moving Beyond Linearity",
+    "section": "How does it fit the data?",
+    "text": "How does it fit the data?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = ifelse(b1 &gt; 35, b1 - 35, 0),\n  b3 = ifelse(b1 &gt; 65, b1 - 65, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
+  },
+  {
     "objectID": "slides/10_non_linear_ch7_o.html#cubic-splines",
     "href": "slides/10_non_linear_ch7_o.html#cubic-splines",
     "title": "Moving Beyond Linearity",
@@ -6432,6 +6474,13 @@
     "title": "Moving Beyond Linearity",
     "section": "Cubic Splines",
     "text": "Cubic Splines\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = b1^2,\n  b3 = b1^3,\n  b4 = ifelse(b1 &gt; 35, (b1 - 35)^3, 0),\n  b5 = ifelse(b1 &gt; 65, (b1 - 65)^3, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),\n             newdata = newdat)\n\nggplot(newdat, aes(x = b1, y = p)) +\n  geom_point() + \n  labs(x = \"X\",\n       y = expression(hat(y)))"
+  },
+  {
+    "objectID": "slides/10_non_linear_ch7_o.html#cubic-splines-with-data-added-to-plot",
+    "href": "slides/10_non_linear_ch7_o.html#cubic-splines-with-data-added-to-plot",
+    "title": "Moving Beyond Linearity",
+    "section": "Cubic Splines with data added to plot",
+    "text": "Cubic Splines with data added to plot\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = b1^2,\n  b3 = b1^3,\n  b4 = ifelse(b1 &gt; 35, (b1 - 35)^3, 0),\n  b5 = ifelse(b1 &gt; 65, (b1 - 65)^3, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
   },
   {
     "objectID": "slides/10_non_linear_ch7_o.html#cubic-splines-3",
@@ -6553,6 +6602,13 @@
     "text": "Polynomial Regression\nPolynomials have notoriously bad tail behavior (so they can be bad for extrapolation)\n\n\nWhat does this mean?"
   },
   {
+    "objectID": "slides/10_non_linear_ch7.html#scatterplot-again",
+    "href": "slides/10_non_linear_ch7.html#scatterplot-again",
+    "title": "Moving Beyond Linearity",
+    "section": "Scatterplot again",
+    "text": "Scatterplot again"
+  },
+  {
     "objectID": "slides/10_non_linear_ch7.html#step-functions",
     "href": "slides/10_non_linear_ch7.html#step-functions",
     "title": "Moving Beyond Linearity",
@@ -6644,6 +6700,13 @@
     "text": "Linear Splines\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = ifelse(b1 &gt; 35, b1 - 35, 0),\n  b3 = ifelse(b1 &gt; 65, b1 - 65, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3, data = d),\n             newdata = newdat)\n\nggplot(newdat, aes(x = b1, y = p)) +\n  geom_point() + \n  labs(x = \"X\",\n       y = expression(hat(y)))"
   },
   {
+    "objectID": "slides/10_non_linear_ch7.html#how-does-it-fit-the-data",
+    "href": "slides/10_non_linear_ch7.html#how-does-it-fit-the-data",
+    "title": "Moving Beyond Linearity",
+    "section": "How does it fit the data?",
+    "text": "How does it fit the data?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = ifelse(b1 &gt; 35, b1 - 35, 0),\n  b3 = ifelse(b1 &gt; 65, b1 - 65, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
+  },
+  {
     "objectID": "slides/10_non_linear_ch7.html#cubic-splines",
     "href": "slides/10_non_linear_ch7.html#cubic-splines",
     "title": "Moving Beyond Linearity",
@@ -6684,6 +6747,13 @@
     "title": "Moving Beyond Linearity",
     "section": "Cubic Splines",
     "text": "Cubic Splines\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = b1^2,\n  b3 = b1^3,\n  b4 = ifelse(b1 &gt; 35, (b1 - 35)^3, 0),\n  b5 = ifelse(b1 &gt; 65, (b1 - 65)^3, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),\n             newdata = newdat)\n\nggplot(newdat, aes(x = b1, y = p)) +\n  geom_point() + \n  labs(x = \"X\",\n       y = expression(hat(y)))"
+  },
+  {
+    "objectID": "slides/10_non_linear_ch7.html#cubic-splines-with-data-added-to-plot",
+    "href": "slides/10_non_linear_ch7.html#cubic-splines-with-data-added-to-plot",
+    "title": "Moving Beyond Linearity",
+    "section": "Cubic Splines with data added to plot",
+    "text": "Cubic Splines with data added to plot\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = b1^2,\n  b3 = b1^3,\n  b4 = ifelse(b1 &gt; 35, (b1 - 35)^3, 0),\n  b5 = ifelse(b1 &gt; 65, (b1 - 65)^3, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
   },
   {
     "objectID": "slides/10_non_linear_ch7.html#cubic-splines-3",
@@ -6740,75 +6810,5 @@
     "title": "Moving Beyond Linearity",
     "section": "Acknowledgements",
     "text": "Acknowledgements\nThe content in the slides is from\n\nChapter 7 of Introduction to Statistical Learning, 2nd Ed by James, Witten, Hastie, and Tibshirani\nInitial versions of the slides are by Dr. Lucy D’Agostino McGowan"
-  },
-  {
-    "objectID": "slides/01-welcome_ch1.html#course-and-college-policies",
-    "href": "slides/01-welcome_ch1.html#course-and-college-policies",
-    "title": "Welcome and Chapter 1",
-    "section": "Course and College Policies",
-    "text": "Course and College Policies\n\nAI policy\nAccommodations\nAcademic Honesty\nIllness\nMandatory Reporter"
-  },
-  {
-    "objectID": "slides/01-welcome_ch1_o.html#course-and-college-policies",
-    "href": "slides/01-welcome_ch1_o.html#course-and-college-policies",
-    "title": "Welcome and Chapter 1",
-    "section": "",
-    "text": "AI policy\nAccommodations\nAcademic Honesty\nIllness\nMandatory Reporter"
-  },
-  {
-    "objectID": "slides/01-welcome_ch1.html#scatterplot-again",
-    "href": "slides/01-welcome_ch1.html#scatterplot-again",
-    "title": "Welcome and Chapter 1",
-    "section": "Scatterplot again",
-    "text": "Scatterplot again"
-  },
-  {
-    "objectID": "slides/01-welcome_ch1_o.html#scatterplot-again",
-    "href": "slides/01-welcome_ch1_o.html#scatterplot-again",
-    "title": "Welcome and Chapter 1",
-    "section": "Scatterplot again",
-    "text": "Scatterplot again"
-  },
-  {
-    "objectID": "slides/10_non_linear_ch7.html#scatterplot-again",
-    "href": "slides/10_non_linear_ch7.html#scatterplot-again",
-    "title": "Moving Beyond Linearity",
-    "section": "Scatterplot again",
-    "text": "Scatterplot again"
-  },
-  {
-    "objectID": "slides/10_non_linear_ch7.html#how-does-it-fit-the-data",
-    "href": "slides/10_non_linear_ch7.html#how-does-it-fit-the-data",
-    "title": "Moving Beyond Linearity",
-    "section": "How does it fit the data?",
-    "text": "How does it fit the data?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = ifelse(b1 &gt; 35, b1 - 35, 0),\n  b3 = ifelse(b1 &gt; 65, b1 - 65, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
-  },
-  {
-    "objectID": "slides/10_non_linear_ch7.html#cubic-splines-with-data-added-to-plot",
-    "href": "slides/10_non_linear_ch7.html#cubic-splines-with-data-added-to-plot",
-    "title": "Moving Beyond Linearity",
-    "section": "Cubic Splines with data added to plot",
-    "text": "Cubic Splines with data added to plot\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = b1^2,\n  b3 = b1^3,\n  b4 = ifelse(b1 &gt; 35, (b1 - 35)^3, 0),\n  b5 = ifelse(b1 &gt; 65, (b1 - 65)^3, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
-  },
-  {
-    "objectID": "slides/10_non_linear_ch7_o.html#scatterplot-again",
-    "href": "slides/10_non_linear_ch7_o.html#scatterplot-again",
-    "title": "Moving Beyond Linearity",
-    "section": "Scatterplot again",
-    "text": "Scatterplot again"
-  },
-  {
-    "objectID": "slides/10_non_linear_ch7_o.html#how-does-it-fit-the-data",
-    "href": "slides/10_non_linear_ch7_o.html#how-does-it-fit-the-data",
-    "title": "Moving Beyond Linearity",
-    "section": "How does it fit the data?",
-    "text": "How does it fit the data?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = ifelse(b1 &gt; 35, b1 - 35, 0),\n  b3 = ifelse(b1 &gt; 65, b1 - 65, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
-  },
-  {
-    "objectID": "slides/10_non_linear_ch7_o.html#cubic-splines-with-data-added-to-plot",
-    "href": "slides/10_non_linear_ch7_o.html#cubic-splines-with-data-added-to-plot",
-    "title": "Moving Beyond Linearity",
-    "section": "Cubic Splines with data added to plot",
-    "text": "Cubic Splines with data added to plot\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = b1^2,\n  b3 = b1^3,\n  b4 = ifelse(b1 &gt; 35, (b1 - 35)^3, 0),\n  b5 = ifelse(b1 &gt; 65, (b1 - 65)^3, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
   }
 ]

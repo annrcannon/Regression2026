@@ -7,8 +7,9 @@ format: html
 ## Lab Setup
 
 1) Copy the project lab folder located at *Home -> STA363_inst_files-> labs*. If you check the box next to the folder name, then click the small gear icon you can "copy to" and put a copy of the folder in your newly created folder. 
-2) Now, click *File-> Open Project* and navigate to the project file in the folder you just copied. 
-3) You can place your responses in the *qmd* file included. 
+2) Now, click *Project:(None)* in the top right corner of your screen and choose *New Project* and "Don't Save". 
+3) Choose *Existing Directory* and navigate to the directory you just copied.
+4) You can place your responses in the *qmd* file included. (There is only one *qmd* file in this directory.)
 
 ## Packages
 

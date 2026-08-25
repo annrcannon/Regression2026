@@ -1,239 +1,215 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/syllabus.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/syllabus.html</loc>
     <lastmod>2026-08-24T16:26:26.721Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/09_longitudinal_ch9.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/09_longitudinal_ch9.html</loc>
     <lastmod>2026-05-18T18:22:25.539Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/09_longitudinal_ch9_o.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/09_longitudinal_ch9_o.html</loc>
     <lastmod>2026-05-18T18:22:25.539Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/07_correlated_data_ch7.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/07_correlated_data_ch7.html</loc>
     <lastmod>2026-05-18T18:22:25.306Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/07_correlated_data_ch7_o.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/07_correlated_data_ch7_o.html</loc>
     <lastmod>2026-05-18T18:22:25.306Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/05_iwls_ch5.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/05_iwls_ch5.html</loc>
     <lastmod>2026-08-19T18:15:15.740Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/05_iwls_ch5_o.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/05_iwls_ch5_o.html</loc>
     <lastmod>2026-08-19T18:15:15.740Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/04_poisson_ch4.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/04_poisson_ch4.html</loc>
     <lastmod>2026-08-19T18:15:15.737Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/04_poisson_ch4_o.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/04_poisson_ch4_o.html</loc>
     <lastmod>2026-08-19T18:15:15.737Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/02_likelihoods_ch2.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/02_likelihoods_ch2.html</loc>
     <lastmod>2026-08-19T18:15:15.647Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/02_likelihoods_ch2_o.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/slides/02_likelihoods_ch2_o.html</loc>
     <lastmod>2026-08-19T18:15:15.647Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/project.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/project.html</loc>
     <lastmod>2026-05-18T18:22:24.809Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/mini_project/03_project_MLM.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/mini_project/03_project_MLM.html</loc>
     <lastmod>2026-05-18T18:22:24.809Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/mini_project/01_project_poisson.html</loc>
-    <lastmod>2026-08-23T19:31:42.653Z</lastmod>
+    <loc>https://annrcannon.github.io/Regression2026/mini_project/01_project_poisson.html</loc>
+    <lastmod>2026-08-21T19:35:25.344Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/05_multilevel_mod/05_happy.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/labs/05_multilevel_mod/05_happy.html</loc>
     <lastmod>2026-05-18T18:22:24.775Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/03_poisson/03_FullMoon.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/labs/03_poisson/03_FullMoon.html</loc>
     <lastmod>2026-05-18T18:22:24.771Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/02_seaice.html</loc>
-    <lastmod>2026-08-19T18:15:15.434Z</lastmod>
+    <loc>https://annrcannon.github.io/Regression2026/labs/02_seaice.html</loc>
+    <lastmod>2026-08-25T21:40:45.289Z</lastmod>
   </url>
   <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/02_likelihood/02_likelihood.html</loc>
+    <loc>https://annrcannon.github.io/Regression2026/labs/02_likelihood/02_likelihood.html</loc>
     <lastmod>2026-05-18T18:22:24.761Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/01_linear_regression/01_banksalary.html</loc>
-    <lastmod>2026-08-24T16:41:47.202Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/08_hw_ch7ISLR.html</loc>
-    <lastmod>2026-08-23T19:31:42.648Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/06_hw_ch7_ch8.html</loc>
-    <lastmod>2026-08-23T19:31:42.646Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/04_hw_ch4.html</loc>
-    <lastmod>2026-08-23T19:31:42.643Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/02_hw_ch2.html</loc>
-    <lastmod>2026-08-23T19:31:42.642Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/course-support.html</loc>
-    <lastmod>2026-08-21T20:05:24.906Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/course-links.html</loc>
-    <lastmod>2026-05-18T18:22:23.730Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/computing-access.html</loc>
-    <lastmod>2026-08-21T19:40:20.599Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/about.html</loc>
-    <lastmod>2026-05-18T18:22:23.722Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/course-instructor.html</loc>
-    <lastmod>2026-05-18T18:22:23.730Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/course-overview.html</loc>
-    <lastmod>2026-05-18T18:22:23.730Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/01_hw_ch1.html</loc>
-    <lastmod>2026-08-23T19:31:42.640Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/03_hw_ch3.html</loc>
-    <lastmod>2026-08-23T19:31:42.643Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/05_hw_ch5_6.html</loc>
-    <lastmod>2026-08-23T19:31:42.645Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/hw/07_hw_ch9.html</loc>
-    <lastmod>2026-08-23T19:31:42.647Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/index.html</loc>
-    <lastmod>2026-07-12T16:38:07.796Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/01_linear_regression/01_banksalary_fillable.html</loc>
-    <lastmod>2026-05-18T18:22:24.761Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/02_likelihood/02_likelihood_fillable.html</loc>
-    <lastmod>2026-05-18T18:22:24.769Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/02_splines/02_seaice.html</loc>
-    <lastmod>2026-08-23T19:31:42.651Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/03_poisson/03_FullMoon_fillable.html</loc>
-    <lastmod>2026-05-18T18:22:24.771Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/labs/05_multilevel_mod/05_happy_fillable.html</loc>
-    <lastmod>2026-05-18T18:22:24.775Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/mini_project/02_project_GLM.html</loc>
-    <lastmod>2026-08-23T19:31:42.654Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/newlabs/02_splines/test2.html</loc>
-    <lastmod>2026-08-19T18:15:15.439Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/01-welcome_ch1_o.html</loc>
-    <lastmod>2026-08-24T16:26:26.691Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/01-welcome_ch1.html</loc>
-    <lastmod>2026-08-23T21:32:28.795Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/03_distribution_ch3_o.html</loc>
-    <lastmod>2026-08-19T18:15:15.735Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/03_distribution_ch3.html</loc>
-    <lastmod>2026-08-19T18:15:15.735Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/05_glm_ch5_o.html</loc>
-    <lastmod>2026-08-19T18:15:15.740Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/05_glm_ch5.html</loc>
-    <lastmod>2026-08-19T18:15:15.740Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/06_logistic_ch6_o.html</loc>
-    <lastmod>2026-08-19T18:15:15.750Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/06_logistic_ch6.html</loc>
-    <lastmod>2026-08-19T18:15:15.750Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/08_multilevel_mod_ch8_o.html</loc>
-    <lastmod>2026-05-18T18:22:25.453Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/08_multilevel_mod_ch8.html</loc>
-    <lastmod>2026-05-18T18:22:25.453Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/10_non_linear_ch7_o.html</loc>
-    <lastmod>2026-05-18T18:22:25.574Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stats-tgeorge.github.io/STA363_AdvRegF25/slides/10_non_linear_ch7.html</loc>
-    <lastmod>2026-05-18T18:22:25.574Z</lastmod>
   </url>
   <url>
     <loc>https://annrcannon.github.io/Regression2026/labs/01_linear_regression/01_banksalary.html</loc>
     <lastmod>2026-08-24T16:41:47.202Z</lastmod>
   </url>
   <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/08_hw_ch7ISLR.html</loc>
+    <lastmod>2026-08-21T19:20:06.480Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/06_hw_ch7_ch8.html</loc>
+    <lastmod>2026-08-21T19:19:26.982Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/04_hw_ch4.html</loc>
+    <lastmod>2026-08-21T19:18:29.947Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/02_hw_ch2.html</loc>
+    <lastmod>2026-08-21T19:17:48.595Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/course-support.html</loc>
+    <lastmod>2026-08-21T20:05:24.906Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/course-links.html</loc>
+    <lastmod>2026-05-18T18:22:23.730Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/computing-access.html</loc>
+    <lastmod>2026-08-21T19:40:20.599Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/about.html</loc>
+    <lastmod>2026-05-18T18:22:23.722Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/course-instructor.html</loc>
+    <lastmod>2026-05-18T18:22:23.730Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/course-overview.html</loc>
+    <lastmod>2026-05-18T18:22:23.730Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/01_hw_ch1.html</loc>
+    <lastmod>2026-08-21T19:17:03.524Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/03_hw_ch3.html</loc>
+    <lastmod>2026-08-21T19:18:14.686Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/05_hw_ch5_6.html</loc>
+    <lastmod>2026-08-21T19:19:02.495Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/hw/07_hw_ch9.html</loc>
+    <lastmod>2026-08-21T19:19:43.938Z</lastmod>
+  </url>
+  <url>
     <loc>https://annrcannon.github.io/Regression2026/index.html</loc>
     <lastmod>2026-05-20T20:43:46.271Z</lastmod>
   </url>
   <url>
-    <loc>https://annrcannon.github.io/Regression2026/slides/01-welcome_ch1.html</loc>
-    <lastmod>2026-08-24T16:26:26.691Z</lastmod>
+    <loc>https://annrcannon.github.io/Regression2026/labs/01_linear_regression/01_banksalary_fillable.html</loc>
+    <lastmod>2026-05-18T18:22:24.761Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/labs/02_likelihood/02_likelihood_fillable.html</loc>
+    <lastmod>2026-05-18T18:22:24.769Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/labs/02_splines/02_seaice.html</loc>
+    <lastmod>2026-08-19T22:30:45.901Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/labs/03_poisson/03_FullMoon_fillable.html</loc>
+    <lastmod>2026-05-18T18:22:24.771Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/labs/05_multilevel_mod/05_happy_fillable.html</loc>
+    <lastmod>2026-05-18T18:22:24.775Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/mini_project/02_project_GLM.html</loc>
+    <lastmod>2026-08-21T19:28:03.908Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/newlabs/02_splines/test2.html</loc>
+    <lastmod>2026-08-19T18:15:15.439Z</lastmod>
   </url>
   <url>
     <loc>https://annrcannon.github.io/Regression2026/slides/01-welcome_ch1_o.html</loc>
     <lastmod>2026-08-24T16:26:26.691Z</lastmod>
   </url>
   <url>
-    <loc>https://annrcannon.github.io/Regression2026/slides/10_non_linear_ch7.html</loc>
-    <lastmod>2026-08-25T01:29:54.703Z</lastmod>
+    <loc>https://annrcannon.github.io/Regression2026/slides/01-welcome_ch1.html</loc>
+    <lastmod>2026-08-24T16:26:26.691Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/03_distribution_ch3_o.html</loc>
+    <lastmod>2026-08-19T18:15:15.735Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/03_distribution_ch3.html</loc>
+    <lastmod>2026-08-19T18:15:15.735Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/05_glm_ch5_o.html</loc>
+    <lastmod>2026-08-19T18:15:15.740Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/05_glm_ch5.html</loc>
+    <lastmod>2026-08-19T18:15:15.740Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/06_logistic_ch6_o.html</loc>
+    <lastmod>2026-08-19T18:15:15.750Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/06_logistic_ch6.html</loc>
+    <lastmod>2026-08-19T18:15:15.750Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/08_multilevel_mod_ch8_o.html</loc>
+    <lastmod>2026-05-18T18:22:25.453Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/08_multilevel_mod_ch8.html</loc>
+    <lastmod>2026-05-18T18:22:25.453Z</lastmod>
   </url>
   <url>
     <loc>https://annrcannon.github.io/Regression2026/slides/10_non_linear_ch7_o.html</loc>
-    <lastmod>2026-08-25T01:29:54.703Z</lastmod>
+    <lastmod>2026-08-25T13:22:46.599Z</lastmod>
+  </url>
+  <url>
+    <loc>https://annrcannon.github.io/Regression2026/slides/10_non_linear_ch7.html</loc>
+    <lastmod>2026-08-25T13:22:46.599Z</lastmod>
   </url>
 </urlset>

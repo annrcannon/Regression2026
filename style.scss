@@ -1,7 +1,11 @@
 /*-- scss:rules --*/
 
-code {
-  color: #ffe7a3 !important;
+.cell-output code {
+  color: #7a5c00;
+}
+
+code:not(pre code) {
+  color: #ffe7a3;
 }
 
 .icon h1 {
@@ -67,6 +71,9 @@ html[data-bs-theme="dark"] {
   }
 }
 
+html[data-bs-theme="dark"] .cell-output code {
+  color: #ffe7a3;
+}
 
 .quarto-title .quarto-categories
 .category[data-category="⚠️ Warning: Page Under Revision"] {

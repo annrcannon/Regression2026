@@ -6536,14 +6536,14 @@
     "href": "slides/10_non_linear_ch7.html#application-exercise",
     "title": "Moving Beyond Linearity",
     "section": " Application Exercise",
-    "text": "Application Exercise\n\\[pop = \\beta_0 + \\beta_1age + \\beta_2age^2 + \\beta_3age^3 +\\beta_4age^4+ \\epsilon\\]\n\n\nUsing the information below, write out the equation to predicted change in population from a change in age from the 25th percentile (24.5) to a 75th percentile (73.5).\n\n\nModel ResultCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n1672.0854\n64.5606\n25.8995\n0.0000\n\n\nage\n-10.6429\n9.2268\n-1.1535\n0.2516\n\n\nI(age^2)\n-1.1427\n0.3857\n-2.9627\n0.0039\n\n\nI(age^3)\n0.0216\n0.0059\n3.6498\n0.0004\n\n\nI(age^4)\n-0.0001\n0.0000\n-3.6540\n0.0004\n\n\n\n\n\n\n\n\nlm(pop ~ age + I(age^2) + I(age^3) + I(age^4), data = co) %&gt;%\n  tidy()"
+    "text": "Application Exercise\n\\[pop = \\beta_0 + \\beta_1age + \\beta_2age^2 + \\beta_3age^3 +\\beta_4age^4+ \\epsilon\\]\n\n\nUsing the information below, write out the equation to predicte change in population from a change in age from the 25th percentile (24.5) to the 75th percentile (73.5).\n\n\nModel ResultCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n1672.0854\n64.5606\n25.8995\n0.0000\n\n\nage\n-10.6429\n9.2268\n-1.1535\n0.2516\n\n\nI(age^2)\n-1.1427\n0.3857\n-2.9627\n0.0039\n\n\nI(age^3)\n0.0216\n0.0059\n3.6498\n0.0004\n\n\nI(age^4)\n-0.0001\n0.0000\n-3.6540\n0.0004\n\n\n\n\n\n\n\n\nlm(pop ~ age + I(age^2) + I(age^3) + I(age^4), data = co) %&gt;%\n  tidy()"
   },
   {
     "objectID": "slides/10_non_linear_ch7.html#choosing-d",
     "href": "slides/10_non_linear_ch7.html#choosing-d",
     "title": "Moving Beyond Linearity",
     "section": "Choosing \\(d\\)",
-    "text": "Choosing \\(d\\)\n\\[y_i = \\beta_0 + \\beta_1x_i + \\beta_2x_i^2+\\beta_3x_i^3 \\dots + \\beta_dx_i^d+\\epsilon_i\\]\nEither:\n\nPre-specify \\(d\\) (before looking 👀 at your data!)\nUse cross-validation to pick \\(d\\) (take statistical learning!)\n\n. . .\n\nWhy before looking?"
+    "text": "Choosing \\(d\\)\n\\[y_i = \\beta_0 + \\beta_1x_i + \\beta_2x_i^2+\\beta_3x_i^3 \\dots + \\beta_dx_i^d+\\epsilon_i\\]\nEither:\n\nPre-specify \\(d\\) (before looking 👀 at your data!)\nUse cross-validation to pick \\(d\\) (take statistical learning!)\n\n\nWhy before looking?"
   },
   {
     "objectID": "slides/10_non_linear_ch7.html#polynomial-regression-2",
@@ -6585,7 +6585,7 @@
     "href": "slides/10_non_linear_ch7.html#piecewise-polynomials",
     "title": "Moving Beyond Linearity",
     "section": "Piecewise polynomials",
-    "text": "Piecewise polynomials\nInstead of a single polynomial in \\(X\\) over it’s whole domain, we can use different polynomials in regions defined by knots\n\\[y_i = \\begin{cases}\\beta_{01}+\\beta_{11}x_i + \\beta_{21}x^2_i+\\beta_{31}x^3_i+\\epsilon_i& \\textrm{if } x_i &lt; c\\\\ \\beta_{02}+\\beta_{12}x_i + \\beta_{22}x_i^2 + \\beta_{32}x_{i}^3+\\epsilon_i&\\textrm{if }x_i\\geq c\\end{cases}\\]\n\nWhat could go wrong here?\n\n\nIt would be nice to have constraints (like continuity!)\nInsert splines!"
+    "text": "Piecewise polynomials\nInstead of a single polynomial in \\(X\\) over it’s whole domain, we can use different polynomials in regions defined by knots\n\\[y_i = \\begin{cases}\\beta_{01}+\\beta_{11}x_i + \\beta_{21}x^2_i+\\beta_{31}x^3_i+\\epsilon_i& \\textrm{if } x_i &lt; c\\\\ \\beta_{02}+\\beta_{12}x_i + \\beta_{22}x_i^2 + \\beta_{32}x_{i}^3+\\epsilon_i&\\textrm{if }x_i\\geq c\\end{cases}\\]\n\n\nWhat could go wrong here?\n\n\nIt would be nice to have constraints (like continuity!)\nInsert splines!"
   },
   {
     "objectID": "slides/10_non_linear_ch7.html#examples",
@@ -6620,7 +6620,7 @@
     "href": "slides/10_non_linear_ch7.html#application-exercise-2",
     "title": "Moving Beyond Linearity",
     "section": " Application Exercise",
-    "text": "Application Exercise\nBelow is a linear regression model fit to include the 3 bases you just created with 2 knots: 35 and 65. Use the information here to draw the relationship between \\(x\\) and \\(y\\).\n\nResultCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-0.3\n0.2\n-1.3\n0.3\n\n\nb1\n2.0\n0.0\n231.3\n0.0\n\n\nb2\n-2.0\n0.0\n-130.0\n0.0\n\n\nb3\n-3.0\n0.0\n-116.5\n0.0\n\n\n\n\n\n\n\n\nset.seed(1)\nd &lt;- tibble(\n  b1 = c(4, 15, 25, 37, 49, 66, 70, 80),\n  b2 = ifelse(b1 &lt; 35, 0, b1 - 35),\n  b3 = ifelse(b1 &lt; 65, 0, b1 - 65),\n  y = 2 * b1 + -2 * b2 -3 * b3 + rnorm(8, sd = 0.25)\n)\nlm(y ~ b1 + b2 + b3, data = d) |&gt;\n  tidy() |&gt;\n  knitr::kable(digits = 1)"
+    "text": "Application Exercise\nBelow is a linear regression model fit to include the 3 bases you just created with 2 knots: 35 and 65. Use the information here to hand draw the relationship between \\(x\\) and \\(y\\).\n\nResultCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-0.3\n0.2\n-1.3\n0.3\n\n\nb1\n2.0\n0.0\n231.3\n0.0\n\n\nb2\n-2.0\n0.0\n-130.0\n0.0\n\n\nb3\n-3.0\n0.0\n-116.5\n0.0\n\n\n\n\n\n\n\n\nset.seed(1)\nd &lt;- tibble(\n  b1 = c(4, 15, 25, 37, 49, 66, 70, 80),\n  b2 = ifelse(b1 &lt; 35, 0, b1 - 35),\n  b3 = ifelse(b1 &lt; 65, 0, b1 - 65),\n  y = 2 * b1 + -2 * b2 -3 * b3 + rnorm(8, sd = 0.25)\n)\nlm(y ~ b1 + b2 + b3, data = d) |&gt;\n  tidy() |&gt;\n  knitr::kable(digits = 1)"
   },
   {
     "objectID": "slides/10_non_linear_ch7.html#linear-splines-1",
@@ -6768,5 +6768,26 @@
     "title": "Welcome and Chapter 1",
     "section": "Scatterplot again",
     "text": "Scatterplot again"
+  },
+  {
+    "objectID": "slides/10_non_linear_ch7.html#scatterplot-again",
+    "href": "slides/10_non_linear_ch7.html#scatterplot-again",
+    "title": "Moving Beyond Linearity",
+    "section": "Scatterplot again",
+    "text": "Scatterplot again"
+  },
+  {
+    "objectID": "slides/10_non_linear_ch7.html#how-does-it-fit-the-data",
+    "href": "slides/10_non_linear_ch7.html#how-does-it-fit-the-data",
+    "title": "Moving Beyond Linearity",
+    "section": "How does it fit the data?",
+    "text": "How does it fit the data?\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = ifelse(b1 &gt; 35, b1 - 35, 0),\n  b3 = ifelse(b1 &gt; 65, b1 - 65, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
+  },
+  {
+    "objectID": "slides/10_non_linear_ch7.html#cubic-splines-with-data-added-to-plot",
+    "href": "slides/10_non_linear_ch7.html#cubic-splines-with-data-added-to-plot",
+    "title": "Moving Beyond Linearity",
+    "section": "Cubic Splines with data added to plot",
+    "text": "Cubic Splines with data added to plot\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnewdat &lt;- tibble(\n  b1 = 4:80,\n  b2 = b1^2,\n  b3 = b1^3,\n  b4 = ifelse(b1 &gt; 35, (b1 - 35)^3, 0),\n  b5 = ifelse(b1 &gt; 65, (b1 - 65)^3, 0)\n)\np &lt;- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),\n             newdata = newdat)\n\nggplot() +\n  geom_point(data=newdat, aes(x = b1, y = p)) + \n  geom_point(data=d, aes(x=b1, y=y), color=\"red\") +\n  labs(x = \"X\",\n       y = expression(hat(y)))"
   }
 ]

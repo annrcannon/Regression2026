@@ -117,8 +117,8 @@ $$pop = \beta_0 + \beta_1age + \beta_2age^2 + \beta_3age^3 +\beta_4age^4+ \epsil
 . . .
 
 ::: question
-Using the information below, write out the equation to predicted change
-in population from a change in age from the 25th percentile (24.5) to a
+Using the information below, write out the equation to predicte change
+in population from a change in age from the 25th percentile (24.5) to the
 75th percentile (73.5).
 :::
 
@@ -152,7 +152,7 @@ $$y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2+\beta_3x_i^3 \dots + \beta_dx_i^d+\e
 -   Use cross-validation to pick $d$ (take statistical learning!)
 :::
 
-. . .
+
 
 ::: question
 Why before looking? 
@@ -168,6 +168,16 @@ extrapolation)
 ::: question
 What does this mean?
 :::
+
+## Scatterplot again
+
+```{r, echo = FALSE,out.width= "70%"}
+#| fig-height: 4.5
+ggplot(co, aes(age, pop)) + 
+  geom_point() + 
+  geom_smooth(formula = y ~ poly(x, 4), method = "lm")
+```
+
 
 ## Step functions {.smaller}
 
@@ -287,6 +297,8 @@ different polynomials in regions defined by knots
 
 $$y_i = \begin{cases}\beta_{01}+\beta_{11}x_i + \beta_{21}x^2_i+\beta_{31}x^3_i+\epsilon_i& \textrm{if } x_i < c\\ \beta_{02}+\beta_{12}x_i + \beta_{22}x_i^2 + \beta_{32}x_{i}^3+\epsilon_i&\textrm{if }x_i\geq c\end{cases}$$
 
+. . .
+
 ::: question
 What could go wrong here?
 :::
@@ -385,7 +397,7 @@ on some outcome $y$ using this linear spline
 
 ## <i class="fas fa-pen"></i> `Application Exercise` {.small}
 
-Below is a linear regression model fit to include the 3 bases you just created with 2 knots: 35 and 65. Use the information here to draw the relationship between $x$ and $y$.
+Below is a linear regression model fit to include the 3 bases you just created with 2 knots: 35 and 65. Use the information here to hand draw the relationship between $x$ and $y$.
 
 :::{.panel-tabset}
 
@@ -513,6 +525,52 @@ ggplot(newdat, aes(x = b1, y = p)) +
 ```
 
 :::
+
+## How does it fit the data? {.small}
+
+
+:::{.panel-tabset}
+
+### Plot
+
+```{r}
+#| echo: false
+newdat <- tibble(
+  b1 = 4:80,
+  b2 = ifelse(b1 > 35, b1 - 35, 0),
+  b3 = ifelse(b1 > 65, b1 - 65, 0)
+)
+p <- predict(lm(y ~ b1 + b2 + b3, data = d),
+             newdata = newdat)
+
+ggplot() +
+  geom_point(data=newdat, aes(x = b1, y = p)) + 
+  geom_point(data=d, aes(x=b1, y=y), color="red") +
+  labs(x = "X",
+       y = expression(hat(y)))
+```
+
+### Code
+
+```{r}
+#| eval: false
+newdat <- tibble(
+  b1 = 4:80,
+  b2 = ifelse(b1 > 35, b1 - 35, 0),
+  b3 = ifelse(b1 > 65, b1 - 65, 0)
+)
+p <- predict(lm(y ~ b1 + b2 + b3, data = d),
+             newdata = newdat)
+
+ggplot() +
+  geom_point(data=newdat, aes(x = b1, y = p)) + 
+  geom_point(data=d, aes(x=b1, y=y), color="red") +
+  labs(x = "X",
+       y = expression(hat(y)))
+```
+
+:::
+
 
 ## Cubic Splines {.small}
 
@@ -728,6 +786,55 @@ ggplot(newdat, aes(x = b1, y = p)) +
 ```
 
 :::
+
+## Cubic Splines with data added to plot {.small}
+
+:::{.panel-tabset}
+
+### Plot
+```{r}
+#| echo: false
+newdat <- tibble(
+  b1 = 4:80,
+  b2 = b1^2,
+  b3 = b1^3,
+  b4 = ifelse(b1 > 35, (b1 - 35)^3, 0),
+  b5 = ifelse(b1 > 65, (b1 - 65)^3, 0)
+)
+p <- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),
+             newdata = newdat)
+
+ggplot() +
+  geom_point(data=newdat, aes(x = b1, y = p)) + 
+  geom_point(data=d, aes(x=b1, y=y), color="red") +
+  labs(x = "X",
+       y = expression(hat(y)))
+```
+
+### Code
+
+```{r}
+#| eval: false
+newdat <- tibble(
+  b1 = 4:80,
+  b2 = b1^2,
+  b3 = b1^3,
+  b4 = ifelse(b1 > 35, (b1 - 35)^3, 0),
+  b5 = ifelse(b1 > 65, (b1 - 65)^3, 0)
+)
+p <- predict(lm(y ~ b1 + b2 + b3 + b4 + b5, data = d),
+             newdata = newdat)
+
+ggplot() +
+  geom_point(data=newdat, aes(x = b1, y = p)) + 
+  geom_point(data=d, aes(x=b1, y=y), color="red") +
+  labs(x = "X",
+       y = expression(hat(y)))
+```
+
+:::
+
+
 
 ## Cubic Splines {.small}
 

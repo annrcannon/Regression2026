@@ -175,6 +175,8 @@ There are
 
 - 44 total fouls on the visiting team 
 
+- 90 total fouls overall (3 fouls in each of 30 games)
+
 :::
 ::::
 
@@ -768,13 +770,13 @@ The p-value is very large, so we fail to reject $H_0$. We do not have convincing
 Unconditional Model 
 
 ```{r}
-(Model1_AIC <- 2 * loglik1(46/90) + 2 * 1)
+(Model1_AIC <- -2 * loglik1(46/90) + 2 * 1)
 ```
 
 Conditional Model 
 
 ```{r}
-(Model2_AIC <-2 * loglik2(25/48, 8/20, 13/22) + 2 * 3)
+(Model2_AIC <- -2 * loglik2(25/48, 8/20, 13/22) + 2 * 3)
 ```
 
 
@@ -788,13 +790,13 @@ Conditional Model
 Unconditional Model 
 
 ```{r}
-(Model1_BIC <- 2 * loglik1(46/90) + 1 * log(30))
+(Model1_BIC <- -2 * loglik1(46/90) + 1 * log(30))
 ```
 
 Conditional Model 
 
 ```{r}
-(Model2_BIC <-2 * loglik2(25/48, 8/20, 13/22) + 3 * log(30))
+(Model2_BIC <- -2 * loglik2(25/48, 8/20, 13/22) + 3 * log(30))
 ```
 
 

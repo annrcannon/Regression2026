@@ -36,7 +36,7 @@ logo: "../img/favicon.png"
 - Create a mixture of distributions and evaluate the shape, mean, and variance.
 
 
-## Libraries Needed (none new?)
+## Libraries Needed 
 
 ```{r load_packages3, message = FALSE,warning=F}
 # Packages required for Chapter 3
@@ -76,9 +76,11 @@ library(tidyverse)
 - Consider the event of flipping a (possibly unfair) coin. 
 - If the coin lands heads, let's consider this a success and record $Y = 1$.
 - If the coin lands tails, then we record $Y=0$.
-- A series of these events is a  __Bernoulli process__, \index{Bernoulli process} independent trials that take on one of two values (e.g., 0 or 1). 
-- These values are often referred to as a failure and a success
+- A series of these events is a  __Bernoulli process__ \index{Bernoulli process} if these events consist of 
+  - independent trials 
+  - each trial takes on one of two values (e.g., 0 or 1). 
   - the probability of success is identical for each trial.
+- Typically we refer to the value 0 as a failure and the value of 1 as a success.
   
 ## Binary Random Variable{.smaller}
 
@@ -103,19 +105,18 @@ P(Y = y) = p^y(1-p)^{1-y} \quad \textrm{for} \quad y = 0, 1.
 
 ## Binomial Random Variable (1/2) {.smaller}
 
-- Does anybody know how this relates to a Bernoulli random variable? 
+
 - We can extend our knowledge of binary random variables. 
 - Suppose we flipped an *unfair* coin $n$ times and recorded $Y$, the number of heads after $n$ flips. 
-- If we consider a case where $p = 0.25$ and $n = 4$, then here $P(Y=0)$ represents the probability of no successes in 4 trials
+- If we consider a case where $p = 0.25$ and $n = 4$, then here $P(Y=0)$ represents the probability of no successes in 4 trials (no heads in 4 flips)
   - 4 consecutive failures. 
   - The probability of 4 consecutive failures is $P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4$. 
   
 ## Binomial Random Variable (2/2) {.smaller}
 
 - Next we consider $P(Y = 1)$, and are interested in the probability of exactly 1 success _anywhere_ among the 4 trials. 
-- How many different ways can we get exactly 1 success in the four trials? 
-- To find the probability of this what else do we need to count? 
-- What is the probability? 
+- There are several ways to get exactly 1 success in 4 trials.  What is the probability for one way of these ways?
+- To find the total probability of getting exactly 1 success among the 4 trials what else do we need to count? 
 
 - There are $\binom{4}{1} = \frac{4!}{1!(4-1)!}=4$ ways to have exactly 1 success in 4 trials, 
 $P(Y = 1) = \binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3$. 
@@ -207,6 +208,7 @@ P(Y=y) = \binom{y + r - 1}{r-1} (1-p)^{y}(p)^r \quad \textrm{for}\quad y = 0, 1,
 ## Negative Binomial RV  {.smaller}
 
 - If $Y \sim \textrm{Negative Binomial}(r, p)$ then $E(Y) = \frac{r(1-p)}{p}$ and $\SD(Y) = \sqrt{\frac{r(1-p)}{p^2}}$. 
+- R function `dnbinom(y, r, p)` for the probability of $y$ failures before the $r$^th^ success given probability $p$.
 
 ## Negative Binomial RV  {.smaller}
 
@@ -264,21 +266,6 @@ grid.arrange(NBin1, NBin2, NBin3, ncol = 1)
 
 
 
-## Negative Binomial RV {.smaller}
-
-- Note that if we set $r=1$, then
-
-. . .
-
-\begin{align*}
- P(Y=y) &= \binom{y}{0} (1-p)^yp \\
-        &= (1-p)^yp \quad \textrm{for} \quad y = 0, 1, \ldots, \infty,
-\end{align*}
-which is the probability mass function of a geometric random variable! 
-
-- Thus, a geometric random variable is, in fact, a special case of a negative binomial random variable.
-
-- R function `dnbinom(y, r, p)` for the probability of $y$ failures before the $r$^th^ success given probability $p$.
 
 ## Poisson Random Variable {.smaller}
 
@@ -451,7 +438,7 @@ f(y) = \frac{\lambda^r}{\Gamma(r)} y^{r-1} e^{-\lambda y}\quad \textrm{for} \qua
 \end{equation}
 
 - If $Y \sim \textrm{Gamma}(r, \lambda)$ then $\E(Y) = r/\lambda$ and $\SD(Y) = \sqrt{r/\lambda^2}$. 
-- Note: $\Gamma(r)=(r-1)!$ (There is more to it)
+- Note: If r is an integer, then $\Gamma(r)=(r-1)!$ (There is more to it)
 
 ## Gamma Distribution {.smaller}
 
@@ -523,7 +510,7 @@ ggplot(data = gammaDf, aes(x = x, y = value,
 \end{align*}
 an exponential distribution. 
 
-- Just as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!
+- Exponential distributions are in fact a special case of gamma distributions!
 
 - Just like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative $r$.
 - In R, `pgamma(y, r, lambda)` outputs the probability $P(Y < y)$ given $r$ and $\lambda$.
@@ -551,7 +538,7 @@ an exponential distribution.
 
 ## Acknowledgements
 
-- These slides are based on content in [BMLR: Chapter 1 - Review of Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/ch-MLRreview.html)
+- These slides are based on content in [BMLR: Chapter 3 - Distribution Theory](https://bookdown.org/roback/bookdown-BeyondMLR/ch-distthry.html)
 - Edited from slides by Tyler George
 
 

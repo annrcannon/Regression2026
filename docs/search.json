@@ -4380,7 +4380,7 @@
     "href": "slides/03_distribution_ch3_o.html#binary-random-variable",
     "title": "Distribution Theory",
     "section": "Binary Random Variable",
-    "text": "Binary Random Variable\n\nConsider the event of flipping a (possibly unfair) coin.\nIf the coin lands heads, let’s consider this a success and record \\(Y = 1\\).\nIf the coin lands tails, then we record \\(Y=0\\).\nA series of these events is a Bernoulli process, independent trials that take on one of two values (e.g., 0 or 1).\nThese values are often referred to as a failure and a success\n\nthe probability of success is identical for each trial."
+    "text": "Binary Random Variable\n\nConsider the event of flipping a (possibly unfair) coin.\nIf the coin lands heads, let’s consider this a success and record \\(Y = 1\\).\nIf the coin lands tails, then we record \\(Y=0\\).\nA series of these events is a Bernoulli process if these events consist of\n\nindependent trials\neach trial takes on one of two values (e.g., 0 or 1).\nthe probability of success is identical for each trial.\n\nTypically we refer to the value 0 as a failure and the value of 1 as a success."
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#binary-random-variable-1",
@@ -4401,14 +4401,14 @@
     "href": "slides/03_distribution_ch3_o.html#binomial-random-variable-12",
     "title": "Distribution Theory",
     "section": "Binomial Random Variable (1/2)",
-    "text": "Binomial Random Variable (1/2)\n\nDoes anybody know how this relates to a Bernoulli random variable?\nWe can extend our knowledge of binary random variables.\nSuppose we flipped an unfair coin \\(n\\) times and recorded \\(Y\\), the number of heads after \\(n\\) flips.\nIf we consider a case where \\(p = 0.25\\) and \\(n = 4\\), then here \\(P(Y=0)\\) represents the probability of no successes in 4 trials\n\n4 consecutive failures.\nThe probability of 4 consecutive failures is \\(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\\)."
+    "text": "Binomial Random Variable (1/2)\n\nWe can extend our knowledge of binary random variables.\nSuppose we flipped an unfair coin \\(n\\) times and recorded \\(Y\\), the number of heads after \\(n\\) flips.\nIf we consider a case where \\(p = 0.25\\) and \\(n = 4\\), then here \\(P(Y=0)\\) represents the probability of no successes in 4 trials (no heads in 4 flips)\n\n4 consecutive failures.\nThe probability of 4 consecutive failures is \\(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#binomial-random-variable-22",
     "href": "slides/03_distribution_ch3_o.html#binomial-random-variable-22",
     "title": "Distribution Theory",
     "section": "Binomial Random Variable (2/2)",
-    "text": "Binomial Random Variable (2/2)\n\nNext we consider \\(P(Y = 1)\\), and are interested in the probability of exactly 1 success anywhere among the 4 trials.\nHow many different ways can we get exactly 1 success in the four trials?\nTo find the probability of this what else do we need to count?\nWhat is the probability?\nThere are \\(\\binom{4}{1} = \\frac{4!}{1!(4-1)!}=4\\) ways to have exactly 1 success in 4 trials, \\(P(Y = 1) = \\binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\\)."
+    "text": "Binomial Random Variable (2/2)\n\nNext we consider \\(P(Y = 1)\\), and are interested in the probability of exactly 1 success anywhere among the 4 trials.\nThere are several ways to get exactly 1 success in 4 trials. What is the probability for one way of these ways?\nTo find the total probability of getting exactly 1 success among the 4 trials what else do we need to count?\nThere are \\(\\binom{4}{1} = \\frac{4!}{1!(4-1)!}=4\\) ways to have exactly 1 success in 4 trials, \\(P(Y = 1) = \\binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#binomial-distribution",
@@ -4471,7 +4471,7 @@
     "href": "slides/03_distribution_ch3_o.html#negative-binomial-rv",
     "title": "Distribution Theory",
     "section": "Negative Binomial RV",
-    "text": "Negative Binomial RV\n\nIf \\(Y \\sim \\textrm{Negative Binomial}(r, p)\\) then \\(E(Y) = \\frac{r(1-p)}{p}\\) and \\(\\operatorname{SD}(Y) = \\sqrt{\\frac{r(1-p)}{p^2}}\\)."
+    "text": "Negative Binomial RV\n\nIf \\(Y \\sim \\textrm{Negative Binomial}(r, p)\\) then \\(E(Y) = \\frac{r(1-p)}{p}\\) and \\(\\operatorname{SD}(Y) = \\sqrt{\\frac{r(1-p)}{p^2}}\\).\nR function dnbinom(y, r, p) for the probability of \\(y\\) failures before the \\(r\\)th success given probability \\(p\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#negative-binomial-rv-1",
@@ -4534,7 +4534,7 @@
     "href": "slides/03_distribution_ch3_o.html#gamma-random-variable",
     "title": "Distribution Theory",
     "section": "Gamma Random Variable",
-    "text": "Gamma Random Variable\n\nOnce again consider a Poisson process.\nWhen discussing exponential random variables, we modeled the wait time before one event occurred.\nIf \\(Y\\) represents the wait time before \\(r\\) events occur in a Poisson process with rate \\(\\lambda\\), \\(Y\\) follows a gamma distribution where\n\n. . .\n\\[\\begin{equation}\nf(y) = \\frac{\\lambda^r}{\\Gamma(r)} y^{r-1} e^{-\\lambda y}\\quad \\textrm{for} \\quad y &gt;0.\n\\end{equation}\\]\n\nIf \\(Y \\sim \\textrm{Gamma}(r, \\lambda)\\) then \\(\\operatorname{E}(Y) = r/\\lambda\\) and \\(\\operatorname{SD}(Y) = \\sqrt{r/\\lambda^2}\\).\nNote: \\(\\Gamma(r)=(r-1)!\\) (There is more to it)"
+    "text": "Gamma Random Variable\n\nOnce again consider a Poisson process.\nWhen discussing exponential random variables, we modeled the wait time before one event occurred.\nIf \\(Y\\) represents the wait time before \\(r\\) events occur in a Poisson process with rate \\(\\lambda\\), \\(Y\\) follows a gamma distribution where\n\n. . .\n\\[\\begin{equation}\nf(y) = \\frac{\\lambda^r}{\\Gamma(r)} y^{r-1} e^{-\\lambda y}\\quad \\textrm{for} \\quad y &gt;0.\n\\end{equation}\\]\n\nIf \\(Y \\sim \\textrm{Gamma}(r, \\lambda)\\) then \\(\\operatorname{E}(Y) = r/\\lambda\\) and \\(\\operatorname{SD}(Y) = \\sqrt{r/\\lambda^2}\\).\nNote: If r is an integer, then \\(\\Gamma(r)=(r-1)!\\) (There is more to it)"
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#gamma-distribution",
@@ -4548,7 +4548,7 @@
     "href": "slides/03_distribution_ch3_o.html#gamma-vs-others",
     "title": "Distribution Theory",
     "section": "Gamma vs Others",
-    "text": "Gamma vs Others\n\nNote that if we let \\(r = 1\\), we have the following pdf,\n\n. . .\n\\[\\begin{align*}\nf(y) &= \\frac{\\lambda}{\\Gamma(1)} y^{1-1} e^{-\\lambda y} \\\\\n      &= \\lambda e^{-\\lambda y} \\quad \\textrm{for} \\quad y &gt; 0,\n\\end{align*}\\] an exponential distribution.\n\nJust as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!\nJust like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative \\(r\\).\nIn R, pgamma(y, r, lambda) outputs the probability \\(P(Y &lt; y)\\) given \\(r\\) and \\(\\lambda\\)."
+    "text": "Gamma vs Others\n\nNote that if we let \\(r = 1\\), we have the following pdf,\n\n. . .\n\\[\\begin{align*}\nf(y) &= \\frac{\\lambda}{\\Gamma(1)} y^{1-1} e^{-\\lambda y} \\\\\n      &= \\lambda e^{-\\lambda y} \\quad \\textrm{for} \\quad y &gt; 0,\n\\end{align*}\\] an exponential distribution.\n\nExponential distributions are in fact a special case of gamma distributions!\nJust like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative \\(r\\).\nIn R, pgamma(y, r, lambda) outputs the probability \\(P(Y &lt; y)\\) given \\(r\\) and \\(\\lambda\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#distributions-used-in-testing",
@@ -4569,7 +4569,7 @@
     "href": "slides/03_distribution_ch3_o.html#acknowledgements",
     "title": "Distribution Theory",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 1 - Review of Multiple Linear Regression\nEdited from slides by Tyler George"
+    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 3 - Distribution Theory\nEdited from slides by Tyler George"
   },
   {
     "objectID": "slides/03_distribution_ch3.html#learning-objectives",
@@ -4604,7 +4604,7 @@
     "href": "slides/03_distribution_ch3.html#binary-random-variable",
     "title": "Distribution Theory",
     "section": "Binary Random Variable",
-    "text": "Binary Random Variable\n\nConsider the event of flipping a (possibly unfair) coin.\nIf the coin lands heads, let’s consider this a success and record \\(Y = 1\\).\nIf the coin lands tails, then we record \\(Y=0\\).\nA series of these events is a Bernoulli process, independent trials that take on one of two values (e.g., 0 or 1).\nThese values are often referred to as a failure and a success\n\nthe probability of success is identical for each trial."
+    "text": "Binary Random Variable\n\nConsider the event of flipping a (possibly unfair) coin.\nIf the coin lands heads, let’s consider this a success and record \\(Y = 1\\).\nIf the coin lands tails, then we record \\(Y=0\\).\nA series of these events is a Bernoulli process if these events consist of\n\nindependent trials\neach trial takes on one of two values (e.g., 0 or 1).\nthe probability of success is identical for each trial.\n\nTypically we refer to the value 0 as a failure and the value of 1 as a success."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#binary-random-variable-1",
@@ -4625,14 +4625,14 @@
     "href": "slides/03_distribution_ch3.html#binomial-random-variable-12",
     "title": "Distribution Theory",
     "section": "Binomial Random Variable (1/2)",
-    "text": "Binomial Random Variable (1/2)\n\nDoes anybody know how this relates to a Bernoulli random variable?\nWe can extend our knowledge of binary random variables.\nSuppose we flipped an unfair coin \\(n\\) times and recorded \\(Y\\), the number of heads after \\(n\\) flips.\nIf we consider a case where \\(p = 0.25\\) and \\(n = 4\\), then here \\(P(Y=0)\\) represents the probability of no successes in 4 trials\n\n4 consecutive failures.\nThe probability of 4 consecutive failures is \\(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\\)."
+    "text": "Binomial Random Variable (1/2)\n\nWe can extend our knowledge of binary random variables.\nSuppose we flipped an unfair coin \\(n\\) times and recorded \\(Y\\), the number of heads after \\(n\\) flips.\nIf we consider a case where \\(p = 0.25\\) and \\(n = 4\\), then here \\(P(Y=0)\\) represents the probability of no successes in 4 trials (no heads in 4 flips)\n\n4 consecutive failures.\nThe probability of 4 consecutive failures is \\(P(Y = 0) = P(TTTT) = (1-p)^4 = 0.75^4\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#binomial-random-variable-22",
     "href": "slides/03_distribution_ch3.html#binomial-random-variable-22",
     "title": "Distribution Theory",
     "section": "Binomial Random Variable (2/2)",
-    "text": "Binomial Random Variable (2/2)\n\nNext we consider \\(P(Y = 1)\\), and are interested in the probability of exactly 1 success anywhere among the 4 trials.\nHow many different ways can we get exactly 1 success in the four trials?\nTo find the probability of this what else do we need to count?\nWhat is the probability?\nThere are \\(\\binom{4}{1} = \\frac{4!}{1!(4-1)!}=4\\) ways to have exactly 1 success in 4 trials, \\(P(Y = 1) = \\binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\\)."
+    "text": "Binomial Random Variable (2/2)\n\nNext we consider \\(P(Y = 1)\\), and are interested in the probability of exactly 1 success anywhere among the 4 trials.\nThere are several ways to get exactly 1 success in 4 trials. What is the probability for one way of these ways?\nTo find the total probability of getting exactly 1 success among the 4 trials what else do we need to count?\nThere are \\(\\binom{4}{1} = \\frac{4!}{1!(4-1)!}=4\\) ways to have exactly 1 success in 4 trials, \\(P(Y = 1) = \\binom{4}{1}p^1(1-p)^{4-1} = (4)(0.25)(0.75)^3\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#binomial-distribution",
@@ -4695,7 +4695,7 @@
     "href": "slides/03_distribution_ch3.html#negative-binomial-rv",
     "title": "Distribution Theory",
     "section": "Negative Binomial RV",
-    "text": "Negative Binomial RV\n\nIf \\(Y \\sim \\textrm{Negative Binomial}(r, p)\\) then \\(E(Y) = \\frac{r(1-p)}{p}\\) and \\(\\operatorname{SD}(Y) = \\sqrt{\\frac{r(1-p)}{p^2}}\\)."
+    "text": "Negative Binomial RV\n\nIf \\(Y \\sim \\textrm{Negative Binomial}(r, p)\\) then \\(E(Y) = \\frac{r(1-p)}{p}\\) and \\(\\operatorname{SD}(Y) = \\sqrt{\\frac{r(1-p)}{p^2}}\\).\nR function dnbinom(y, r, p) for the probability of \\(y\\) failures before the \\(r\\)th success given probability \\(p\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#negative-binomial-rv-1",
@@ -4709,7 +4709,7 @@
     "href": "slides/03_distribution_ch3.html#negative-binomial-rv-2",
     "title": "Distribution Theory",
     "section": "Negative Binomial RV",
-    "text": "Negative Binomial RV\n\nNote that if we set \\(r=1\\), then\n\n\n\\[\\begin{align*}\nP(Y=y) &= \\binom{y}{0} (1-p)^yp \\\\\n        &= (1-p)^yp \\quad \\textrm{for} \\quad y = 0, 1, \\ldots, \\infty,\n\\end{align*}\\] which is the probability mass function of a geometric random variable!\n\nThus, a geometric random variable is, in fact, a special case of a negative binomial random variable.\nR function dnbinom(y, r, p) for the probability of \\(y\\) failures before the \\(r\\)th success given probability \\(p\\)."
+    "text": "Negative Binomial RV\n\nR function dnbinom(y, r, p) for the probability of \\(y\\) failures before the \\(r\\)th success given probability \\(p\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#poisson-random-variable",
@@ -4758,7 +4758,7 @@
     "href": "slides/03_distribution_ch3.html#gamma-random-variable",
     "title": "Distribution Theory",
     "section": "Gamma Random Variable",
-    "text": "Gamma Random Variable\n\nOnce again consider a Poisson process.\nWhen discussing exponential random variables, we modeled the wait time before one event occurred.\nIf \\(Y\\) represents the wait time before \\(r\\) events occur in a Poisson process with rate \\(\\lambda\\), \\(Y\\) follows a gamma distribution where\n\n\n\\[\\begin{equation}\nf(y) = \\frac{\\lambda^r}{\\Gamma(r)} y^{r-1} e^{-\\lambda y}\\quad \\textrm{for} \\quad y &gt;0.\n\\end{equation}\\]\n\nIf \\(Y \\sim \\textrm{Gamma}(r, \\lambda)\\) then \\(\\operatorname{E}(Y) = r/\\lambda\\) and \\(\\operatorname{SD}(Y) = \\sqrt{r/\\lambda^2}\\).\nNote: \\(\\Gamma(r)=(r-1)!\\) (There is more to it)"
+    "text": "Gamma Random Variable\n\nOnce again consider a Poisson process.\nWhen discussing exponential random variables, we modeled the wait time before one event occurred.\nIf \\(Y\\) represents the wait time before \\(r\\) events occur in a Poisson process with rate \\(\\lambda\\), \\(Y\\) follows a gamma distribution where\n\n\n\\[\\begin{equation}\nf(y) = \\frac{\\lambda^r}{\\Gamma(r)} y^{r-1} e^{-\\lambda y}\\quad \\textrm{for} \\quad y &gt;0.\n\\end{equation}\\]\n\nIf \\(Y \\sim \\textrm{Gamma}(r, \\lambda)\\) then \\(\\operatorname{E}(Y) = r/\\lambda\\) and \\(\\operatorname{SD}(Y) = \\sqrt{r/\\lambda^2}\\).\nNote: If r is an integer, then \\(\\Gamma(r)=(r-1)!\\) (There is more to it)"
   },
   {
     "objectID": "slides/03_distribution_ch3.html#gamma-distribution",
@@ -4772,7 +4772,7 @@
     "href": "slides/03_distribution_ch3.html#gamma-vs-others",
     "title": "Distribution Theory",
     "section": "Gamma vs Others",
-    "text": "Gamma vs Others\n\nNote that if we let \\(r = 1\\), we have the following pdf,\n\n\n\\[\\begin{align*}\nf(y) &= \\frac{\\lambda}{\\Gamma(1)} y^{1-1} e^{-\\lambda y} \\\\\n      &= \\lambda e^{-\\lambda y} \\quad \\textrm{for} \\quad y &gt; 0,\n\\end{align*}\\] an exponential distribution.\n\nJust as how the geometric distribution was a special case of the negative binomial, exponential distributions are in fact a special case of gamma distributions!\nJust like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative \\(r\\).\nIn R, pgamma(y, r, lambda) outputs the probability \\(P(Y &lt; y)\\) given \\(r\\) and \\(\\lambda\\)."
+    "text": "Gamma vs Others\n\nNote that if we let \\(r = 1\\), we have the following pdf,\n\n\n\\[\\begin{align*}\nf(y) &= \\frac{\\lambda}{\\Gamma(1)} y^{1-1} e^{-\\lambda y} \\\\\n      &= \\lambda e^{-\\lambda y} \\quad \\textrm{for} \\quad y &gt; 0,\n\\end{align*}\\] an exponential distribution.\n\nExponential distributions are in fact a special case of gamma distributions!\nJust like negative binomial, the pdf of a gamma distribution is defined for all real, non-negative \\(r\\).\nIn R, pgamma(y, r, lambda) outputs the probability \\(P(Y &lt; y)\\) given \\(r\\) and \\(\\lambda\\)."
   },
   {
     "objectID": "slides/03_distribution_ch3.html#distributions-used-in-testing",
@@ -4793,7 +4793,7 @@
     "href": "slides/03_distribution_ch3.html#acknowledgements",
     "title": "Distribution Theory",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 1 - Review of Multiple Linear Regression\nEdited from slides by Tyler George"
+    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 3 - Distribution Theory\nEdited from slides by Tyler George"
   },
   {
     "objectID": "slides/05_glm_ch5_o.html",
@@ -6810,5 +6810,19 @@
     "title": "Moving Beyond Linearity",
     "section": "Acknowledgements",
     "text": "Acknowledgements\nThe content in the slides is from\n\nChapter 7 of Introduction to Statistical Learning, 2nd Ed by James, Witten, Hastie, and Tibshirani\nInitial versions of the slides are by Dr. Lucy D’Agostino McGowan"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#libraries-needed",
+    "href": "slides/03_distribution_ch3.html#libraries-needed",
+    "title": "Distribution Theory",
+    "section": "Libraries Needed",
+    "text": "Libraries Needed\n\n# Packages required for Chapter 3\nlibrary(gridExtra)  \nlibrary(knitr) \nlibrary(kableExtra)\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#libraries-needed",
+    "href": "slides/03_distribution_ch3_o.html#libraries-needed",
+    "title": "Distribution Theory",
+    "section": "Libraries Needed",
+    "text": "Libraries Needed\n\n# Packages required for Chapter 3\nlibrary(gridExtra)  \nlibrary(knitr) \nlibrary(kableExtra)\nlibrary(tidyverse)"
   }
 ]

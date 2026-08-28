@@ -4345,7 +4345,7 @@
     "href": "slides/03_distribution_ch3_o.html",
     "title": "Distribution Theory",
     "section": "",
-    "text": "Write definitions of non-normal random variables in the context of an application.\nIdentify possible values for each random variable.\nIdentify how changing values for a parameter affects the characteristics of the distribution.\nRecognize a form of the probability density function for each distribution.\nIdentify the mean and variance for each distribution.\nMatch the response for a study to a plausible random variable and provide reasons for ruling out other random variables.\nMatch a histogram of sample data to plausible distributions.\nCreate a mixture of distributions and evaluate the shape, mean, and variance."
+    "text": "Write definitions of non-normal random variables in the context of an application.\nIdentify possible values for each random variable.\nIdentify how changing values for a parameter affects the characteristics of the distribution.\nRecognize a form of the probability density function for each distribution.\nIdentify the mean and variance for each distribution.\nMatch the response for a study to a plausible random variable and provide reasons for ruling out other random variables.\nMatch a histogram of sample data to plausible distributions.\nCreate a mixture of distributions and evaluate the shape, mean, and variance.\n\n\n\n\n\n# Packages required for Chapter 3\nlibrary(gridExtra)  \nlibrary(knitr) \nlibrary(kableExtra)\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(GGally)\nlibrary(knitr)\nlibrary(patchwork)\nlibrary(viridis)\nlibrary(ggfortify)\n\n\n\n\n\nWhat if it is not plausible that a response is normally distributed?\nYou may want to construct a model to predict whether a prospective student will enroll at a school or model the lifetimes of patients following a particular surgery.\n\nIn the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to have very skewed data with many similar values and a few hardy souls with extremely long survival.\nThese responses are not expected to be normally distributed; other distributions will be needed to describe and model binary or lifetime data.\nNon-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models.\nAll information in this chapter is covered in much greater depth in STA 347."
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#learning-objectives",
@@ -4365,8 +4365,8 @@
     "objectID": "slides/03_distribution_ch3_o.html#introduction",
     "href": "slides/03_distribution_ch3_o.html#introduction",
     "title": "Distribution Theory",
-    "section": "Introduction",
-    "text": "Introduction\n\nWhat if it is not plausible that a response is normally distributed?\nYou may want to construct a model to predict whether a prospective student will enroll at a school or model the lifetimes of patients following a particular surgery.\n\nIn the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to have very skewed data with many similar values and a few hardy souls with extremely long survival.\nThese responses are not expected to be normally distributed; other distributions will be needed to describe and model binary or lifetime data.\nNon-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models.\nAll information in this chapter is covered in much greater depth in STA 347."
+    "section": "",
+    "text": "What if it is not plausible that a response is normally distributed?\nYou may want to construct a model to predict whether a prospective student will enroll at a school or model the lifetimes of patients following a particular surgery.\n\nIn the first case you have a binary response (enrolls (1) or does not enroll (0)), and in the second case you are likely to have very skewed data with many similar values and a few hardy souls with extremely long survival.\nThese responses are not expected to be normally distributed; other distributions will be needed to describe and model binary or lifetime data.\nNon-normal responses are encountered in a large number of situations. Luckily, there are quite a few possibilities for models.\nAll information in this chapter is covered in much greater depth in STA 347."
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#discrete-random-variables-1",
@@ -6816,13 +6816,209 @@
     "href": "slides/03_distribution_ch3.html#libraries-needed",
     "title": "Distribution Theory",
     "section": "Libraries Needed",
-    "text": "Libraries Needed\n\n# Packages required for Chapter 3\nlibrary(gridExtra)  \nlibrary(knitr) \nlibrary(kableExtra)\nlibrary(tidyverse)"
+    "text": "Libraries Needed\n\n# Packages required for Chapter 3\nlibrary(gridExtra)  \nlibrary(knitr) \nlibrary(kableExtra)\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(GGally)\nlibrary(knitr)\nlibrary(patchwork)\nlibrary(viridis)\nlibrary(ggfortify)"
   },
   {
     "objectID": "slides/03_distribution_ch3_o.html#libraries-needed",
     "href": "slides/03_distribution_ch3_o.html#libraries-needed",
     "title": "Distribution Theory",
-    "section": "Libraries Needed",
-    "text": "Libraries Needed\n\n# Packages required for Chapter 3\nlibrary(gridExtra)  \nlibrary(knitr) \nlibrary(kableExtra)\nlibrary(tidyverse)"
+    "section": "",
+    "text": "# Packages required for Chapter 3\nlibrary(gridExtra)  \nlibrary(knitr) \nlibrary(kableExtra)\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(GGally)\nlibrary(knitr)\nlibrary(patchwork)\nlibrary(viridis)\nlibrary(ggfortify)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#learning-goals",
+    "href": "slides/03_distribution_ch3.html#learning-goals",
+    "title": "Distribution Theory",
+    "section": "Learning goals",
+    "text": "Learning goals\n\nExplain the use of generalized linear models\nIdentify the components common to all generalized linear models\nFind the canonical link based on the distribution of the response variable"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#why-are-glms-useful",
+    "href": "slides/03_distribution_ch3.html#why-are-glms-useful",
+    "title": "Distribution Theory",
+    "section": "Why are GLMs useful?",
+    "text": "Why are GLMs useful?\n\nLinear regression models are used to predict \\(\\mu_{y|x}\\).\n\nWe assume that \\(Y\\) has a normal distribution with mean \\(\\mu_{y|x}\\) and variance \\(\\sigma^2\\).\nThe model we use is \\(\\mu_{y|x}=\\beta_0 + \\beta_1~x_1 + \\beta_2~x_2 +...\\)\nNote the unknown parameter is on the left and a linear combination of the predictor variables is on the right.\n\nWhat if the response variable \\(Y\\) doesn’t have a normal distribution? Can we estimate a relevant parameter of its actual distribution?\n\nIf a GLM exists, then it gives us a way of estimating the relevant parameter using a linear combination of the predictor variables."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#many-models-one-family",
+    "href": "slides/03_distribution_ch3.html#many-models-one-family",
+    "title": "Distribution Theory",
+    "section": "Many models; one family",
+    "text": "Many models; one family\nWe will see three different situations where glms are appropriate:\n\nlinear regression (response has a Normal distribution)\nlogistic regression (response has a Bernoulli or Binomial distribution)\npoisson regression (response has a Poisson or Negative Binomial distribution)\n\n\nAll of these cases lead to models that are examples of generalized linear models.\nGLMs have a similar structure for their likelihoods, MLEs, and variances, so we can use a generalized approach to find the model estimates and associated uncertainty."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#components-of-a-glm",
+    "href": "slides/03_distribution_ch3.html#components-of-a-glm",
+    "title": "Distribution Theory",
+    "section": "Components of a GLM",
+    "text": "Components of a GLM\nNelder and Wedderburn (1972) define a broad class of models called generalized linear models that generalizes multiple linear regression. GLMs are characterized by three components:\n\n1️⃣ The response variable has a probability function with parameter \\(\\theta\\) that can be written in exponential family form (random component)\n\n\n2️⃣ There exists a linear combination of predictors, \\(\\eta = \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\) (systematic component) so that:\n\n\n3️⃣ A link function \\(g(\\theta)\\) exists that connects \\(\\theta\\) to \\(\\eta\\)\n\n\n\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#math-identities-that-are-needed",
+    "href": "slides/03_distribution_ch3.html#math-identities-that-are-needed",
+    "title": "Distribution Theory",
+    "section": "Math identities that are needed",
+    "text": "Math identities that are needed\n\n\\(a=e^{\\log(a)}\\)\n\\(a^x = e ^ {x\\log(a)}\\)\n\\(\\log(ab)= \\log(a) + \\log(b)\\)\n\\(\\log\\left(\\frac{a}{b}\\right) = \\log(a)-\\log(b)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#exponential-family-form",
+    "href": "slides/03_distribution_ch3.html#exponential-family-form",
+    "title": "Distribution Theory",
+    "section": "Exponential family form",
+    "text": "Exponential family form\nSuppose a probability (mass or density) function has a parameter \\(\\theta\\). It is said to have a one-parameter exponential family form if\n\n✅ The support (set of possible values) does not depend on \\(\\theta\\), and\n\n\n✅ The probability function can be written in the following form\n\\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\)\n\n\nUsing this form:\n\\[E(Y) = -\\frac{c'(\\theta)}{b'(\\theta)} \\hspace{20mm} Var(Y) = \\frac{b''(\\theta)c'(\\theta) - c''(\\theta)b'(\\theta)}{[b'(\\theta)]^3}\\]\n\n\nNote these last two equations use calculus, so we will not use them."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#poisson-in-exponential-family-form",
+    "href": "slides/03_distribution_ch3.html#poisson-in-exponential-family-form",
+    "title": "Distribution Theory",
+    "section": "Poisson in exponential family form",
+    "text": "Poisson in exponential family form\nWhat if our response variable has a Poisson distribution? Can we write the distribution funciton in exponential family form?\n\\[P(Y = y) = \\frac{e^{-\\lambda}\\lambda^y}{y!} \\hspace{10mm} y = 0, 1, 2, \\ldots, \\infty\\]\n\n\\[\\begin{aligned}P(Y = y) &= e^{-\\lambda}e^{y\\log(\\lambda)}e^{-\\log(y!)}\\\\\n& = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\end{aligned}\\]\n\n\nRecall the form: \\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\), where the parameter \\(\\theta = \\lambda\\) for the Poisson distribution\n\n\n\n\\(a(y) = y\\)\n\\(b(\\lambda) = \\log(\\lambda)\\)\n\n\n\n\\(c(\\lambda) = -\\lambda\\)\n\\(d(y) = -\\log(y!)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#poisson-in-exponential-family-form-1",
+    "href": "slides/03_distribution_ch3.html#poisson-in-exponential-family-form-1",
+    "title": "Distribution Theory",
+    "section": "Poisson in exponential family form",
+    "text": "Poisson in exponential family form\n\nThe support for the Poisson distribution is \\(y = 0, 1, 2, \\ldots, \\infty\\). This does not depend on the parameter \\(\\lambda\\).\nThe probability mass function can be written in the form \\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\)\n\n\nThe Poisson distribution can be written in one-parameter exponential family form."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#canonical-link",
+    "href": "slides/03_distribution_ch3.html#canonical-link",
+    "title": "Distribution Theory",
+    "section": "Canonical link",
+    "text": "Canonical link\nSuppose there is a response variable \\(Y\\) from a distribution with parameter \\(\\theta\\) and a set of predictors that can be written as a linear combination \\(\\eta = \\sum_{j=1}^{p}\\beta_jx_j = \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\)\n\n(There does not have to be an intercept but generally we also include \\(\\beta_0\\))\n\n\nA link function, \\(g()\\), is a monotonic and differentiable function that connects \\(\\theta\\) to \\(\\eta\\)\n\n\nThe canonical link is a link function such that \\(g(\\theta) = \\eta\\)\n\nWhen working with a member of the one-parameter exponential family, the canonical link is \\(b(\\theta)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#canonical-link-for-poisson",
+    "href": "slides/03_distribution_ch3.html#canonical-link-for-poisson",
+    "title": "Distribution Theory",
+    "section": "Canonical link for Poisson",
+    "text": "Canonical link for Poisson\nRecall\n\\[P(Y = y) = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\]\nthen the canonical link is \\(b(\\lambda) = \\log(\\lambda)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#glm-framework-poisson-response-variable",
+    "href": "slides/03_distribution_ch3.html#glm-framework-poisson-response-variable",
+    "title": "Distribution Theory",
+    "section": "GLM framework: Poisson response variable",
+    "text": "GLM framework: Poisson response variable\n1️⃣ Response variable with parameter \\(\\theta\\) whose probability function can be written in exponential family form\n\\[P(Y = y) = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\]\n\n2️⃣ A linear combination of predictors, \\(\\eta = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\)\n\n\n3️⃣ A function \\(g(\\lambda)\\) that connects \\(\\lambda\\) and \\(\\eta\\)\n\\[\\log(\\lambda) = \\eta =  \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\] This means that our linear model will estimate \\(\\log(\\lambda)\\) rather than just \\(\\lambda\\)."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#activity-identifying-canonical-link",
+    "href": "slides/03_distribution_ch3.html#activity-identifying-canonical-link",
+    "title": "Distribution Theory",
+    "section": "Activity: Identifying canonical link",
+    "text": "Activity: Identifying canonical link\nFor the distribution\n\nDescribe an example of a setting where this random variable may be used.\nIdentify the parameter.\nWrite the pmf or pdf in one-parameter exponential form.\nIdentify the canonical link function\nOne person from each group: Write your response on the board."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#activity",
+    "href": "slides/03_distribution_ch3.html#activity",
+    "title": "Distribution Theory",
+    "section": "Activity",
+    "text": "Activity\nDistributions\n\nBinary\nExponential\nNegative binomial (with fixed \\(r\\))\nNormal (with fixed \\(\\sigma\\))\n\n\nIf your group finishes early, try identifying the canonical link for the other distributions.\nSee BMLR - Section 3.6 for details on the distributions."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3.html#acknowledgements-1",
+    "href": "slides/03_distribution_ch3.html#acknowledgements-1",
+    "title": "Distribution Theory",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 5\nInitial versions of the slides are by Dr. Maria Tackett, Duke University\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384.\nGeneralized Linear Models with Examples in R\n\nChapter 5 - Generalized Linear Models: Structure\nChapter 6 - Generalized Linear Models: Estimation"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#learning-goals",
+    "href": "slides/03_distribution_ch3_o.html#learning-goals",
+    "title": "Distribution Theory",
+    "section": "Learning goals",
+    "text": "Learning goals\n\nExplain the use of generalized linear models\nIdentify the components common to all generalized linear models\nFind the canonical link based on the distribution of the response variable"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#why-are-glms-useful",
+    "href": "slides/03_distribution_ch3_o.html#why-are-glms-useful",
+    "title": "Distribution Theory",
+    "section": "Why are GLMs useful?",
+    "text": "Why are GLMs useful?\n\nLinear regression models are used to predict \\(\\mu_{y|x}\\).\n\nWe assume that \\(Y\\) has a normal distribution with mean \\(\\mu_{y|x}\\) and variance \\(\\sigma^2\\).\nThe model we use is \\(\\mu_{y|x}=\\beta_0 + \\beta_1~x_1 + \\beta_2~x_2 +...\\)\nNote the unknown parameter is on the left and a linear combination of the predictor variables is on the right.\n\nWhat if the response variable \\(Y\\) doesn’t have a normal distribution? Can we estimate a relevant parameter of its actual distribution?\n\nIf a GLM exists, then it gives us a way of estimating the relevant parameter using a linear combination of the predictor variables."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#many-models-one-family",
+    "href": "slides/03_distribution_ch3_o.html#many-models-one-family",
+    "title": "Distribution Theory",
+    "section": "Many models; one family",
+    "text": "Many models; one family\nWe will see three different situations where glms are appropriate:\n\nlinear regression (response has a Normal distribution)\nlogistic regression (response has a Bernoulli or Binomial distribution)\npoisson regression (response has a Poisson or Negative Binomial distribution)\n\n. . .\nAll of these cases lead to models that are examples of generalized linear models.\nGLMs have a similar structure for their likelihoods, MLEs, and variances, so we can use a generalized approach to find the model estimates and associated uncertainty."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#components-of-a-glm",
+    "href": "slides/03_distribution_ch3_o.html#components-of-a-glm",
+    "title": "Distribution Theory",
+    "section": "Components of a GLM",
+    "text": "Components of a GLM\nNelder and Wedderburn (1972) define a broad class of models called generalized linear models that generalizes multiple linear regression. GLMs are characterized by three components:\n. . .\n1️⃣ The response variable has a probability function with parameter \\(\\theta\\) that can be written in exponential family form (random component)\n. . .\n2️⃣ There exists a linear combination of predictors, \\(\\eta = \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\) (systematic component) so that:\n. . .\n3️⃣ A link function \\(g(\\theta)\\) exists that connects \\(\\theta\\) to \\(\\eta\\)\n\n\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#math-identities-that-are-needed",
+    "href": "slides/03_distribution_ch3_o.html#math-identities-that-are-needed",
+    "title": "Distribution Theory",
+    "section": "Math identities that are needed",
+    "text": "Math identities that are needed\n\n\\(a=e^{\\log(a)}\\)\n\\(a^x = e ^ {x\\log(a)}\\)\n\\(\\log(ab)= \\log(a) + \\log(b)\\)\n\\(\\log\\left(\\frac{a}{b}\\right) = \\log(a)-\\log(b)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#exponential-family-form",
+    "href": "slides/03_distribution_ch3_o.html#exponential-family-form",
+    "title": "Distribution Theory",
+    "section": "Exponential family form",
+    "text": "Exponential family form\nSuppose a probability (mass or density) function has a parameter \\(\\theta\\). It is said to have a one-parameter exponential family form if\n. . .\n✅ The support (set of possible values) does not depend on \\(\\theta\\), and\n. . .\n✅ The probability function can be written in the following form\n\\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\)\n. . .\nUsing this form:\n\\[E(Y) = -\\frac{c'(\\theta)}{b'(\\theta)} \\hspace{20mm} Var(Y) = \\frac{b''(\\theta)c'(\\theta) - c''(\\theta)b'(\\theta)}{[b'(\\theta)]^3}\\]\n. . .\nNote these last two equations use calculus, so we will not use them."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#poisson-in-exponential-family-form",
+    "href": "slides/03_distribution_ch3_o.html#poisson-in-exponential-family-form",
+    "title": "Distribution Theory",
+    "section": "Poisson in exponential family form",
+    "text": "Poisson in exponential family form\nWhat if our response variable has a Poisson distribution? Can we write the distribution funciton in exponential family form?\n\\[P(Y = y) = \\frac{e^{-\\lambda}\\lambda^y}{y!} \\hspace{10mm} y = 0, 1, 2, \\ldots, \\infty\\]\n. . .\n\\[\\begin{aligned}P(Y = y) &= e^{-\\lambda}e^{y\\log(\\lambda)}e^{-\\log(y!)}\\\\\n& = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\end{aligned}\\]\n. . .\nRecall the form: \\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\), where the parameter \\(\\theta = \\lambda\\) for the Poisson distribution\n\n\n\n\\(a(y) = y\\)\n\\(b(\\lambda) = \\log(\\lambda)\\)\n\n\n\n\\(c(\\lambda) = -\\lambda\\)\n\\(d(y) = -\\log(y!)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#poisson-in-exponential-family-form-1",
+    "href": "slides/03_distribution_ch3_o.html#poisson-in-exponential-family-form-1",
+    "title": "Distribution Theory",
+    "section": "Poisson in exponential family form",
+    "text": "Poisson in exponential family form\n\nThe support for the Poisson distribution is \\(y = 0, 1, 2, \\ldots, \\infty\\). This does not depend on the parameter \\(\\lambda\\).\nThe probability mass function can be written in the form \\(f(y;\\theta) = e^{[a(y)b(\\theta) + c(\\theta) + d(y)]}\\)\n\n. . .\nThe Poisson distribution can be written in one-parameter exponential family form."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#canonical-link",
+    "href": "slides/03_distribution_ch3_o.html#canonical-link",
+    "title": "Distribution Theory",
+    "section": "Canonical link",
+    "text": "Canonical link\nSuppose there is a response variable \\(Y\\) from a distribution with parameter \\(\\theta\\) and a set of predictors that can be written as a linear combination \\(\\eta = \\sum_{j=1}^{p}\\beta_jx_j = \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\)\n\n(There does not have to be an intercept but generally we also include \\(\\beta_0\\))\n\n. . .\nA link function, \\(g()\\), is a monotonic and differentiable function that connects \\(\\theta\\) to \\(\\eta\\)\n. . .\nThe canonical link is a link function such that \\(g(\\theta) = \\eta\\)\n\nWhen working with a member of the one-parameter exponential family, the canonical link is \\(b(\\theta)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#canonical-link-for-poisson",
+    "href": "slides/03_distribution_ch3_o.html#canonical-link-for-poisson",
+    "title": "Distribution Theory",
+    "section": "Canonical link for Poisson",
+    "text": "Canonical link for Poisson\nRecall\n\\[P(Y = y) = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\]\nthen the canonical link is \\(b(\\lambda) = \\log(\\lambda)\\)"
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#glm-framework-poisson-response-variable",
+    "href": "slides/03_distribution_ch3_o.html#glm-framework-poisson-response-variable",
+    "title": "Distribution Theory",
+    "section": "GLM framework: Poisson response variable",
+    "text": "GLM framework: Poisson response variable\n1️⃣ Response variable with parameter \\(\\theta\\) whose probability function can be written in exponential family form\n\\[P(Y = y) = e^{y\\log(\\lambda) - \\lambda - \\log(y!)}\\]\n. . .\n2️⃣ A linear combination of predictors, \\(\\eta = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\)\n. . .\n3️⃣ A function \\(g(\\lambda)\\) that connects \\(\\lambda\\) and \\(\\eta\\)\n\\[\\log(\\lambda) = \\eta =  \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p\\] This means that our linear model will estimate \\(\\log(\\lambda)\\) rather than just \\(\\lambda\\)."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#activity-identifying-canonical-link",
+    "href": "slides/03_distribution_ch3_o.html#activity-identifying-canonical-link",
+    "title": "Distribution Theory",
+    "section": "Activity: Identifying canonical link",
+    "text": "Activity: Identifying canonical link\nFor the distribution\n\nDescribe an example of a setting where this random variable may be used.\nIdentify the parameter.\nWrite the pmf or pdf in one-parameter exponential form.\nIdentify the canonical link function\nOne person from each group: Write your response on the board."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#activity",
+    "href": "slides/03_distribution_ch3_o.html#activity",
+    "title": "Distribution Theory",
+    "section": "Activity",
+    "text": "Activity\nDistributions\n\nBinary\nExponential\nNegative binomial (with fixed \\(r\\))\nNormal (with fixed \\(\\sigma\\))\n\n\nIf your group finishes early, try identifying the canonical link for the other distributions.\nSee BMLR - Section 3.6 for details on the distributions."
+  },
+  {
+    "objectID": "slides/03_distribution_ch3_o.html#acknowledgements-1",
+    "href": "slides/03_distribution_ch3_o.html#acknowledgements-1",
+    "title": "Distribution Theory",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 5\nInitial versions of the slides are by Dr. Maria Tackett, Duke University\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384.\nGeneralized Linear Models with Examples in R\n\nChapter 5 - Generalized Linear Models: Structure\nChapter 6 - Generalized Linear Models: Estimation"
   }
 ]

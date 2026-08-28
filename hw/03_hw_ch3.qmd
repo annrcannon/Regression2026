@@ -72,12 +72,12 @@ Use the numbering on the left. The codes are for instructor use (Ex: C1).
 
 ## Exercise 1
 
-6.  (C1) For each distribution below,
+1.  (C1) For each distribution below,
 
 -   Write the pmf or pdf in one-parameter exponential form, if possible.
 -   Describe an example of a setting where this random variable might be used.
--   Identify the canonical link function, and
--   (For Fun) Compute $\mu = -\frac{c'(\theta)}{b'(\theta)}$ and $\sigma^2 = \frac{b''(\theta)c'(\theta)-c''(\theta)b'(\theta)}{[b'(\theta)]^3}$ and compare with known $\E(Y)$ and $\var(Y)$.
+-   Identify the canonical link function
+
 
 a)  Binomial (for fixed $n$): Y = number of successes in $n$ independent, identical trials
 

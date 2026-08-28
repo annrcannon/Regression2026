@@ -2392,7 +2392,7 @@
     "href": "slides/02_likelihoods_ch2_o.html#exploratory-data-analysis",
     "title": "Beyond Least Squares: Using Likelihoods",
     "section": "Exploratory data analysis",
-    "text": "Exploratory data analysis\n\n\n\nrefs %&gt;%\ncount(foul1, foul2, foul3) %&gt;% kable()\n\n\n\n\nfoul1\nfoul2\nfoul3\nn\n\n\n\n\nH\nH\nH\n3\n\n\nH\nH\nV\n2\n\n\nH\nV\nH\n3\n\n\nH\nV\nV\n7\n\n\nV\nH\nH\n7\n\n\nV\nH\nV\n1\n\n\nV\nV\nH\n5\n\n\nV\nV\nV\n2\n\n\n\n\n\n\nThere are\n\n46 total fouls on the home team\n44 total fouls on the visiting team"
+    "text": "Exploratory data analysis\n\n\n\nrefs %&gt;%\ncount(foul1, foul2, foul3) %&gt;% kable()\n\n\n\n\nfoul1\nfoul2\nfoul3\nn\n\n\n\n\nH\nH\nH\n3\n\n\nH\nH\nV\n2\n\n\nH\nV\nH\n3\n\n\nH\nV\nV\n7\n\n\nV\nH\nH\n7\n\n\nV\nH\nV\n1\n\n\nV\nV\nH\n5\n\n\nV\nV\nV\n2\n\n\n\n\n\n\nThere are\n\n46 total fouls on the home team\n44 total fouls on the visiting team\n90 total fouls overall (3 fouls in each of 30 games)"
   },
   {
     "objectID": "slides/02_likelihoods_ch2_o.html#model-1-unconditional-model",
@@ -2623,7 +2623,7 @@
     "href": "slides/02_likelihoods_ch2_o.html#comparing-non-nested-models",
     "title": "Beyond Least Squares: Using Likelihoods",
     "section": "Comparing non-nested models",
-    "text": "Comparing non-nested models\n\n\nAIC = -2(max log-likelihood) + 2p\nUnconditional Model\n\n(Model1_AIC &lt;- 2 * loglik1(46/90) + 2 * 1)\n\n[1] -122.722\n\n\nConditional Model\n\n(Model2_AIC &lt;-2 * loglik2(25/48, 8/20, 13/22) + 2 * 3)\n\n[1] -117.1464\n\n\n\nBIC = -2(max log-likelihood) + plog(n)\nUnconditional Model\n\n(Model1_BIC &lt;- 2 * loglik1(46/90) + 1 * log(30))\n\n[1] -121.3208\n\n\nConditional Model\n\n(Model2_BIC &lt;-2 * loglik2(25/48, 8/20, 13/22) + 3 * log(30))\n\n[1] -112.9428\n\n\n\n\n. . .\nChoose Model 1, the unconditional model, based on AIC and BIC"
+    "text": "Comparing non-nested models\n\n\nAIC = -2(max log-likelihood) + 2p\nUnconditional Model\n\n(Model1_AIC &lt;- -2 * loglik1(46/90) + 2 * 1)\n\n[1] 126.722\n\n\nConditional Model\n\n(Model2_AIC &lt;- -2 * loglik2(25/48, 8/20, 13/22) + 2 * 3)\n\n[1] 129.1464\n\n\n\nBIC = -2(max log-likelihood) + plog(n)\nUnconditional Model\n\n(Model1_BIC &lt;- -2 * loglik1(46/90) + 1 * log(30))\n\n[1] 128.1232\n\n\nConditional Model\n\n(Model2_BIC &lt;- -2 * loglik2(25/48, 8/20, 13/22) + 3 * log(30))\n\n[1] 133.35\n\n\n\n\n. . .\nChoose Model 1, the unconditional model, based on AIC and BIC"
   },
   {
     "objectID": "slides/02_likelihoods_ch2_o.html#looking-ahead",
@@ -3263,7 +3263,7 @@
     "href": "hw/03_hw_ch3.html#exercise-1-1",
     "title": "Homework 4",
     "section": "Exercise 1",
-    "text": "Exercise 1\n\n(C1) For each distribution below,\n\n\nWrite the pmf or pdf in one-parameter exponential form, if possible.\nDescribe an example of a setting where this random variable might be used.\nIdentify the canonical link function, and\n(For Fun) Compute \\(\\mu = -\\frac{c'(\\theta)}{b'(\\theta)}\\) and \\(\\sigma^2 = \\frac{b''(\\theta)c'(\\theta)-c''(\\theta)b'(\\theta)}{[b'(\\theta)]^3}\\) and compare with known \\(\\E(Y)\\) and \\(\\var(Y)\\).\n\n\nBinomial (for fixed \\(n\\)): Y = number of successes in \\(n\\) independent, identical trials\n\n\\[P(Y=y;p)=\\left(\\begin{array} {c}  n\\\\y  \\end{array}\\right) p^y(1-p)^{(n-y)}\\]\n\nGamma (for fixed \\(r\\)): Y = time spent waiting for the \\(r^{th}\\) event in a Poisson process with an average rate of \\(\\lambda\\) events per unit of time\n\n\\[f(y; \\lambda) = \\frac{\\lambda^r}{\\Gamma(r)} y^{r-1} e^{-\\lambda y}\\]"
+    "text": "Exercise 1\n\n(C1) For each distribution below,\n\n\nWrite the pmf or pdf in one-parameter exponential form, if possible.\nDescribe an example of a setting where this random variable might be used.\nIdentify the canonical link function\n\n\nBinomial (for fixed \\(n\\)): Y = number of successes in \\(n\\) independent, identical trials\n\n\\[P(Y=y;p)=\\left(\\begin{array} {c}  n\\\\y  \\end{array}\\right) p^y(1-p)^{(n-y)}\\]\n\nGamma (for fixed \\(r\\)): Y = time spent waiting for the \\(r^{th}\\) event in a Poisson process with an average rate of \\(\\lambda\\) events per unit of time\n\n\\[f(y; \\lambda) = \\frac{\\lambda^r}{\\Gamma(r)} y^{r-1} e^{-\\lambda y}\\]"
   },
   {
     "objectID": "hw/05_hw_ch5_6.html",

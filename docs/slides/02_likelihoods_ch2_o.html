@@ -4612,6 +4612,7 @@ window.Quarto = {
 <ul>
 <li><p>46 total fouls on the home team</p></li>
 <li><p>44 total fouls on the visiting team</p></li>
+<li><p>90 total fouls overall (3 fouls in each of 30 games)</p></li>
 </ul>
 </div>
 </div>
@@ -5210,32 +5211,32 @@ NULL</code></pre>
 <p><strong>AIC</strong> = -2(max log-likelihood) + 2p</p>
 <p>Unconditional Model</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(Model1_AIC <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik1</span>(<span class="dv">46</span><span class="sc">/</span><span class="dv">90</span>) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(Model1_AIC <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik1</span>(<span class="dv">46</span><span class="sc">/</span><span class="dv">90</span>) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -122.722</code></pre>
+<pre><code>[1] 126.722</code></pre>
 </div>
 </div>
 <p>Conditional Model</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(Model2_AIC <span class="ot">&lt;-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik2</span>(<span class="dv">25</span><span class="sc">/</span><span class="dv">48</span>, <span class="dv">8</span><span class="sc">/</span><span class="dv">20</span>, <span class="dv">13</span><span class="sc">/</span><span class="dv">22</span>) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(Model2_AIC <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik2</span>(<span class="dv">25</span><span class="sc">/</span><span class="dv">48</span>, <span class="dv">8</span><span class="sc">/</span><span class="dv">20</span>, <span class="dv">13</span><span class="sc">/</span><span class="dv">22</span>) <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -117.1464</code></pre>
+<pre><code>[1] 129.1464</code></pre>
 </div>
 </div>
 </div><div class="column">
 <p><strong>BIC</strong> = -2(max log-likelihood) + plog(n)</p>
 <p>Unconditional Model</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(Model1_BIC <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik1</span>(<span class="dv">46</span><span class="sc">/</span><span class="dv">90</span>) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">30</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(Model1_BIC <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik1</span>(<span class="dv">46</span><span class="sc">/</span><span class="dv">90</span>) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">30</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -121.3208</code></pre>
+<pre><code>[1] 128.1232</code></pre>
 </div>
 </div>
 <p>Conditional Model</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(Model2_BIC <span class="ot">&lt;-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik2</span>(<span class="dv">25</span><span class="sc">/</span><span class="dv">48</span>, <span class="dv">8</span><span class="sc">/</span><span class="dv">20</span>, <span class="dv">13</span><span class="sc">/</span><span class="dv">22</span>) <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">30</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(Model2_BIC <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">loglik2</span>(<span class="dv">25</span><span class="sc">/</span><span class="dv">48</span>, <span class="dv">8</span><span class="sc">/</span><span class="dv">20</span>, <span class="dv">13</span><span class="sc">/</span><span class="dv">22</span>) <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">30</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -112.9428</code></pre>
+<pre><code>[1] 133.35</code></pre>
 </div>
 </div>
 </div>

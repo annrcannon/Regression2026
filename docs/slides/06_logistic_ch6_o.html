@@ -4458,7 +4458,8 @@ window.Quarto = {
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
   <li><a href="#response-variable" id="toc-response-variable" class="nav-link" data-scroll-target="#response-variable">Response variable</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#interpreting-the-results" id="toc-interpreting-the-results" class="nav-link" data-scroll-target="#interpreting-the-results">Interpreting the results</a></li>
+  <li><a href="#interpreting-the-results-12" id="toc-interpreting-the-results-12" class="nav-link" data-scroll-target="#interpreting-the-results-12">Interpreting the results (1/2)</a></li>
+  <li><a href="#interpreting-the-results-22" id="toc-interpreting-the-results-22" class="nav-link" data-scroll-target="#interpreting-the-results-22">Interpreting the results (2/2)</a></li>
   </ul></li>
   <li><a href="#visualizations-for-logistic-regression" id="toc-visualizations-for-logistic-regression" class="nav-link" data-scroll-target="#visualizations-for-logistic-regression">Visualizations for logistic regression</a>
   <ul class="collapse">
@@ -4695,8 +4696,24 @@ window.Quarto = {
 <div class="no-row-height column-margin column-container"><div class="margin-aside">
 <p>Andualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., … &amp; Adane, M. (2022). COVID-19 infection prevention practices among a sample of food handlers of food and drink establishments in Ethiopia. PloS one, 17(1), e0259851.</p>
 </div></div></section>
-<section id="interpreting-the-results" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="interpreting-the-results">Interpreting the results</h2>
+<section id="interpreting-the-results-12" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="interpreting-the-results-12">Interpreting the results (1/2)</h2>
+<p>Odds and Odds Ratios</p>
+<ul>
+<li>The odds of a response variable are: <span class="math inline">\(\text{Odds} = \frac{\text{Num yes}}{\text{Num no}}\)</span>
+<ul>
+<li>If <span class="math inline">\(\text{Odds} &gt; 1\)</span> then yeses are more likely than noes.</li>
+<li>If <span class="math inline">\(\text{Odds} &lt; 1\)</span> then noes are more likely than yeses.</li>
+<li>If <span class="math inline">\(\text{Odds} = 1\)</span> then the probability of yeses and noes is the same.</li>
+</ul></li>
+<li>The odds ratio compares the odds of two different groups. Often these groups consist of the “treated” group and the “control” group. Or, the group of interest and the reference group.
+<ul>
+<li><span class="math inline">\(\text{Odds ratio} = \frac{\text{Odds of interest group}}{\text{Odds of reference group}}=\frac{\text{Odds of treatment group}}{\text{Odds of control group}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="interpreting-the-results-22" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="interpreting-the-results-22">Interpreting the results (2/2)</h2>
 <ul>
 <li><p>Is the response a Bernoulli or Binomial?</p></li>
 <li><p>What is the strongest predictor of having good COVID-19 infection prevention practices?</p></li>

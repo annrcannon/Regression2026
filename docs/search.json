@@ -7034,5 +7034,33 @@
     "title": "Logistic Regression",
     "section": "Fit an interaction term",
     "text": "Fit an interaction term\n\nModelResidual PlotPlot Code\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes-YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, data=rr, family=binomial)\nrr_int_aug &lt;- augment(rr_int_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_int_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.2075801\n7.964510\n0.4663943\n5.0884957\n32.9667672\n\n\n2\n0\n15\n7\n92.40\n0.6776101\n-5.827504\n0.0492925\n6.3049338\n0.4298496\n\n\n3\n4\n38\n15\n18.28\n0.2024659\n-1.885115\n0.6433983\n6.6366201\n3.7828247\n\n\n4\n1790\n14\n0\n59.38\n0.9760416\n5.230746\n0.8996698\n0.5044966\n452.2582760\n\n\n5\n0\n15\n7\n55.51\n0.8513123\n-7.561561\n0.0240118\n5.9951340\n0.5412285\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\")"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#interpreting-the-results-12",
+    "href": "slides/06_logistic_ch6.html#interpreting-the-results-12",
+    "title": "Logistic Regression",
+    "section": "Interpreting the results (1/2)",
+    "text": "Interpreting the results (1/2)\nOdds and Odds Ratios\n\nThe odds of a response variable are: \\(\\text{Odds} = \\frac{\\text{Num yes}}{\\text{Num no}}\\)\n\nIf \\(\\text{Odds} &gt; 1\\) then yeses are more likely than noes.\nIf \\(\\text{Odds} &lt; 1\\) then noes are more likely than yeses.\nIf \\(\\text{Odds} = 1\\) then the probability of yeses and noes is the same.\n\nThe odds ratio compares the odds of two different groups. Often these groups consist of the “treated” group and the “control” group. Or, the group of interest and the reference group.\n\n\\(\\text{Odds ratio} = \\frac{\\text{Odds of interest group}}{\\text{Odds of reference group}}=\\frac{\\text{Odds of treatment group}}{\\text{Odds of control group}}\\)"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#interpreting-the-results-22",
+    "href": "slides/06_logistic_ch6.html#interpreting-the-results-22",
+    "title": "Logistic Regression",
+    "section": "Interpreting the results (2/2)",
+    "text": "Interpreting the results (2/2)\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6_o.html#interpreting-the-results-12",
+    "href": "slides/06_logistic_ch6_o.html#interpreting-the-results-12",
+    "title": "Logistic Regression",
+    "section": "Interpreting the results (1/2)",
+    "text": "Interpreting the results (1/2)\nOdds and Odds Ratios\n\nThe odds of a response variable are: \\(\\text{Odds} = \\frac{\\text{Num yes}}{\\text{Num no}}\\)\n\nIf \\(\\text{Odds} &gt; 1\\) then yeses are more likely than noes.\nIf \\(\\text{Odds} &lt; 1\\) then noes are more likely than yeses.\nIf \\(\\text{Odds} = 1\\) then the probability of yeses and noes is the same.\n\nThe odds ratio compares the odds of two different groups. Often these groups consist of the “treated” group and the “control” group. Or, the group of interest and the reference group.\n\n\\(\\text{Odds ratio} = \\frac{\\text{Odds of interest group}}{\\text{Odds of reference group}}=\\frac{\\text{Odds of treatment group}}{\\text{Odds of control group}}\\)"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6_o.html#interpreting-the-results-22",
+    "href": "slides/06_logistic_ch6_o.html#interpreting-the-results-22",
+    "title": "Logistic Regression",
+    "section": "Interpreting the results (2/2)",
+    "text": "Interpreting the results (2/2)\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
   }
 ]

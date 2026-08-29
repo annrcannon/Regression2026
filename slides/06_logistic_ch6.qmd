@@ -235,7 +235,20 @@ Andualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., ... &
 
 
 
-## Interpreting the results {.smaller}
+## Interpreting the results (1/2) {.smaller}
+
+Odds and Odds Ratios
+
+- The odds of a response variable are: $\text{Odds} = \frac{\text{Num yes}}{\text{Num no}}$
+  - If $\text{Odds} > 1$ then yeses are more likely than noes.
+  - If $\text{Odds} < 1$ then noes are more likely than yeses.
+  - If $\text{Odds} = 1$ then the probability of yeses and noes is the same.
+  
+- The odds ratio compares the odds of two different groups.  Often these groups consist of the "treated" group and the "control" group.  Or, the group of interest and the reference group.
+  - $\text{Odds ratio} = \frac{\text{Odds of interest group}}{\text{Odds of reference group}}=\frac{\text{Odds of treatment group}}{\text{Odds of control group}}$
+
+
+## Interpreting the results (2/2)  {.smaller}
 
 - Is the response a Bernoulli or Binomial? 
 

@@ -34,7 +34,7 @@ library(gridExtra)
 
 - Visualizations for logistic regression
 
-- Interpret coefficients and results from an ordinal logistic regression model 
+
 
 
 
@@ -197,7 +197,7 @@ Researchers at Wollo Univeristy in Ethiopia conducted a study in July and August
 
 <br> 
 
-They were particularly interested in the understanding implementation of prevention practices at food establishments, given the workers' increased risk due to daily contact with customers. 
+They were particularly interested in understanding the implementation of prevention practices at food establishments, given the workers' increased risk due to daily contact with customers. 
 
 :::aside
 Andualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., ... & Adane, M. (2022). COVID-19 infection prevention practices among a sample of food handlers of food and drink establishments in Ethiopia. PloS one, 17(1), e0259851.
@@ -240,7 +240,7 @@ Andualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., ... &
 - Is the response a Bernoulli or Binomial? 
 
 - What is the strongest predictor of having good COVID-19 infection prevention practices?
-  - It's often unreliable to answer this question just based on the model output. Why are we able to answer this question based on the model output in this case? 
+  
   
 - Describe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment. 
 
@@ -508,7 +508,7 @@ $$\text{Pearson residual}_i = \frac{\text{actual count} - \text{predicted count}
 
 ## Deviance residuals {.smaller}
 
-The deviance residual also compare the actual and predicted counts, but do so using the theory of likelihoods.
+The deviance residuals also compare the actual and predicted counts, but do so using the theory of likelihoods.
 
 **Deviance residuals** 
 
@@ -520,6 +520,8 @@ $$\text{sign}(y_i - m_i\hat{p}_i)  =  \begin{cases}
 -1 & \text{ if }(y_i - m_i\hat{p}_i) < 0 \\
 0 & \text{ if }(y_i - m_i\hat{p}_i) = 0
 \end{cases}$$
+
+$\Sigma d_i =$ deviance or residual deviance
 
 ## Meaning of Residuals {.smaller}
 
@@ -540,10 +542,46 @@ $$d_i = \text{sign}(Y_i - m_i\hat{p}_i)\sqrt{2\left[Y_i\log\left(\frac{Y_i}{m_i\
 ### Model {.smaller}
 
 ```{r, warning=F,message=F}
-rr_int_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +
-                      distance*pctBlack, 
-                data = rr, family = binomial)
+rr_aug <- augment(rr_model, type.predict = "response", 
+                        type.residuals = "deviance")
 
+rr_aug |> slice(1:5) |> kable()
+```
+
+
+### Residual Plot
+
+```{r echo = F}
+ggplot(data = rr_aug, aes(x = .fitted, y = .resid)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, color = "red") + 
+  labs(x = "Fitted values", 
+       y = "Deviance residuals", 
+       title = "Deviance residuals vs. fitted")
+```
+
+### Plot Code
+
+```{r eval = F}
+ggplot(data = rr_aug, aes(x = .fitted, y = .resid)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, color = "red") + 
+  labs(x = "Fitted values", 
+       y = "Deviance residuals", 
+       title = "Deviance residuals vs. fitted")
+```
+
+:::
+
+## Fit an interaction term {.smaller}
+
+:::{.panel-tabset}
+
+### Model {.smaller}
+
+```{r, warning=F,message=F}
+rr_int_model <- glm(cbind(YesVotes, NumVotes-YesVotes) ~ distance + pctBlack +
+                      distance*pctBlack, data=rr, family=binomial)
 rr_int_aug <- augment(rr_int_model, type.predict = "response", 
                         type.residuals = "deviance")
 
@@ -559,8 +597,7 @@ ggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) +
   geom_hline(yintercept = 0, color = "red") + 
   labs(x = "Fitted values", 
        y = "Deviance residuals", 
-       title = "Deviance residuals vs. fitted", 
-       subtitle = "for model with interaction term")
+       title = "Deviance residuals vs. fitted")
 ```
 
 ### Plot Code
@@ -571,11 +608,11 @@ ggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) +
   geom_hline(yintercept = 0, color = "red") + 
   labs(x = "Fitted values", 
        y = "Deviance residuals", 
-       title = "Deviance residuals vs. fitted", 
-       subtitle = "for model with interaction term")
+       title = "Deviance residuals vs. fitted")
 ```
 
 :::
+
 
 ## Goodness of fit {.smaller}
 
@@ -597,11 +634,9 @@ $$\begin{aligned} &H_0: \text{ Model is a good fit} \\
 ### Model {.smaller}
 
 ```{r, warning=F,message=F}
-rr_int_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +
-                      distance*pctBlack, 
-                data = rr, family = binomial)
+rr_int_model <- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + distance*pctBlack, data = rr, family = binomial)
 
-tidy(rr_int_model) |> kable(digits=3)
+rr_int_model
 ```
 
 

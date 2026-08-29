@@ -5017,7 +5017,7 @@
     "href": "slides/06_logistic_ch6_o.html#learning-goals",
     "title": "Logistic Regression",
     "section": "Learning goals",
-    "text": "Learning goals\n\nIdentify Bernoulli and binomial random variables\nWrite GLM for binomial response variable\nInterpret the coefficients for a logistic regression model\nVisualizations for logistic regression\nInterpret coefficients and results from an ordinal logistic regression model"
+    "text": "Learning goals\n\nIdentify Bernoulli and binomial random variables\nWrite GLM for binomial response variable\nInterpret the coefficients for a logistic regression model\nVisualizations for logistic regression"
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#bernoulli-binomial-random-variables-12",
@@ -5073,7 +5073,7 @@
     "href": "slides/06_logistic_ch6_o.html#covid-19-infection-prevention-practices-at-food-establishments",
     "title": "Logistic Regression",
     "section": "COVID-19 infection prevention practices at food establishments",
-    "text": "COVID-19 infection prevention practices at food establishments\nResearchers at Wollo Univeristy in Ethiopia conducted a study in July and August 2020 to understand factors associated with good COVID-19 infection prevention practices at food establishments. Their study is published in Andualem et al. (2022)\n\nThey were particularly interested in the understanding implementation of prevention practices at food establishments, given the workers’ increased risk due to daily contact with customers.\n\n\nAndualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., … & Adane, M. (2022). COVID-19 infection prevention practices among a sample of food handlers of food and drink establishments in Ethiopia. PloS one, 17(1), e0259851."
+    "text": "COVID-19 infection prevention practices at food establishments\nResearchers at Wollo Univeristy in Ethiopia conducted a study in July and August 2020 to understand factors associated with good COVID-19 infection prevention practices at food establishments. Their study is published in Andualem et al. (2022)\n\nThey were particularly interested in understanding the implementation of prevention practices at food establishments, given the workers’ increased risk due to daily contact with customers.\n\n\nAndualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., … & Adane, M. (2022). COVID-19 infection prevention practices among a sample of food handlers of food and drink establishments in Ethiopia. PloS one, 17(1), e0259851."
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#the-data",
@@ -5101,14 +5101,14 @@
     "href": "slides/06_logistic_ch6_o.html#interpreting-the-results",
     "title": "Logistic Regression",
     "section": "Interpreting the results",
-    "text": "Interpreting the results\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\n\nIt’s often unreliable to answer this question just based on the model output. Why are we able to answer this question based on the model output in this case?\n\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
+    "text": "Interpreting the results\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#access-to-personal-protective-equipment",
     "href": "slides/06_logistic_ch6_o.html#access-to-personal-protective-equipment",
     "title": "Logistic Regression",
     "section": "Access to personal protective equipment",
-    "text": "Access to personal protective equipment\nWe will use the data from Andualem et al. (2022) to explore the association between age, sex, years of service, and whether someone works at a food establishment with access to personal protective equipment (PPE) as of August 2020. We will use access to PPE as a proxy for wearing PPE.\n\nDataCode\n\n\n\n\n\n\n\nage\nsex\nyears\nppe_access\n\n\n\n\n34\nMale\n2\n1\n\n\n32\nFemale\n3\n1\n\n\n32\nFemale\n1\n1\n\n\n40\nMale\n4\n1\n\n\n32\nMale\n10\n1\n\n\n\n\n\n\n\n\ncovid_df &lt;- read_csv(\"data/covid-prevention-study.csv\") |&gt;\n  rename(age = \"Age of food handlers\", \n         years = \"Years of service\", \n         ppe_access = \"Availability of PPEs\") |&gt;\n  mutate(sex = factor(if_else(Sex == 2, \"Female\", \"Male\"))) |&gt;\n  select(age, sex, years, ppe_access) \n\ncovid_df |&gt; slice(1:5) |&gt; kable()"
+    "text": "Access to personal protective equipment\nWe will use the data from Andualem et al. (2022) to explore the association between age, sex, years of service, and whether someone works at a food establishment with access to personal protective equipment (PPE) as of August 2020. We will use access to PPE as a proxy for wearing PPE.\n\nDataCode\n\n\n\n\nRows: 401 Columns: 58\n── Column specification ──────────────────────────────────────────────────────────────────\nDelimiter: \",\"\ndbl (58): Age of food handlers, Sex, Years of service, Specific budget for PPE, Availa...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\n\nage\nsex\nyears\nppe_access\n\n\n\n\n34\nMale\n2\n1\n\n\n32\nFemale\n3\n1\n\n\n32\nFemale\n1\n1\n\n\n40\nMale\n4\n1\n\n\n32\nMale\n10\n1\n\n\n\n\n\n\n\n\ncovid_df &lt;- read_csv(\"data/covid-prevention-study.csv\") |&gt;\n  rename(age = \"Age of food handlers\", \n         years = \"Years of service\", \n         ppe_access = \"Availability of PPEs\") |&gt;\n  mutate(sex = factor(if_else(Sex == 2, \"Female\", \"Male\"))) |&gt;\n  select(age, sex, years, ppe_access) \n\ncovid_df |&gt; slice(1:5) |&gt; kable()"
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#eda-for-binary-response-12",
@@ -5150,7 +5150,7 @@
     "href": "slides/06_logistic_ch6_o.html#the-data-1",
     "title": "Logistic Regression",
     "section": "The data",
-    "text": "The data\n\nrr &lt;- read_csv(\"data/RR_Data_Hale.csv\")\nrr |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCounty\npopBlack\npopWhite\npopTotal\npctBlack\ndistance\nYesVotes\nNumVotes\n\n\n\n\nCarthage\n841\n599\n1440\n58.40\n17\n61\n110\n\n\nCederville\n1774\n146\n1920\n92.40\n7\n0\n15\n\n\nFive Mile Creek\n140\n626\n766\n18.28\n15\n4\n42\n\n\nGreensboro\n1425\n975\n2400\n59.38\n0\n1790\n1804\n\n\nHarrison\n443\n355\n798\n55.51\n7\n0\n15"
+    "text": "The data\n\nrr &lt;- read_csv(\"data/RR_Data_Hale.csv\")\n\nRows: 12 Columns: 8\n── Column specification ──────────────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): County\ndbl (7): popBlack, popWhite, popTotal, pctBlack, distance, YesVotes, NumVotes\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nrr |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCounty\npopBlack\npopWhite\npopTotal\npctBlack\ndistance\nYesVotes\nNumVotes\n\n\n\n\nCarthage\n841\n599\n1440\n58.40\n17\n61\n110\n\n\nCederville\n1774\n146\n1920\n92.40\n7\n0\n15\n\n\nFive Mile Creek\n140\n626\n766\n18.28\n15\n4\n42\n\n\nGreensboro\n1425\n975\n2400\n59.38\n0\n1790\n1804\n\n\nHarrison\n443\n355\n798\n55.51\n7\n0\n15"
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#eda-13",
@@ -5164,7 +5164,7 @@
     "href": "slides/06_logistic_ch6_o.html#eda-23",
     "title": "Logistic Regression",
     "section": "EDA (2/3)",
-    "text": "EDA (2/3)\n\nPlotCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\np1 &lt;- ggplot(data = rr, aes(x = distance, y = emp_logit)) + \n  geom_point() + \n  geom_smooth(method  = \"lm\", se = FALSE) + \n  labs(x = \"Distance to proposed railroad\", \n       y = \" \")\n  \np2 &lt;- ggplot(data = rr, aes(x = pctBlack, y = emp_logit)) + \n  geom_point() + \n  geom_smooth(method  = \"lm\", se = FALSE) + \n  labs(x = \"% Black residents\", \n       y = \"\")\np1 + p2 + plot_annotation(title = \"Log(odds yes vote) vs. predictor variables\")"
+    "text": "EDA (2/3)\n\nPlotCode\n\n\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 2 rows containing non-finite outside the scale range (`stat_smooth()`).\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 3 rows containing non-finite outside the scale range (`stat_smooth()`).\n\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n\n\n\np1 &lt;- ggplot(data = rr, aes(x = distance, y = emp_logit)) + \n  geom_point() + \n  geom_smooth(method  = \"lm\", se = FALSE) + \n  labs(x = \"Distance to proposed railroad\", \n       y = \" \")\n  \np2 &lt;- ggplot(data = rr, aes(x = pctBlack, y = emp_logit)) + \n  geom_point() + \n  geom_smooth(method  = \"lm\", se = FALSE) + \n  labs(x = \"% Black residents\", \n       y = \"\")\np1 + p2 + plot_annotation(title = \"Log(odds yes vote) vs. predictor variables\")"
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#eda-33",
@@ -5199,7 +5199,7 @@
     "href": "slides/06_logistic_ch6_o.html#deviance-residuals",
     "title": "Logistic Regression",
     "section": "Deviance residuals",
-    "text": "Deviance residuals\nThe deviance residual also compare the actual and predicted counts, but do so using the theory of likelihoods.\nDeviance residuals\n\\[d_i = \\text{sign}(Y_i - m_i\\hat{p}_i)\\sqrt{2\\left[Y_i\\log\\left(\\frac{Y_i}{m_i\\hat{p}_i}\\right) + (m_i - Y_i)\\log\\left(\\frac{m_i - Y_i}{m_i - m_i\\hat{p}_i}\\right)\\right]}\\] where\n\\[\\text{sign}(y_i - m_i\\hat{p}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - m_i\\hat{p}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - m_i\\hat{p}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - m_i\\hat{p}_i) = 0\n\\end{cases}\\]"
+    "text": "Deviance residuals\nThe deviance residuals also compare the actual and predicted counts, but do so using the theory of likelihoods.\nDeviance residuals\n\\[d_i = \\text{sign}(Y_i - m_i\\hat{p}_i)\\sqrt{2\\left[Y_i\\log\\left(\\frac{Y_i}{m_i\\hat{p}_i}\\right) + (m_i - Y_i)\\log\\left(\\frac{m_i - Y_i}{m_i - m_i\\hat{p}_i}\\right)\\right]}\\] where\n\\[\\text{sign}(y_i - m_i\\hat{p}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - m_i\\hat{p}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - m_i\\hat{p}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - m_i\\hat{p}_i) = 0\n\\end{cases}\\]\n\\(\\Sigma d_i =\\) deviance or residual deviance"
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#meaning-of-residuals",
@@ -5213,7 +5213,7 @@
     "href": "slides/06_logistic_ch6_o.html#plot-of-deviance-residuals",
     "title": "Logistic Regression",
     "section": "Plot of deviance residuals",
-    "text": "Plot of deviance residuals\n\nModelResidual PlotPlot Code\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\nrr_int_aug &lt;- augment(rr_int_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_int_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.2075801\n7.964510\n0.4663943\n5.0884957\n32.9667672\n\n\n2\n0\n15\n7\n92.40\n0.6776101\n-5.827504\n0.0492925\n6.3049338\n0.4298496\n\n\n3\n4\n38\n15\n18.28\n0.2024659\n-1.885115\n0.6433983\n6.6366201\n3.7828247\n\n\n4\n1790\n14\n0\n59.38\n0.9760416\n5.230746\n0.8996698\n0.5044966\n452.2582760\n\n\n5\n0\n15\n7\n55.51\n0.8513123\n-7.561561\n0.0240118\n5.9951340\n0.5412285\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\", \n       subtitle = \"for model with interaction term\")"
+    "text": "Plot of deviance residuals\n\nModelResidual PlotPlot Code\n\n\n\nrr_aug &lt;- augment(rr_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.1809492\n8.771817\n0.4024062\n5.049182\n38.9100153\n\n\n2\n0\n15\n7\n92.40\n0.7226596\n-6.202846\n0.0475431\n6.173926\n0.6827913\n\n\n3\n4\n38\n15\n18.28\n0.4023246\n-4.470391\n0.5021377\n6.176880\n11.1227469\n\n\n4\n1790\n14\n0\n59.38\n0.9688288\n6.822432\n0.8365269\n1.792364\n341.6089578\n\n\n5\n0\n15\n7\n55.51\n0.8093268\n-7.050945\n0.0191686\n6.053687\n0.4228691\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\")"
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#goodness-of-fit",
@@ -5227,7 +5227,7 @@
     "href": "slides/06_logistic_ch6_o.html#goodness-of-fit-test",
     "title": "Logistic Regression",
     "section": "Goodness of fit test",
-    "text": "Goodness of fit test\n\nModelTest\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\ntidy(rr_int_model) |&gt; kable(digits=3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.551\n0.638\n11.828\n0\n\n\ndistance\n-0.614\n0.057\n-10.701\n0\n\n\npctBlack\n-0.065\n0.009\n-7.057\n0\n\n\ndistance:pctBlack\n0.005\n0.001\n5.974\n0\n\n\n\n\n\n\n\nThe test statistic is the residual deviance: 274.2\nThe degrees of freedom are the residual df: 7\nWe find the p-value using the chi-square distribution r function\n\n1-pchisq(274.2, 7)\n\n[1] 0\n\n\nThe p-value is quite small, so there is significant evidence that the model is not a good fit."
+    "text": "Goodness of fit test\n\nModelTest\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + distance*pctBlack, data = rr, family = binomial)\n\nrr_int_model\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + \n    pctBlack + distance * pctBlack, family = binomial, data = rr)\n\nCoefficients:\n      (Intercept)           distance           pctBlack  distance:pctBlack  \n         7.550902          -0.614005          -0.064731           0.005367  \n\nDegrees of Freedom: 10 Total (i.e. Null);  7 Residual\n  (1 observation deleted due to missingness)\nNull Deviance:      988.4 \nResidual Deviance: 274.2    AIC: 320.5\n\n\n\n\nThe test statistic is the residual deviance: 274.2\nThe degrees of freedom are the residual df: 7\nWe find the p-value using the chi-square distribution r function\n\n1-pchisq(274.2, 7)\n\n[1] 0\n\n\nThe p-value is quite small, so there is significant evidence that the model is not a good fit."
   },
   {
     "objectID": "slides/06_logistic_ch6_o.html#drop-in-deviance-test",
@@ -5304,7 +5304,7 @@
     "href": "slides/06_logistic_ch6.html#learning-goals",
     "title": "Logistic Regression",
     "section": "Learning goals",
-    "text": "Learning goals\n\nIdentify Bernoulli and binomial random variables\nWrite GLM for binomial response variable\nInterpret the coefficients for a logistic regression model\nVisualizations for logistic regression\nInterpret coefficients and results from an ordinal logistic regression model"
+    "text": "Learning goals\n\nIdentify Bernoulli and binomial random variables\nWrite GLM for binomial response variable\nInterpret the coefficients for a logistic regression model\nVisualizations for logistic regression"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#bernoulli-binomial-random-variables-12",
@@ -5360,7 +5360,7 @@
     "href": "slides/06_logistic_ch6.html#covid-19-infection-prevention-practices-at-food-establishments",
     "title": "Logistic Regression",
     "section": "COVID-19 infection prevention practices at food establishments",
-    "text": "COVID-19 infection prevention practices at food establishments\nResearchers at Wollo Univeristy in Ethiopia conducted a study in July and August 2020 to understand factors associated with good COVID-19 infection prevention practices at food establishments. Their study is published in Andualem et al. (2022)\n\nThey were particularly interested in the understanding implementation of prevention practices at food establishments, given the workers’ increased risk due to daily contact with customers.\n\n\nAndualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., … & Adane, M. (2022). COVID-19 infection prevention practices among a sample of food handlers of food and drink establishments in Ethiopia. PloS one, 17(1), e0259851."
+    "text": "COVID-19 infection prevention practices at food establishments\nResearchers at Wollo Univeristy in Ethiopia conducted a study in July and August 2020 to understand factors associated with good COVID-19 infection prevention practices at food establishments. Their study is published in Andualem et al. (2022)\n\nThey were particularly interested in understanding the implementation of prevention practices at food establishments, given the workers’ increased risk due to daily contact with customers.\n\n\nAndualem, A., Tegegne, B., Ademe, S., Natnael, T., Berihun, G., Abebe, M., … & Adane, M. (2022). COVID-19 infection prevention practices among a sample of food handlers of food and drink establishments in Ethiopia. PloS one, 17(1), e0259851."
   },
   {
     "objectID": "slides/06_logistic_ch6.html#the-data",
@@ -5388,7 +5388,7 @@
     "href": "slides/06_logistic_ch6.html#interpreting-the-results",
     "title": "Logistic Regression",
     "section": "Interpreting the results",
-    "text": "Interpreting the results\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\n\nIt’s often unreliable to answer this question just based on the model output. Why are we able to answer this question based on the model output in this case?\n\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
+    "text": "Interpreting the results\n\nIs the response a Bernoulli or Binomial?\nWhat is the strongest predictor of having good COVID-19 infection prevention practices?\nDescribe the effect (coefficient interpretation and inference) of having COVID-19 infection prevention policies available at the food establishment.\nThe intercept describes what group of food handlers?"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#access-to-personal-protective-equipment",
@@ -5486,7 +5486,7 @@
     "href": "slides/06_logistic_ch6.html#deviance-residuals",
     "title": "Logistic Regression",
     "section": "Deviance residuals",
-    "text": "Deviance residuals\nThe deviance residual also compare the actual and predicted counts, but do so using the theory of likelihoods.\nDeviance residuals\n\\[d_i = \\text{sign}(Y_i - m_i\\hat{p}_i)\\sqrt{2\\left[Y_i\\log\\left(\\frac{Y_i}{m_i\\hat{p}_i}\\right) + (m_i - Y_i)\\log\\left(\\frac{m_i - Y_i}{m_i - m_i\\hat{p}_i}\\right)\\right]}\\] where\n\\[\\text{sign}(y_i - m_i\\hat{p}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - m_i\\hat{p}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - m_i\\hat{p}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - m_i\\hat{p}_i) = 0\n\\end{cases}\\]"
+    "text": "Deviance residuals\nThe deviance residuals also compare the actual and predicted counts, but do so using the theory of likelihoods.\nDeviance residuals\n\\[d_i = \\text{sign}(Y_i - m_i\\hat{p}_i)\\sqrt{2\\left[Y_i\\log\\left(\\frac{Y_i}{m_i\\hat{p}_i}\\right) + (m_i - Y_i)\\log\\left(\\frac{m_i - Y_i}{m_i - m_i\\hat{p}_i}\\right)\\right]}\\] where\n\\[\\text{sign}(y_i - m_i\\hat{p}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - m_i\\hat{p}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - m_i\\hat{p}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - m_i\\hat{p}_i) = 0\n\\end{cases}\\]\n\\(\\Sigma d_i =\\) deviance or residual deviance"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#meaning-of-residuals",
@@ -5500,7 +5500,7 @@
     "href": "slides/06_logistic_ch6.html#plot-of-deviance-residuals",
     "title": "Logistic Regression",
     "section": "Plot of deviance residuals",
-    "text": "Plot of deviance residuals\n\nModelResidual PlotPlot Code\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\nrr_int_aug &lt;- augment(rr_int_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_int_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.2075801\n7.964510\n0.4663943\n5.0884957\n32.9667672\n\n\n2\n0\n15\n7\n92.40\n0.6776101\n-5.827504\n0.0492925\n6.3049338\n0.4298496\n\n\n3\n4\n38\n15\n18.28\n0.2024659\n-1.885115\n0.6433983\n6.6366201\n3.7828247\n\n\n4\n1790\n14\n0\n59.38\n0.9760416\n5.230746\n0.8996698\n0.5044966\n452.2582760\n\n\n5\n0\n15\n7\n55.51\n0.8513123\n-7.561561\n0.0240118\n5.9951340\n0.5412285\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\", \n       subtitle = \"for model with interaction term\")"
+    "text": "Plot of deviance residuals\n\nModelResidual PlotPlot Code\n\n\n\nrr_aug &lt;- augment(rr_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.1809492\n8.771817\n0.4024062\n5.049182\n38.9100153\n\n\n2\n0\n15\n7\n92.40\n0.7226596\n-6.202846\n0.0475431\n6.173926\n0.6827913\n\n\n3\n4\n38\n15\n18.28\n0.4023246\n-4.470391\n0.5021377\n6.176880\n11.1227469\n\n\n4\n1790\n14\n0\n59.38\n0.9688288\n6.822432\n0.8365269\n1.792364\n341.6089578\n\n\n5\n0\n15\n7\n55.51\n0.8093268\n-7.050945\n0.0191686\n6.053687\n0.4228691\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\")"
   },
   {
     "objectID": "slides/06_logistic_ch6.html#goodness-of-fit",
@@ -5514,7 +5514,7 @@
     "href": "slides/06_logistic_ch6.html#goodness-of-fit-test",
     "title": "Logistic Regression",
     "section": "Goodness of fit test",
-    "text": "Goodness of fit test\n\nModelTest\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, \n                data = rr, family = binomial)\n\ntidy(rr_int_model) |&gt; kable(digits=3)\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n7.551\n0.638\n11.828\n0\n\n\ndistance\n-0.614\n0.057\n-10.701\n0\n\n\npctBlack\n-0.065\n0.009\n-7.057\n0\n\n\ndistance:pctBlack\n0.005\n0.001\n5.974\n0\n\n\n\n\n\n\n\nThe test statistic is the residual deviance: 274.2\nThe degrees of freedom are the residual df: 7\nWe find the p-value using the chi-square distribution r function\n\n1-pchisq(274.2, 7)\n\n[1] 0\n\n\nThe p-value is quite small, so there is significant evidence that the model is not a good fit."
+    "text": "Goodness of fit test\n\nModelTest\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes - YesVotes) ~ distance + pctBlack + distance*pctBlack, data = rr, family = binomial)\n\nrr_int_model\n\n\nCall:  glm(formula = cbind(YesVotes, NumVotes - YesVotes) ~ distance + \n    pctBlack + distance * pctBlack, family = binomial, data = rr)\n\nCoefficients:\n      (Intercept)           distance           pctBlack  distance:pctBlack  \n         7.550902          -0.614005          -0.064731           0.005367  \n\nDegrees of Freedom: 10 Total (i.e. Null);  7 Residual\n  (1 observation deleted due to missingness)\nNull Deviance:      988.4 \nResidual Deviance: 274.2    AIC: 320.5\n\n\n\n\nThe test statistic is the residual deviance: 274.2\nThe degrees of freedom are the residual df: 7\nWe find the p-value using the chi-square distribution r function\n\n1-pchisq(274.2, 7)\n\n[1] 0\n\n\nThe p-value is quite small, so there is significant evidence that the model is not a good fit."
   },
   {
     "objectID": "slides/06_logistic_ch6.html#drop-in-deviance-test",
@@ -7020,5 +7020,19 @@
     "title": "Distribution Theory",
     "section": "Acknowledgements",
     "text": "Acknowledgements\n\nThese slides are based on content in BMLR: Chapter 5\nInitial versions of the slides are by Dr. Maria Tackett, Duke University\nNelder, J. A., & Wedderburn, R. W. (1972). Generalized linear models. Journal of the Royal Statistical Society: Series A (General), 135(3), 370-384.\nGeneralized Linear Models with Examples in R\n\nChapter 5 - Generalized Linear Models: Structure\nChapter 6 - Generalized Linear Models: Estimation"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6.html#fit-an-interaction-term",
+    "href": "slides/06_logistic_ch6.html#fit-an-interaction-term",
+    "title": "Logistic Regression",
+    "section": "Fit an interaction term",
+    "text": "Fit an interaction term\n\nModelResidual PlotPlot Code\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes-YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, data=rr, family=binomial)\nrr_int_aug &lt;- augment(rr_int_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_int_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.2075801\n7.964510\n0.4663943\n5.0884957\n32.9667672\n\n\n2\n0\n15\n7\n92.40\n0.6776101\n-5.827504\n0.0492925\n6.3049338\n0.4298496\n\n\n3\n4\n38\n15\n18.28\n0.2024659\n-1.885115\n0.6433983\n6.6366201\n3.7828247\n\n\n4\n1790\n14\n0\n59.38\n0.9760416\n5.230746\n0.8996698\n0.5044966\n452.2582760\n\n\n5\n0\n15\n7\n55.51\n0.8513123\n-7.561561\n0.0240118\n5.9951340\n0.5412285\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\")"
+  },
+  {
+    "objectID": "slides/06_logistic_ch6_o.html#fit-an-interaction-term",
+    "href": "slides/06_logistic_ch6_o.html#fit-an-interaction-term",
+    "title": "Logistic Regression",
+    "section": "Fit an interaction term",
+    "text": "Fit an interaction term\n\nModelResidual PlotPlot Code\n\n\n\nrr_int_model &lt;- glm(cbind(YesVotes, NumVotes-YesVotes) ~ distance + pctBlack +\n                      distance*pctBlack, data=rr, family=binomial)\nrr_int_aug &lt;- augment(rr_int_model, type.predict = \"response\", \n                        type.residuals = \"deviance\")\n\nrr_int_aug |&gt; slice(1:5) |&gt; kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.rownames\ncbind(YesVotes, NumVotes - YesVotes)\ndistance\npctBlack\n.fitted\n.resid\n.hat\n.sigma\n.cooksd\n.std.resid\n\n\n\n\n1\n61\n49\n17\n58.40\n0.2075801\n7.964510\n0.4663943\n5.0884957\n32.9667672\n\n\n2\n0\n15\n7\n92.40\n0.6776101\n-5.827504\n0.0492925\n6.3049338\n0.4298496\n\n\n3\n4\n38\n15\n18.28\n0.2024659\n-1.885115\n0.6433983\n6.6366201\n3.7828247\n\n\n4\n1790\n14\n0\n59.38\n0.9760416\n5.230746\n0.8996698\n0.5044966\n452.2582760\n\n\n5\n0\n15\n7\n55.51\n0.8513123\n-7.561561\n0.0240118\n5.9951340\n0.5412285\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = rr_int_aug, aes(x = .fitted, y = .resid)) + \n  geom_point() + \n  geom_hline(yintercept = 0, color = \"red\") + \n  labs(x = \"Fitted values\", \n       y = \"Deviance residuals\", \n       title = \"Deviance residuals vs. fitted\")"
   }
 ]

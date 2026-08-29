@@ -85,7 +85,7 @@ ii. For categorical explanatory variables (`female` or `sex`, `highstatus` or `s
 
 b.  In (a), you should have found no relationship between whether or not a patient develops lung cancer and either their age or sex. Why might this be? What implications will this have on your modeling?
 
-c.  Based on a two-way table with keeping birds and developing lung cancer from (a), find an unadjusted odds ratio comparing birdkeepers to non-birdkeepers and interpret this odds ratio in context. (Note: an *unadjusted* odds ratio is found by *not* controlling for any other variables.) Also, find an analogous relative risk and interpret it in context as well.
+c.  Based on a two-way table with keeping birds and developing lung cancer from (a), find an unadjusted odds ratio comparing birdkeepers to non-birdkeepers and interpret this odds ratio in context. (Note: an *unadjusted* odds ratio is found by *not* controlling for any other variables.) 
 
 d.  Are the empirical logit's reasonably linear relating number of years smoked to the estimated log odds of developing lung cancer? Demonstrate with an appropriate plot.
 

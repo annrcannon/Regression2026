@@ -1,6 +1,6 @@
 ---
 title: 'Mini Project 1'
-subtitle: 'Generalized Linear Models'
+subtitle: 'Logistic Regression Models'
 execute:
   eval: false
 ---
@@ -11,7 +11,7 @@ execute:
 
 ##### 2) Find an appropriate data set.
 
-  -   GLM's are broadly applicable and there are no requirements on the type of data the response needs to follow.
+  -   Logistic regression is a category of glms. They require that the response variable either be an indicator variable, or counts of successes in some number of trials (which may vary over observations)
   -   The data you choose should have a few predictors that may be useful when modeling (ideally at least 1 quantitative and 1 categorical).
 
 - **Data Options:** Check out Data Links on the [Useful Links](../course-links.qmd) part of the course website. *TidyTuesday* has quickly accessible data.

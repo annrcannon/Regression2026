@@ -3,7 +3,7 @@ title: "STA 363 Exam 1 Output 2026"
 author: "Ann Cannon"
 ---
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(ISLR2)
 library(ggplot2)
@@ -20,46 +20,59 @@ library(ggfortify)
 ggplot(Auto, aes(weight, mpg)) +
   geom_point() +
   labs(
-    title= "Weight versus mpg for a sample of cars",
+    title= "Figure 1",
     x = "Vehicle weight in pounds",
     y = "Average miles per gallon of gasoline",
-    subtitle = "Figure 1"
+    subtitle = "Weight versus mpg for a sample of cars"
   )
 
 
 
 ```
 
+## Polynomial Regression
+
 ```{r}
 mod1 <- lm(mpg~weight, data=Auto)
-par(mfrow=c(2,2))
-plot(mod1)
+par(mfrow = c(2, 2), oma = c(0, 0, 1, 0))  # oma: bottom, left, top, right
+plot(mod1, sub.caption="")
+mtext("Figure 2", outer = TRUE, cex = 1)
+par(mfrow = c(1, 1), oma = c(0, 0, 0, 0))  # reset to defaults
 glance(mod1) |>
   select(r.squared, adj.r.squared, AIC, BIC) |>
   kable(digits = 3)
 
 mod2 <- lm(mpg~poly(weight, 2), data=Auto)
-par(mfrow=c(2,2))
-plot(mod2)
+par(mfrow = c(2, 2), oma = c(0, 0, 1, 0))  # oma: bottom, left, top, right
+plot(mod2, sub.caption="")
+mtext("Figure 3", outer = TRUE, cex = 1)
+par(mfrow = c(1, 1), oma = c(0, 0, 0, 0))  # reset to defaults
 glance(mod2) |>
   select(r.squared, adj.r.squared, AIC, BIC) |>
   kable(digits = 3)
 
 mod3 <- lm(mpg~poly(weight, 3), data=Auto)
-par(mfrow=c(2,2))
-plot(mod3)
+par(mfrow = c(2, 2), oma = c(0, 0, 1, 0))  # oma: bottom, left, top, right
+plot(mod3, sub.caption="")
+mtext("Figure 4", outer = TRUE, cex = 1)
+par(mfrow = c(1, 1), oma = c(0, 0, 0, 0))  # reset to defaults
 glance(mod3) |>
   select(r.squared, adj.r.squared, AIC, BIC) |>
   kable(digits = 3)
 
 mod4 <- lm(mpg~poly(weight, 4), data=Auto)
-par(mfrow=c(2,2))
-plot(mod4)
+par(mfrow = c(2, 2), oma = c(0, 0, 1, 0))  # oma: bottom, left, top, right
+plot(mod4, sub.caption="")
+mtext("Figure 5", outer = TRUE, cex = 1)
+par(mfrow = c(1, 1), oma = c(0, 0, 0, 0))  # reset to defaults
 glance(mod4) |>
   select(r.squared, adj.r.squared, AIC, BIC) |>
   kable(digits = 3)
 
 ```
+
+## Spline Regression Models
+
 
 ```{r}
 glance(lm(mpg ~ bs(weight, df=3), data = Auto)) |>
@@ -68,7 +81,11 @@ glance(lm(mpg ~ bs(weight, df=3), data = Auto)) |>
 
 ggplot(data=Auto, aes(x=weight, y=mpg)) +
   geom_point(aes(x=weight, y=mpg)) +
-  geom_smooth(formula =y ~ bs(x, df=3), method="lm")
+  geom_smooth(formula =y ~ bs(x, df=3), method="lm") +
+  labs(title= "Figure 6",
+    x = "Vehicle weight in pounds",
+    y = "Average miles per gallon of gasoline",
+    subtitle = "Spline model with df=3")
 
 
 glance(lm(mpg ~ bs(weight, df=4), data = Auto)) |>
@@ -77,7 +94,11 @@ glance(lm(mpg ~ bs(weight, df=4), data = Auto)) |>
 
 ggplot(data=Auto, aes(x=weight, y=mpg)) +
   geom_point(aes(x=weight, y=mpg)) +
-  geom_smooth(formula =y ~ bs(x, df=4), method="lm")
+  geom_smooth(formula =y ~ bs(x, df=4), method="lm") +
+  labs(title= "Figure 7",
+    x = "Vehicle weight in pounds",
+    y = "Average miles per gallon of gasoline",
+    subtitle = "Spline model with df=4")
 
 
 glance(lm(mpg ~ bs(weight, df=5), data = Auto)) |>
@@ -86,10 +107,16 @@ glance(lm(mpg ~ bs(weight, df=5), data = Auto)) |>
 
 ggplot(data=Auto, aes(x=weight, y=mpg)) +
   geom_point(aes(x=weight, y=mpg)) +
-  geom_smooth(formula =y ~ bs(x, df=5), method="lm")
+  geom_smooth(formula =y ~ bs(x, df=5), method="lm") +
+  labs(title= "Figure 7",
+    x = "Vehicle weight in pounds",
+    y = "Average miles per gallon of gasoline",
+    subtitle = "Spline model with df=5")
 
 
 ```
+
+## Natural Spline Models
 
 
 ```{r}
@@ -99,7 +126,11 @@ glance(lm(mpg ~ ns(weight, df=3), data = Auto)) |>
 
 ggplot(data=Auto, aes(x=weight, y=mpg)) +
   geom_point(aes(x=weight, y=mpg)) +
-  geom_smooth(formula =y ~ ns(x, df=3), method="lm")
+  geom_smooth(formula =y ~ ns(x, df=3), method="lm") +
+  labs(title= "Figure 8",
+    x = "Vehicle weight in pounds",
+    y = "Average miles per gallon of gasoline",
+    subtitle = "Natural spline model with df=3")
 
 
 glance(lm(mpg ~ ns(weight, df=4), data = Auto)) |>
@@ -108,7 +139,11 @@ glance(lm(mpg ~ ns(weight, df=4), data = Auto)) |>
 
 ggplot(data=Auto, aes(x=weight, y=mpg)) +
   geom_point(aes(x=weight, y=mpg)) +
-  geom_smooth(formula =y ~ ns(x, df=4), method="lm")
+  geom_smooth(formula =y ~ ns(x, df=4), method="lm") +
+  labs(title= "Figure 9",
+    x = "Vehicle weight in pounds",
+    y = "Average miles per gallon of gasoline",
+    subtitle = "Natural spline model with df=4")
 
 
 glance(lm(mpg ~ ns(weight, df=5), data = Auto)) |>
@@ -117,7 +152,11 @@ glance(lm(mpg ~ ns(weight, df=5), data = Auto)) |>
 
 ggplot(data=Auto, aes(x=weight, y=mpg)) +
   geom_point(aes(x=weight, y=mpg)) +
-  geom_smooth(formula =y ~ ns(x, df=5), method="lm")
+  geom_smooth(formula =y ~ ns(x, df=5), method="lm") +
+  labs(title= "Figure 10",
+    x = "Vehicle weight in pounds",
+    y = "Average miles per gallon of gasoline",
+    subtitle = "Natural spline model with df=5")
 
 
 ```

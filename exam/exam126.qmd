@@ -23,6 +23,7 @@ library(Stat2Data)
 3. You are required to upload the HTML file from your output to Moodle.  Technical difficulties are **not** and excuse for late work - do not wait until the last minute. **Verify your HTML file includes all graphs and tables before uploading to Moodle.**  If I have you re-render, and resubmit, you will lose 5 points on the exam.  
 4.  Your analysis, output, and narrative, not your code, should answer the questions. 
 5. I expect your answers to be complete written answers.  When you refer to output, make sure the reference is obvious.  And only refer to what you need to make your answer complete.
+6.  This part is due on **Wednesday, September 2, at 5:00 pm on Moodle**
 
 ## Exam Scenario
 

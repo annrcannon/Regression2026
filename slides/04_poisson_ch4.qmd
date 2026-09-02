@@ -40,7 +40,6 @@ library(gridExtra)
 
 - Use Goodness-of-fit to assess model fit 
 
-- Summarize GLMs for independent observations
 
 ## Learning goals (2/2) {.smaller}
 
@@ -55,6 +54,8 @@ library(gridExtra)
 - Fit and interpret Zero-inflated Poisson models
 
 - Write likelihood for Poisson and Zero-inflated Poisson model
+
+- Summarize GLMs for independent observations
 
 
 ## Scenarios to use Poisson regression{.smaller}
@@ -139,8 +140,11 @@ The annual number of earthquakes registering at least 2.5 on the Richter Scale a
 
 $$P(Y \leq 3) = P(Y = 0) + P(Y = 1) + P(Y = 2) + P(Y = 3)$$
 
+. . .
 
 $$ = \frac{e^{-6.5}6.5^0}{0!} + \frac{e^{-6.5}6.5^1}{1!} + \frac{e^{-6.5}6.5^2}{2!} + \frac{e^{-6.5}6.5^3}{3!}$$
+
+. . .
 
 $$ = 0.112$$
 
@@ -408,7 +412,7 @@ Question: The coefficient for `age` is -0.0047. Interpret this coefficient in co
 - Each additional year older the head of household is, the estimated average log of the number of people in the household is .0047 lower. 
 
 - Each additional year older the head of household is, the estimated average number of people in the household reduces by 0.5%.
-- Each additional year older the head of household is the estimated average number of people in the household changes by a factor of .995.
+- Each additional year older the head of household is, the estimated average number of people in the household changes by a factor of .995.
 
 - For every 10 years older the head of household is, the estimated average number of people in the household reduces by 5%.
 
@@ -662,7 +666,7 @@ $$\text{Pearson residual}_i = \frac{\text{observed} - \text{predicted}}{\text{st
 
 ## Deviance residuals {.smaller}
 
-The **deviance residual** indicates how much the observed data deviates from the fitted model
+The **deviance residuals** indicate how much the observed data deviates from the fitted model
 
 
 $$\text{deviance residual}_i = \text{sign}(y_i - \hat{\lambda}_i)\sqrt{2\Bigg[y_i\log\bigg(\frac{y_i}{\hat{\lambda}_i}\bigg) - (y_i - \hat{\lambda}_i)\Bigg]}$$
@@ -675,7 +679,9 @@ $$\text{sign}(y_i - \hat{\lambda}_i)  =  \begin{cases}
 0 & \text{ if }(y_i - \hat{\lambda}_i) = 0
 \end{cases}$$
 
+. . .
 
+$$\text{residual deviance} = \sum{\left(\text{deviance residual}\right)_i^2}$$
 
 
 ## Model 3: Residual plots  {.smaller}

@@ -915,14 +915,14 @@
     "href": "slides/04_poisson_ch4.html#learning-goals-12",
     "title": "Poisson Regression",
     "section": "Learning goals (1/2)",
-    "text": "Learning goals (1/2)\n\nDescribe properties of the Poisson random variable\nWrite the Poisson regression model\nDescribe how the Poisson regression differs from least-squares regression\nInterpret the coefficients for the Poisson regression model\nCompare two Poisson regression models\nDefine and calculate residuals for the Poisson regression model\nUse Goodness-of-fit to assess model fit\nSummarize GLMs for independent observations"
+    "text": "Learning goals (1/2)\n\nDescribe properties of the Poisson random variable\nWrite the Poisson regression model\nDescribe how the Poisson regression differs from least-squares regression\nInterpret the coefficients for the Poisson regression model\nCompare two Poisson regression models\nDefine and calculate residuals for the Poisson regression model\nUse Goodness-of-fit to assess model fit"
   },
   {
     "objectID": "slides/04_poisson_ch4.html#learning-goals-22",
     "href": "slides/04_poisson_ch4.html#learning-goals-22",
     "title": "Poisson Regression",
     "section": "Learning goals (2/2)",
-    "text": "Learning goals (2/2)\n\nIdentify overdispersion\nApply modeling approaches to deal with overdispersion\nExplore properties of negative binomial versus Poisson response\nFit and interpret models with offset to adjust for differences in sampling effort\nFit and interpret Zero-inflated Poisson models\nWrite likelihood for Poisson and Zero-inflated Poisson model"
+    "text": "Learning goals (2/2)\n\nIdentify overdispersion\nApply modeling approaches to deal with overdispersion\nExplore properties of negative binomial versus Poisson response\nFit and interpret models with offset to adjust for differences in sampling effort\nFit and interpret Zero-inflated Poisson models\nWrite likelihood for Poisson and Zero-inflated Poisson model\nSummarize GLMs for independent observations"
   },
   {
     "objectID": "slides/04_poisson_ch4.html#scenarios-to-use-poisson-regression",
@@ -957,7 +957,7 @@
     "href": "slides/04_poisson_ch4.html#example",
     "title": "Poisson Regression",
     "section": "Example",
-    "text": "Example\nThe annual number of earthquakes registering at least 2.5 on the Richter Scale and having an epicenter within 40 miles of downtown Memphis follows a Poisson distribution with mean 6.5. What is the probability there will be at 3 or fewer such earthquakes next year?\n\n\\[P(Y \\leq 3) = P(Y = 0) + P(Y = 1) + P(Y = 2) + P(Y = 3)\\]\n\\[ = \\frac{e^{-6.5}6.5^0}{0!} + \\frac{e^{-6.5}6.5^1}{1!} + \\frac{e^{-6.5}6.5^2}{2!} + \\frac{e^{-6.5}6.5^3}{3!}\\]\n\\[ = 0.112\\]\n\n\n\nppois(3, 6.5)\n\n[1] 0.1118496\n\n\n\n\n\nExample adapted from Introduction to Probability Theory Example 28-2"
+    "text": "Example\nThe annual number of earthquakes registering at least 2.5 on the Richter Scale and having an epicenter within 40 miles of downtown Memphis follows a Poisson distribution with mean 6.5. What is the probability there will be at 3 or fewer such earthquakes next year?\n\n\\[P(Y \\leq 3) = P(Y = 0) + P(Y = 1) + P(Y = 2) + P(Y = 3)\\]\n\n\n\\[ = \\frac{e^{-6.5}6.5^0}{0!} + \\frac{e^{-6.5}6.5^1}{1!} + \\frac{e^{-6.5}6.5^2}{2!} + \\frac{e^{-6.5}6.5^3}{3!}\\]\n\n\n\\[ = 0.112\\]\n\n\n\nppois(3, 6.5)\n\n[1] 0.1118496\n\n\n\n\n\nExample adapted from Introduction to Probability Theory Example 28-2"
   },
   {
     "objectID": "slides/04_poisson_ch4.html#poisson-regression-1",
@@ -1020,7 +1020,7 @@
     "href": "slides/04_poisson_ch4.html#answers-1",
     "title": "Poisson Regression",
     "section": "Answers",
-    "text": "Answers\n\nEach additional year older the head of household is, the estimated average log of the number of people in the household is .0047 lower.\nEach additional year older the head of household is, the estimated average number of people in the household reduces by 0.5%.\nEach additional year older the head of household is the estimated average number of people in the household changes by a factor of .995.\nFor every 10 years older the head of household is, the estimated average number of people in the household reduces by 5%."
+    "text": "Answers\n\nEach additional year older the head of household is, the estimated average log of the number of people in the household is .0047 lower.\nEach additional year older the head of household is, the estimated average number of people in the household reduces by 0.5%.\nEach additional year older the head of household is, the estimated average number of people in the household changes by a factor of .995.\nFor every 10 years older the head of household is, the estimated average number of people in the household reduces by 5%."
   },
   {
     "objectID": "slides/04_poisson_ch4.html#understanding-the-interpretation",
@@ -1118,7 +1118,7 @@
     "href": "slides/04_poisson_ch4.html#deviance-residuals",
     "title": "Poisson Regression",
     "section": "Deviance residuals",
-    "text": "Deviance residuals\nThe deviance residual indicates how much the observed data deviates from the fitted model\n\\[\\text{deviance residual}_i = \\text{sign}(y_i - \\hat{\\lambda}_i)\\sqrt{2\\Bigg[y_i\\log\\bigg(\\frac{y_i}{\\hat{\\lambda}_i}\\bigg) - (y_i - \\hat{\\lambda}_i)\\Bigg]}\\]\nwhere\n\\[\\text{sign}(y_i - \\hat{\\lambda}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - \\hat{\\lambda}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - \\hat{\\lambda}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - \\hat{\\lambda}_i) = 0\n\\end{cases}\\]"
+    "text": "Deviance residuals\nThe deviance residuals indicate how much the observed data deviates from the fitted model\n\\[\\text{deviance residual}_i = \\text{sign}(y_i - \\hat{\\lambda}_i)\\sqrt{2\\Bigg[y_i\\log\\bigg(\\frac{y_i}{\\hat{\\lambda}_i}\\bigg) - (y_i - \\hat{\\lambda}_i)\\Bigg]}\\]\nwhere\n\\[\\text{sign}(y_i - \\hat{\\lambda}_i)  =  \\begin{cases}\n1 & \\text{ if }(y_i - \\hat{\\lambda}_i) &gt; 0 \\\\\n-1 & \\text{ if }(y_i - \\hat{\\lambda}_i) &lt; 0 \\\\\n0 & \\text{ if }(y_i - \\hat{\\lambda}_i) = 0\n\\end{cases}\\]\n\n\\[\\text{residual deviance} = \\sum{\\left(\\text{deviance residual}\\right)_i^2}\\]"
   },
   {
     "objectID": "slides/04_poisson_ch4.html#model-3-residual-plots",

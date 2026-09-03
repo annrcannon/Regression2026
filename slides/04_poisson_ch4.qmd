@@ -1007,6 +1007,27 @@ tidy(model3_nb) |>
   kable(digits = 4)
 ```
 
+## Compare all three models {.smaller}
+
+::: {.left-align}
+
+|     | Poisson |    | Quasi-Poisson |    | Negative Binomial |   |
+|-----|---------|----|---------------|----|-------------------|---|
+|Term |Estimate | SE | Estimate      | SE | Estimate          | SE|
+|(intercept)|-0.3843|0.181|-0.3843|0.2166|-0.3753|0.2076|
+|age | 0.0704|0.0069|0.0704|0.0082|0.0699|0.0079|
+|age2 | -0.0007|0.0001|-0.0007|0.0001|-0.0007|0.0001|
+|locDavao|-0.0194|0.0538|-0.0194|0.0640|-0.0219|0.0625|
+|locIllocos|0.0610|0.0527|0.0610|0.0626|0.0577|0.0615|
+|locManila|0.0545|0.0472|0.0545|0.0561|0.0562|0.0551|
+|locVisayas|0.1121|0.0417|0.1121|0.0497|0.1104|0.0487|
+
+
+
+
+
+:::
+
 # Offsets
 ## Data: Airbnbs in NYC {.smaller}
 
@@ -1389,7 +1410,7 @@ where $\alpha$ is the proportion of non-drinkers
 ## Details of the ZIP model {.smaller}
 
 - The ZIP model is a special case of a **latent variable model**
-  - A type of **mixture model** where observations for one or more groups occur together but the group membership unknown
+  - A type of **mixture model** where observations for one or more groups occur together but the group membership is unknown
 
 - Zero-inflated models are a common type of mixture model; they apply beyond Poisson regression
 
@@ -1472,113 +1493,6 @@ Based on the model...
 
 
 
-# Likelihoods for Poisson models 
-## Estimating coefficients in Poisson model {.smaller}
-
-- Least squares estimation would not work because the normality and equal variance assumptions don't hold for Poisson regression 
-
-- **Maximum likelihood estimation** is used to estimate the coefficients of Poisson regression. 
-
-- The likelihood is the product of the probabilities for the $n$ *<u>independent</u>* observations in the data 
-
-## Likelihood for regular Poisson model {.smaller}
-
-Let's go back to example about **household size** in the Philippines. We will focus on the model using the main effect of age to understand variability in mean household size. 
-
-. . .
-
-Suppose the first five observations have household sizes of 4, 2, 8, 6, and 1. Then the likelihood is 
-
-. . .
-
-$L = \frac{e^{-\lambda_1}\lambda_1^4}{4!} * \frac{e^{-\lambda_2}\lambda_2^2}{2!} * \frac{e^{-\lambda_3}\lambda_3^8}{8!} * 
-\frac{e^{-\lambda_4}\lambda_4^6}{6!} * \frac{e^{-\lambda_5}\lambda_5^1}{1!}$
-
-## Likelihood for regular Poisson model {.smaller}
-
-
-We will use the log likelihood to make finding the MLE easier 
-
-. . .
-
-$\begin{aligned}\log(L) &= -\lambda_1 + 4\log(\lambda_1) - \lambda_2 + 2\log(\lambda_2) - \lambda_3 + 8\log(\lambda_3)\\ & -\lambda_4 + 6 \log(\lambda_4) - \lambda_5 + \log(\lambda_5) + C \end{aligned}$
-
-where 
-  - $\lambda$ is the mean number in household depending on $x_i$
-  - $C = -[\log(4!) + \log(2!) + \log(8!) + \log(6!)+ \log(1!)]$
-
-
-
-## Likelihood for regular Poisson model {.smaller}
-
-Given the age of the head of the household, we fit the model 
-
-$$\log(\lambda_i) = \beta_0 + \beta_1~age_i$$
-
-Then we replace each $\lambda_i$ in $\log(L)$ with $e^{\beta_0 + \beta_1~age_i}$. 
-
-. . .
-
-Suppose the first five observations have ages $X = (32, 21, 55, 44, 28)$. Then
-
-. . .
-
-$$\begin{aligned} \log(L) &= [-e^{\beta_0 + \beta_132}+ 4(\beta_0 + \beta_1 32)] + [ - e^{\beta_0 + \beta_121} + 2(\beta_0 + \beta_121)] \\ &+  [- e^{\beta_0 + \beta_155} + 8(\beta_0 + \beta_155)] +  [-e^{\beta_0 + \beta_144} + 6(\beta_0 + \beta_144)] \\ &+ [-e^{\beta_0 + \beta_128}(\beta_0 + \beta_128)] + C \end{aligned}$$
-
-. . .
-
-Use search algorithm to find the values of $\beta_0$ and $\beta_1$ that maximize the above equation. 
-
-
-
-## Probabilities under ZIP model {.smaller}
-
-There are three different types of observations in the data:
-
-- Observed zero and will always be 0 (true zeros)
-- Observed 0 but will not always be 0
-- Observed non-zero count and will not always be 0
-
-
-
-## Probabilities under ZIP model {.smaller}
-
-**True zeros**
-
-$$P(0 | \text{true zero})= \alpha$$
-
-. . .
-
-**Observed 0 but will not always be 0**
-
-$$P(0 | \text{not always zero}) = (1 - \alpha)\frac{e^{-\lambda}\lambda^0}{0!}$$
-
-. . .
-
-**Did not observe 0 and will not always be 0**
-
-$$P(z_i | \text{not always zero}) = (1 - \alpha)\frac{e^{-\lambda}\lambda^{z_i}}{z_i!}$$
-
-
-
-## Probabilities under ZIP model {.smaller}
-
-Putting this all together. Let $y_i$ be an observed response then 
-
-$$P(Y_i = y_i | x_i) = \begin{cases}
-\alpha + (1 - \alpha)e^{-\lambda_i} && \text{ if } y_i = 0 \\
-(1 - \alpha)\frac{e^{-\lambda_i}\lambda_i^{y_i}}{y_i!} && \text{ if } y_i > 0
-\end{cases}$$
-
-. . .
-
-Recall from our example, 
-
-$$\lambda_i = e^{\beta_0 + \beta_1~off\_campus_i + \beta_2 ~ sex_i}$$
-
-$$\alpha_i = \frac{e^{\beta_{0\alpha} + \beta_{1\alpha} ~ first\_year_i}}{1 + e^{\beta_{0\alpha} + \beta_{1\alpha} ~ first\_year_i}}$$
-
-- Plug in $\lambda_i$ and $\alpha_i$ into the above equation obtain the likelihood function
 
 # Wrap up GLM for independent observations
 

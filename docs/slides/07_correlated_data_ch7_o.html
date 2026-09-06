@@ -4689,7 +4689,11 @@ window.Quarto = {
   <li><a href="#scenario-1-no-dose-effect-2" id="toc-scenario-1-no-dose-effect-2" class="nav-link" data-scroll-target="#scenario-1-no-dose-effect-2">Scenario 1: No dose effect</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   <li><a href="#investigating" id="toc-investigating" class="nav-link" data-scroll-target="#investigating">Investigating</a></li>
-  <li><a href="#model-1a" id="toc-model-1a" class="nav-link" data-scroll-target="#model-1a">Model 1a</a></li>
+  <li><a href="#model-1a-binomial" id="toc-model-1a-binomial" class="nav-link" data-scroll-target="#model-1a-binomial">Model 1a Binomial</a></li>
+  <li><a href="#model-1b-quasibinomial" id="toc-model-1b-quasibinomial" class="nav-link" data-scroll-target="#model-1b-quasibinomial">Model 1b Quasibinomial</a></li>
+  <li><a href="#model-1b-binomial" id="toc-model-1b-binomial" class="nav-link" data-scroll-target="#model-1b-binomial">Model 1b Binomial</a></li>
+  <li><a href="#model-1b-quasibinomial-1" id="toc-model-1b-quasibinomial-1" class="nav-link" data-scroll-target="#model-1b-quasibinomial-1">Model 1b Quasibinomial</a></li>
+  <li><a href="#compare-binom-and-quasi" id="toc-compare-binom-and-quasi" class="nav-link" data-scroll-target="#compare-binom-and-quasi">Compare Binom and Quasi</a></li>
   </ul></li>
   <li><a href="#scenario-2-dose-effect" id="toc-scenario-2-dose-effect" class="nav-link" data-scroll-target="#scenario-2-dose-effect">Scenario 2: Dose effect</a>
   <ul class="collapse">
@@ -4994,9 +4998,8 @@ window.Quarto = {
 <p>. . .</p>
 <p>Let’s take a look at a binomial and quasibinomial model for Scenarios 1a and 1b.</p>
 </section>
-<section id="model-1a" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="model-1a">Model 1a</h2>
-<p>Binomial model:</p>
+<section id="model-1a-binomial" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-1a-binomial">Model 1a Binomial</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href>Output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href>Code</a></li></ul>
 <div class="tab-content">
@@ -5025,7 +5028,7 @@ window.Quarto = {
 </table>
 </div>
 </div>
-<p><span style="font-size: 0.6em;">95% confidence interval for the ODDS of a pup with deformity</span></p>
+<p><span style="font-size: 0.8em;">95% confidence interval for the ODDS of a pup with deformity</span></p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Waiting for profiling to be done...</code></pre>
@@ -5064,6 +5067,261 @@ Waiting for profiling to be done...</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="model-1b-quasibinomial" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-1b-quasibinomial">Model 1b Quasibinomial</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href>Output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href>Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.067</td>
+<td style="text-align: right;">0.122</td>
+<td style="text-align: right;">0.546</td>
+<td style="text-align: right;">0.59</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span style="font-size: 0.8em;">95% confidence interval for the ODDS of a pup with deformity</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    2.5 %    97.5 % 
+0.8414573 1.3588535 </code></pre>
+</div>
+</div>
+<p><span style="font-size:0.8em;">95% confidence interval for the PROBABILITY of a pup with a deformity</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...
+Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    2.5 %    97.5 % 
+0.4569518 0.5760652 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_1a <span class="ot">&lt;-</span> <span class="fu">glm</span>(phat_1a <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> quasibinomial, <span class="at">weight =</span> <span class="fu">rep</span>(<span class="dv">10</span>,<span class="dv">24</span>), </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> scenario_1)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model_1a) <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#95% CI for the odds of a pup with deformity</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(model_1a))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#95% CI for the probability of a pup with deformity</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(model_1a)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="fu">confint</span>(model_1a)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-1b-binomial" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-1b-binomial">Model 1b Binomial</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href>Output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href>Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.268</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">2.059</td>
+<td style="text-align: right;">0.039</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span style="font-size: 0.8em;">95% confidence interval for the ODDS of a pup with deformity</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   2.5 %   97.5 % 
+1.014156 1.691097 </code></pre>
+</div>
+</div>
+<p><span style="font-size:0.8em;">95% confidence interval for the PROBABILITY of a pup with a deformity</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...
+Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    2.5 %    97.5 % 
+0.5035141 0.6284043 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model_1b <span class="ot">&lt;-</span> <span class="fu">glm</span>(phat_1b <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> binomial, <span class="at">weight =</span> <span class="fu">rep</span>(<span class="dv">10</span>,<span class="dv">24</span>), </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> scenario_1)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model_1b) <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#95% CI for the odds of a pup with deformity</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(model_1b))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#95% CI for the probability of a pup with deformity</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(model_1b)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="fu">confint</span>(model_1b)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-1b-quasibinomial-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-1b-quasibinomial-1">Model 1b Quasibinomial</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href>Output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href>Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.268</td>
+<td style="text-align: right;">0.341</td>
+<td style="text-align: right;">0.786</td>
+<td style="text-align: right;">0.44</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span style="font-size: 0.8em;">95% confidence interval for the ODDS of a pup with deformity</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    2.5 %    97.5 % 
+0.6726041 2.5941021 </code></pre>
+</div>
+</div>
+<p><span style="font-size:0.8em;">95% confidence interval for the PROBABILITY of a pup with a deformity</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...
+Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    2.5 %    97.5 % 
+0.4021299 0.7217664 </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model_1b <span class="ot">&lt;-</span> <span class="fu">glm</span>(phat_1b <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> quasibinomial, <span class="at">weight =</span> <span class="fu">rep</span>(<span class="dv">10</span>,<span class="dv">24</span>), </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> scenario_1)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model_1b) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#95% CI for the odds of a pup with deformity</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(model_1b))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#95% CI for the probability of a pup with deformity</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(model_1b)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="fu">confint</span>(model_1b)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="compare-binom-and-quasi" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="compare-binom-and-quasi">Compare Binom and Quasi</h2>
+<p>Odds confidence intervals</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>1A Binomial</th>
+<th>1A Quasi</th>
+<th>1B Binomial</th>
+<th>1B Quasi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(0.83, 1.38)</td>
+<td>(0.84,1.36)</td>
+<td>(1.01,1.69)</td>
+<td>(0.67,2.59)</td>
+</tr>
+</tbody>
+</table>
+<p>Probability confidence intervals</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>1A Binomial</th>
+<th>1A Quasi</th>
+<th>1B Binomial</th>
+<th>1B Quasi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(0.45, 0.58)</td>
+<td>(0.46,0.58)</td>
+<td>(0.50,0.63)</td>
+<td>(0.40,0.72)</td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<p>How does the quasibinomial analysis for Scenario 1b differ from the binomial analysis for Scenario 1b? Consider the coefficient estimates, standard error, predicted probabilities, and associated 95% CIs.</p>
+<p>. . .</p>
+<p>Why are differences between the quasibinomial models of Scenario 1a less noticeable than the differences in Scenario 1b?</p>
 </section>
 </section>
 <section id="scenario-2-dose-effect" class="level1 page-columns page-full">
@@ -5108,9 +5366,9 @@ Waiting for profiling to be done...</code></pre>
 <section id="summary-stats-under-scen.2" class="level2 smaller page-columns page-full">
 <h2 class="smaller anchored" data-anchor-id="summary-stats-under-scen.2">Summary stats under Scen.2</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href>Output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href>Code</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href>Output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href>Code</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -5220,29 +5478,29 @@ Scenario 2b
 </div>
 </div>
 </div>
-<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>scenario_2 <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_2a =</span> <span class="fu">mean</span>(count_2a), <span class="at">sd_2a =</span> <span class="fu">sd</span>(count_2a),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_2b =</span> <span class="fu">mean</span>(count_2b), <span class="at">sd_2b =</span> <span class="fu">sd</span>(count_2b) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>scenario_2 <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_2a =</span> <span class="fu">mean</span>(count_2a), <span class="at">sd_2a =</span> <span class="fu">sd</span>(count_2a),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_2b =</span> <span class="fu">mean</span>(count_2b), <span class="at">sd_2b =</span> <span class="fu">sd</span>(count_2b) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>scenario2Tab <span class="ot">&lt;-</span> scenario_2 <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_by</span>(dose) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">summarise</span>(<span class="at">mean_2a_pi =</span> <span class="fu">round</span>(<span class="fu">mean</span>(pi_2a),<span class="dv">3</span>), <span class="at">sd_2a_pi =</span> <span class="fu">round</span>(<span class="fu">sd</span>(pi_2a),<span class="dv">3</span>),</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mean_2a_cnt =</span> <span class="fu">round</span>(<span class="fu">mean</span>(count_2a),<span class="dv">3</span>), <span class="at">sd_2a_cnt =</span> <span class="fu">round</span>(<span class="fu">sd</span>(count_2a),<span class="dv">3</span>),</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mean_2b_pi =</span> <span class="fu">round</span>(<span class="fu">mean</span>(pi_2b),<span class="dv">3</span>), <span class="at">sd_2b_pi =</span> <span class="fu">round</span>(<span class="fu">sd</span>(pi_2b),<span class="dv">3</span>),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mean_2b_cnt =</span> <span class="fu">round</span>(<span class="fu">mean</span>(count_2b),<span class="dv">3</span>), <span class="at">sd_2b_cnt =</span> <span class="fu">round</span>(<span class="fu">sd</span>(count_2b),<span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.data.frame</span>()</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(scenario2Tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dosage&quot;</span>,<span class="st">&quot;Mean p&quot;</span>, <span class="st">&quot;SD p&quot;</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Mean Count&quot;</span>, <span class="st">&quot;SD Count&quot;</span>, <span class="st">&quot;Mean p&quot;</span>, <span class="st">&quot;SD p&quot;</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Mean Count&quot;</span>, <span class="st">&quot;SD Count&quot;</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(scenario2Tab, <span class="at">booktabs =</span> T, </span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Summary statistics of Scenario 2 by dose.&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Scenario 2a&quot;</span> <span class="ot">=</span> <span class="dv">4</span>, </span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Scenario 2b&quot;</span> <span class="ot">=</span> <span class="dv">4</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">&quot;scale_down&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">8</span><span class="sc">:</span><span class="dv">9</span>), <span class="at">width =</span> <span class="st">&quot;1cm&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>scenario2Tab <span class="ot">&lt;-</span> scenario_2 <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_by</span>(dose) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">summarise</span>(<span class="at">mean_2a_pi =</span> <span class="fu">round</span>(<span class="fu">mean</span>(pi_2a),<span class="dv">3</span>), <span class="at">sd_2a_pi =</span> <span class="fu">round</span>(<span class="fu">sd</span>(pi_2a),<span class="dv">3</span>),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mean_2a_cnt =</span> <span class="fu">round</span>(<span class="fu">mean</span>(count_2a),<span class="dv">3</span>), <span class="at">sd_2a_cnt =</span> <span class="fu">round</span>(<span class="fu">sd</span>(count_2a),<span class="dv">3</span>),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mean_2b_pi =</span> <span class="fu">round</span>(<span class="fu">mean</span>(pi_2b),<span class="dv">3</span>), <span class="at">sd_2b_pi =</span> <span class="fu">round</span>(<span class="fu">sd</span>(pi_2b),<span class="dv">3</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mean_2b_cnt =</span> <span class="fu">round</span>(<span class="fu">mean</span>(count_2b),<span class="dv">3</span>), <span class="at">sd_2b_cnt =</span> <span class="fu">round</span>(<span class="fu">sd</span>(count_2b),<span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.data.frame</span>()</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(scenario2Tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dosage&quot;</span>,<span class="st">&quot;Mean p&quot;</span>, <span class="st">&quot;SD p&quot;</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Mean Count&quot;</span>, <span class="st">&quot;SD Count&quot;</span>, <span class="st">&quot;Mean p&quot;</span>, <span class="st">&quot;SD p&quot;</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Mean Count&quot;</span>, <span class="st">&quot;SD Count&quot;</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(scenario2Tab, <span class="at">booktabs =</span> T, </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">&quot;Summary statistics of Scenario 2 by dose.&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Scenario 2a&quot;</span> <span class="ot">=</span> <span class="dv">4</span>, </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Scenario 2b&quot;</span> <span class="ot">=</span> <span class="dv">4</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">&quot;scale_down&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">8</span><span class="sc">:</span><span class="dv">9</span>), <span class="at">width =</span> <span class="st">&quot;1cm&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>

@@ -1287,5 +1287,40 @@
     "title": "Multilevel Models",
     "section": "Fitted model",
     "text": "Fitted model\n\\[\\begin{aligned}na_{ij} &= 15.930 + 1.693 ~ Orchestra_i + 0.911 ~ LargeEnsemble_{ij} \\\\\n&- 1.424 ~ Orchestra_i:LargeEnsemble_{ij}\n\\end{aligned}\\]\n\\[\\left[ \\begin{array}{c}\n            u_{i} \\\\ v_{i}\n          \\end{array}  \\right] \\sim N \\left( \\left[\n          \\begin{array}{c}\n            0 \\\\ 0\n          \\end{array} \\right], \\left[\n          \\begin{array}{cc}\n            2.378^2 & -0.635*2.378*0.672 \\\\\n            -0.635*2.378*0.672 & 0.672^{2}\n          \\end{array} \\right] \\right)\\]\n\\[\\epsilon_{ij} \\sim N \\left( 0,4.670^2 \\right)\\]"
+  },
+  {
+    "objectID": "slides/07_correlated_data_ch7_o.html#model-1a-binomial",
+    "href": "slides/07_correlated_data_ch7_o.html#model-1a-binomial",
+    "title": "Correlated Data",
+    "section": "Model 1a Binomial",
+    "text": "Model 1a Binomial\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.067\n0.129\n0.516\n0.606\n\n\n\n\n\n95% confidence interval for the ODDS of a pup with deformity\n\n\nWaiting for profiling to be done...\n\n\n    2.5 %    97.5 % \n0.8298899 1.3778985 \n\n\n95% confidence interval for the PROBABILITY of a pup with a deformity\n\n\nWaiting for profiling to be done...\nWaiting for profiling to be done...\n\n\n    2.5 %    97.5 % \n0.4535190 0.5794606 \n\n\n\n\n\nmodel_1a &lt;- glm(phat_1a ~ 1, family = binomial, weight = rep(10,24), \n                data = scenario_1)\n\ntidy(model_1a) |&gt;\n  kable(digits = 3)\n\n#95% CI for the odds of a pup with deformity\nexp(confint(model_1a))\n\n#95% CI for the probability of a pup with deformity\nexp(confint(model_1a)) / (1 + exp(confint(model_1a)))"
+  },
+  {
+    "objectID": "slides/07_correlated_data_ch7_o.html#model-1b-quasibinomial",
+    "href": "slides/07_correlated_data_ch7_o.html#model-1b-quasibinomial",
+    "title": "Correlated Data",
+    "section": "Model 1b Quasibinomial",
+    "text": "Model 1b Quasibinomial\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.067\n0.122\n0.546\n0.59\n\n\n\n\n\n95% confidence interval for the ODDS of a pup with deformity\n\n\nWaiting for profiling to be done...\n\n\n    2.5 %    97.5 % \n0.8414573 1.3588535 \n\n\n95% confidence interval for the PROBABILITY of a pup with a deformity\n\n\nWaiting for profiling to be done...\nWaiting for profiling to be done...\n\n\n    2.5 %    97.5 % \n0.4569518 0.5760652 \n\n\n\n\n\nmodel_1a &lt;- glm(phat_1a ~ 1, family = quasibinomial, weight = rep(10,24), \n                data = scenario_1)\n\ntidy(model_1a) |&gt;\n  kable(digits = 3)\n\n#95% CI for the odds of a pup with deformity\nexp(confint(model_1a))\n\n#95% CI for the probability of a pup with deformity\nexp(confint(model_1a)) / (1 + exp(confint(model_1a)))"
+  },
+  {
+    "objectID": "slides/07_correlated_data_ch7_o.html#model-1b-binomial",
+    "href": "slides/07_correlated_data_ch7_o.html#model-1b-binomial",
+    "title": "Correlated Data",
+    "section": "Model 1b Binomial",
+    "text": "Model 1b Binomial\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.268\n0.13\n2.059\n0.039\n\n\n\n\n\n95% confidence interval for the ODDS of a pup with deformity\n\n\nWaiting for profiling to be done...\n\n\n   2.5 %   97.5 % \n1.014156 1.691097 \n\n\n95% confidence interval for the PROBABILITY of a pup with a deformity\n\n\nWaiting for profiling to be done...\nWaiting for profiling to be done...\n\n\n    2.5 %    97.5 % \n0.5035141 0.6284043 \n\n\n\n\n\nmodel_1b &lt;- glm(phat_1b ~ 1, family = binomial, weight = rep(10,24), \n                data = scenario_1)\n\ntidy(model_1b) |&gt;\n  kable(digits = 3)\n\n#95% CI for the odds of a pup with deformity\nexp(confint(model_1b))\n\n#95% CI for the probability of a pup with deformity\nexp(confint(model_1b)) / (1 + exp(confint(model_1b)))"
+  },
+  {
+    "objectID": "slides/07_correlated_data_ch7_o.html#model-1b-quasibinomial-1",
+    "href": "slides/07_correlated_data_ch7_o.html#model-1b-quasibinomial-1",
+    "title": "Correlated Data",
+    "section": "Model 1b Quasibinomial",
+    "text": "Model 1b Quasibinomial\n\nOutputCode\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.268\n0.341\n0.786\n0.44\n\n\n\n\n\n95% confidence interval for the ODDS of a pup with deformity\n\n\nWaiting for profiling to be done...\n\n\n    2.5 %    97.5 % \n0.6726041 2.5941021 \n\n\n95% confidence interval for the PROBABILITY of a pup with a deformity\n\n\nWaiting for profiling to be done...\nWaiting for profiling to be done...\n\n\n    2.5 %    97.5 % \n0.4021299 0.7217664 \n\n\n\n\n\nmodel_1b &lt;- glm(phat_1b ~ 1, family = quasibinomial, weight = rep(10,24), \n                data = scenario_1)\n\ntidy(model_1b) |&gt;\n  kable(digits = 3)\n\n#95% CI for the odds of a pup with deformity\nexp(confint(model_1b))\n\n#95% CI for the probability of a pup with deformity\nexp(confint(model_1b)) / (1 + exp(confint(model_1b)))"
+  },
+  {
+    "objectID": "slides/07_correlated_data_ch7_o.html#compare-binom-and-quasi",
+    "href": "slides/07_correlated_data_ch7_o.html#compare-binom-and-quasi",
+    "title": "Correlated Data",
+    "section": "Compare Binom and Quasi",
+    "text": "Compare Binom and Quasi\nOdds confidence intervals\n\n\n\n1A Binomial\n1A Quasi\n1B Binomial\n1B Quasi\n\n\n\n\n(0.83, 1.38)\n(0.84,1.36)\n(1.01,1.69)\n(0.67,2.59)\n\n\n\nProbability confidence intervals\n\n\n\n1A Binomial\n1A Quasi\n1B Binomial\n1B Quasi\n\n\n\n\n(0.45, 0.58)\n(0.46,0.58)\n(0.50,0.63)\n(0.40,0.72)\n\n\n\n. . .\nHow does the quasibinomial analysis for Scenario 1b differ from the binomial analysis for Scenario 1b? Consider the coefficient estimates, standard error, predicted probabilities, and associated 95% CIs.\n. . .\nWhy are differences between the quasibinomial models of Scenario 1a less noticeable than the differences in Scenario 1b?"
   }
 ]

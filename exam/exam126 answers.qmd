@@ -1,0 +1,222 @@
+---
+title: "Exam 1, Fall 2026"
+author: "Your name here"
+format:
+ html:
+   code-fold: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidymodels)
+library(ggplot2)
+library(kableExtra)
+library(MASS)
+library(gridExtra)
+library(Stat2Data)
+library(scales)
+```
+
+## Instructions
+
+1. This exam is open-book, open-internet, and closed to other people.  You may use any online or book-based resource you would like, but you **must include citations** for any code you use (directly or indirectly).  You **may not** consult anyone about this exam other than the Professor.  You cannot ask direct questions online (including questions about the analysis to AI), or consult other students, even for a hypothetical question. Code questions to AI are allowed, as long as you can explain the final code used in your response.
+2. Please do all your work in this file. **Remember to put your name on the "author" line at the beginning of the file.**
+3. You are required to upload the HTML file from your output to Moodle.  Technical difficulties are **not** and excuse for late work - do not wait until the last minute. **Verify your HTML file includes all graphs and tables before uploading to Moodle.**  If I have you re-render, and resubmit, you will lose 5 points on the exam.  
+4.  Your analysis, output, and narrative, not your code, should answer the questions. 
+5. I expect your answers to be complete written answers.  When you refer to output, make sure the reference is obvious.  And only refer to what you need to make your answer complete.
+6.  This part is due on **Wednesday, September 2, at 5:00 pm on Moodle**
+
+## Exam Scenario
+
+The data read in below consists of a sample of 386 African-American patients. The data was collected to research the relationship among a number of predictor variables and whether the patient had been diagnosed with diabetes or not.  Among the possible predictors are:
+chol (cholesterol), stab.glu (stabilized glucose), hdl (hdl cholesterol), ratio (chol/hdl), glyhb(glycosolated hemoglopin - a measure of the amount of sugar in the blood), bp.1s (first systolic blood pressure), bp.1d (first diastolic blood pressure), hip (hip measurement), and time.ppn (number of minutes after eating, when blood was taken).  We will 
+consider the analysis of whether people are diagnosed with diabetes or not in this problem.  
+
+For this exam we will **NOT** be using the variable glyhb because it is essentially used to diagnose diabetes.
+
+```{r}
+
+dia.data <- read.csv("data/diabetes.csv")
+
+```
+
+1.  [20 points] Using exploratory data analysis, decide which variables might be appropriate to include when modeling the diabetes variable (ignore glyhb).  Explain how you came to your conclusion referring to your output.
+
+```{r}
+ggplot(dia.data, aes(x=chol, y=factor(diabetes))) +
+  geom_boxplot()
+
+ggplot(dia.data, aes(x=stab.glu, y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=hdl, y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=ratio, y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=age, y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=as.numeric(height), y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=weight, y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=as.numeric(bp.1s), y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=as.numeric(bp.1d), y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=waist, y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=hip, y=factor(diabetes))) +
+  geom_boxplot()
+ggplot(dia.data, aes(x=as.numeric(time.ppn), y=factor(diabetes))) +
+  geom_boxplot()
+
+
+```
+
+
+```{r}
+ggplot(dia.data, aes(x=factor(diabetes),  fill=gender))+
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels=percent)+
+  labs(y="Percentage", x="Diabetes")
+
+ggplot(dia.data, aes(x=factor(diabetes),  fill=frame))+
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels=percent)+
+  labs(y="Percentage", x="Diabetes")
+
+ggplot(dia.data, aes(x=factor(diabetes),  fill=location))+
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels=percent)+
+  labs(y="Percentage", x="Diabetes")
+```
+
+
+
+```{r}
+emplogitplot1(diabetes~chol, data=dia.data, ngroups=10)
+emplogitplot1(diabetes~stab.glu, data=dia.data, ngroups=10)
+emplogitplot1(diabetes~ratio, data=dia.data, ngroups=10)
+emplogitplot1(diabetes~age, data=dia.data, ngroups=10)
+emplogitplot1(diabetes~as.numeric(bp.1s), data=dia.data, ngroups=10)
+emplogitplot1(diabetes~waist, data=dia.data, ngroups=10)
+emplogitplot1(diabetes~hip, data=dia.data, ngroups=10)
+
+emplogitplot1(diabetes~stab.glu, data=dia.data, ngroups=15)
+```
+
+
+
+2.  [20 points] Find the best 1-variable model for diabetes.  Explain why you think yours is the best.
+
+```{r}
+dia.complete <- na.omit(dia.data)
+
+mod1 <- glm(diabetes~chol, data=dia.complete, family=binomial)
+tidy(mod1)
+glance(mod1)
+
+mod2 <- glm(diabetes~stab.glu, data=dia.complete, family=binomial)
+tidy(mod2)
+glance(mod2)
+
+mod3 <- glm(diabetes~hdl, data=dia.complete, family=binomial)
+tidy(mod3)
+glance(mod3)
+
+mod4 <- glm(diabetes~ratio, data=dia.complete, family=binomial)
+tidy(mod4)
+glance(mod4)
+
+mod5 <- glm(diabetes~age, data=dia.complete, family=binomial)
+tidy(mod5)
+glance(mod5)
+
+mod6 <- glm(diabetes~weight, data=dia.complete, family=binomial)
+tidy(mod6)
+glance(mod6)
+
+mod7 <- glm(diabetes~frame, data=dia.complete, family=binomial)
+tidy(mod7)
+glance(mod7)
+
+mod8 <- glm(diabetes~as.numeric(bp.1s), data=dia.complete, family=binomial)
+tidy(mod8)
+glance(mod8)
+
+mod9 <- glm(diabetes~hip, data=dia.complete, family=binomial)
+tidy(mod9)
+glance(mod9)
+
+mod10 <- glm(diabetes~waist, data=dia.complete, family=binomial)
+tidy(mod10)
+glance(mod10)
+
+
+
+
+
+
+```
+
+
+
+
+3.  [25 points]  Find the best multivariable model for diabetes.  Again, explain why you think this is the best multivariable model.
+
+```{r}
+dia.complete <- na.omit(dia.data)
+mmod1 <- glm(diabetes~chol+stab.glu+hdl+ratio+age+ weight+frame+
+             as.numeric(bp.1s)+waist+hip, data=dia.complete, family=binomial)
+tidy(mmod1) |> kable(digits=3)
+glance(mmod1)
+#let ratio represent chol and hdl
+mmod2 <- glm(diabetes~stab.glu+ratio+age+ weight+frame+
+             as.numeric(bp.1s)+waist+hip, data=dia.complete, family=binomial)
+tidy(mmod2) |> kable(digits=3)
+glance(mmod2)
+#take out weight
+mmod3 <- glm(diabetes~stab.glu+ratio+age+frame+
+             as.numeric(bp.1s)+waist+hip, data=dia.complete, family=binomial)
+tidy(mmod3) |> kable(digits=3)
+glance(mmod3)
+#take out hip
+mmod4 <- glm(diabetes~stab.glu+ratio+age+frame+
+             as.numeric(bp.1s)+waist, data=dia.complete, family=binomial)
+tidy(mmod4) |> kable(digits=3)
+glance(mmod4)
+#take out frame
+mmod5 <- glm(diabetes~stab.glu+ratio+age+
+             as.numeric(bp.1s)+waist, data=dia.complete, family=binomial)
+tidy(mmod5) |> kable(digits=3)
+glance(mmod5)
+#take out ratio
+mmod6 <- glm(diabetes~stab.glu+age+
+             as.numeric(bp.1s)+waist, data=dia.complete, family=binomial)
+tidy(mmod6) |> kable(digits=3)
+glance(mmod6)
+#take out bp
+mmod7 <- glm(diabetes~stab.glu+age+
+             waist, data=dia.complete, family=binomial)
+tidy(mmod7) |> kable(digits=3)
+glance(mmod7)
+#take out waist
+mmod8 <- glm(diabetes~stab.glu+age,
+              data=dia.complete, family=binomial)
+tidy(mmod8) |> kable(digits=3)
+glance(mmod8)
+
+
+```
+
+Choose model 7 with stab.glu, age, waist
+
+4.  [10 points] Use appropriate inference to compare your models from questions 2 and 3.  Which of the two models would you ultimately use and why?
+
+```{r}
+
+anova(mod2, mmod7, test="Chisq")
+
+
+
+```

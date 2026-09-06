@@ -302,6 +302,230 @@ scenario_1 |>
 
 Let's take a look at a binomial and quasibinomial model for Scenarios 1a and 1b.
 
+
+## Model 1a Binomial {.smaller}
+
+:::{.panel-tabset}
+
+### Output {.smaller}
+
+```{r, echo=FALSE}
+model_1a <- glm(phat_1a ~ 1, family = binomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1a) |>
+  kable(digits = 3)
+```
+
+[95% confidence interval for the ODDS of a pup with deformity]{style="font-size: 0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1a))
+```
+
+[95% confidence interval for the PROBABILITY of a pup with a deformity]{style="font-size:0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1a)) / (1 + exp(confint(model_1a)))
+
+```
+
+### Code
+
+```{r, eval=FALSE}
+model_1a <- glm(phat_1a ~ 1, family = binomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1a) |>
+  kable(digits = 3)
+
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1a))
+
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1a)) / (1 + exp(confint(model_1a)))
+
+```
+
+:::
+
+
+## Model 1b Quasibinomial {.smaller}
+
+:::{.panel-tabset}
+
+### Output {.smaller}
+
+```{r, echo=FALSE}
+model_1a <- glm(phat_1a ~ 1, family = quasibinomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1a) |>
+  kable(digits = 3)
+```
+
+[95% confidence interval for the ODDS of a pup with deformity]{style="font-size: 0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1a))
+```
+
+[95% confidence interval for the PROBABILITY of a pup with a deformity]{style="font-size:0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1a)) / (1 + exp(confint(model_1a)))
+
+```
+
+### Code
+
+```{r, eval=FALSE}
+model_1a <- glm(phat_1a ~ 1, family = quasibinomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1a) |>
+  kable(digits = 3)
+
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1a))
+
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1a)) / (1 + exp(confint(model_1a)))
+
+```
+
+:::
+
+
+
+
+
+
+
+## Model 1b Binomial {.smaller}
+
+:::{.panel-tabset}
+
+### Output {.smaller}
+
+```{r, echo=FALSE}
+model_1b <- glm(phat_1b ~ 1, family = binomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1b) |>
+  kable(digits = 3)
+```
+
+[95% confidence interval for the ODDS of a pup with deformity]{style="font-size: 0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1b))
+```
+
+[95% confidence interval for the PROBABILITY of a pup with a deformity]{style="font-size:0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1b)) / (1 + exp(confint(model_1b)))
+
+```
+
+### Code
+
+```{r, eval=FALSE}
+model_1b <- glm(phat_1b ~ 1, family = binomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1b) |>
+  kable(digits = 3)
+
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1b))
+
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1b)) / (1 + exp(confint(model_1b)))
+
+```
+
+:::
+
+
+## Model 1b Quasibinomial {.smaller}
+
+:::{.panel-tabset}
+
+### Output {.smaller}
+
+```{r, echo=FALSE}
+model_1b <- glm(phat_1b ~ 1, family = quasibinomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1b) |>
+  kable(digits = 3)
+```
+
+[95% confidence interval for the ODDS of a pup with deformity]{style="font-size: 0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1b))
+```
+
+[95% confidence interval for the PROBABILITY of a pup with a deformity]{style="font-size:0.8em;"}
+
+```{r, echo=FALSE}
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1b)) / (1 + exp(confint(model_1b)))
+
+```
+
+### Code
+
+```{r, eval=FALSE}
+model_1b <- glm(phat_1b ~ 1, family = quasibinomial, weight = rep(10,24), 
+                data = scenario_1)
+
+tidy(model_1b) |>
+  kable(digits = 3)
+
+#95% CI for the odds of a pup with deformity
+exp(confint(model_1b))
+
+#95% CI for the probability of a pup with deformity
+exp(confint(model_1b)) / (1 + exp(confint(model_1b)))
+
+```
+
+:::
+
+
+## Compare Binom and Quasi  {.smaller}
+
+Odds confidence intervals
+
+| 1A Binomial| 1A Quasi  | 1B Binomial| 1B Quasi  |
+|------------|-----------|------------|-----------|
+|(0.83, 1.38)|(0.84,1.36)| (1.01,1.69)|(0.67,2.59)|
+
+Probability confidence intervals
+
+| 1A Binomial| 1A Quasi  | 1B Binomial| 1B Quasi  |
+|------------|-----------|------------|-----------|
+|(0.45, 0.58)|(0.46,0.58)| (0.50,0.63)|(0.40,0.72)|
+
+. . .
+
+How does the quasibinomial analysis for Scenario 1b differ from the binomial analysis for Scenario 1b?  Consider the coefficient estimates, standard error, predicted probabilities, and associated 95% CIs.
+
+. . .
+
+Why are differences between the quasibinomial models of Scenario 1a less noticeable than the differences in Scenario 1b?
+
 # Scenario 2: Dose effect
 
 ## Scenario 2: Dose effect {.smaller}

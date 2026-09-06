@@ -17,7 +17,6 @@ modeldata
 parsnip
 recipes
 rsample
-tailor
 tune
 workflows
 workflowsets

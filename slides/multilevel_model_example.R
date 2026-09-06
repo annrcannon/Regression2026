@@ -26,9 +26,35 @@ tidy(ols)
 
 ### Univariate EDA
 
+# code for histograms on slide 13
+
+p1 <- ggplot(data = music, aes(x = na)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Individual negative affect", 
+       title = "Negative affect scores")
+
+p2 <- music %>%
+  group_by(id) %>%
+  summarise(mean_na = mean(na)) %>%
+  ggplot(aes(x = mean_na)) + 
+  geom_histogram(fill = "steelblue", color = "black", binwidth = 2) + 
+  labs(x = "Mean negative affect", 
+       title = "Mean negative affect scores")
+
+p1 + p2
+
 
 
 ### Bivariat EDA
+
+#1. make a single scatterplot of the negative affect versus the number of previous
+#performances (previous) using the individual observations.  Use geom_smooth() to 
+#add a linear regression line to the plot
+
+#2. Make separate scatterplots of na versus previous for each musician (id). 
+# Use a lattice plot for this.  Add geom_smooth to add a linear regression line
+# to each plot
+
 
 
 ### Example for obs 22
@@ -82,5 +108,30 @@ p2 <- ggplot(data = model_stats, aes(x = slopes)) +
        subtitle = "from 37 musicians")
 
 p1 + p2
+
+ggplot(model_stats, aes(x = r.squared)) + 
+  geom_histogram(color = "white", binwidth = 0.05) +
+  labs(x = "", 
+       title = "Fitted R-squared values", 
+       subtitle = "for 37 musicians")
+
   
-  
+### Level 2 Model
+
+# Make a Level Two data set
+
+musicians <- music |>
+  distinct(id, orchestra) |>
+  bind_cols(model_stats)
+
+# Model for intercepts
+
+a <- lm(intercepts ~ orchestra, data = musicians) 
+tidy(a) |>
+  kable(digits = 3)
+
+# Model for slopes
+
+b <- lm(slopes ~ orchestra, data = musicians) 
+tidy(b) |>
+  kable(digits = 3)

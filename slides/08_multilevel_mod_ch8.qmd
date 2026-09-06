@@ -90,10 +90,11 @@ Ex. 1 from Section 7.10.1 in BMLR
 
 ## Data: Music performance anxiety {.smaller}
 
-The data [`musicdata.csv`](data/musicdata.csv) come from the Sadler and Miller (2010) study of the emotional state of musicians before performances. The dataset contains information collected from 37 undergraduate music majors who completed the Positive Affect Negative Affect Schedule (PANAS), an instrument produces a measure of anxiety (negative affect) and a measure of happiness (positive affect). This analysis will focus on negative affect as a measure of performance anxiety.
+The data [`musicdata.csv`](data/musicdata.csv) come from the Sadler and Miller (2010) study of the emotional state of musicians before performances. The dataset contains information collected from 37 undergraduate music majors who completed the Positive Affect Negative Affect Schedule (PANAS), an instrument which produces a measure of anxiety (negative affect) and a measure of happiness (positive affect). This analysis will focus on negative affect as a measure of performance anxiety.
 
 The primary variables we'll use are
 
+- **`id`**: unique musician identification number
 - **`na`**: negative affect score on PANAS (the response variable)
 - **`perform_type`**: type of performance (Solo, Large Ensemble, Small Ensemble)
 - **`instrument`**: type of intstrument (Voice, Orchestral, Piano)
@@ -262,7 +263,7 @@ tidy(ols) %>% kable(digits = 3)
 
 ## Other modeling approaches {.smaller}
 
-`r emo::ji("one")`  Condense each musician's set of responses into a single outcome (e.g., mean max, last observation, etc.) and fit a linear model on these condensed observations 
+`r emo::ji("one")`  Condense each musician's set of responses into a single outcome (e.g., mean, max, last observation, etc.) and fit a linear model on these condensed observations 
 
 - Leaves few observations (37) to fit the model
 - Ignoring a lot of information in the multiple observations for each musician
@@ -279,7 +280,7 @@ tidy(ols) %>% kable(digits = 3)
 
 ## Two-level model {.smaller}
 
-We'll start with the Level One model to understand the association between performance type and performance anxiety for the $i^{th}$ musician. 
+We'll start with the Level One model to understand the association between performance type and performance anxiety for the $i^{th}$ musician. The index $j$ references the specific performance.
 
 
 $$na_{ij} = a_i + b_i ~ LargeEnsemble_{ij} + \epsilon_i, \hspace{5mm} \epsilon_{ij} \sim N(0,\sigma^2)$$
@@ -391,6 +392,8 @@ p1 + p2
 
 
 ## Level Two Model {.smaller}
+
+Now let's consider if there is an association between the estimated slopes, estimated intercepts, and the type of instrument.
 
 The slope and intercept for the $i^{th}$ musician can be modeled as
 
@@ -508,6 +511,8 @@ $$\hat{na}_{ij}  = \hat{a}_i + \hat{b}_i ~ LargeEnsemble_{ij}$$
 
 for each musician. 
 
+. . .
+
 **Level Two** 
 
 $$\begin{aligned}&\hat{a}_i = 16.283 + 1.441 ~ Orchestra_i \\
@@ -535,7 +540,7 @@ $$\begin{aligned}\hat{na}_i &= 16.283 + 1.441 ~ Orchestra_i - 0.771 ~ LargeEnsem
 
 `r emo::ji("warning")`  Drops subjects who have missing values for slope (7 individuals who didn't play a large ensemble performance) 
 
-`r emo::ji("warning")`  Does not share strength effectively across individuals 
+`r emo::ji("warning")`  Does not share strength effectively across individuals (see histogram of $R^2$ values in example file) 
 
 . . .
 
@@ -601,46 +606,11 @@ $$\begin{aligned}Y_{ij} &= a_i \hspace{1.8in}+ \hspace{1.62in} b_i ~ LargeEnsemb
 &= \space \alpha_0 + \alpha_1 ~ Orchestra_i+ u_i \hspace{.2in} + \beta_0LargeEnsemble+\beta_1Orchestra_iLargeEnsemble+v_iLargeEnsemble+\epsilon_{ij}
 \end{aligned}$$
 
-## lmer Syntax {.smaller}
-
-lmer(response~fixed effect variables + (random effect variables|group variable),data = your_data)
-
-- we determine fixed and random effects based on our composite model
-- terms with Greek letters will be fixed effects
-- terms with random components, usually $u$, $v$, or $w$ will be random effects 
-
-## Fitting our Model with lmer {.sortofsmall}
-
-$$\begin{aligned} Y_{ij}&= \space \alpha_0 + \alpha_1 ~ Orchestra_i+ u_i +\space\space\space \beta_0LargeEnsemble+\beta_1Orchestra_iLargeEnsemble+v_iLargeEnsemble+\epsilon_{ij}\\
-&=\alpha_0 + \alpha_1 ~ Orchestra_i + \beta_0LargeEnsemble+\beta_1Orchestra_iLargeEnsemble+u_i + v_iLargeEnsemble+\epsilon_{ij}
-\end{aligned}$$
-
-- All varibles with greek letters are fixed effects and all variables with $u$, $v$ are random effects. 
-
-. . .
-
-
-lmer(na ~ 1 + Orchastra + LargeEnsemble + Orchestra * LargeEnsemble + (1+LargeEnsemble|id),data = music)
-
-
-
-## Composite model {.smaller}
-
-Plug in the equations for $a_i$ and $b_i$ to get the **composite model** 
-
-
-$$\begin{aligned}Y_{ij} &= (\alpha_0 + \alpha_1 ~ Orchestra_i + \beta_0 ~ LargeEnsemble_{ij} \\ 
-&+ \beta_1 ~ Orchestra_i:LargeEnsemble_{ij})\\
-&+ (u_i + v_i ~ LargeEnsemble_{ij} + \epsilon_{ij})\end{aligned}$$
-
-
-- The **fixed effects** to estimate are $\alpha_0, \alpha_1, \beta_0, \beta_1$
-- The **error terms** are $u_i, v_i, \epsilon_{ij}$
-
-. . .
-
-Note that we no longer need to estimate $a_i$ and $b_i$ directly as we did earlier. They conceptually connect the Level One and Level Two models. 
-
+- The **fixed effects** to estimate are $\alpha_0$, $\alpha_1$, $\beta_0$, and $\beta_1$.
+- The **error terms** are $u_i$, $v_i$, and $\epsilon_{ij}$.
+   - $u_i$ and $v_i$ are associated with musician random effect
+   - $\epsilon_{ij}$ is what's left unexplained
+- We no longer need to estimate $a_i$ and $b_i$.
 
 ## Notation {.smaller}
 
@@ -652,7 +622,7 @@ Note that we no longer need to estimate $a_i$ and $b_i$ directly as we did earli
 
 - $\sigma$ and $\rho$ denote variance components that will be estimated 
 
-- $\epsilon_{ij}, u_i, v_i$ denote error terms 
+- $\epsilon_{ij}, u_i, v_i$ denote error terms (not directly estimated)
 
 
 
@@ -663,7 +633,9 @@ Note that we no longer need to estimate $a_i$ and $b_i$ directly as we did earli
 
 - For the Level Two models, the errors are 
   - $u_i$: deviation of musician $i$ from the mean performance anxiety before solos and small ensembles after accounting for the instrument 
+     - musician-to-musician differences are in the intercepts
   - $v_i$: deviance of musician $i$ from the mean difference in performance anxiety between large ensembles and other performance types after accounting for instrument
+     - musician-to-musician differences are in the slopes
 
 - Need to account for fact that $u_i$ and $v_i$ are correlated for the $i^{th}$ musician 
 
@@ -675,6 +647,7 @@ Note that we no longer need to estimate $a_i$ and $b_i$ directly as we did earli
 ### Plot
 
 ```{r echo = F, fig.cap = "Recreated from Figure 8.11"}
+#| out-width: "65%"
 musicians %>%
   filter(!is.na(slopes)) %>%
 ggplot(aes(x = intercepts, y = slopes)) + 
@@ -686,7 +659,7 @@ ggplot(aes(x = intercepts, y = slopes)) +
        subtitle = paste0("r = ", round(cor(musicians %>% filter(!is.na(slopes)) %>% pull(intercepts), musicians %>% filter(!is.na(slopes)) %>% pull(slopes)),3)))
 ```
 
-Question: **Describe what we learn about the association between the slopes and intercepts based on this plot.** 
+[Question: **Describe what we learn about the association between the slopes and intercepts based on this plot.** ]{style="font-size:0.8em;"}
 
 ### Code
 
@@ -703,12 +676,6 @@ ggplot(aes(x = intercepts, y = slopes)) +
 ```
 
 :::
-
-
-
-
-
-
 
 ## Distribution of Level Two errors {.smaller}
 
@@ -772,6 +739,64 @@ con.2 <- ggplot(data = zframe, aes(x = Var1, y = Var2, z = z)) +
 ```{r contour-boundary2,fig.align="center",out.width="60%", fig.cap='Recreated from Figure 8.12',echo=FALSE, warning=FALSE}
 con.1 + con.2
 ```
+
+
+
+
+
+
+## Fit the Model {.smaller}
+
+Fit the multilevel model using the `lmer` function from the **lme4** package.  Display results using the `tidy()` function from the **broom.mixed** package.
+
+. . .
+
+#### lmer Syntax
+
+lmer(response~fixed effect variables + (random effect variables|group variable),data = your_data)
+
+- we determine fixed and random effects based on our composite model
+- terms with Greek letters will be fixed effects
+- terms with random components, usually $u$, $v$, or $w$ will be random effects 
+
+## Fitting our Model with lmer {.sortofsmall}
+
+$$\begin{aligned} Y_{ij}&= \space \alpha_0 + \alpha_1 ~ Orchestra_i+ u_i + \beta_0LargeEnsemble  \\ 
+&  \space\space\space  + \beta_1Orchestra_iLargeEnsemble+v_iLargeEnsemble+\epsilon_{ij}\\
+&=\alpha_0 + \alpha_1 ~ Orchestra_i + \beta_0LargeEnsemble+\beta_1Orchestra_iLargeEnsemble \\
+& \space\space\space +u_i + v_iLargeEnsemble+\epsilon_{ij}
+\end{aligned}$$
+
+- All variables with greek letters are fixed effects and all variables with $u$, $v$ are random effects. 
+
+. . .
+
+
+lmer(na ~ Orchestra + LargeEnsemble + Orchestra * LargeEnsemble + (LargeEnsemble|id),data = music)
+
+
+
+## Composite model {.smaller}
+
+Plug in the equations for $a_i$ and $b_i$ to get the **composite model** 
+
+
+$$\begin{aligned}Y_{ij} &= (\alpha_0 + \alpha_1 ~ Orchestra_i + \beta_0 ~ LargeEnsemble_{ij} \\ 
+&+ \beta_1 ~ Orchestra_i:LargeEnsemble_{ij})\\
+&+ (u_i + v_i ~ LargeEnsemble_{ij} + \epsilon_{ij})\end{aligned}$$
+
+
+- The **fixed effects** to estimate are $\alpha_0, \alpha_1, \beta_0, \beta_1$
+- The **error terms** are $u_i, v_i, \epsilon_{ij}$
+
+. . .
+
+Note that we no longer need to estimate $a_i$ and $b_i$ directly as we did earlier. They conceptually connect the Level One and Level Two models. 
+
+
+
+
+
 
 
 
@@ -874,6 +899,27 @@ tidy(music_model) %>% filter(effect == "ran_pars") %>% kable(digits = 3)
 
 **Label the error terms and variance components**
 
+## Fitted model {.smaller}
+
+$$\begin{aligned}na_{ij} &= 15.930 + 1.693 ~ Orchestra_i + 0.911 ~ LargeEnsemble_{ij} \\ 
+&- 1.424 ~ Orchestra_i:LargeEnsemble_{ij}
+\end{aligned}$$
+
+
+$$\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            2.378^2 & -0.635*2.378*0.672 \\
+            -0.635*2.378*0.672 & 0.672^{2}
+          \end{array} \right] \right)$$
+ 
+ 
+          
+$$\epsilon_{ij} \sim N \left( 0,4.670^2 \right)$$
 
 
 ## Interpret the effects  {.smaller}
